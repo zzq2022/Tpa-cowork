@@ -490,10 +490,7 @@ pub fn native_host_manifest_path(host_name: &str) -> Option<PathBuf> {
 
 fn clean_windows_path(path: &std::path::Path) -> String {
     let value = path.to_string_lossy();
-    value
-        .strip_prefix(r#"\\?\"#)
-        .unwrap_or(&value)
-        .to_string()
+    value.strip_prefix(r#"\\?\"#).unwrap_or(&value).to_string()
 }
 
 pub fn default_native_host_manifest_path() -> Option<PathBuf> {
@@ -976,7 +973,6 @@ fn register_windows_native_host(
 mod tests {
     use super::*;
 
-    
     #[test]
     fn strips_windows_extended_path_prefix_for_browser_manifests() {
         assert_eq!(

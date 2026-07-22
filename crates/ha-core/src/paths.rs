@@ -123,7 +123,11 @@ fn copy_tree(source: &Path, destination: &Path) -> Result<()> {
             copy_tree(&source_path, &destination_path)?;
         } else if metadata.is_file() {
             fs::copy(&source_path, &destination_path).with_context(|| {
-                format!("copy {} to {}", source_path.display(), destination_path.display())
+                format!(
+                    "copy {} to {}",
+                    source_path.display(),
+                    destination_path.display()
+                )
             })?;
         } else if metadata.file_type().is_symlink() {
             copy_symlink(&source_path, &destination_path)?;
@@ -139,7 +143,10 @@ fn verify_tree(source: &Path, destination: &Path) -> Result<()> {
     let destination_metadata = fs::symlink_metadata(destination)?;
     if source_metadata.is_dir() {
         if !destination_metadata.is_dir() {
-            anyhow::bail!("migration verification type mismatch: {}", destination.display());
+            anyhow::bail!(
+                "migration verification type mismatch: {}",
+                destination.display()
+            );
         }
         for entry in fs::read_dir(source)? {
             let entry = entry?;
@@ -156,7 +163,10 @@ fn verify_tree(source: &Path, destination: &Path) -> Result<()> {
         if !destination_metadata.file_type().is_symlink()
             || fs::read_link(source)? != fs::read_link(destination)?
         {
-            anyhow::bail!("migration symlink verification failed: {}", source.display());
+            anyhow::bail!(
+                "migration symlink verification failed: {}",
+                source.display()
+            );
         }
     }
     Ok(())
@@ -1210,16 +1220,18 @@ mod tests {
     fn tpa_data_dir_takes_precedence_over_ha_data_dir() {
         let tpa = std::path::PathBuf::from("C:/tpa-data");
         let ha = std::path::PathBuf::from("C:/ha-data");
-        crate::test_support::with_env_vars(
-            &[("TPA_DATA_DIR", &tpa), ("HA_DATA_DIR", &ha)],
-            || assert_eq!(root_dir().expect("root_dir"), tpa),
-        );
+        crate::test_support::with_env_vars(&[("TPA_DATA_DIR", &tpa), ("HA_DATA_DIR", &ha)], || {
+            assert_eq!(root_dir().expect("root_dir"), tpa)
+        });
     }
 
     #[test]
     fn default_root_uses_tpa_cowork_directory() {
         crate::test_support::with_env_vars(
-            &[("TPA_DATA_DIR", Path::new("")), ("HA_DATA_DIR", Path::new(""))],
+            &[
+                ("TPA_DATA_DIR", Path::new("")),
+                ("HA_DATA_DIR", Path::new("")),
+            ],
             || {
                 let home = dirs::home_dir().expect("home directory");
                 assert_eq!(root_dir().expect("root_dir"), home.join(".tpa-cowork"));
@@ -1249,8 +1261,14 @@ mod tests {
         migrate_legacy_data(&source, &destination).expect("migration succeeds");
 
         assert!(!source.exists());
-        assert_eq!(std::fs::read(destination.join("config.json")).unwrap(), b"config");
-        assert_eq!(std::fs::read(destination.join("nested/data.db")).unwrap(), b"data");
+        assert_eq!(
+            std::fs::read(destination.join("config.json")).unwrap(),
+            b"config"
+        );
+        assert_eq!(
+            std::fs::read(destination.join("nested/data.db")).unwrap(),
+            b"data"
+        );
     }
 
     #[test]
@@ -1266,7 +1284,10 @@ mod tests {
         migrate_legacy_data(&source, &destination).expect("migration succeeds");
 
         assert_eq!(std::fs::read(source.join("legacy.txt")).unwrap(), b"legacy");
-        assert_eq!(std::fs::read(destination.join("current.txt")).unwrap(), b"current");
+        assert_eq!(
+            std::fs::read(destination.join("current.txt")).unwrap(),
+            b"current"
+        );
     }
 
     #[test]
@@ -1275,11 +1296,9 @@ mod tests {
         let source = root.path().join("legacy");
         let destination = root.path().join("current");
         std::fs::create_dir_all(source.join("nested")).expect("nested source dir");
-        std::fs::write(source.join("nested/data.db"), vec![b'x'; 128 * 1024])
-            .expect("nested data");
+        std::fs::write(source.join("nested/data.db"), vec![b'x'; 128 * 1024]).expect("nested data");
 
-        super::migrate_legacy_data_by_copy(&source, &destination)
-            .expect("copy migration succeeds");
+        super::migrate_legacy_data_by_copy(&source, &destination).expect("copy migration succeeds");
 
         assert!(!source.exists());
         assert_eq!(
@@ -1299,7 +1318,10 @@ mod tests {
         std::fs::write(&destination_parent, b"block destination parent").expect("blocker");
 
         assert!(migrate_legacy_data(&source, &destination).is_err());
-        assert_eq!(std::fs::read(source.join("important.txt")).unwrap(), b"important");
+        assert_eq!(
+            std::fs::read(source.join("important.txt")).unwrap(),
+            b"important"
+        );
         assert!(!destination.exists());
     }
 

@@ -409,7 +409,10 @@ export default function MySkillList({
                     type="button"
                     className="flex min-h-0 flex-1 flex-col text-left outline-none cursor-pointer"
                     onDoubleClick={() => onOpenSkill(row.local.name)}
-                    title="双击查看详情"
+                    aria-label={t("mySkills.openDetail", {
+                      name: row.local.name,
+                      defaultValue: `Open ${row.local.name}`,
+                    })}
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary/70 text-lg">
@@ -452,7 +455,6 @@ export default function MySkillList({
                           "truncate text-sm font-medium text-foreground",
                           !row.local.enabled && "line-through opacity-70",
                         )}
-                        title={row.local.name}
                       >
                         {row.local.name}
                       </div>

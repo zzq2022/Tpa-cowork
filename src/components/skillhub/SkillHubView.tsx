@@ -763,8 +763,8 @@ export default function SkillHubView({ onBack, onDownloaded }: SkillHubViewProps
                     <article
                       key={skill.id}
                       onDoubleClick={() => void openSkillPreview(skill.id)}
-                      className="rounded-xl border border-border bg-card p-4 hover:shadow-md hover:border-border/80 transition-all duration-200 flex flex-col justify-between relative group cursor-pointer"
-                      title="双击查看详情"
+                      className="rounded-xl border border-border bg-card p-4 hover:shadow-md hover:bg-secondary/20 transition-all duration-200 flex flex-col justify-between relative group cursor-pointer"
+                      aria-label={t("skillhub.openDetail", { defaultValue: "Double-click for details" })}
                     >
                       {loadingDetailId === skill.id && (
                         <div className="absolute inset-0 bg-background/40 flex items-center justify-center rounded-xl z-10">
@@ -785,16 +785,10 @@ export default function SkillHubView({ onBack, onDownloaded }: SkillHubViewProps
                               {initial}
                             </div>
                             <div className="min-w-0">
-                              <h3
-                                className="truncate text-sm font-semibold text-foreground group-hover:text-primary transition-colors"
-                                title={skill.name}
-                              >
+                              <h3 className="truncate text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
                                 {skill.name}
                               </h3>
-                              <p
-                                className="mt-0.5 truncate text-[10px] text-muted-foreground font-medium"
-                                title={skill.registrySlug}
-                              >
+                              <p className="mt-0.5 truncate text-[10px] text-muted-foreground font-medium">
                                 {skill.registrySlug}
                               </p>
                             </div>
@@ -810,7 +804,7 @@ export default function SkillHubView({ onBack, onDownloaded }: SkillHubViewProps
                               void requestDownload(skill)
                             }}
                             disabled={downloading === skill.id || pendingOverwrite?.skill.id === skill.id}
-                            title={t("skillhub.download")}
+                            aria-label={t("skillhub.download")}
                           >
                             {downloading === skill.id ? (
                               <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -836,21 +830,13 @@ export default function SkillHubView({ onBack, onDownloaded }: SkillHubViewProps
 
                         <div className="flex items-center gap-3 text-[10px] text-muted-foreground">
                           {updateDate && (
-                            <span className="text-muted-foreground/75 font-medium" title="更新时间">
-                              {updateDate}
-                            </span>
+                            <span className="text-muted-foreground/75 font-medium">{updateDate}</span>
                           )}
-                          <span
-                            className="inline-flex items-center gap-0.5 font-medium"
-                            title={`${skill.downloads} 下载`}
-                          >
+                          <span className="inline-flex items-center gap-0.5 font-medium">
                             <Download className="h-3 w-3" />
                             {skill.downloads}
                           </span>
-                          <span
-                            className="inline-flex items-center gap-0.5 font-medium"
-                            title={`${skill.stars} 收藏`}
-                          >
+                          <span className="inline-flex items-center gap-0.5 font-medium">
                             <Star className="h-3 w-3" />
                             {skill.stars}
                           </span>

@@ -87,7 +87,8 @@ test("MySkillsView opens the shared skill detail view when a skill row is clicke
 
   const skillButton = screen.getByText("autoplan").closest("button")
   expect(skillButton).toBeTruthy()
-  fireEvent.click(skillButton!)
+  // List cards open the shared detail view on double-click.
+  fireEvent.doubleClick(skillButton!)
 
   await waitFor(() => {
     expect(transportCallMock).toHaveBeenCalledWith("get_skill_detail", { name: "autoplan" })

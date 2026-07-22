@@ -126,6 +126,18 @@ pub fn init_runtime(role: &'static str) {
         eprintln!("[runtime_lock] ensure_dirs failed: {e}");
     }
 
+    if let Some(venv_bin) = paths::agent_venv_bin_dir() {
+        let mut search_path = std::env::var_os("PATH").unwrap_or_default();
+        let separator = if cfg!(windows) { ";" } else { ":" };
+        let mut updated = venv_bin.into_os_string();
+        if !search_path.is_empty() {
+            updated.push(separator);
+            updated.push(&search_path);
+        }
+        search_path = updated;
+        std::env::set_var("PATH", search_path);
+    }
+
     // Pre-warm the user's login-shell environment snapshot on a background
     // thread so the first `exec` doesn't pay the one-time (~1s) cost of sourcing
     // the shell on its hot path. Unix-only; Windows inherits the process env.
@@ -323,7 +335,7 @@ pub fn init_runtime(role: &'static str) {
         "info",
         "system",
         "lib::run",
-        "Hope Agent started",
+        "TPA CoWork started",
         None,
         None,
         None,

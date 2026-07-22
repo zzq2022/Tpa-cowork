@@ -1,9 +1,6 @@
-; Install Visual C++ 2015-2022 Redistributable — bundled native dependencies
-; require MSVCP140_1.dll, which is absent on a clean Windows install. Always
-; run the official installer rather than try to detect from a 32-bit NSIS
-; process (where $SYSDIR is redirected to SysWOW64). Accept 0 / 1638 / 3010
-; as success per Microsoft conventions; surface any other code so the user
-; knows to install manually instead of silently shipping a broken setup.
+; Install VC++ runtime and atomically install the bundled agent Python runtime.
+; The archive remains available when extraction fails so the Rust runtime can
+; retry on first launch.
 
 !macro NSIS_HOOK_POSTINSTALL
   DetailPrint "Installing Microsoft Visual C++ 2015-2022 Redistributable..."
@@ -13,11 +10,80 @@
   ${ElseIf} $0 = 1638
     DetailPrint "VC++ Redistributable already up to date."
   ${ElseIf} $0 = 3010
-    DetailPrint "VC++ Redistributable installed (reboot recommended after Hope Agent setup)."
+    DetailPrint "VC++ Redistributable installed (reboot recommended after TPA CoWork setup)."
   ${Else}
     DetailPrint "VC++ Redistributable installation failed (exit code $0)."
-    MessageBox MB_OK|MB_ICONEXCLAMATION "Failed to install Microsoft Visual C++ 2015-2022 Redistributable (exit code $0).$\r$\n$\r$\nHope Agent has been installed but may fail to start with 'MSVCP140_1.dll not found'. Please install the runtime manually from:$\r$\nhttps://aka.ms/vs/17/release/vc_redist.x64.exe"
+    MessageBox MB_OK|MB_ICONEXCLAMATION "VC++ Redistributable installation failed (exit code $0). TPA CoWork may not start until the runtime is installed from https://aka.ms/vs/17/release/vc_redist.x64.exe"
   ${EndIf}
   Delete "$INSTDIR\resources\vc_redist.x64.exe"
+
+  StrCpy $1 "$INSTDIR\resources\agent-venv.zip"
+  IfFileExists "$1" agent_venv_zip_found 0
+  StrCpy $1 "$INSTDIR\agent-venv.zip"
+  IfFileExists "$1" agent_venv_zip_found agent_venv_zip_missing
+
+  agent_venv_zip_found:
+  DetailPrint "Extracting agent-venv from $1..."
+  StrCpy $2 "$INSTDIR\.agent-venv-staging"
+  StrCpy $3 "$INSTDIR\.agent-venv-backup"
+  RMDir /r "$2"
+  RMDir /r "$3"
+  CreateDirectory "$2"
+
+  StrCpy $4 "$WINDIR\Sysnative\tar.exe"
+  IfFileExists "$4" agent_venv_tar_ready 0
+  StrCpy $4 "$WINDIR\System32\tar.exe"
+  IfFileExists "$4" agent_venv_tar_ready 0
+  StrCpy $4 ""
+
+  agent_venv_tar_ready:
+  ${If} $4 != ""
+    nsExec::ExecToLog '"$4" -xf "$1" -C "$2"'
+    Pop $0
+  ${Else}
+    StrCpy $0 1
+  ${EndIf}
+  ${If} $0 != 0
+    DetailPrint "tar.exe unavailable or failed; using PowerShell Expand-Archive."
+    nsExec::ExecToLog 'powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Expand-Archive -LiteralPath ''$1'' -DestinationPath ''$2'' -Force"'
+    Pop $0
+  ${EndIf}
+
+  IfFileExists "$2\agent-venv\Scripts\python.exe" agent_venv_staged_ok agent_venv_failed
+
+  agent_venv_staged_ok:
+  IfFileExists "$INSTDIR\agent-venv\*.*" agent_venv_backup_existing agent_venv_promote
+
+  agent_venv_backup_existing:
+  Rename "$INSTDIR\agent-venv" "$3"
+  IfErrors agent_venv_failed
+
+  agent_venv_promote:
+  Rename "$2\agent-venv" "$INSTDIR\agent-venv"
+  IfErrors agent_venv_restore
+  FileOpen $4 "$INSTDIR\agent-venv\.tpa-cowork-venv-complete" w
+  FileWrite $4 "complete"
+  FileClose $4
+  RMDir /r "$3"
+  Delete "$1"
+  Delete "$INSTDIR\resources\agent-venv.zip"
+  Delete "$INSTDIR\agent-venv.zip"
+  Goto agent_venv_done
+
+  agent_venv_restore:
+  IfFileExists "$3\Scripts\python.exe" 0 agent_venv_failed
+  Rename "$3" "$INSTDIR\agent-venv"
+  Goto agent_venv_failed
+
+  agent_venv_failed:
+  RMDir /r "$2"
+  DetailPrint "agent-venv extraction failed (exit code $0); archive retained for runtime retry."
+  MessageBox MB_OK|MB_ICONEXCLAMATION "Bundled Python extraction failed. TPA CoWork will retry on first launch. Re-run the installer if office or skill scripts remain unavailable."
+  Goto agent_venv_done
+
+  agent_venv_zip_missing:
+  DetailPrint "agent-venv.zip not found; skipping Python environment extraction."
+
+  agent_venv_done:
   RMDir "$INSTDIR\resources"
 !macroend

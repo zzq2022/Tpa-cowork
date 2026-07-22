@@ -20,6 +20,11 @@ src-tauri/resources/chrome-extension/
 # built binary, same class as the browser-host above — never committed).
 src-tauri/binaries/
 
+# Agent Python runtime ZIP staged by scripts/prepare-zip-venv.mjs
+# (~60MB+ prebuilt; never commit — local/CI packaging artifact).
+agent-venv/
+agent-venv.zip
+
 # Python (skill-creator scripts, eval helpers)
 __pycache__/
 *.pyc

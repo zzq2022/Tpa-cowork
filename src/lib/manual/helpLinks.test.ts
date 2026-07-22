@@ -43,23 +43,23 @@ test("external http(s) links pass through", () => {
 test("links escaping the manual resolve to GitHub, per-language depth", () => {
   expect(resolveManualLink("../deployment/docker.md", "zh")).toEqual({
     kind: "external",
-    url: "https://github.com/shiwenwen/hope-agent/tree/main/docs/deployment/docker.md",
+    url: "https://github.com/zzq2022/Tpa-cowork/tree/main/docs/deployment/docker.md",
   })
   expect(resolveManualLink("../../deployment/docker.md", "en")).toEqual({
     kind: "external",
-    url: "https://github.com/shiwenwen/hope-agent/tree/main/docs/deployment/docker.md",
+    url: "https://github.com/zzq2022/Tpa-cowork/tree/main/docs/deployment/docker.md",
   })
   expect(resolveManualLink("../../README.md", "zh")).toEqual({
     kind: "external",
-    url: "https://github.com/shiwenwen/hope-agent/tree/main/README.md",
+    url: "https://github.com/zzq2022/Tpa-cowork/tree/main/README.md",
   })
   expect(resolveManualLink("../../../README.en.md", "en")).toEqual({
     kind: "external",
-    url: "https://github.com/shiwenwen/hope-agent/tree/main/README.en.md",
+    url: "https://github.com/zzq2022/Tpa-cowork/tree/main/README.en.md",
   })
   expect(resolveManualLink("../architecture/", "zh")).toEqual({
     kind: "external",
-    url: "https://github.com/shiwenwen/hope-agent/tree/main/docs/architecture",
+    url: "https://github.com/zzq2022/Tpa-cowork/tree/main/docs/architecture",
   })
 })
 
@@ -84,7 +84,7 @@ test("rewriteManualBody turns relative manual links into harden-safe targets", (
   expect(zh).toContain("](#ch:0)")
   expect(zh).toContain("](#lang-switch)")
   expect(zh).toContain(
-    "](https://github.com/shiwenwen/hope-agent/tree/main/docs/deployment/docker.md)",
+    "](https://github.com/zzq2022/Tpa-cowork/tree/main/docs/deployment/docker.md)",
   )
   // Fragments and absolute URLs pass through untouched.
   expect(zh).toContain("](#41-三层记忆)")

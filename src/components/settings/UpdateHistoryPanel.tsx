@@ -36,7 +36,7 @@ interface ParsedVersion {
 }
 
 const GITHUB_RELEASES_API =
-  "https://api.github.com/repos/shiwenwen/hope-agent/releases?per_page=100"
+  "https://api.github.com/repos/zzq2022/Tpa-cowork/releases?per_page=100"
 const RELEASE_TAG_RE = /^v?([0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?)$/
 
 function parseVersion(version: string): ParsedVersion | null {

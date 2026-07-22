@@ -83,7 +83,7 @@ function miss(platform, message) {
   else console.warn(`[patch-latest-json] skip ${platform}: ${message}`);
 }
 
-const repoUrl = `https://github.com/shiwenwen/hope-agent/releases/download/v${version}`;
+const repoUrl = `https://github.com/zzq2022/Tpa-cowork/releases/download/v${version}`;
 
 const manifestRaw = fs.readFileSync(manifestPath, "utf8");
 const manifest = JSON.parse(manifestRaw);

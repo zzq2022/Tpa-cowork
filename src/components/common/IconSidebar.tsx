@@ -350,25 +350,6 @@ export default function IconSidebar({
             </IconTip>
           </div>
 
-          {/* Channels entry */}
-          <div className="w-full flex justify-center mt-1">
-            <IconTip label={t("settings.channels")} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(
-                  "rounded-xl h-8 w-8 transition-all duration-200",
-                  view === "channels"
-                    ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
-                    : "text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/10",
-                )}
-                onClick={onOpenChannels}
-              >
-                <MessageCircle className="h-4 w-4" />
-              </Button>
-            </IconTip>
-          </div>
-
           {/* Skills entry */}
           <div className="w-full flex justify-center mt-1">
             <div className="relative">

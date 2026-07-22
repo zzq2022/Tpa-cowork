@@ -141,12 +141,6 @@ const SECTIONS: SettingsSectionItem[] = [
     labelKey: "settings.teams",
   },
   {
-    id: "channels",
-    icon: <MessageCircle className="h-3.5 w-3.5" />,
-    colorClass: "bg-emerald-500",
-    labelKey: "settings.channels",
-  },
-  {
     id: "skills",
     icon: <Puzzle className="h-3.5 w-3.5" />,
     colorClass: "bg-amber-500",
@@ -235,12 +229,6 @@ const SECTIONS: SettingsSectionItem[] = [
     icon: <Compass className="h-3.5 w-3.5" />,
     colorClass: "bg-sky-600",
     labelKey: "settings.browser.title",
-  },
-  {
-    id: "acp",
-    icon: <Cable className="h-3.5 w-3.5" />,
-    colorClass: "bg-zinc-500",
-    labelKey: "settings.acpControl",
   },
   {
     id: "notifications",

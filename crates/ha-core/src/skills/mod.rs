@@ -22,6 +22,7 @@ pub use activation::{
 pub use commands::{PresetCandidate, PresetSkillSource};
 pub use discovery::*;
 pub use fork_helper::{extract_fork_result, spawn_skill_fork, MAX_RESULT_CHARS};
+pub(crate) use frontmatter::parse_skill_name_fallback;
 pub use mention::{
     list_mentionable_skills, resolve_inline_skill_mentions, MentionableSkill, AT_MENTIONABLE_SKILLS,
 };

@@ -52,11 +52,13 @@ pub(super) struct ParsedFrontmatter {
 pub(super) fn parse_frontmatter(content: &str) -> Option<ParsedFrontmatter> {
     let trimmed = content.trim_start();
     if !trimmed.starts_with("---") {
-        return None;
+        return parse_frontmatter_fallback(content);
     }
     // Find the closing ---
     let after_opening = &trimmed[3..];
-    let end_idx = after_opening.find("\n---")?;
+    let Some(end_idx) = after_opening.find("\n---") else {
+        return parse_frontmatter_fallback(content);
+    };
     let yaml_block = &after_opening[..end_idx];
     let body = &after_opening[end_idx + 4..]; // skip \n---
 
@@ -1075,4 +1077,72 @@ pub(super) fn parse_metadata_namespaces(yaml_block: &str) -> MetadataNamespaces 
     out.hermes_install = hr_install_specs;
 
     out
+}
+
+/// Best-effort parse for SKILL.md files that lack a proper `--- ... ---`
+/// YAML frontmatter block. Derives the skill name from the first Markdown
+/// heading (`# Title`) and uses the next non-empty, non-heading line as the
+/// description. Previously these files parsed to `None` (skill ignored);
+/// this is strictly more permissive and matches skills downloaded from the
+/// SkillHub, which may ship a heading-only SKILL.md.
+pub(super) fn parse_frontmatter_fallback(content: &str) -> Option<ParsedFrontmatter> {
+    let trimmed = content.trim();
+    if trimmed.is_empty() {
+        return None;
+    }
+    let first_line = trimmed.lines().find(|line| !line.trim().is_empty())?;
+    let name = if let Some(title) = first_line.trim().strip_prefix('#') {
+        let title = title.trim();
+        let raw_name = title.split_whitespace().next().unwrap_or(title);
+        unquote(raw_name)
+    } else {
+        String::new()
+    };
+    if name.is_empty() {
+        return None;
+    }
+
+    let description = trimmed
+        .lines()
+        .skip(1)
+        .find(|line| !line.trim().is_empty() && !line.trim().starts_with('#'))
+        .map(|line| line.trim().to_string())
+        .unwrap_or_default();
+
+    Some(ParsedFrontmatter {
+        name,
+        description,
+        when_to_use: None,
+        requires: SkillRequires::default(),
+        body: content.to_string(),
+        aliases: Vec::new(),
+        skill_key: None,
+        user_invocable: None,
+        disable_model_invocation: None,
+        command_dispatch: None,
+        command_tool: None,
+        command_arg_mode: None,
+        command_arg_placeholder: None,
+        command_arg_options: None,
+        command_prompt_template: None,
+        install: Vec::new(),
+        allowed_tools: Vec::new(),
+        context_mode: None,
+        agent: None,
+        effort: None,
+        paths: None,
+        status: SkillStatus::Active,
+        authored_by: None,
+        rationale: None,
+        display: SkillDisplay::default(),
+    })
+}
+
+/// Extract just the skill name from a frontmatter-less SKILL.md. Used by the
+/// SkillHub download path to derive a local directory name when the package
+/// has no YAML frontmatter.
+pub(crate) fn parse_skill_name_fallback(content: &str) -> Option<String> {
+    parse_frontmatter_fallback(content)
+        .map(|p| p.name)
+        .filter(|n| !n.is_empty())
 }

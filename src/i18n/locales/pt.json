@@ -43,10 +43,10 @@
     "updateHistoryLatest": "Mais recente",
     "updateHistoryNoNotes": "Não há notas disponíveis para esta versão.",
     "updateHistoryUndated": "Notas de versão",
-    "updateInstalled": "Atualização instalada. Reiniciando o Hope Agent...",
+    "updateInstalled": "Atualização instalada. Reiniciando o TPA CoWork...",
     "updateInstalling": "Instalando v{{version}}...",
-    "updateRestartManually": "A atualização foi instalada, mas o reinício automático falhou. Saia do Hope Agent manualmente e abra-o novamente.",
-    "updateReady": "Você pode conferir uma nova versão desktop no GitHub Releases ou deixar o Hope Agent instalá-la para você.",
+    "updateRestartManually": "A atualização foi instalada, mas o reinício automático falhou. Saia do TPA CoWork manualmente e abra-o novamente.",
+    "updateReady": "Você pode conferir uma nova versão desktop no GitHub Releases ou deixar o TPA CoWork instalá-la para você.",
     "updateUpToDate": "Você já está na versão mais recente v{{version}}.",
     "updateAndRestart": "Atualizar e reiniciar",
     "updateOnly": "Apenas atualizar",
@@ -144,7 +144,7 @@
       },
       "mac_control_action": {
         "title": "Ação do Mac Control",
-        "body": "Esta chamada de controle do macOS altera o foco/estado da área de trabalho. Confirme antes que o Hope Agent ative outro app."
+        "body": "Esta chamada de controle do macOS altera o foco/estado da área de trabalho. Confirme antes que o TPA CoWork ative outro app."
       },
       "mac_control_dangerous_action": {
         "title": "Ação perigosa do Mac Control",
@@ -163,7 +163,7 @@
   "auth": {
     "tokenLabel": "Token Bearer",
     "tokenPlaceholder": "Cole seu token",
-    "tokenRequiredBody": "Este servidor Hope Agent é protegido por um token Bearer. Cole o token fornecido pelo administrador para continuar.",
+    "tokenRequiredBody": "Este servidor TPA CoWork é protegido por um token Bearer. Cole o token fornecido pelo administrador para continuar.",
     "tokenRequiredTitle": "Autenticação do servidor necessária",
     "tokenSave": "Salvar e recarregar"
   },
@@ -567,7 +567,7 @@
         "manualEntry": "Inserir manualmente",
         "chooseRecent": "Escolher chat recente",
         "loadingConversations": "Carregando chats recentes…",
-        "noRecentConversations": "Ainda não há chats recentes disponíveis. Envie uma mensagem para Hope Agent pelo chat de IM de destino, ou insira manualmente.",
+        "noRecentConversations": "Ainda não há chats recentes disponíveis. Envie uma mensagem para TPA CoWork pelo chat de IM de destino, ou insira manualmente.",
         "refreshConversations": "Atualizar chats recentes",
         "chatId": "ID do chat",
         "chatIdPlaceholder": "ex: 123456789 ou @username",
@@ -950,7 +950,7 @@
     "reasoningDisabledHint": "O raciocínio não está ativado para este modelo. Para ajustar a profundidade de raciocínio, edite o modelo em Configurações → Provedores de modelos e ative \"Raciocínio\".",
     "browserExtensionNudge": {
       "installTitle": "Deixe a IA controlar seu Chrome real",
-      "installBody": "Instale a extensão do Hope Agent para operar seu Chrome com login. Por enquanto, ele roda em um navegador isolado.",
+      "installBody": "Instale a extensão do TPA CoWork para operar seu Chrome com login. Por enquanto, ele roda em um navegador isolado.",
       "reloadTitle": "Recarregue a extensão do Chrome",
       "reloadBody": "A extensão instalada não corresponde ao host. Recarregue-a para restaurar o controle do seu Chrome real.",
       "openSettings": "Abrir configurações",
@@ -2283,7 +2283,7 @@
     },
     "system": {
       "cores": "Núcleos",
-      "cpuDesc": "Hope Agent usa {{percent}}% de CPU ({{cores}} núcleos no total)",
+      "cpuDesc": "TPA CoWork usa {{percent}}% de CPU ({{cores}} núcleos no total)",
       "cpuUsage": "Uso de CPU",
       "diskIO": "E/S de disco",
       "diskRead": "Leitura",
@@ -3188,12 +3188,12 @@
     "agentDesc": "Substituições de notificação por Agent. Quando definido como Padrão, usa a configuração global.",
     "agentSection": "Notificações de Agent",
     "approvalRequired": "Aprovação de ferramenta necessária",
-    "approvalRequiredFallback": "Hope Agent está aguardando você aprovar uma chamada de ferramenta",
+    "approvalRequiredFallback": "TPA CoWork está aguardando você aprovar uma chamada de ferramenta",
     "approvalTimedOut": "A aprovação de ferramenta expirou",
     "approvalTimedOut_denied": "A chamada de ferramenta pendente foi negada após {{seconds}}s.",
     "approvalTimedOut_proceeded": "A chamada de ferramenta pendente continuou após {{seconds}}s.",
     "askUserRequired": "O agente está aguardando uma resposta",
-    "askUserRequiredFallback": "Hope Agent tem uma pergunta para você",
+    "askUserRequiredFallback": "TPA CoWork tem uma pergunta para você",
     "askUserTimedOut": "A pergunta expirou",
     "askUserTimedOutDefaults": "As respostas padrão foram usadas após {{seconds}}s.",
     "askUserTimedOutNoDefaults": "Nenhuma resposta foi recebida em {{seconds}}s.",
@@ -3202,7 +3202,7 @@
     "channelAuthFailedFallback": "Credenciais de uma conta de canal IM foram rejeitadas — autentique-se novamente",
     "chatCompleted": "Conversa concluída",
     "chatCompletedGenericBody": "A conversa foi concluída. Abra o aplicativo para ver a resposta mais recente.",
-    "chatCompletedGenericTitle": "Hope Agent",
+    "chatCompletedGenericTitle": "TPA CoWork",
     "chatError": "Erro na conversa",
     "cronEmpty": "Tarefa agendada concluída (sem saída)",
     "cronError": "Tarefa agendada falhou",
@@ -3253,7 +3253,7 @@
         "whatsapp": "WhatsApp"
       },
       "macOnly": "somente macOS",
-      "subtitle": "Converse com Hope Agent de Telegram, Slack, WeChat e muito mais. Escolha qualquer um para acessar a configuração completa.",
+      "subtitle": "Converse com TPA CoWork de Telegram, Slack, WeChat e muito mais. Escolha qualquer um para acessar a configuração completa.",
       "title": "Conecte um canal de IM (opcional)"
     },
     "exit": {
@@ -3310,11 +3310,11 @@
       "warningsTitle": "Atenção"
     },
     "mode": {
-      "localDesc": "Executar o Hope Agent neste dispositivo. A seguir você escolhe um provedor de modelo.",
+      "localDesc": "Executar o TPA CoWork neste dispositivo. A seguir você escolhe um provedor de modelo.",
       "localTitle": "Configurar localmente",
-      "remoteDesc": "Já possui um servidor Hope Agent rodando? Aponte este app para ele e pule a configuração local.",
+      "remoteDesc": "Já possui um servidor TPA CoWork rodando? Aponte este app para ele e pule a configuração local.",
       "remoteTitle": "Conectar ao remoto",
-      "subtitle": "Execute o Hope Agent localmente neste dispositivo ou conecte-se a um servidor Hope Agent existente.",
+      "subtitle": "Execute o TPA CoWork localmente neste dispositivo ou conecte-se a um servidor TPA CoWork existente.",
       "title": "Escolha como executar"
     },
     "nav": {
@@ -3393,7 +3393,7 @@
         "desc": "Altere o tempo limite em Configurações → Segurança, ou aprove automaticamente chamadas vindas de um canal de mensagens específico (Telegram / Slack / Discord, etc.).",
         "title": "Ajustável posteriormente"
       },
-      "subtitle": "Por padrão, Hope Agent pergunta antes de executar comandos shell ou editar arquivos.",
+      "subtitle": "Por padrão, TPA CoWork pergunta antes de executar comandos shell ou editar arquivos.",
       "title": "As aprovações de ferramentas mantêm você no controle",
       "toggle": "Exigir aprovações",
       "toggleHint": "Desativar isso significa que as ferramentas são executadas sem aviso prévio – não recomendado."
@@ -3411,7 +3411,7 @@
       "previewLabel": "Rede GUI URL",
       "restartHint": "As alterações de endereço de vinculação entrarão em vigor após a próxima reinicialização.",
       "subtitle": "O servidor HTTP integrado permite abrir o mesmo aplicativo em qualquer navegador.",
-      "title": "Como você gostaria de acessar o Hope Agent?"
+      "title": "Como você gostaria de acessar o TPA CoWork?"
     },
     "skills": {
       "empty": "Nenhuma habilidade encontrada. Clique em Próximo para continuar.",
@@ -3452,7 +3452,7 @@
       "languageHint": "Atualmente em exibição: {{current}}",
       "languageLabel": "Idioma da interface",
       "subtitle": "Um assistente de IA que te conhece melhor a cada uso — no desktop, na nuvem e na mensageria, sempre pronto.\nSegue um guia rápido — todas as etapas são opcionais, exceto escolher um modelo.",
-      "title": "Bem-vindo ao Hope Agent"
+      "title": "Bem-vindo ao TPA CoWork"
     }
   },
   "plans": {
@@ -3675,7 +3675,7 @@
     "projectLogo": "Logotipo",
     "projectLogoHint": "Opcional. Imagens são redimensionadas automaticamente para 256×256.",
     "projectName": "Nome do projeto",
-    "projectNamePlaceholder": "ex. Desenvolvimento Hope Agent",
+    "projectNamePlaceholder": "ex. Desenvolvimento TPA CoWork",
     "projects": "Projetos",
     "removeFromProject": "Remover do projeto",
     "removeLogo": "Remover",
@@ -4403,7 +4403,7 @@
       "deleteConfirmDesc": "Todos os cookies, logins e dados em cache deste perfil serão removidos. Isso não pode ser desfeito.",
       "deleteConfirmTitle": "Excluir perfil '{{name}}'?",
       "deleteDisabledActive": "Pare o navegador antes de excluir seu perfil",
-      "desc": "O Hope Agent pode lançar e controlar uma instância dedicada do Chrome para você. Crie perfis separados para manter logins (Google, GitHub, ferramentas de trabalho…) isolados — o agente e você compartilham a mesma sessão, então tudo em que você fizer login, o agente poderá operar.",
+      "desc": "O TPA CoWork pode lançar e controlar uma instância dedicada do Chrome para você. Crie perfis separados para manter logins (Google, GitHub, ferramentas de trabalho…) isolados — o agente e você compartilham a mesma sessão, então tudo em que você fizer login, o agente poderá operar.",
       "disconnect": "Parar",
       "doctorChromeFound": "Chrome encontrado em {{url}}",
       "doctorChromeMissing": "Nenhum Chrome detectado na porta de depuração padrão",
@@ -4430,7 +4430,7 @@
       "minutesAgo": "{{count}} min atrás",
       "modeConnect": "Anexado ao Chrome externo",
       "modeLabel": "Modo",
-      "modeLaunch": "Lançado pelo Hope Agent",
+      "modeLaunch": "Lançado pelo TPA CoWork",
       "modeStandalone": "Navegador independente",
       "modeStandaloneHint": "hope-agent mantém uma instância isolada do Chrome. Recomendado para automação.",
       "modeUserChrome": "Assumir Chrome do usuário",
@@ -4483,10 +4483,10 @@
         "kindBrokerUnavailable": "Broker não está em execução",
         "kindVersionMismatch": "Incompatibilidade de protocolo",
         "kindExtensionMissing": "Não conectado",
-        "statusReady": "A extensão do Chrome do Hope Agent está conectada.",
+        "statusReady": "A extensão do Chrome do TPA CoWork está conectada.",
         "statusHostMissing": "O host de mensagens nativas do Chrome não está instalado.",
         "statusBrokerUnavailable": "O broker da extensão do Chrome não está em execução.",
-        "statusExtensionMissing": "A extensão do Chrome do Hope Agent não está conectada.",
+        "statusExtensionMissing": "A extensão do Chrome do TPA CoWork não está conectada.",
         "statusVersionMismatch": "A versão do protocolo da extensão não corresponde à do host. Recarregue a extensão para atualizá-la.",
         "versionLine": "Extensão {{version}} · protocolo {{protocol}}",
         "unknown": "desconhecido",
@@ -4536,7 +4536,7 @@
         "managed": "Chrome gerenciado",
         "attach": "Conectar ao Chrome",
         "extensionDesc": "Controle seu Chrome real com login pela extensão — ele compartilha seus cookies e sessões. Recomendado.",
-        "managedDesc": "O Hope Agent inicia e mantém sua própria instância isolada do Chrome. Ideal para automação.",
+        "managedDesc": "O TPA CoWork inicia e mantém sua própria instância isolada do Chrome. Ideal para automação.",
         "attachDesc": "Conecte-se a um Chrome que você mesmo iniciou com --remote-debugging-port."
       },
       "rawCdpConfirm": {
@@ -5194,7 +5194,7 @@
     "issueReportingToken": "Token do GitHub",
     "issueReportingTokenCleared": "Token do GitHub removido",
     "issueReportingTokenConfigured": "Um token está configurado.",
-    "issueReportingTokenMissing": "Nenhum token configurado. O Hope Agent tentará usar o gh CLI autenticado.",
+    "issueReportingTokenMissing": "Nenhum token configurado. O TPA CoWork tentará usar o gh CLI autenticado.",
     "issueReportingTokenPlaceholderClear": "Deixe em branco e salve para limpar",
     "issueReportingTokenPlaceholderNew": "Fine-grained PAT",
     "issueReportingTokenSaveFailed": "Falha ao salvar token do GitHub",
@@ -5978,7 +5978,7 @@
     "permCheck": "Verificar",
     "permContacts": "Contatos",
     "permContactsDesc": "Ler informações de contato",
-    "permDesc": "Hope Agent precisa das seguintes permissões do sistema para controlar seu computador. Por favor, conceda-as nas Configurações do sistema.",
+    "permDesc": "TPA CoWork precisa das seguintes permissões do sistema para controlar seu computador. Por favor, conceda-as nas Configurações do sistema.",
     "permFilesAndFolders": "Arquivos e pastas",
     "permFilesAndFoldersDesc": "Acessar Área de Trabalho, Documentos, Downloads e outros diretórios do usuário",
     "permFullDiskAccess": "Acesso completo ao disco",
@@ -6082,7 +6082,7 @@
       },
       "homekit": {
         "label": "HomeKit (casa)",
-        "note": "Hope Agent não usa fluxos HomeKit atualmente.",
+        "note": "TPA CoWork não usa fluxos HomeKit atualmente.",
         "usage": "Acessar dados da Casa somente se futuros fluxos HomeKit forem habilitados."
       },
       "input_monitoring": {
@@ -6312,7 +6312,7 @@
     "serverModeEmbedded": "Embutido",
     "serverModeEmbeddedDesc": "App de desktop roda um servidor HTTP em localhost",
     "serverModeRemote": "Remoto",
-    "serverModeRemoteDesc": "Conectar a um servidor Hope Agent externo",
+    "serverModeRemoteDesc": "Conectar a um servidor TPA CoWork externo",
     "serverNotStarted": "Não iniciado",
     "serverRemoteUrl": "URL do servidor remoto",
     "serverRemoteUrlPlaceholder": "http://192.168.1.100:8420",
@@ -6528,7 +6528,7 @@
         },
         "autoCuratorEnabled": {
           "label": "Executar curator em agenda",
-          "help": "Quando ativado, o Hope Agent verifica periodicamente os rascunhos de habilidades em busca de sobreposição e mostra aqui sugestões de mesclagem."
+          "help": "Quando ativado, o TPA CoWork verifica periodicamente os rascunhos de habilidades em busca de sobreposição e mostra aqui sugestões de mesclagem."
         },
         "autoCuratorIntervalDays": {
           "label": "Intervalo do curator",
@@ -6537,7 +6537,7 @@
       }
     },
     "skillsEvolutionHero": {
-      "body": "O Hope Agent não fica parado. De tempos em tempos relê os chats e destila o que você repete em habilidades reutilizáveis — na próxima vez que surgir, já está aprendido.",
+      "body": "O TPA CoWork não fica parado. De tempos em tempos relê os chats e destila o que você repete em habilidades reutilizáveis — na próxima vez que surgir, já está aprendido.",
       "note": "Ligado por padrão · ajusta-se a você a cada uso. Ao desligar, as conversas seguem normais; apenas deixa de acumular novas habilidades automaticamente.",
       "statusOff": "Pausado",
       "statusOn": "Evoluindo",
@@ -6666,7 +6666,7 @@
     "subagentTitle": "Delegação para sub-Agent",
     "system": "Sistema",
     "systemAutostart": "Iniciar no login",
-    "systemAutostartDesc": "Iniciar Hope Agent automaticamente quando você fizer login no computador",
+    "systemAutostartDesc": "Iniciar TPA CoWork automaticamente quando você fizer login no computador",
     "systemPreventSleep": "Impedir suspensão",
     "systemPreventSleepDesc": "Mantenha o computador ativo para que tarefas demoradas, downloads e atividades em segundo plano não sejam interrompidos pela suspensão do sistema. A tela ainda pode desligar.",
     "tabAppearance": "Aparência e idioma",
@@ -6876,7 +6876,7 @@
     "toolCoreMemoryDesc": "Lê e mantém a memória principal limitada e sempre carregada nos escopos Global, Agent e Projeto.",
     "toolProjectMemoryDesc": "Pesquisa e mantém o índice MEMORY.md local e os arquivos de tópicos do projeto atual.",
     "toolMacControlDesc": "Inspeciona e controla apps, janelas, menus, elementos de interface, capturas, área de transferência e diálogos do macOS.",
-    "toolIssueReportDesc": "Pesquisa, rascunha ou, com confirmação, cria issues do GitHub para o Hope Agent.",
+    "toolIssueReportDesc": "Pesquisa, rascunha ou, com confirmação, cria issues do GitHub para o TPA CoWork.",
     "toolArtifactDesc": "Cria, inspeciona, atualiza, restaura e verifica artefatos locais duráveis e versionados.",
     "toolDesignDesc": "Cria e gerencia sistemas e projetos de design, além de artefatos visuais versionados.",
     "toolSubmitPlanDesc": "Envia o plano escrito final para revisão e aprovação do usuário.",
@@ -6896,7 +6896,7 @@
     "toolLoopRecordProgressDesc": "Registra uma nota leve de progresso, estado ou transferência para um ciclo ativo.",
     "toolLoopWatchDesc": "Anexa ou reativa um monitor durável de eventos que pode despertar o ciclo rapidamente.",
     "toolLoopUnwatchDesc": "Desativa o monitor de eventos sem parar o ciclo nem sua agenda de contingência.",
-    "toolAppUpdateDesc": "Verifica, instala, inspeciona ou reverte atualizações do Hope Agent no desktop, servidor e CLI.",
+    "toolAppUpdateDesc": "Verifica, instala, inspeciona ou reverte atualizações do TPA CoWork no desktop, servidor e CLI.",
     "toolJobStatusDesc": "Inspeciona, lista, aguarda brevemente, cancela ou obtém resultados de tarefas de ferramentas em segundo plano.",
     "toolScheduleWakeupDesc": "Agenda um despertar único que continua esta sessão após um atraso.",
     "toolRuntimeCancelDesc": "Cancela uma tarefa assíncrona, sub-Agent, processo ou tarefa agendada em andamento.",
@@ -7189,10 +7189,10 @@
     "memoryExternalPolicyBidirectional": "Bidirecional",
     "memoryExternalPolicyOffDesc": "Desativado para este provedor.",
     "memoryExternalPolicyManualDesc": "Sincronize apenas quando você iniciá-lo explicitamente.",
-    "memoryExternalPolicyPullOnlyDesc": "Leia a memória externa apenas na fila de revisão do Hope Agent.",
-    "memoryExternalPolicyPushOnlyDesc": "Envie a memória Hope Agent selecionada apenas para fora.",
+    "memoryExternalPolicyPullOnlyDesc": "Leia a memória externa apenas na fila de revisão do TPA CoWork.",
+    "memoryExternalPolicyPushOnlyDesc": "Envie a memória TPA CoWork selecionada apenas para fora.",
     "memoryExternalPolicyBidirectionalDesc": "Reconcilie ambas as direções após a configuração explícita.",
-    "memoryExternalProvidersOverviewOff": "A sincronização do provedor externo está desativada. Nenhum dado de memória sai do Hope Agent através dos provedores.",
+    "memoryExternalProvidersOverviewOff": "A sincronização do provedor externo está desativada. Nenhum dado de memória sai do TPA CoWork através dos provedores.",
     "memoryExternalProvidersOverviewNeedsSetup": "Os provedores {{count}} precisam de configuração de ponto de conexão. A memória local permanece disponível.",
     "memoryExternalProvidersOverviewUnsupportedPolicy": "As configurações do provedor {{count}} usam uma política de sincronização sem suporte. Escolha uma política compatível antes que a sincronização possa ser executada.",
     "memoryExternalProvidersOverviewAdapterPending": "As configurações do provedor {{count}} estão aguardando um adaptador de tempo de execução. Nenhuma sincronização será executada; a memória local permanece disponível.",
@@ -7205,7 +7205,7 @@
     "memoryExternalProviderLocalFirstAdapterPending": "Os metadados do terminal estão configurados, mas esse adaptador de tempo de execução ainda não está disponível. Nenhuma sincronização será executada.",
     "memoryExternalProviderLocalFirstUnsupportedPolicy": "A política de sincronização selecionada não é suportada por este adaptador de provedor. Nenhuma sincronização será executada.",
     "memoryExternalProviderLocalFirstNeedsSetup": "A sincronização ainda não pode ser executada. A memória local permanece disponível.",
-    "memoryExternalProviderLocalFirstOff": "A sincronização do provedor não está ativa; nenhum dado de memória sai de Hope Agent através deste provedor.",
+    "memoryExternalProviderLocalFirstOff": "A sincronização do provedor não está ativa; nenhum dado de memória sai de TPA CoWork através deste provedor.",
     "memoryExternalProviderPrivacyOff": "Nenhum dado do provedor será movido enquanto este provedor ou a sincronização global estiver desativado.",
     "memoryExternalProviderPrivacyBlocked": "Nenhum dado do provedor será movido até que a configuração, a política e a prontidão do adaptador sejam aprovadas.",
     "memoryExternalProviderPrivacyManual": "A sincronização manual pode enviar a memória selecionada ou o contexto de recuperação somente após uma ação explícita.",
@@ -7653,11 +7653,11 @@
       "safetyProfileConflicts": "Os conflitos de escopo de perfil são ignorados, a menos que o usuário habilite explicitamente a substituição."
     },
     "memoryBackupPreviewIssues": {
-      "invalidArchive": "O pacote de backup não é um arquivo de memória Hope Agent válido",
+      "invalidArchive": "O pacote de backup não é um arquivo de memória TPA CoWork válido",
       "invalidJson": "O arquivo de backup não é válido JSON",
       "encryptedPassphraseRequired": "Este backup é criptografado; digite sua senha para visualizar ou restaurar.",
       "encryptedDecryptFailed": "O backup criptografado não pôde ser descriptografado",
-      "encryptedPlaintextInvalid": "O backup criptografado foi descriptografado, mas o pacote descriptografado não é um backup de memória Hope Agent válido",
+      "encryptedPlaintextInvalid": "O backup criptografado foi descriptografado, mas o pacote descriptografado não é um backup de memória TPA CoWork válido",
       "unsupportedSchema": "Esquema de backup de memória não suportado",
       "invalidBundleShape": "O esquema de backup é reconhecido, mas o pacote está incompleto",
       "sourceBundlePartial": "O pacote de fontes foi exportado com avisos; verifique manifest.warnings antes de restaurar.",
@@ -7706,7 +7706,7 @@
     "memoryBackupRestorePlanRows": {
       "invalid": {
         "label": "O arquivo de backup não é compatível",
-        "detail": "Execute a visualização com um backup de memória Hope Agent compatível antes de restaurar."
+        "detail": "Execute a visualização com um backup de memória TPA CoWork compatível antes de restaurar."
       },
       "legacy-import": {
         "label": "Memórias legadas perdidas",
@@ -7916,7 +7916,7 @@
     "memoryExternalProviderKind": "Provedor",
     "memoryExternalProviderPolicy": "Política de sincronização",
     "memoryExternalProviderEnabled": "Provedor ativado",
-    "memoryExternalProviderEndpointConfigured": "ponto de conexão configurado fora de Hope Agent",
+    "memoryExternalProviderEndpointConfigured": "ponto de conexão configurado fora de TPA CoWork",
     "memoryExternalProviderAdd": "Adicionar provedor",
     "memoryExternalProvidersNoActive": "Ativado, sem provedores ativos",
     "memoryBackupPassphraseStrong": "Forte",
@@ -7934,7 +7934,7 @@
     "memoryBackupEncryptedPassphraseConfirm": "Confirmar senha",
     "memoryBackupEncryptedUnlock": "Desbloquear backup",
     "memoryBackupPreviewDesc": "Revise o que esse backup contém antes que qualquer trabalho de restauração seja permitido.",
-    "memoryBackupPreviewInvalidDesc": "Este arquivo não é um backup de memória Hope Agent compatível.",
+    "memoryBackupPreviewInvalidDesc": "Este arquivo não é um backup de memória TPA CoWork compatível.",
     "memoryBackupPreviewMemories": "Memórias",
     "memoryBackupPreviewNew": "Novos candidatos",
     "memoryBackupPreviewClaims": "Reivindicações",
@@ -8775,7 +8775,7 @@
     "loop_record_progress": "Registrar progresso do ciclo",
     "loop_watch": "Monitorar evento do ciclo",
     "loop_unwatch": "Remover monitoramento do ciclo",
-    "app_update": "Atualizar Hope Agent",
+    "app_update": "Atualizar TPA CoWork",
     "job_status": "Status de tarefas em segundo plano",
     "schedule_wakeup": "Agendar despertar",
     "runtime_cancel": "Cancelar tarefa em execução",
@@ -8930,30 +8930,30 @@
     },
     "appUpdate": {
       "rollback": {
-        "context": "Hope Agent rollback — restaure o binário anterior de ~/.hope-agent/updater/backup/ e reinicie o serviço.",
-        "text": "Reverter para o binário Hope Agent instalado anteriormente? O serviço será reiniciado imediatamente após a troca.",
-        "header": "Hope Agent reversão",
+        "context": "TPA CoWork rollback — restaure o binário anterior de ~/.hope-agent/updater/backup/ e reinicie o serviço.",
+        "text": "Reverter para o binário TPA CoWork instalado anteriormente? O serviço será reiniciado imediatamente após a troca.",
+        "header": "TPA CoWork reversão",
         "confirm": "Reverter agora",
         "cancel": "Cancelar"
       },
       "install": {
-        "context": "Hope Agent confirmação de atualização automática. Fonte de instalação: {{installSource}}. Caminho recomendado: {{path}}.",
-        "header": "Hope Agent {{from}} → {{to}}",
+        "context": "TPA CoWork confirmação de atualização automática. Fonte de instalação: {{installSource}}. Caminho recomendado: {{path}}.",
+        "header": "TPA CoWork {{from}} → {{to}}",
         "text": {
-          "packageManager": "Atualizar o Hope Agent de {{from}} para {{to}}?\nRota: gerenciador de pacotes ({{installSource}}){{notes}}\n\nO serviço do usuário será reiniciado logo após a troca do executável (normalmente com 1-2 segundos de indisponibilidade). Qualquer turno de chat, tarefa agendada ou transmissão de IM em andamento será cancelado; pause primeiro os trabalhos importantes.",
-          "selfContained": "Atualizar o Hope Agent de {{from}} para {{to}}?\nRota: baixar o executável independente, verificar a assinatura Minisign e fazer a troca atômica.{{notes}}\n\nO serviço do usuário será reiniciado logo após a troca do executável (normalmente com 1-2 segundos de indisponibilidade). Qualquer turno de chat, tarefa agendada ou transmissão de IM em andamento será cancelado; pause primeiro os trabalhos importantes.",
-          "tauri": "Atualizar o Hope Agent de {{from}} para {{to}}?\nRota: atualizador integrado do Tauri (instalador assinado).{{notes}}\n\nO serviço do usuário será reiniciado logo após a troca do executável (normalmente com 1-2 segundos de indisponibilidade). Qualquer turno de chat, tarefa agendada ou transmissão de IM em andamento será cancelado; pause primeiro os trabalhos importantes.",
-          "manualPrompt": "Atualizar o Hope Agent de {{from}} para {{to}}?\nRota: download manual (nenhuma rota automática compatível).{{notes}}\n\nO serviço do usuário será reiniciado logo após a troca do executável (normalmente com 1-2 segundos de indisponibilidade). Qualquer turno de chat, tarefa agendada ou transmissão de IM em andamento será cancelado; pause primeiro os trabalhos importantes."
+          "packageManager": "Atualizar o TPA CoWork de {{from}} para {{to}}?\nRota: gerenciador de pacotes ({{installSource}}){{notes}}\n\nO serviço do usuário será reiniciado logo após a troca do executável (normalmente com 1-2 segundos de indisponibilidade). Qualquer turno de chat, tarefa agendada ou transmissão de IM em andamento será cancelado; pause primeiro os trabalhos importantes.",
+          "selfContained": "Atualizar o TPA CoWork de {{from}} para {{to}}?\nRota: baixar o executável independente, verificar a assinatura Minisign e fazer a troca atômica.{{notes}}\n\nO serviço do usuário será reiniciado logo após a troca do executável (normalmente com 1-2 segundos de indisponibilidade). Qualquer turno de chat, tarefa agendada ou transmissão de IM em andamento será cancelado; pause primeiro os trabalhos importantes.",
+          "tauri": "Atualizar o TPA CoWork de {{from}} para {{to}}?\nRota: atualizador integrado do Tauri (instalador assinado).{{notes}}\n\nO serviço do usuário será reiniciado logo após a troca do executável (normalmente com 1-2 segundos de indisponibilidade). Qualquer turno de chat, tarefa agendada ou transmissão de IM em andamento será cancelado; pause primeiro os trabalhos importantes.",
+          "manualPrompt": "Atualizar o TPA CoWork de {{from}} para {{to}}?\nRota: download manual (nenhuma rota automática compatível).{{notes}}\n\nO serviço do usuário será reiniciado logo após a troca do executável (normalmente com 1-2 segundos de indisponibilidade). Qualquer turno de chat, tarefa agendada ou transmissão de IM em andamento será cancelado; pause primeiro os trabalhos importantes."
         },
         "confirm": "Atualize agora",
         "cancel": "Agora não"
       },
       "manual": {
-        "dockerContext": "Hope Agent está sendo executado em um contêiner Docker. A atualização automática não pode substituir a imagem — atualize puxando uma nova tag e recriando o contêiner.",
-        "dockerText": "Hope Agent está sendo executado em um contêiner Docker ({{from}} → {{to}}).\n\nAtualize extraindo a nova imagem e recriando o contêiner:\n\n    docker pull ghcr.io/shiwenwen/hope-agent:v{{to}}\n    docker compose up -d\n\nou fixe em `latest` se o seu arquivo de composição o usar.",
+        "dockerContext": "TPA CoWork está sendo executado em um contêiner Docker. A atualização automática não pode substituir a imagem — atualize puxando uma nova tag e recriando o contêiner.",
+        "dockerText": "TPA CoWork está sendo executado em um contêiner Docker ({{from}} → {{to}}).\n\nAtualize extraindo a nova imagem e recriando o contêiner:\n\n    docker pull ghcr.io/shiwenwen/hope-agent:v{{to}}\n    docker compose up -d\n\nou fixe em `latest` se o seu arquivo de composição o usar.",
         "dockerHeader": "Docker atualização necessária",
-        "context": "Hope Agent não pode escolher um caminho de atualização automatizado para esta instalação. Decida como proceder.",
-        "text": "Nenhum caminho de atualização automatizado está disponível para Hope Agent {{from}} → {{to}}. Fonte de instalação detectada como: {{installSource}}. Escolha uma recuperação:",
+        "context": "TPA CoWork não pode escolher um caminho de atualização automatizado para esta instalação. Decida como proceder.",
+        "text": "Nenhum caminho de atualização automatizado está disponível para TPA CoWork {{from}} → {{to}}. Fonte de instalação detectada como: {{installSource}}. Escolha uma recuperação:",
         "header": "Atualização manual necessária",
         "openReleases": "Abra a página de lançamento no navegador",
         "openReleasesManual": "Abra a página de lançamento no navegador (download manual)",
@@ -11767,15 +11767,15 @@
       "unbound": "Vínculo removido",
       "err": "Falha ao vincular",
       "sourceDir": "Origem: diretório local",
-      "sourceHaProject": "Origem: projeto do Hope Agent",
+      "sourceHaProject": "Origem: projeto do TPA CoWork",
       "stale": "Inválido (o diretório ou o projeto não existe mais)",
       "unbind": "Desvincular",
       "modeDir": "Diretório local",
-      "modeHaProject": "Projeto do Hope Agent",
+      "modeHaProject": "Projeto do TPA CoWork",
       "dir": "Diretório do repositório",
       "dirPlaceholder": "Escolha ou digite a raiz do repositório",
       "choose": "Escolher…",
-      "haProject": "Projeto do Hope Agent",
+      "haProject": "Projeto do TPA CoWork",
       "haProjectPlaceholder": "Selecione um projeto…",
       "haProjectHint": "O diretório vem do diretório de trabalho do projeto e acompanha alterações automaticamente.",
       "bind": "Vincular"
@@ -12164,14 +12164,14 @@
   },
   "configRecovery": {
     "title": "É necessário recuperar a configuração",
-    "subtitle": "Hope Agent não conseguiu ler o config.json existente. Para proteger o provedor, o servidor MCP e o estado da configuração inicial, a gravação da configuração foi pausada.",
+    "subtitle": "TPA CoWork não conseguiu ler o config.json existente. Para proteger o provedor, o servidor MCP e o estado da configuração inicial, a gravação da configuração foi pausada.",
     "path": "Arquivo de configuração",
     "error": "Erro de leitura",
     "details": "Nota de proteção",
     "retry": "Tentar ler novamente",
     "restart": "Reiniciar aplicativo",
     "backupsTitle": "Restaurar um instantâneo da configuração",
-    "backupsDesc": "Após a restauração, Hope Agent recarregará a configuração e continuará a inicialização. O arquivo ilegível permanece no local original e, quando possível, é copiado para um arquivo auxiliar .corrupt-<timestamp>.",
+    "backupsDesc": "Após a restauração, TPA CoWork recarregará a configuração e continuará a inicialização. O arquivo ilegível permanece no local original e, quando possível, é copiado para um arquivo auxiliar .corrupt-<timestamp>.",
     "loading": "Carregando instantâneos…",
     "empty": "Nenhum instantâneo de configuração encontrado",
     "emptyHint": "Repare config.json manualmente ou recupere uma versão utilizável de backups/autosave ou config.json.corrupt-* e tente novamente.",
@@ -12179,7 +12179,7 @@
     "source": "Fonte",
     "retrying": "Lendo",
     "restoring": "Restaurando",
-    "restartFailed": "A reinicialização automática não está disponível aqui. Feche e reabra Hope Agent manualmente.",
+    "restartFailed": "A reinicialização automática não está disponível aqui. Feche e reabra TPA CoWork manualmente.",
     "categoryValues": {
       "providers": "Provedores",
       "proxy": "Servidor proxy",
@@ -12200,6 +12200,85 @@
     "kindValues": {
       "config": "Configuração",
       "user": "Configurações do usuário"
+    }
+  },
+  "cloud": {
+    "title": "Cloud account",
+    "notSignedIn": "Not signed in to TPA CoWork Cloud",
+    "login": "Log in",
+    "logout": "Log out",
+    "loginTitle": "Log in to TPA CoWork Cloud",
+    "loginDescription": "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+    "serverUrl": "Cloud server URL",
+    "username": "Username",
+    "password": "Password",
+    "loggingIn": "Logging in...",
+    "signedInAs": "Signed in as {{username}}"
+  },
+  "skillhub": {
+    "title": "SkillHub",
+    "subtitle": "Browse, search, and install public skills.",
+    "searchPlaceholder": "Search skills",
+    "search": "Search",
+    "refresh": "Refresh",
+    "empty": "No public skills yet.",
+    "emptyHint": "Search SkillHub or refresh the list.",
+    "download": "Download",
+    "downloaded": "Skill downloaded. Check My Skills to use it.",
+    "downloadedOverwrite": "Local skill overwritten. Check My Skills to use it.",
+    "overwriteTitle": "Overwrite local skill?",
+    "overwriteDescription": "A local skill named {{name}} already exists. Downloading will replace that skill's files.",
+    "overwriteConfirm": "Overwrite",
+    "freshness": {
+      "localNewer": "Local copy looks newer than the server package.",
+      "remoteNewer": "Server package looks newer than the local copy.",
+      "same": "Local and server versions look the same.",
+      "unknown": "Could not compare which copy is newer.",
+      "versions": "Local: {{local}} · Server: {{remote}}",
+      "na": "n/a"
+    }
+  },
+  "mySkills": {
+    "title": "My Skills",
+    "subtitle": "Local user skills with optional cloud review badges.",
+    "count": "{{count}} local skills",
+    "empty": "No local user skills found.",
+    "emptyHint": "Install or create a local skill first.",
+    "noMatches": "No skills match the current filters.",
+    "noDescription": "No description",
+    "searchPlaceholder": "Search local skills",
+    "refreshLocal": "Refresh status",
+    "refreshStatus": "Refresh status",
+    "retry": "Retry",
+    "openDirectory": "Open directory",
+    "refreshCloud": "Sync cloud status",
+    "refreshCloudPrompt": "Log in to Hope Cloud before syncing cloud status.",
+    "submitReview": "Submit review",
+    "submitSuccess": "Submitted for review.",
+    "loginToSubmit": "Log in to submit",
+    "loginToSubmitPrompt": "Log in to Hope Cloud before submitting for review.",
+    "filter": {
+      "all": "All",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "needsConfig": "Needs setup",
+      "draft": "Draft",
+      "local": "Local",
+      "pendingReview": "In review",
+      "published": "Published"
+    },
+    "localState": {
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "needsConfig": "Needs setup",
+      "draft": "Draft"
+    },
+    "state": {
+      "published": "Published",
+      "pendingReview": "In review",
+      "notPublished": "Local",
+      "unknown": "Unknown",
+      "cloudFailed": "Cloud failed"
     }
   }
 }

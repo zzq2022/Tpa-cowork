@@ -43,10 +43,10 @@
     "updateHistoryLatest": "Terkini",
     "updateHistoryNoNotes": "Tiada nota tersedia untuk keluaran ini.",
     "updateHistoryUndated": "Nota keluaran",
-    "updateInstalled": "Kemas kini telah dipasang. Sedang memulakan semula Hope Agent...",
+    "updateInstalled": "Kemas kini telah dipasang. Sedang memulakan semula TPA CoWork...",
     "updateInstalling": "Sedang memasang v{{version}}...",
-    "updateRestartManually": "Kemas kini telah dipasang tetapi mulakan semula automatik gagal. Sila keluar Hope Agent secara manual lalu buka semula.",
-    "updateReady": "Anda boleh melihat binaan desktop baharu di GitHub Releases atau biarkan Hope Agent memasang kemas kini itu untuk anda.",
+    "updateRestartManually": "Kemas kini telah dipasang tetapi mulakan semula automatik gagal. Sila keluar TPA CoWork secara manual lalu buka semula.",
+    "updateReady": "Anda boleh melihat binaan desktop baharu di GitHub Releases atau biarkan TPA CoWork memasang kemas kini itu untuk anda.",
     "updateUpToDate": "Anda sudah menggunakan versi terkini v{{version}}.",
     "updateAndRestart": "Kemas kini & mula semula",
     "updateOnly": "Kemas kini sahaja",
@@ -144,7 +144,7 @@
       },
       "mac_control_action": {
         "title": "Tindakan Mac Control",
-        "body": "Panggilan kawalan macOS ini menukar fokus/keadaan desktop. Sahkan sebelum Hope Agent mengaktifkan app lain."
+        "body": "Panggilan kawalan macOS ini menukar fokus/keadaan desktop. Sahkan sebelum TPA CoWork mengaktifkan app lain."
       },
       "mac_control_dangerous_action": {
         "title": "Tindakan Mac Control berbahaya",
@@ -163,7 +163,7 @@
   "auth": {
     "tokenLabel": "Bearer Token",
     "tokenPlaceholder": "Tampal token anda",
-    "tokenRequiredBody": "Pelayan Hope Agent ini dilindungi dengan Bearer Token. Tampal token yang diberikan oleh pentadbir untuk meneruskan.",
+    "tokenRequiredBody": "Pelayan TPA CoWork ini dilindungi dengan Bearer Token. Tampal token yang diberikan oleh pentadbir untuk meneruskan.",
     "tokenRequiredTitle": "Pengesahan pelayan diperlukan",
     "tokenSave": "Simpan dan muat semula"
   },
@@ -567,7 +567,7 @@
         "manualEntry": "Masukkan manual",
         "chooseRecent": "Pilih sembang terkini",
         "loadingConversations": "Memuatkan sembang terkini…",
-        "noRecentConversations": "Belum ada sembang terkini yang tersedia. Hantar mesej kepada Hope Agent dari sembang IM sasaran, atau masukkan secara manual.",
+        "noRecentConversations": "Belum ada sembang terkini yang tersedia. Hantar mesej kepada TPA CoWork dari sembang IM sasaran, atau masukkan secara manual.",
         "refreshConversations": "Muat semula sembang terkini",
         "chatId": "ID sembang",
         "chatIdPlaceholder": "cth. 123456789 atau @username",
@@ -950,7 +950,7 @@
     "reasoningDisabledHint": "Penaakulan tidak didayakan untuk model ini. Untuk melaraskan kedalaman penaakulan, edit model di bawah Tetapan → Pembekal Model dan hidupkan \"Penaakulan\".",
     "browserExtensionNudge": {
       "installTitle": "Biar AI mengawal Chrome sebenar anda",
-      "installBody": "Pasang sambungan Hope Agent untuk mengendalikan Chrome yang telah anda log masuk. Buat masa ini ia berjalan dalam pelayar terpencil.",
+      "installBody": "Pasang sambungan TPA CoWork untuk mengendalikan Chrome yang telah anda log masuk. Buat masa ini ia berjalan dalam pelayar terpencil.",
       "reloadTitle": "Muat semula sambungan Chrome",
       "reloadBody": "Sambungan yang dipasang tidak sepadan dengan hos. Muat semula untuk memulihkan kawalan Chrome sebenar anda.",
       "openSettings": "Buka tetapan",
@@ -2283,7 +2283,7 @@
     },
     "system": {
       "cores": "Teras",
-      "cpuDesc": "Hope Agent menggunakan {{percent}}% CPU (jumlah {{cores}} teras)",
+      "cpuDesc": "TPA CoWork menggunakan {{percent}}% CPU (jumlah {{cores}} teras)",
       "cpuUsage": "Penggunaan CPU",
       "diskIO": "I/O Cakera",
       "diskRead": "Baca",
@@ -3188,12 +3188,12 @@
     "agentDesc": "Penggantian pemberitahuan setiap Agent. Apabila ditetapkan kepada Lalai, ia menggunakan tetapan global.",
     "agentSection": "Pemberitahuan Agent",
     "approvalRequired": "Kelulusan alat diperlukan",
-    "approvalRequiredFallback": "Hope Agent sedang menunggu anda meluluskan panggilan alat",
+    "approvalRequiredFallback": "TPA CoWork sedang menunggu anda meluluskan panggilan alat",
     "approvalTimedOut": "Kelulusan alat tamat masa",
     "approvalTimedOut_denied": "Panggilan alat yang menunggu telah ditolak selepas {{seconds}}s.",
     "approvalTimedOut_proceeded": "Panggilan alat yang menunggu diteruskan selepas {{seconds}}s.",
     "askUserRequired": "Agen menunggu jawapan",
-    "askUserRequiredFallback": "Hope Agent ada soalan untuk anda",
+    "askUserRequiredFallback": "TPA CoWork ada soalan untuk anda",
     "askUserTimedOut": "Soalan tamat masa",
     "askUserTimedOutDefaults": "Jawapan lalai digunakan selepas {{seconds}}s.",
     "askUserTimedOutNoDefaults": "Tiada jawapan diterima dalam {{seconds}}s.",
@@ -3202,7 +3202,7 @@
     "channelAuthFailedFallback": "Kelayakan akaun saluran IM ditolak — sila sahkan semula",
     "chatCompleted": "Sembang selesai",
     "chatCompletedGenericBody": "Sembang telah selesai. Buka aplikasi untuk melihat balasan terkini.",
-    "chatCompletedGenericTitle": "Hope Agent",
+    "chatCompletedGenericTitle": "TPA CoWork",
     "chatError": "Ralat sembang",
     "cronEmpty": "Tugas berjadual selesai (tiada output)",
     "cronError": "Tugasan berjadual gagal",
@@ -3253,7 +3253,7 @@
         "whatsapp": "WhatsApp"
       },
       "macOnly": "macOS sahaja",
-      "subtitle": "Sembang dengan Hope Agent daripada Telegram, Slack, WeChat dan banyak lagi. Pilih mana-mana untuk melompat ke konfigurasi penuh.",
+      "subtitle": "Sembang dengan TPA CoWork daripada Telegram, Slack, WeChat dan banyak lagi. Pilih mana-mana untuk melompat ke konfigurasi penuh.",
       "title": "Sambungkan saluran IM (pilihan)"
     },
     "exit": {
@@ -3310,11 +3310,11 @@
       "warningsTitle": "Perhatian"
     },
     "mode": {
-      "localDesc": "Jalankan Hope Agent di peranti ini. Seterusnya anda pilih penyedia model.",
+      "localDesc": "Jalankan TPA CoWork di peranti ini. Seterusnya anda pilih penyedia model.",
       "localTitle": "Konfigurasi tempatan",
-      "remoteDesc": "Sudah ada pelayan Hope Agent di tempat lain? Masukkan alamatnya dan langkau persediaan tempatan.",
+      "remoteDesc": "Sudah ada pelayan TPA CoWork di tempat lain? Masukkan alamatnya dan langkau persediaan tempatan.",
       "remoteTitle": "Sambung jauh",
-      "subtitle": "Jalankan Hope Agent secara tempatan di peranti ini atau sambung ke pelayan Hope Agent sedia ada.",
+      "subtitle": "Jalankan TPA CoWork secara tempatan di peranti ini atau sambung ke pelayan TPA CoWork sedia ada.",
       "title": "Pilih cara menjalankan"
     },
     "nav": {
@@ -3393,7 +3393,7 @@
         "desc": "Ubah tempoh masa tamat dalam Tetapan → Keselamatan, atau benarkan auto-lulus untuk saluran IM tertentu (Telegram / Slack / Discord, dsb.).",
         "title": "Boleh laras kemudian"
       },
-      "subtitle": "Secara lalai, Hope Agent bertanya sebelum menjalankan perintah shell atau mengedit fail.",
+      "subtitle": "Secara lalai, TPA CoWork bertanya sebelum menjalankan perintah shell atau mengedit fail.",
       "title": "Kelulusan alat memastikan anda terkawal",
       "toggle": "Memerlukan kelulusan",
       "toggleHint": "Mematikan ini bermakna alat dijalankan tanpa digesa — tidak disyorkan."
@@ -3411,7 +3411,7 @@
       "previewLabel": "URL GUI Web",
       "restartHint": "Perubahan alamat ikatan berkuat kuasa selepas mula semula seterusnya.",
       "subtitle": "Pelayan HTTP yang dibenamkan membolehkan anda membuka apl yang sama dalam mana-mana penyemak imbas.",
-      "title": "Bagaimanakah anda ingin mengakses Hope Agent?"
+      "title": "Bagaimanakah anda ingin mengakses TPA CoWork?"
     },
     "skills": {
       "empty": "Tiada kemahiran ditemui. Klik Seterusnya untuk teruskan.",
@@ -3452,7 +3452,7 @@
       "languageHint": "Sedang dipaparkan: {{current}}",
       "languageLabel": "Bahasa antara muka",
       "subtitle": "Pembantu AI yang semakin mengenali anda setiap kali digunakan — di desktop, di awan dan di IM, sentiasa bersedia.\nDi bawah ialah panduan ringkas — semua langkah boleh dilangkau kecuali memilih model.",
-      "title": "Selamat datang ke Hope Agent"
+      "title": "Selamat datang ke TPA CoWork"
     }
   },
   "plans": {
@@ -3675,7 +3675,7 @@
     "projectLogo": "Logo",
     "projectLogoHint": "Pilihan. Imej akan diubah saiz secara automatik kepada 256×256.",
     "projectName": "Nama projek",
-    "projectNamePlaceholder": "cth. Pembangunan Hope Agent",
+    "projectNamePlaceholder": "cth. Pembangunan TPA CoWork",
     "projects": "Projek",
     "removeFromProject": "Buang dari projek",
     "removeLogo": "Buang",
@@ -4403,7 +4403,7 @@
       "deleteConfirmDesc": "Semua cookie, log masuk dan data cache profil ini akan dibuang. Tidak boleh dibatalkan.",
       "deleteConfirmTitle": "Padam profil '{{name}}'?",
       "deleteDisabledActive": "Hentikan pelayar sebelum memadam profilnya",
-      "desc": "Hope Agent boleh melancarkan dan mengendalikan sebuah instance Chrome khusus untuk anda. Cipta profil berasingan untuk memisahkan log masuk (Google, GitHub, alat kerja…) — agen dan anda berkongsi sesi yang sama, jadi apa sahaja anda log masuk, agen boleh operasikan.",
+      "desc": "TPA CoWork boleh melancarkan dan mengendalikan sebuah instance Chrome khusus untuk anda. Cipta profil berasingan untuk memisahkan log masuk (Google, GitHub, alat kerja…) — agen dan anda berkongsi sesi yang sama, jadi apa sahaja anda log masuk, agen boleh operasikan.",
       "disconnect": "Henti",
       "doctorChromeFound": "Chrome dijumpai di {{url}}",
       "doctorChromeMissing": "Tiada Chrome dikesan pada port debug standard",
@@ -4430,7 +4430,7 @@
       "minutesAgo": "{{count}} minit lalu",
       "modeConnect": "Dilampirkan pada Chrome luaran",
       "modeLabel": "Mod",
-      "modeLaunch": "Dilancarkan oleh Hope Agent",
+      "modeLaunch": "Dilancarkan oleh TPA CoWork",
       "modeStandalone": "Pelayar berasingan",
       "modeStandaloneHint": "hope-agent menyelenggara instans Chrome berasingan. Disyorkan untuk automasi.",
       "modeUserChrome": "Ambil alih Chrome pengguna",
@@ -4483,10 +4483,10 @@
         "kindBrokerUnavailable": "Broker tidak berjalan",
         "kindVersionMismatch": "Protokol tidak sepadan",
         "kindExtensionMissing": "Tidak disambungkan",
-        "statusReady": "Sambungan Chrome Hope Agent telah disambungkan.",
+        "statusReady": "Sambungan Chrome TPA CoWork telah disambungkan.",
         "statusHostMissing": "Hos pemesejan asli Chrome belum dipasang.",
         "statusBrokerUnavailable": "Broker sambungan Chrome tidak berjalan.",
-        "statusExtensionMissing": "Sambungan Chrome Hope Agent tidak disambungkan.",
+        "statusExtensionMissing": "Sambungan Chrome TPA CoWork tidak disambungkan.",
         "statusVersionMismatch": "Versi protokol sambungan tidak sepadan dengan hos. Muat semula sambungan untuk mengemas kininya.",
         "versionLine": "Sambungan {{version}} · protokol {{protocol}}",
         "unknown": "tidak diketahui",
@@ -4536,7 +4536,7 @@
         "managed": "Chrome terurus",
         "attach": "Sambung ke Chrome",
         "extensionDesc": "Kawal Chrome sebenar yang telah anda log masuk melalui sambungan — ia berkongsi kuki dan sesi anda. Disyorkan.",
-        "managedDesc": "Hope Agent melancarkan dan menyelenggara instans Chrome terpencil sendiri. Terbaik untuk automasi.",
+        "managedDesc": "TPA CoWork melancarkan dan menyelenggara instans Chrome terpencil sendiri. Terbaik untuk automasi.",
         "attachDesc": "Sambung ke Chrome yang anda lancarkan sendiri dengan --remote-debugging-port."
       },
       "rawCdpConfirm": {
@@ -5194,7 +5194,7 @@
     "issueReportingToken": "Token GitHub",
     "issueReportingTokenCleared": "Token GitHub dikosongkan",
     "issueReportingTokenConfigured": "Token telah dikonfigurasikan.",
-    "issueReportingTokenMissing": "Tiada token dikonfigurasikan. Hope Agent akan cuba menggunakan gh CLI yang telah disahkan.",
+    "issueReportingTokenMissing": "Tiada token dikonfigurasikan. TPA CoWork akan cuba menggunakan gh CLI yang telah disahkan.",
     "issueReportingTokenPlaceholderClear": "Biarkan kosong dan simpan untuk mengosongkan",
     "issueReportingTokenPlaceholderNew": "Fine-grained PAT",
     "issueReportingTokenSaveFailed": "Gagal menyimpan token GitHub",
@@ -5978,7 +5978,7 @@
     "permCheck": "Sahkan",
     "permContacts": "Kenalan",
     "permContactsDesc": "Baca maklumat kenalan",
-    "permDesc": "Hope Agent memerlukan kebenaran sistem berikut untuk mengawal komputer anda. Sila berikannya dalam Tetapan Sistem.",
+    "permDesc": "TPA CoWork memerlukan kebenaran sistem berikut untuk mengawal komputer anda. Sila berikannya dalam Tetapan Sistem.",
     "permFilesAndFolders": "Fail & folder",
     "permFilesAndFoldersDesc": "Akses Desktop, Documents, Downloads dan direktori pengguna lain",
     "permFullDiskAccess": "Akses cakera penuh",
@@ -6082,7 +6082,7 @@
       },
       "homekit": {
         "label": "HomeKit (rumah)",
-        "note": "Hope Agent tidak menggunakan aliran kerja HomeKit buat masa ini.",
+        "note": "TPA CoWork tidak menggunakan aliran kerja HomeKit buat masa ini.",
         "usage": "Akses data rumah hanya apabila aliran kerja HomeKit pada masa hadapan diaktifkan."
       },
       "input_monitoring": {
@@ -6312,7 +6312,7 @@
     "serverModeEmbedded": "Terbenam",
     "serverModeEmbeddedDesc": "Aplikasi desktop menjalankan pelayan HTTP pada localhost",
     "serverModeRemote": "Jauh",
-    "serverModeRemoteDesc": "Sambung ke pelayan Hope Agent luaran",
+    "serverModeRemoteDesc": "Sambung ke pelayan TPA CoWork luaran",
     "serverNotStarted": "Belum Dimulakan",
     "serverRemoteUrl": "URL pelayan jauh",
     "serverRemoteUrlPlaceholder": "http://192.168.1.100:8420",
@@ -6528,7 +6528,7 @@
         },
         "autoCuratorEnabled": {
           "label": "Jalankan curator mengikut jadual",
-          "help": "Apabila dihidupkan, Hope Agent mengimbas draf kemahiran secara berkala untuk pertindihan dan memaparkan cadangan gabungan di sini."
+          "help": "Apabila dihidupkan, TPA CoWork mengimbas draf kemahiran secara berkala untuk pertindihan dan memaparkan cadangan gabungan di sini."
         },
         "autoCuratorIntervalDays": {
           "label": "Selang curator",
@@ -6537,7 +6537,7 @@
       }
     },
     "skillsEvolutionHero": {
-      "body": "Hope Agent tidak berdiam diri. Sekali-sekala menyemak semula sembang dan menyuling perkara yang anda ulang-ulang menjadi kemahiran yang boleh digunakan semula — kali berikutnya, perkara itu sudah dipelajari.",
+      "body": "TPA CoWork tidak berdiam diri. Sekali-sekala menyemak semula sembang dan menyuling perkara yang anda ulang-ulang menjadi kemahiran yang boleh digunakan semula — kali berikutnya, perkara itu sudah dipelajari.",
       "note": "Dihidupkan secara lalai · semakin kerap digunakan, semakin sesuai dengan anda. Jika dimatikan, perbualan harian tidak terjejas, cuma kemahiran baharu tidak lagi terkumpul secara automatik.",
       "statusOff": "Dijeda",
       "statusOn": "Berkembang",
@@ -6666,7 +6666,7 @@
     "subagentTitle": "Delegasi Sub-Agent",
     "system": "Sistem",
     "systemAutostart": "Mulakan pada log masuk",
-    "systemAutostartDesc": "Mulakan Hope Agent secara automatik apabila anda log masuk ke komputer anda",
+    "systemAutostartDesc": "Mulakan TPA CoWork secara automatik apabila anda log masuk ke komputer anda",
     "systemPreventSleep": "Halang tidur",
     "systemPreventSleepDesc": "Pastikan komputer anda kekal aktif supaya tugas panjang, muat turun dan aktiviti latar belakang tidak terganggu oleh tidur sistem. Paparan masih boleh dimatikan.",
     "tabAppearance": "Rupa & bahasa",
@@ -6876,7 +6876,7 @@
     "toolCoreMemoryDesc": "Membaca dan menyelenggara memori teras terhad yang sentiasa dimuatkan merentas skop Global, Agent dan Projek.",
     "toolProjectMemoryDesc": "Mencari dan menyelenggara indeks MEMORY.md setempat serta fail topik projek semasa.",
     "toolMacControlDesc": "Memeriksa dan mengawal aplikasi, tetingkap, menu, elemen UI, tangkapan skrin, papan klip dan dialog macOS setempat.",
-    "toolIssueReportDesc": "Mencari, menyediakan draf atau, selepas pengesahan, mencipta GitHub Issue untuk Hope Agent.",
+    "toolIssueReportDesc": "Mencari, menyediakan draf atau, selepas pengesahan, mencipta GitHub Issue untuk TPA CoWork.",
     "toolArtifactDesc": "Mencipta, memeriksa, mengemas kini, memulihkan dan mengesahkan artifak setempat tahan lama yang berversi.",
     "toolDesignDesc": "Mencipta dan mengurus sistem reka bentuk, projek reka bentuk serta artifak visual berversi.",
     "toolSubmitPlanDesc": "Menghantar pelan bertulis muktamad untuk semakan dan kelulusan pengguna.",
@@ -6896,7 +6896,7 @@
     "toolLoopRecordProgressDesc": "Merekod nota ringan kemajuan, keadaan atau serahan untuk gelung aktif.",
     "toolLoopWatchDesc": "Melampir atau mengaktifkan semula pantauan peristiwa tahan lama yang boleh membangunkan gelung dengan segera.",
     "toolLoopUnwatchDesc": "Menyahaktifkan pantauan peristiwa tanpa menghentikan gelung atau jadual sandarannya.",
-    "toolAppUpdateDesc": "Menyemak, memasang, memeriksa atau mengundurkan kemas kini Hope Agent dalam mod desktop, pelayan dan CLI.",
+    "toolAppUpdateDesc": "Menyemak, memasang, memeriksa atau mengundurkan kemas kini TPA CoWork dalam mod desktop, pelayan dan CLI.",
     "toolJobStatusDesc": "Memeriksa, menyenaraikan, menunggu seketika, membatalkan atau mendapatkan hasil tugas alat latar.",
     "toolScheduleWakeupDesc": "Menjadualkan bangun sekali yang meneruskan sesi ini selepas kelewatan.",
     "toolRuntimeCancelDesc": "Membatalkan tugas tak segerak, sub-Agent, proses atau tugas berjadual yang sedang berjalan.",
@@ -7189,10 +7189,10 @@
     "memoryExternalPolicyBidirectional": "Dwiarah",
     "memoryExternalPolicyOffDesc": "Dilumpuhkan untuk pembekal ini.",
     "memoryExternalPolicyManualDesc": "Segerakkan hanya apabila anda memulakannya dengan jelas.",
-    "memoryExternalPolicyPullOnlyDesc": "Baca memori luaran ke dalam baris gilir semakan Hope Agent sahaja.",
-    "memoryExternalPolicyPushOnlyDesc": "Hantar memori Hope Agent yang dipilih ke luar sahaja.",
+    "memoryExternalPolicyPullOnlyDesc": "Baca memori luaran ke dalam baris gilir semakan TPA CoWork sahaja.",
+    "memoryExternalPolicyPushOnlyDesc": "Hantar memori TPA CoWork yang dipilih ke luar sahaja.",
     "memoryExternalPolicyBidirectionalDesc": "Selaraskan kedua-dua arah selepas persediaan yang jelas.",
-    "memoryExternalProvidersOverviewOff": "Penyegerakan pembekal luaran dimatikan. Tiada data memori meninggalkan Hope Agent melalui pembekal.",
+    "memoryExternalProvidersOverviewOff": "Penyegerakan pembekal luaran dimatikan. Tiada data memori meninggalkan TPA CoWork melalui pembekal.",
     "memoryExternalProvidersOverviewNeedsSetup": "Pembekal {{count}} memerlukan persediaan titik akhir. Memori tempatan kekal tersedia.",
     "memoryExternalProvidersOverviewUnsupportedPolicy": "Konfigurasi penyedia {{count}} menggunakan dasar penyegerakan yang tidak disokong. Pilih dasar yang disokong sebelum penyegerakan boleh dijalankan.",
     "memoryExternalProvidersOverviewAdapterPending": "Konfigurasi penyedia {{count}} sedang menunggu penyesuai masa jalan. Tiada penyegerakan akan dijalankan; memori tempatan kekal tersedia.",
@@ -7205,7 +7205,7 @@
     "memoryExternalProviderLocalFirstAdapterPending": "Metadata titik akhir dikonfigurasikan, tetapi penyesuai masa jalan ini belum tersedia lagi. Tiada penyegerakan akan dijalankan.",
     "memoryExternalProviderLocalFirstUnsupportedPolicy": "Dasar penyegerakan yang dipilih tidak disokong oleh penyesuai pembekal ini. Tiada penyegerakan akan dijalankan.",
     "memoryExternalProviderLocalFirstNeedsSetup": "Penyegerakan tidak boleh dijalankan lagi. Memori tempatan kekal tersedia.",
-    "memoryExternalProviderLocalFirstOff": "Penyegerakan pembekal tidak aktif; tiada data memori meninggalkan Hope Agent melalui pembekal ini.",
+    "memoryExternalProviderLocalFirstOff": "Penyegerakan pembekal tidak aktif; tiada data memori meninggalkan TPA CoWork melalui pembekal ini.",
     "memoryExternalProviderPrivacyOff": "Tiada data pembekal akan bergerak semasa penyedia atau penyegerakan global ini dimatikan.",
     "memoryExternalProviderPrivacyBlocked": "Tiada data pembekal akan bergerak sehingga persediaan, dasar dan kesediaan penyesuai lulus.",
     "memoryExternalProviderPrivacyManual": "Penyegerakan manual boleh menghantar memori yang dipilih atau konteks pengambilan hanya selepas tindakan eksplisit.",
@@ -7653,11 +7653,11 @@
       "safetyProfileConflicts": "Konflik skop profil dilangkau melainkan pengguna secara eksplisit mendayakan penggantian."
     },
     "memoryBackupPreviewIssues": {
-      "invalidArchive": "Pakej sandaran bukan arkib memori Hope Agent yang sah",
+      "invalidArchive": "Pakej sandaran bukan arkib memori TPA CoWork yang sah",
       "invalidJson": "Fail sandaran tidak sah JSON",
       "encryptedPassphraseRequired": "Sandaran ini disulitkan; masukkan frasa laluannya untuk pratonton atau pulihkan.",
       "encryptedDecryptFailed": "Sandaran yang disulitkan tidak dapat dinyahsulit",
-      "encryptedPlaintextInvalid": "Sandaran yang disulitkan dinyahsulitkan, tetapi berkas yang disulitkan bukan sandaran memori Hope Agent yang sah",
+      "encryptedPlaintextInvalid": "Sandaran yang disulitkan dinyahsulitkan, tetapi berkas yang disulitkan bukan sandaran memori TPA CoWork yang sah",
       "unsupportedSchema": "Skema sandaran memori tidak disokong",
       "invalidBundleShape": "Skema sandaran dikenali tetapi himpunan tidak lengkap",
       "sourceBundlePartial": "Himpunan sumber telah dieksport dengan amaran; periksa manifest.warnings sebelum memulihkan.",
@@ -7706,7 +7706,7 @@
     "memoryBackupRestorePlanRows": {
       "invalid": {
         "label": "Fail sandaran tidak serasi",
-        "detail": "Jalankan pratonton dengan sandaran memori Hope Agent yang serasi sebelum dipulihkan."
+        "detail": "Jalankan pratonton dengan sandaran memori TPA CoWork yang serasi sebelum dipulihkan."
       },
       "legacy-import": {
         "label": "Hilang kenangan legasi",
@@ -7916,7 +7916,7 @@
     "memoryExternalProviderKind": "Penyedia",
     "memoryExternalProviderPolicy": "Dasar penyegerakan",
     "memoryExternalProviderEnabled": "Pembekal didayakan",
-    "memoryExternalProviderEndpointConfigured": "Titik akhir dikonfigurasikan di luar Hope Agent",
+    "memoryExternalProviderEndpointConfigured": "Titik akhir dikonfigurasikan di luar TPA CoWork",
     "memoryExternalProviderAdd": "Tambah pembekal",
     "memoryExternalProvidersNoActive": "Didayakan, tiada pembekal aktif",
     "memoryBackupPassphraseStrong": "kuat",
@@ -7934,7 +7934,7 @@
     "memoryBackupEncryptedPassphraseConfirm": "Sahkan frasa laluan",
     "memoryBackupEncryptedUnlock": "Buka kunci sandaran",
     "memoryBackupPreviewDesc": "Semak kandungan sandaran ini sebelum sebarang kerja pemulihan dibenarkan.",
-    "memoryBackupPreviewInvalidDesc": "Fail ini bukan sandaran memori Hope Agent yang serasi.",
+    "memoryBackupPreviewInvalidDesc": "Fail ini bukan sandaran memori TPA CoWork yang serasi.",
     "memoryBackupPreviewMemories": "Kenangan",
     "memoryBackupPreviewNew": "calon baru",
     "memoryBackupPreviewClaims": "Tuntutan",
@@ -8775,7 +8775,7 @@
     "loop_record_progress": "Rekod kemajuan gelung",
     "loop_watch": "Pantau peristiwa gelung",
     "loop_unwatch": "Alih keluar pemantauan gelung",
-    "app_update": "Kemas kini Hope Agent",
+    "app_update": "Kemas kini TPA CoWork",
     "job_status": "Status tugas latar",
     "schedule_wakeup": "Jadualkan bangun",
     "runtime_cancel": "Batalkan tugas berjalan",
@@ -8930,30 +8930,30 @@
     },
     "appUpdate": {
       "rollback": {
-        "context": "Hope Agent rollback — memulihkan binari sebelumnya daripada ~/.hope-agent/updater/backup/ dan mulakan semula perkhidmatan.",
-        "text": "Kembali ke perduaan Hope Agent yang dipasang sebelum ini? Perkhidmatan akan dimulakan semula serta-merta selepas pertukaran.",
-        "header": "Hope Agent gulung balik",
+        "context": "TPA CoWork rollback — memulihkan binari sebelumnya daripada ~/.hope-agent/updater/backup/ dan mulakan semula perkhidmatan.",
+        "text": "Kembali ke perduaan TPA CoWork yang dipasang sebelum ini? Perkhidmatan akan dimulakan semula serta-merta selepas pertukaran.",
+        "header": "TPA CoWork gulung balik",
         "confirm": "Gulung semula sekarang",
         "cancel": "Batal"
       },
       "install": {
-        "context": "Hope Agent pengesahan kemas kini diri. Pasang sumber: {{installSource}}. Laluan yang disyorkan: {{path}}.",
-        "header": "Hope Agent {{from}} → {{to}}",
+        "context": "TPA CoWork pengesahan kemas kini diri. Pasang sumber: {{installSource}}. Laluan yang disyorkan: {{path}}.",
+        "header": "TPA CoWork {{from}} → {{to}}",
         "text": {
-          "packageManager": "Naik taraf Hope Agent {{from}} → {{to}}?\nKaedah: pengurus pakej ({{installSource}}){{notes}}\n\nPerkhidmatan peringkat pengguna akan dimulakan semula sebaik sahaja binari diganti (biasanya terhenti selama 1–2 saat). Sebarang giliran sembang, tugas berjadual atau strim IM yang sedang berjalan akan dibatalkan — jeda dahulu kerja penting.",
-          "selfContained": "Naik taraf Hope Agent {{from}} → {{to}}?\nKaedah: muat turun binari kendiri, sahkan tandatangan Minisign dan gantikannya secara atomik.{{notes}}\n\nPerkhidmatan peringkat pengguna akan dimulakan semula sebaik sahaja binari diganti (biasanya terhenti selama 1–2 saat). Sebarang giliran sembang, tugas berjadual atau strim IM yang sedang berjalan akan dibatalkan — jeda dahulu kerja penting.",
-          "tauri": "Naik taraf Hope Agent {{from}} → {{to}}?\nKaedah: pengemas kini terbina dalam Tauri (pemasang bertandatangan){{notes}}\n\nPerkhidmatan peringkat pengguna akan dimulakan semula sebaik sahaja binari diganti (biasanya terhenti selama 1–2 saat). Sebarang giliran sembang, tugas berjadual atau strim IM yang sedang berjalan akan dibatalkan — jeda dahulu kerja penting.",
-          "manualPrompt": "Naik taraf Hope Agent {{from}} → {{to}}?\nKaedah: muat turun manual (tiada kaedah automatik yang sepadan){{notes}}\n\nPerkhidmatan peringkat pengguna akan dimulakan semula sebaik sahaja binari diganti (biasanya terhenti selama 1–2 saat). Sebarang giliran sembang, tugas berjadual atau strim IM yang sedang berjalan akan dibatalkan — jeda dahulu kerja penting."
+          "packageManager": "Naik taraf TPA CoWork {{from}} → {{to}}?\nKaedah: pengurus pakej ({{installSource}}){{notes}}\n\nPerkhidmatan peringkat pengguna akan dimulakan semula sebaik sahaja binari diganti (biasanya terhenti selama 1–2 saat). Sebarang giliran sembang, tugas berjadual atau strim IM yang sedang berjalan akan dibatalkan — jeda dahulu kerja penting.",
+          "selfContained": "Naik taraf TPA CoWork {{from}} → {{to}}?\nKaedah: muat turun binari kendiri, sahkan tandatangan Minisign dan gantikannya secara atomik.{{notes}}\n\nPerkhidmatan peringkat pengguna akan dimulakan semula sebaik sahaja binari diganti (biasanya terhenti selama 1–2 saat). Sebarang giliran sembang, tugas berjadual atau strim IM yang sedang berjalan akan dibatalkan — jeda dahulu kerja penting.",
+          "tauri": "Naik taraf TPA CoWork {{from}} → {{to}}?\nKaedah: pengemas kini terbina dalam Tauri (pemasang bertandatangan){{notes}}\n\nPerkhidmatan peringkat pengguna akan dimulakan semula sebaik sahaja binari diganti (biasanya terhenti selama 1–2 saat). Sebarang giliran sembang, tugas berjadual atau strim IM yang sedang berjalan akan dibatalkan — jeda dahulu kerja penting.",
+          "manualPrompt": "Naik taraf TPA CoWork {{from}} → {{to}}?\nKaedah: muat turun manual (tiada kaedah automatik yang sepadan){{notes}}\n\nPerkhidmatan peringkat pengguna akan dimulakan semula sebaik sahaja binari diganti (biasanya terhenti selama 1–2 saat). Sebarang giliran sembang, tugas berjadual atau strim IM yang sedang berjalan akan dibatalkan — jeda dahulu kerja penting."
         },
         "confirm": "Tingkatkan sekarang",
         "cancel": "bukan sekarang"
       },
       "manual": {
-        "dockerContext": "Hope Agent sedang berjalan dalam bekas Docker. Kemas kini sendiri tidak boleh menggantikan imej — naik taraf dengan menarik teg baharu dan mencipta semula bekas.",
-        "dockerText": "Hope Agent sedang dijalankan dalam bekas Docker ({{from}} → {{to}}).\n\nTingkatkan dengan menarik imej baharu dan mencipta semula bekas:\n\n    docker pull ghcr.io/shiwenwen/hope-agent:v{{to}}\n    docker compose up -d\n\natau sematkan pada `latest` jika fail karang anda menggunakannya.",
+        "dockerContext": "TPA CoWork sedang berjalan dalam bekas Docker. Kemas kini sendiri tidak boleh menggantikan imej — naik taraf dengan menarik teg baharu dan mencipta semula bekas.",
+        "dockerText": "TPA CoWork sedang dijalankan dalam bekas Docker ({{from}} → {{to}}).\n\nTingkatkan dengan menarik imej baharu dan mencipta semula bekas:\n\n    docker pull ghcr.io/shiwenwen/hope-agent:v{{to}}\n    docker compose up -d\n\natau sematkan pada `latest` jika fail karang anda menggunakannya.",
         "dockerHeader": "Docker peningkatan diperlukan",
-        "context": "Hope Agent tidak boleh memilih laluan naik taraf automatik untuk pemasangan ini. Tentukan cara untuk meneruskan.",
-        "text": "Tiada laluan naik taraf automatik tersedia untuk Hope Agent {{from}} → {{to}}. Pasang sumber dikesan sebagai: {{installSource}}. Pilih pemulihan:",
+        "context": "TPA CoWork tidak boleh memilih laluan naik taraf automatik untuk pemasangan ini. Tentukan cara untuk meneruskan.",
+        "text": "Tiada laluan naik taraf automatik tersedia untuk TPA CoWork {{from}} → {{to}}. Pasang sumber dikesan sebagai: {{installSource}}. Pilih pemulihan:",
         "header": "Peningkatan manual diperlukan",
         "openReleases": "Buka halaman keluaran dalam penyemak imbas",
         "openReleasesManual": "Buka halaman keluaran dalam penyemak imbas (muat turun manual)",
@@ -11767,15 +11767,15 @@
       "unbound": "Pautan dibuang",
       "err": "Gagal memautkan",
       "sourceDir": "Sumber: direktori setempat",
-      "sourceHaProject": "Sumber: projek Hope Agent",
+      "sourceHaProject": "Sumber: projek TPA CoWork",
       "stale": "Tidak sah (direktori atau projek tiada lagi)",
       "unbind": "Nyahpaut",
       "modeDir": "Direktori setempat",
-      "modeHaProject": "Projek Hope Agent",
+      "modeHaProject": "Projek TPA CoWork",
       "dir": "Direktori repositori",
       "dirPlaceholder": "Pilih atau taip akar repositori",
       "choose": "Pilih…",
-      "haProject": "Projek Hope Agent",
+      "haProject": "Projek TPA CoWork",
       "haProjectPlaceholder": "Pilih projek…",
       "haProjectHint": "Direktori diambil daripada direktori kerja projek itu dan mengikuti perubahan secara automatik.",
       "bind": "Pautkan"
@@ -12164,14 +12164,14 @@
   },
   "configRecovery": {
     "title": "Pemulihan Konfigurasi Diperlukan",
-    "subtitle": "Hope Agent tidak dapat membaca config.json yang sedia ada. Untuk melindungi penyedia, pelayan MCP dan status persediaan awal anda, penulisan konfigurasi dijeda.",
+    "subtitle": "TPA CoWork tidak dapat membaca config.json yang sedia ada. Untuk melindungi penyedia, pelayan MCP dan status persediaan awal anda, penulisan konfigurasi dijeda.",
     "path": "Fail konfigurasi",
     "error": "Ralat membaca",
     "details": "Nota perlindungan",
     "retry": "Cuba baca semula",
     "restart": "Mulakan semula aplikasi",
     "backupsTitle": "Pulihkan syot kilat konfigurasi",
-    "backupsDesc": "Selepas pemulihan, Hope Agent akan memuatkan semula konfigurasi dan meneruskan permulaan. Fail yang tidak dapat dibaca dikekalkan di lokasi asal dan disalin sebagai fail sampingan .corrupt-<timestamp> apabila boleh.",
+    "backupsDesc": "Selepas pemulihan, TPA CoWork akan memuatkan semula konfigurasi dan meneruskan permulaan. Fail yang tidak dapat dibaca dikekalkan di lokasi asal dan disalin sebagai fail sampingan .corrupt-<timestamp> apabila boleh.",
     "loading": "Memuatkan syot kilat…",
     "empty": "Tiada syot kilat konfigurasi ditemui",
     "emptyHint": "Baiki config.json secara manual atau pulihkan versi yang boleh digunakan daripada backups/autosave atau config.json.corrupt-* kemudian cuba lagi.",
@@ -12179,7 +12179,7 @@
     "source": "Sumber",
     "retrying": "Sedang membaca",
     "restoring": "Sedang memulihkan",
-    "restartFailed": "Mula semula automatik tidak tersedia di sini. Tutup dan buka semula Hope Agent secara manual.",
+    "restartFailed": "Mula semula automatik tidak tersedia di sini. Tutup dan buka semula TPA CoWork secara manual.",
     "categoryValues": {
       "providers": "Penyedia",
       "proxy": "Proksi",
@@ -12200,6 +12200,85 @@
     "kindValues": {
       "config": "Konfigurasi",
       "user": "Tetapan pengguna"
+    }
+  },
+  "cloud": {
+    "title": "Cloud account",
+    "notSignedIn": "Not signed in to TPA CoWork Cloud",
+    "login": "Log in",
+    "logout": "Log out",
+    "loginTitle": "Log in to TPA CoWork Cloud",
+    "loginDescription": "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+    "serverUrl": "Cloud server URL",
+    "username": "Username",
+    "password": "Password",
+    "loggingIn": "Logging in...",
+    "signedInAs": "Signed in as {{username}}"
+  },
+  "skillhub": {
+    "title": "SkillHub",
+    "subtitle": "Browse, search, and install public skills.",
+    "searchPlaceholder": "Search skills",
+    "search": "Search",
+    "refresh": "Refresh",
+    "empty": "No public skills yet.",
+    "emptyHint": "Search SkillHub or refresh the list.",
+    "download": "Download",
+    "downloaded": "Skill downloaded. Check My Skills to use it.",
+    "downloadedOverwrite": "Local skill overwritten. Check My Skills to use it.",
+    "overwriteTitle": "Overwrite local skill?",
+    "overwriteDescription": "A local skill named {{name}} already exists. Downloading will replace that skill's files.",
+    "overwriteConfirm": "Overwrite",
+    "freshness": {
+      "localNewer": "Local copy looks newer than the server package.",
+      "remoteNewer": "Server package looks newer than the local copy.",
+      "same": "Local and server versions look the same.",
+      "unknown": "Could not compare which copy is newer.",
+      "versions": "Local: {{local}} · Server: {{remote}}",
+      "na": "n/a"
+    }
+  },
+  "mySkills": {
+    "title": "My Skills",
+    "subtitle": "Local user skills with optional cloud review badges.",
+    "count": "{{count}} local skills",
+    "empty": "No local user skills found.",
+    "emptyHint": "Install or create a local skill first.",
+    "noMatches": "No skills match the current filters.",
+    "noDescription": "No description",
+    "searchPlaceholder": "Search local skills",
+    "refreshLocal": "Refresh status",
+    "refreshStatus": "Refresh status",
+    "retry": "Retry",
+    "openDirectory": "Open directory",
+    "refreshCloud": "Sync cloud status",
+    "refreshCloudPrompt": "Log in to Hope Cloud before syncing cloud status.",
+    "submitReview": "Submit review",
+    "submitSuccess": "Submitted for review.",
+    "loginToSubmit": "Log in to submit",
+    "loginToSubmitPrompt": "Log in to Hope Cloud before submitting for review.",
+    "filter": {
+      "all": "All",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "needsConfig": "Needs setup",
+      "draft": "Draft",
+      "local": "Local",
+      "pendingReview": "In review",
+      "published": "Published"
+    },
+    "localState": {
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "needsConfig": "Needs setup",
+      "draft": "Draft"
+    },
+    "state": {
+      "published": "Published",
+      "pendingReview": "In review",
+      "notPublished": "Local",
+      "unknown": "Unknown",
+      "cloudFailed": "Cloud failed"
     }
   }
 }

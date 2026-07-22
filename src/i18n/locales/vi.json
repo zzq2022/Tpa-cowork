@@ -43,10 +43,10 @@
     "updateHistoryLatest": "Mới nhất",
     "updateHistoryNoNotes": "Không có ghi chú nào cho bản phát hành này.",
     "updateHistoryUndated": "Ghi chú phát hành",
-    "updateInstalled": "Đã cài đặt bản cập nhật. Đang khởi động lại Hope Agent...",
+    "updateInstalled": "Đã cài đặt bản cập nhật. Đang khởi động lại TPA CoWork...",
     "updateInstalling": "Đang cài đặt v{{version}}...",
-    "updateRestartManually": "Đã cài đặt bản cập nhật nhưng tự động khởi động lại thất bại. Vui lòng thoát Hope Agent thủ công rồi mở lại.",
-    "updateReady": "Bạn có thể xem bản desktop mới trên GitHub Releases hoặc để Hope Agent tự cài đặt cho bạn.",
+    "updateRestartManually": "Đã cài đặt bản cập nhật nhưng tự động khởi động lại thất bại. Vui lòng thoát TPA CoWork thủ công rồi mở lại.",
+    "updateReady": "Bạn có thể xem bản desktop mới trên GitHub Releases hoặc để TPA CoWork tự cài đặt cho bạn.",
     "updateUpToDate": "Bạn đang ở phiên bản mới nhất v{{version}}.",
     "updateAndRestart": "Cập nhật và khởi động lại",
     "updateOnly": "Chỉ cập nhật",
@@ -144,7 +144,7 @@
       },
       "mac_control_action": {
         "title": "Thao tác Mac Control",
-        "body": "Lệnh điều khiển macOS này thay đổi tiêu điểm/trạng thái màn hình. Hãy xác nhận trước khi Hope Agent kích hoạt ứng dụng khác."
+        "body": "Lệnh điều khiển macOS này thay đổi tiêu điểm/trạng thái màn hình. Hãy xác nhận trước khi TPA CoWork kích hoạt ứng dụng khác."
       },
       "mac_control_dangerous_action": {
         "title": "Tác vụ Mac Control nguy hiểm",
@@ -163,7 +163,7 @@
   "auth": {
     "tokenLabel": "Bearer Token",
     "tokenPlaceholder": "Dán token của bạn",
-    "tokenRequiredBody": "Máy chủ Hope Agent này được bảo vệ bằng Bearer Token. Dán Token mà quản trị viên đã cấp để tiếp tục.",
+    "tokenRequiredBody": "Máy chủ TPA CoWork này được bảo vệ bằng Bearer Token. Dán Token mà quản trị viên đã cấp để tiếp tục.",
     "tokenRequiredTitle": "Cần xác thực máy chủ",
     "tokenSave": "Lưu và tải lại"
   },
@@ -567,7 +567,7 @@
         "manualEntry": "Nhập thủ công",
         "chooseRecent": "Chọn cuộc trò chuyện gần đây",
         "loadingConversations": "Đang tải cuộc trò chuyện gần đây…",
-        "noRecentConversations": "Chưa có cuộc trò chuyện gần đây nào. Hãy gửi tin nhắn cho Hope Agent từ cuộc trò chuyện IM đích, hoặc nhập thủ công.",
+        "noRecentConversations": "Chưa có cuộc trò chuyện gần đây nào. Hãy gửi tin nhắn cho TPA CoWork từ cuộc trò chuyện IM đích, hoặc nhập thủ công.",
         "refreshConversations": "Làm mới cuộc trò chuyện gần đây",
         "chatId": "ID cuộc trò chuyện",
         "chatIdPlaceholder": "ví dụ: 123456789 hoặc @username",
@@ -950,7 +950,7 @@
     "reasoningDisabledHint": "Mô hình này chưa bật suy luận. Để điều chỉnh độ sâu suy luận, hãy chỉnh sửa mô hình trong \"Cài đặt → Nhà cung cấp mô hình\" và bật \"Hỗ trợ suy luận/tư duy\".",
     "browserExtensionNudge": {
       "installTitle": "Để AI điều khiển Chrome thật của bạn",
-      "installBody": "Cài tiện ích Hope Agent để vận hành Chrome đã đăng nhập của bạn. Hiện đang chạy trong trình duyệt cách ly.",
+      "installBody": "Cài tiện ích TPA CoWork để vận hành Chrome đã đăng nhập của bạn. Hiện đang chạy trong trình duyệt cách ly.",
       "reloadTitle": "Tải lại tiện ích Chrome",
       "reloadBody": "Tiện ích đã cài không khớp với host. Tải lại để khôi phục quyền điều khiển Chrome thật của bạn.",
       "openSettings": "Mở cài đặt",
@@ -2283,7 +2283,7 @@
     },
     "system": {
       "cores": "Lõi",
-      "cpuDesc": "Hope Agent dùng {{percent}}% CPU (tổng {{cores}} lõi)",
+      "cpuDesc": "TPA CoWork dùng {{percent}}% CPU (tổng {{cores}} lõi)",
       "cpuUsage": "Sử dụng CPU",
       "diskIO": "I/O đĩa",
       "diskRead": "Đọc",
@@ -3188,12 +3188,12 @@
     "agentDesc": "Ghi đè thông báo cho từng Agent. Khi đặt là Mặc định, sẽ dùng cài đặt toàn cục.",
     "agentSection": "Thông báo Agent",
     "approvalRequired": "Cần phê duyệt công cụ",
-    "approvalRequiredFallback": "Hope Agent đang chờ bạn phê duyệt một lệnh gọi công cụ",
+    "approvalRequiredFallback": "TPA CoWork đang chờ bạn phê duyệt một lệnh gọi công cụ",
     "approvalTimedOut": "Phê duyệt công cụ đã hết hạn",
     "approvalTimedOut_denied": "Lệnh gọi công cụ đang chờ đã bị từ chối sau {{seconds}} giây.",
     "approvalTimedOut_proceeded": "Lệnh gọi công cụ đang chờ đã tiếp tục sau {{seconds}} giây.",
     "askUserRequired": "Agent đang chờ câu trả lời",
-    "askUserRequiredFallback": "Hope Agent có một câu hỏi cho bạn",
+    "askUserRequiredFallback": "TPA CoWork có một câu hỏi cho bạn",
     "askUserTimedOut": "Câu hỏi đã hết hạn",
     "askUserTimedOutDefaults": "Đã dùng câu trả lời mặc định sau {{seconds}} giây.",
     "askUserTimedOutNoDefaults": "Không nhận được câu trả lời trong {{seconds}} giây.",
@@ -3202,7 +3202,7 @@
     "channelAuthFailedFallback": "Thông tin xác thực một tài khoản kênh IM bị từ chối — vui lòng xác thực lại",
     "chatCompleted": "Cuộc trò chuyện đã hoàn thành",
     "chatCompletedGenericBody": "Cuộc trò chuyện đã hoàn tất. Mở ứng dụng để xem câu trả lời mới nhất.",
-    "chatCompletedGenericTitle": "Hope Agent",
+    "chatCompletedGenericTitle": "TPA CoWork",
     "chatError": "Lỗi cuộc trò chuyện",
     "cronEmpty": "Tác vụ theo lịch đã hoàn tất (không có kết quả)",
     "cronError": "Tác vụ định kỳ thất bại",
@@ -3253,7 +3253,7 @@
         "whatsapp": "WhatsApp"
       },
       "macOnly": "chỉ macOS",
-      "subtitle": "Trò chuyện với Hope Agent từ Telegram, Slack, WeChat và hơn thế nữa. Chọn bất kỳ để chuyển sang cấu hình đầy đủ.",
+      "subtitle": "Trò chuyện với TPA CoWork từ Telegram, Slack, WeChat và hơn thế nữa. Chọn bất kỳ để chuyển sang cấu hình đầy đủ.",
       "title": "Kết nối kênh IM (tùy chọn)"
     },
     "exit": {
@@ -3310,11 +3310,11 @@
       "warningsTitle": "Lưu ý"
     },
     "mode": {
-      "localDesc": "Chạy Hope Agent trên thiết bị này. Tiếp theo bạn chọn nhà cung cấp mô hình.",
+      "localDesc": "Chạy TPA CoWork trên thiết bị này. Tiếp theo bạn chọn nhà cung cấp mô hình.",
       "localTitle": "Cấu hình cục bộ",
-      "remoteDesc": "Đã có máy chủ Hope Agent chạy ở nơi khác? Nhập địa chỉ và bỏ qua cấu hình cục bộ.",
+      "remoteDesc": "Đã có máy chủ TPA CoWork chạy ở nơi khác? Nhập địa chỉ và bỏ qua cấu hình cục bộ.",
       "remoteTitle": "Kết nối từ xa",
-      "subtitle": "Chạy Hope Agent cục bộ trên máy này hoặc kết nối đến một máy chủ Hope Agent hiện có.",
+      "subtitle": "Chạy TPA CoWork cục bộ trên máy này hoặc kết nối đến một máy chủ TPA CoWork hiện có.",
       "title": "Chọn cách chạy"
     },
     "nav": {
@@ -3393,7 +3393,7 @@
         "desc": "Đổi thời gian chờ trong Cài đặt → Bảo mật, hoặc bật tự động phê duyệt cho một kênh IM cụ thể (Telegram / Slack / Discord, v.v.).",
         "title": "Điều chỉnh sau"
       },
-      "subtitle": "Theo mặc định, Hope Agent sẽ hỏi trước khi chạy lệnh shell hoặc chỉnh sửa tệp.",
+      "subtitle": "Theo mặc định, TPA CoWork sẽ hỏi trước khi chạy lệnh shell hoặc chỉnh sửa tệp.",
       "title": "Phê duyệt công cụ giúp bạn nắm quyền kiểm soát",
       "toggle": "Yêu cầu phê duyệt",
       "toggleHint": "Tắt tính năng này có nghĩa là các công cụ sẽ chạy mà không cần nhắc — không được khuyến nghị."
@@ -3411,7 +3411,7 @@
       "previewLabel": "WebGUIURL",
       "restartHint": "Thay đổi địa chỉ liên kết có hiệu lực sau lần khởi động lại tiếp theo.",
       "subtitle": "Máy chủ HTTP được nhúng cho phép bạn mở cùng một ứng dụng trong bất kỳ trình duyệt nào.",
-      "title": "Bạn muốn truy cập Hope Agent bằng cách nào?"
+      "title": "Bạn muốn truy cập TPA CoWork bằng cách nào?"
     },
     "skills": {
       "empty": "Không tìm thấy kỹ năng nào. Nhấn Tiếp theo để tiếp tục.",
@@ -3452,7 +3452,7 @@
       "languageHint": "Hiện đang hiển thị: {{current}}",
       "languageLabel": "Ngôn ngữ giao diện",
       "subtitle": "Một trợ lý AI càng dùng càng hiểu bạn — trên máy tính, trên đám mây và trong IM, luôn sẵn sàng.\nDưới đây là hướng dẫn nhanh — ngoại trừ chọn mô hình, mọi bước đều có thể bỏ qua.",
-      "title": "Chào mừng đến với Hope Agent"
+      "title": "Chào mừng đến với TPA CoWork"
     }
   },
   "plans": {
@@ -3675,7 +3675,7 @@
     "projectLogo": "biểu tượng",
     "projectLogoHint": "Tùy chọn. Ảnh tự động được thu về 256×256.",
     "projectName": "Tên dự án",
-    "projectNamePlaceholder": "vd. Phát triển Hope Agent",
+    "projectNamePlaceholder": "vd. Phát triển TPA CoWork",
     "projects": "Dự án",
     "removeFromProject": "Gỡ khỏi dự án",
     "removeLogo": "Gỡ bỏ",
@@ -4403,7 +4403,7 @@
       "deleteConfirmDesc": "Toàn bộ cookie, đăng nhập và dữ liệu bộ nhớ đệm của hồ sơ này sẽ bị xóa. Không thể hoàn tác.",
       "deleteConfirmTitle": "Xóa hồ sơ '{{name}}'?",
       "deleteDisabledActive": "Dừng trình duyệt trước khi xóa hồ sơ",
-      "desc": "Hope Agent có thể khởi chạy và điều khiển một phiên Chrome riêng cho bạn. Tạo các hồ sơ riêng để cô lập đăng nhập (Google, GitHub, công cụ công việc…) — agent và bạn dùng chung phiên, nên mọi nơi bạn đăng nhập agent đều thao tác được.",
+      "desc": "TPA CoWork có thể khởi chạy và điều khiển một phiên Chrome riêng cho bạn. Tạo các hồ sơ riêng để cô lập đăng nhập (Google, GitHub, công cụ công việc…) — agent và bạn dùng chung phiên, nên mọi nơi bạn đăng nhập agent đều thao tác được.",
       "disconnect": "Dừng",
       "doctorChromeFound": "Tìm thấy Chrome tại {{url}}",
       "doctorChromeMissing": "Không phát hiện Chrome trên cổng gỡ lỗi tiêu chuẩn",
@@ -4430,7 +4430,7 @@
       "minutesAgo": "{{count}} phút trước",
       "modeConnect": "Gắn vào Chrome bên ngoài",
       "modeLabel": "Chế độ",
-      "modeLaunch": "Được Hope Agent khởi chạy",
+      "modeLaunch": "Được TPA CoWork khởi chạy",
       "modeStandalone": "Trình duyệt độc lập",
       "modeStandaloneHint": "hope-agent duy trì một phiên Chrome độc lập. Khuyến nghị cho tự động hóa.",
       "modeUserChrome": "Tiếp quản Chrome người dùng",
@@ -4483,10 +4483,10 @@
         "kindBrokerUnavailable": "Broker chưa chạy",
         "kindVersionMismatch": "Giao thức không khớp",
         "kindExtensionMissing": "Chưa kết nối",
-        "statusReady": "Tiện ích mở rộng Chrome của Hope Agent đã được kết nối.",
+        "statusReady": "Tiện ích mở rộng Chrome của TPA CoWork đã được kết nối.",
         "statusHostMissing": "Chrome native messaging host chưa được cài đặt.",
         "statusBrokerUnavailable": "Broker của tiện ích mở rộng Chrome chưa chạy.",
-        "statusExtensionMissing": "Tiện ích mở rộng Chrome của Hope Agent chưa được kết nối.",
+        "statusExtensionMissing": "Tiện ích mở rộng Chrome của TPA CoWork chưa được kết nối.",
         "statusVersionMismatch": "Phiên bản giao thức của tiện ích không khớp với host. Hãy tải lại tiện ích để cập nhật.",
         "versionLine": "Tiện ích {{version}} · giao thức {{protocol}}",
         "unknown": "không xác định",
@@ -4536,7 +4536,7 @@
         "managed": "Chrome do ứng dụng quản lý",
         "attach": "Kết nối tới Chrome",
         "extensionDesc": "Điều khiển Chrome thật đã đăng nhập của bạn thông qua tiện ích mở rộng — nó dùng chung cookie và phiên của bạn. Khuyến nghị.",
-        "managedDesc": "Hope Agent khởi chạy và duy trì một phiên bản Chrome riêng biệt, độc lập. Phù hợp nhất cho tự động hóa.",
+        "managedDesc": "TPA CoWork khởi chạy và duy trì một phiên bản Chrome riêng biệt, độc lập. Phù hợp nhất cho tự động hóa.",
         "attachDesc": "Kết nối tới một Chrome mà bạn tự khởi chạy với --remote-debugging-port."
       },
       "rawCdpConfirm": {
@@ -5194,7 +5194,7 @@
     "issueReportingToken": "Mã thông báo GitHub",
     "issueReportingTokenCleared": "Đã xóa GitHub token",
     "issueReportingTokenConfigured": "Đã cấu hình token.",
-    "issueReportingTokenMissing": "Chưa cấu hình token. Hope Agent sẽ thử dùng gh CLI đã xác thực.",
+    "issueReportingTokenMissing": "Chưa cấu hình token. TPA CoWork sẽ thử dùng gh CLI đã xác thực.",
     "issueReportingTokenPlaceholderClear": "Để trống rồi lưu để xóa",
     "issueReportingTokenPlaceholderNew": "Fine-grained PAT",
     "issueReportingTokenSaveFailed": "Không thể lưu GitHub token",
@@ -5978,7 +5978,7 @@
     "permCheck": "Xác minh",
     "permContacts": "Danh bạ",
     "permContactsDesc": "Đọc thông tin liên hệ",
-    "permDesc": "Hope Agent cần các quyền hệ thống sau để điều khiển máy tính của bạn. Vui lòng cấp chúng trong Cài đặt hệ thống.",
+    "permDesc": "TPA CoWork cần các quyền hệ thống sau để điều khiển máy tính của bạn. Vui lòng cấp chúng trong Cài đặt hệ thống.",
     "permFilesAndFolders": "Tệp và thư mục",
     "permFilesAndFoldersDesc": "Truy cập Desktop, Documents, Downloads và các thư mục người dùng khác",
     "permFullDiskAccess": "Truy cập toàn bộ đĩa",
@@ -6082,7 +6082,7 @@
       },
       "homekit": {
         "label": "HomeKit (nhà)",
-        "note": "Hope Agent hiện không dùng luồng HomeKit.",
+        "note": "TPA CoWork hiện không dùng luồng HomeKit.",
         "usage": "Chỉ truy cập dữ liệu Nhà nếu luồng HomeKit tương lai được bật."
       },
       "input_monitoring": {
@@ -6312,7 +6312,7 @@
     "serverModeEmbedded": "Nhúng",
     "serverModeEmbeddedDesc": "Ứng dụng desktop chạy máy chủ HTTP trên localhost",
     "serverModeRemote": "Từ xa",
-    "serverModeRemoteDesc": "Kết nối với máy chủ Hope Agent bên ngoài",
+    "serverModeRemoteDesc": "Kết nối với máy chủ TPA CoWork bên ngoài",
     "serverNotStarted": "Chưa khởi động",
     "serverRemoteUrl": "URL máy chủ từ xa",
     "serverRemoteUrlPlaceholder": "http://192.168.1.100:8420",
@@ -6528,7 +6528,7 @@
         },
         "autoCuratorEnabled": {
           "label": "Chạy curator theo lịch",
-          "help": "Khi bật, Hope Agent định kỳ quét các kỹ năng nháp để tìm phần trùng lặp và hiển thị gợi ý hợp nhất tại đây."
+          "help": "Khi bật, TPA CoWork định kỳ quét các kỹ năng nháp để tìm phần trùng lặp và hiển thị gợi ý hợp nhất tại đây."
         },
         "autoCuratorIntervalDays": {
           "label": "Khoảng chạy curator",
@@ -6537,7 +6537,7 @@
       }
     },
     "skillsEvolutionHero": {
-      "body": "Hope Agent không đứng yên. Thi thoảng sẽ xem lại các cuộc trò chuyện và chắt lọc những việc bạn lặp lại thành kỹ năng có thể tái sử dụng — lần sau gặp lại là đã biết cách rồi.",
+      "body": "TPA CoWork không đứng yên. Thi thoảng sẽ xem lại các cuộc trò chuyện và chắt lọc những việc bạn lặp lại thành kỹ năng có thể tái sử dụng — lần sau gặp lại là đã biết cách rồi.",
       "note": "Bật mặc định · càng dùng càng hợp với bạn. Tắt đi không ảnh hưởng tới các cuộc trò chuyện, chỉ là kỹ năng mới sẽ không tự tích lũy thêm.",
       "statusOff": "Đã tạm dừng",
       "statusOn": "Đang tiến hóa",
@@ -6666,7 +6666,7 @@
     "subagentTitle": "Ủy quyền Sub-Agent",
     "system": "Hệ thống",
     "systemAutostart": "Khởi động khi đăng nhập",
-    "systemAutostartDesc": "Tự động khởi động Hope Agent khi bạn đăng nhập vào máy tính",
+    "systemAutostartDesc": "Tự động khởi động TPA CoWork khi bạn đăng nhập vào máy tính",
     "systemPreventSleep": "Ngăn chế độ ngủ",
     "systemPreventSleepDesc": "Giữ cho máy tính luôn hoạt động để các tác vụ dài, tải xuống và hoạt động nền không bị gián đoạn do hệ thống ngủ. Màn hình vẫn có thể tắt.",
     "tabAppearance": "Giao diện & ngôn ngữ",
@@ -6876,7 +6876,7 @@
     "toolCoreMemoryDesc": "Đọc và duy trì bộ nhớ cốt lõi có giới hạn, luôn được nạp ở phạm vi Toàn cục, Agent và Dự án.",
     "toolProjectMemoryDesc": "Tìm kiếm và duy trì chỉ mục MEMORY.md cục bộ cùng các tệp chủ đề của dự án hiện tại.",
     "toolMacControlDesc": "Kiểm tra và điều khiển ứng dụng, cửa sổ, trình đơn, phần tử giao diện, ảnh chụp, bảng tạm và hộp thoại macOS cục bộ.",
-    "toolIssueReportDesc": "Tìm kiếm, soạn thảo hoặc, sau khi xác nhận, tạo GitHub Issue cho Hope Agent.",
+    "toolIssueReportDesc": "Tìm kiếm, soạn thảo hoặc, sau khi xác nhận, tạo GitHub Issue cho TPA CoWork.",
     "toolArtifactDesc": "Tạo, kiểm tra, cập nhật, khôi phục và xác minh các sản phẩm cục bộ bền vững có phiên bản.",
     "toolDesignDesc": "Tạo và quản lý hệ thống thiết kế, dự án thiết kế và sản phẩm trực quan có phiên bản.",
     "toolSubmitPlanDesc": "Gửi kế hoạch bằng văn bản đã hoàn tất để người dùng xem xét và phê duyệt.",
@@ -6896,7 +6896,7 @@
     "toolLoopRecordProgressDesc": "Ghi chú nhẹ về tiến độ, trạng thái hoặc bàn giao cho vòng lặp đang hoạt động.",
     "toolLoopWatchDesc": "Gắn hoặc kích hoạt lại bộ theo dõi sự kiện bền vững có thể đánh thức vòng lặp nhanh chóng.",
     "toolLoopUnwatchDesc": "Tắt theo dõi sự kiện mà không dừng vòng lặp hoặc lịch dự phòng.",
-    "toolAppUpdateDesc": "Kiểm tra, cài đặt, xem hoặc hoàn tác bản cập nhật Hope Agent ở chế độ máy tính, máy chủ và CLI.",
+    "toolAppUpdateDesc": "Kiểm tra, cài đặt, xem hoặc hoàn tác bản cập nhật TPA CoWork ở chế độ máy tính, máy chủ và CLI.",
     "toolJobStatusDesc": "Kiểm tra, liệt kê, chờ ngắn, hủy hoặc lấy kết quả của tác vụ công cụ chạy nền.",
     "toolScheduleWakeupDesc": "Lên lịch đánh thức một lần để tiếp tục phiên này sau một khoảng trễ.",
     "toolRuntimeCancelDesc": "Hủy tác vụ bất đồng bộ, Agent con, tiến trình hoặc tác vụ theo lịch đang hoạt động.",
@@ -7189,10 +7189,10 @@
     "memoryExternalPolicyBidirectional": "hai chiều",
     "memoryExternalPolicyOffDesc": "Đã bị vô hiệu hóa đối với nhà cung cấp này.",
     "memoryExternalPolicyManualDesc": "Chỉ đồng bộ hóa khi bạn khởi động nó một cách rõ ràng.",
-    "memoryExternalPolicyPullOnlyDesc": "Chỉ đọc bộ nhớ ngoài vào hàng đợi đánh giá của Hope Agent.",
-    "memoryExternalPolicyPushOnlyDesc": "Chỉ gửi bộ nhớ Hope Agent đã chọn ra bên ngoài.",
+    "memoryExternalPolicyPullOnlyDesc": "Chỉ đọc bộ nhớ ngoài vào hàng đợi đánh giá của TPA CoWork.",
+    "memoryExternalPolicyPushOnlyDesc": "Chỉ gửi bộ nhớ TPA CoWork đã chọn ra bên ngoài.",
     "memoryExternalPolicyBidirectionalDesc": "Điều chỉnh cả hai hướng sau khi thiết lập rõ ràng.",
-    "memoryExternalProvidersOverviewOff": "Đồng bộ hóa nhà cung cấp bên ngoài bị tắt. Không có dữ liệu bộ nhớ nào rời khỏi Hope Agent thông qua nhà cung cấp.",
+    "memoryExternalProvidersOverviewOff": "Đồng bộ hóa nhà cung cấp bên ngoài bị tắt. Không có dữ liệu bộ nhớ nào rời khỏi TPA CoWork thông qua nhà cung cấp.",
     "memoryExternalProvidersOverviewNeedsSetup": "(Các) nhà cung cấp {{count}} cần thiết lập điểm cuối. Bộ nhớ cục bộ vẫn có sẵn.",
     "memoryExternalProvidersOverviewUnsupportedPolicy": "(Các) cấu hình nhà cung cấp {{count}} sử dụng chính sách đồng bộ hóa không được hỗ trợ. Chọn chính sách được hỗ trợ trước khi đồng bộ hóa có thể chạy.",
     "memoryExternalProvidersOverviewAdapterPending": "(Các) cấu hình nhà cung cấp {{count}} đang chờ bộ điều hợp thời gian chạy. Sẽ không có đồng bộ hóa nào chạy; bộ nhớ cục bộ vẫn còn trống.",
@@ -7205,7 +7205,7 @@
     "memoryExternalProviderLocalFirstAdapterPending": "Siêu dữ liệu điểm cuối đã được định cấu hình nhưng bộ điều hợp thời gian chạy này chưa khả dụng. Không có đồng bộ hóa sẽ chạy.",
     "memoryExternalProviderLocalFirstUnsupportedPolicy": "Chính sách đồng bộ hóa đã chọn không được bộ điều hợp nhà cung cấp này hỗ trợ. Không có đồng bộ hóa sẽ chạy.",
     "memoryExternalProviderLocalFirstNeedsSetup": "Đồng bộ hóa chưa thể chạy. Bộ nhớ cục bộ vẫn có sẵn.",
-    "memoryExternalProviderLocalFirstOff": "Đồng bộ hóa nhà cung cấp không hoạt động; không có dữ liệu bộ nhớ nào rời khỏi Hope Agent thông qua nhà cung cấp này.",
+    "memoryExternalProviderLocalFirstOff": "Đồng bộ hóa nhà cung cấp không hoạt động; không có dữ liệu bộ nhớ nào rời khỏi TPA CoWork thông qua nhà cung cấp này.",
     "memoryExternalProviderPrivacyOff": "Sẽ không có dữ liệu nhà cung cấp nào di chuyển khi nhà cung cấp này hoặc đồng bộ hóa toàn cầu tắt.",
     "memoryExternalProviderPrivacyBlocked": "Sẽ không có dữ liệu nhà cung cấp nào được di chuyển cho đến khi tất cả đều đạt yêu cầu thiết lập, chính sách và mức độ sẵn sàng của bộ điều hợp.",
     "memoryExternalProviderPrivacyManual": "Đồng bộ hóa thủ công chỉ có thể gửi bộ nhớ đã chọn hoặc ngữ cảnh truy xuất sau một hành động rõ ràng.",
@@ -7653,11 +7653,11 @@
       "safetyProfileConflicts": "Xung đột phạm vi hồ sơ bị bỏ qua trừ khi người dùng cho phép thay thế một cách rõ ràng."
     },
     "memoryBackupPreviewIssues": {
-      "invalidArchive": "Gói sao lưu không phải là kho lưu trữ bộ nhớ Hope Agent hợp lệ",
+      "invalidArchive": "Gói sao lưu không phải là kho lưu trữ bộ nhớ TPA CoWork hợp lệ",
       "invalidJson": "Tệp sao lưu không hợp lệ JSON",
       "encryptedPassphraseRequired": "Bản sao lưu này được mã hóa; nhập cụm mật khẩu của nó để xem trước hoặc khôi phục.",
       "encryptedDecryptFailed": "Không thể giải mã bản sao lưu được mã hóa",
-      "encryptedPlaintextInvalid": "Bản sao lưu được mã hóa đã được giải mã nhưng gói được giải mã không phải là bản sao lưu bộ nhớ Hope Agent hợp lệ",
+      "encryptedPlaintextInvalid": "Bản sao lưu được mã hóa đã được giải mã nhưng gói được giải mã không phải là bản sao lưu bộ nhớ TPA CoWork hợp lệ",
       "unsupportedSchema": "Lược đồ sao lưu bộ nhớ không được hỗ trợ",
       "invalidBundleShape": "Lược đồ sao lưu được nhận dạng nhưng gói không đầy đủ",
       "sourceBundlePartial": "Gói nguồn đã được xuất kèm cảnh báo; hãy kiểm tra manifest.warnings trước khi khôi phục.",
@@ -7706,7 +7706,7 @@
     "memoryBackupRestorePlanRows": {
       "invalid": {
         "label": "Tệp sao lưu không tương thích",
-        "detail": "Chạy bản xem trước với bản sao lưu bộ nhớ Hope Agent tương thích trước khi khôi phục."
+        "detail": "Chạy bản xem trước với bản sao lưu bộ nhớ TPA CoWork tương thích trước khi khôi phục."
       },
       "legacy-import": {
         "label": "Ký ức di sản bị mất tích",
@@ -7916,7 +7916,7 @@
     "memoryExternalProviderKind": "Nhà cung cấp",
     "memoryExternalProviderPolicy": "Chính sách đồng bộ hóa",
     "memoryExternalProviderEnabled": "Đã bật nhà cung cấp",
-    "memoryExternalProviderEndpointConfigured": "Điểm cuối được định cấu hình bên ngoài Hope Agent",
+    "memoryExternalProviderEndpointConfigured": "Điểm cuối được định cấu hình bên ngoài TPA CoWork",
     "memoryExternalProviderAdd": "Thêm nhà cung cấp",
     "memoryExternalProvidersNoActive": "Đã bật, không có nhà cung cấp nào đang hoạt động",
     "memoryBackupPassphraseStrong": "mạnh mẽ",
@@ -7934,7 +7934,7 @@
     "memoryBackupEncryptedPassphraseConfirm": "Xác nhận cụm mật khẩu",
     "memoryBackupEncryptedUnlock": "Mở khóa sao lưu",
     "memoryBackupPreviewDesc": "Xem lại nội dung bản sao lưu này chứa trước khi thực hiện bất kỳ công việc khôi phục nào.",
-    "memoryBackupPreviewInvalidDesc": "Tệp này không phải là bản sao lưu bộ nhớ Hope Agent tương thích.",
+    "memoryBackupPreviewInvalidDesc": "Tệp này không phải là bản sao lưu bộ nhớ TPA CoWork tương thích.",
     "memoryBackupPreviewMemories": "Ký ức",
     "memoryBackupPreviewNew": "Ứng viên mới",
     "memoryBackupPreviewClaims": "Khiếu nại",
@@ -8775,7 +8775,7 @@
     "loop_record_progress": "Ghi tiến độ vòng lặp",
     "loop_watch": "Theo dõi sự kiện vòng lặp",
     "loop_unwatch": "Bỏ theo dõi vòng lặp",
-    "app_update": "Cập nhật Hope Agent",
+    "app_update": "Cập nhật TPA CoWork",
     "job_status": "Trạng thái tác vụ nền",
     "schedule_wakeup": "Lên lịch đánh thức",
     "runtime_cancel": "Hủy tác vụ đang chạy",
@@ -8930,30 +8930,30 @@
     },
     "appUpdate": {
       "rollback": {
-        "context": "Hope Agent khôi phục — khôi phục tệp nhị phân trước đó từ ~/.hope-agent/updater/backup/ và khởi động lại dịch vụ.",
-        "text": "Quay lại tệp nhị phân Hope Agent đã cài đặt trước đó? Dịch vụ sẽ khởi động lại ngay sau khi trao đổi.",
-        "header": "Hope Agent khôi phục",
+        "context": "TPA CoWork khôi phục — khôi phục tệp nhị phân trước đó từ ~/.hope-agent/updater/backup/ và khởi động lại dịch vụ.",
+        "text": "Quay lại tệp nhị phân TPA CoWork đã cài đặt trước đó? Dịch vụ sẽ khởi động lại ngay sau khi trao đổi.",
+        "header": "TPA CoWork khôi phục",
         "confirm": "Quay lại bây giờ",
         "cancel": "Hủy bỏ"
       },
       "install": {
-        "context": "Hope Agent xác nhận tự cập nhật. Nguồn cài đặt: {{installSource}}. Đường dẫn đề xuất: {{path}}.",
-        "header": "Hope Agent {{from}} → {{to}}",
+        "context": "TPA CoWork xác nhận tự cập nhật. Nguồn cài đặt: {{installSource}}. Đường dẫn đề xuất: {{path}}.",
+        "header": "TPA CoWork {{from}} → {{to}}",
         "text": {
-          "packageManager": "Nâng cấp Hope Agent {{from}} → {{to}}?\nPhương thức: trình quản lý gói ({{installSource}}){{notes}}\n\nDịch vụ cấp người dùng sẽ khởi động lại ngay sau khi thay tệp nhị phân (thường gián đoạn 1–2 giây). Mọi lượt trò chuyện, tác vụ định kỳ hoặc luồng IM đang chạy sẽ bị hủy — hãy tạm dừng công việc quan trọng trước.",
-          "selfContained": "Nâng cấp Hope Agent {{from}} → {{to}}?\nPhương thức: tải tệp nhị phân độc lập, xác minh chữ ký Minisign và thay thế nguyên tử.{{notes}}\n\nDịch vụ cấp người dùng sẽ khởi động lại ngay sau khi thay tệp nhị phân (thường gián đoạn 1–2 giây). Mọi lượt trò chuyện, tác vụ định kỳ hoặc luồng IM đang chạy sẽ bị hủy — hãy tạm dừng công việc quan trọng trước.",
-          "tauri": "Nâng cấp Hope Agent {{from}} → {{to}}?\nPhương thức: trình cập nhật đi kèm Tauri (trình cài đặt đã ký){{notes}}\n\nDịch vụ cấp người dùng sẽ khởi động lại ngay sau khi thay tệp nhị phân (thường gián đoạn 1–2 giây). Mọi lượt trò chuyện, tác vụ định kỳ hoặc luồng IM đang chạy sẽ bị hủy — hãy tạm dừng công việc quan trọng trước.",
-          "manualPrompt": "Nâng cấp Hope Agent {{from}} → {{to}}?\nPhương thức: tải xuống thủ công (không có phương thức tự động phù hợp){{notes}}\n\nDịch vụ cấp người dùng sẽ khởi động lại ngay sau khi thay tệp nhị phân (thường gián đoạn 1–2 giây). Mọi lượt trò chuyện, tác vụ định kỳ hoặc luồng IM đang chạy sẽ bị hủy — hãy tạm dừng công việc quan trọng trước."
+          "packageManager": "Nâng cấp TPA CoWork {{from}} → {{to}}?\nPhương thức: trình quản lý gói ({{installSource}}){{notes}}\n\nDịch vụ cấp người dùng sẽ khởi động lại ngay sau khi thay tệp nhị phân (thường gián đoạn 1–2 giây). Mọi lượt trò chuyện, tác vụ định kỳ hoặc luồng IM đang chạy sẽ bị hủy — hãy tạm dừng công việc quan trọng trước.",
+          "selfContained": "Nâng cấp TPA CoWork {{from}} → {{to}}?\nPhương thức: tải tệp nhị phân độc lập, xác minh chữ ký Minisign và thay thế nguyên tử.{{notes}}\n\nDịch vụ cấp người dùng sẽ khởi động lại ngay sau khi thay tệp nhị phân (thường gián đoạn 1–2 giây). Mọi lượt trò chuyện, tác vụ định kỳ hoặc luồng IM đang chạy sẽ bị hủy — hãy tạm dừng công việc quan trọng trước.",
+          "tauri": "Nâng cấp TPA CoWork {{from}} → {{to}}?\nPhương thức: trình cập nhật đi kèm Tauri (trình cài đặt đã ký){{notes}}\n\nDịch vụ cấp người dùng sẽ khởi động lại ngay sau khi thay tệp nhị phân (thường gián đoạn 1–2 giây). Mọi lượt trò chuyện, tác vụ định kỳ hoặc luồng IM đang chạy sẽ bị hủy — hãy tạm dừng công việc quan trọng trước.",
+          "manualPrompt": "Nâng cấp TPA CoWork {{from}} → {{to}}?\nPhương thức: tải xuống thủ công (không có phương thức tự động phù hợp){{notes}}\n\nDịch vụ cấp người dùng sẽ khởi động lại ngay sau khi thay tệp nhị phân (thường gián đoạn 1–2 giây). Mọi lượt trò chuyện, tác vụ định kỳ hoặc luồng IM đang chạy sẽ bị hủy — hãy tạm dừng công việc quan trọng trước."
         },
         "confirm": "Nâng cấp ngay bây giờ",
         "cancel": "Không phải bây giờ"
       },
       "manual": {
-        "dockerContext": "Hope Agent đang chạy trong vùng chứa Docker. Tự cập nhật không thể thay thế hình ảnh — hãy nâng cấp bằng cách kéo thẻ mới và tạo lại vùng chứa.",
-        "dockerText": "Hope Agent đang chạy trong vùng chứa Docker ({{from}} → {{to}}).\n\nNâng cấp bằng cách kéo hình ảnh mới và tạo lại vùng chứa:\n\n    docker pull ghcr.io/shiwenwen/hope-agent:v{{to}}\n    docker compose up -d\n\nhoặc ghim vào `latest` nếu tệp soạn thảo của bạn sử dụng nó.",
+        "dockerContext": "TPA CoWork đang chạy trong vùng chứa Docker. Tự cập nhật không thể thay thế hình ảnh — hãy nâng cấp bằng cách kéo thẻ mới và tạo lại vùng chứa.",
+        "dockerText": "TPA CoWork đang chạy trong vùng chứa Docker ({{from}} → {{to}}).\n\nNâng cấp bằng cách kéo hình ảnh mới và tạo lại vùng chứa:\n\n    docker pull ghcr.io/shiwenwen/hope-agent:v{{to}}\n    docker compose up -d\n\nhoặc ghim vào `latest` nếu tệp soạn thảo của bạn sử dụng nó.",
         "dockerHeader": "Docker yêu cầu nâng cấp",
-        "context": "Hope Agent không thể chọn đường dẫn nâng cấp tự động cho cài đặt này. Quyết định cách tiến hành.",
-        "text": "Không có đường dẫn nâng cấp tự động nào cho Hope Agent {{from}} → {{to}}. Nguồn cài đặt được phát hiện là: {{installSource}}. Chọn một sự phục hồi:",
+        "context": "TPA CoWork không thể chọn đường dẫn nâng cấp tự động cho cài đặt này. Quyết định cách tiến hành.",
+        "text": "Không có đường dẫn nâng cấp tự động nào cho TPA CoWork {{from}} → {{to}}. Nguồn cài đặt được phát hiện là: {{installSource}}. Chọn một sự phục hồi:",
         "header": "Yêu cầu nâng cấp thủ công",
         "openReleases": "Mở trang phát hành trong trình duyệt",
         "openReleasesManual": "Mở trang phát hành trong trình duyệt (tải xuống thủ công)",
@@ -11767,15 +11767,15 @@
       "unbound": "Đã gỡ liên kết",
       "err": "Liên kết thất bại",
       "sourceDir": "Nguồn: thư mục cục bộ",
-      "sourceHaProject": "Nguồn: dự án Hope Agent",
+      "sourceHaProject": "Nguồn: dự án TPA CoWork",
       "stale": "Không còn hiệu lực (thư mục hoặc dự án không tồn tại)",
       "unbind": "Gỡ liên kết",
       "modeDir": "Thư mục cục bộ",
-      "modeHaProject": "Dự án Hope Agent",
+      "modeHaProject": "Dự án TPA CoWork",
       "dir": "Thư mục kho",
       "dirPlaceholder": "Chọn hoặc nhập thư mục gốc của kho",
       "choose": "Chọn…",
-      "haProject": "Dự án Hope Agent",
+      "haProject": "Dự án TPA CoWork",
       "haProjectPlaceholder": "Chọn dự án…",
       "haProjectHint": "Thư mục lấy từ thư mục làm việc của dự án và tự động cập nhật theo thay đổi.",
       "bind": "Liên kết"
@@ -12164,14 +12164,14 @@
   },
   "configRecovery": {
     "title": "Cần khôi phục cấu hình",
-    "subtitle": "Hope Agent không thể đọc config.json hiện có. Để bảo vệ nhà cung cấp, máy chủ MCP và trạng thái thiết lập ban đầu, việc ghi cấu hình đã bị tạm dừng.",
+    "subtitle": "TPA CoWork không thể đọc config.json hiện có. Để bảo vệ nhà cung cấp, máy chủ MCP và trạng thái thiết lập ban đầu, việc ghi cấu hình đã bị tạm dừng.",
     "path": "Tệp cấu hình",
     "error": "Lỗi đọc",
     "details": "Lưu ý bảo vệ",
     "retry": "Đọc lại",
     "restart": "Khởi động lại ứng dụng",
     "backupsTitle": "Khôi phục ảnh chụp cấu hình",
-    "backupsDesc": "Sau khi khôi phục, Hope Agent sẽ tải lại cấu hình và tiếp tục khởi động. Tệp không đọc được vẫn được giữ ở vị trí cũ và được sao chép thành tệp phụ .corrupt-<timestamp> khi có thể.",
+    "backupsDesc": "Sau khi khôi phục, TPA CoWork sẽ tải lại cấu hình và tiếp tục khởi động. Tệp không đọc được vẫn được giữ ở vị trí cũ và được sao chép thành tệp phụ .corrupt-<timestamp> khi có thể.",
     "loading": "Đang tải ảnh chụp…",
     "empty": "Không tìm thấy ảnh chụp cấu hình",
     "emptyHint": "Hãy sửa config.json theo cách thủ công hoặc khôi phục một phiên bản dùng được từ backups/autosave hay config.json.corrupt-* rồi thử lại.",
@@ -12179,7 +12179,7 @@
     "source": "Nguồn",
     "retrying": "Đang đọc",
     "restoring": "Đang khôi phục",
-    "restartFailed": "Không thể tự động khởi động lại tại đây. Hãy đóng rồi mở lại Hope Agent theo cách thủ công.",
+    "restartFailed": "Không thể tự động khởi động lại tại đây. Hãy đóng rồi mở lại TPA CoWork theo cách thủ công.",
     "categoryValues": {
       "providers": "Nhà cung cấp",
       "proxy": "Máy chủ proxy",
@@ -12200,6 +12200,85 @@
     "kindValues": {
       "config": "Cấu hình",
       "user": "Cài đặt người dùng"
+    }
+  },
+  "cloud": {
+    "title": "Cloud account",
+    "notSignedIn": "Not signed in to TPA CoWork Cloud",
+    "login": "Log in",
+    "logout": "Log out",
+    "loginTitle": "Log in to TPA CoWork Cloud",
+    "loginDescription": "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+    "serverUrl": "Cloud server URL",
+    "username": "Username",
+    "password": "Password",
+    "loggingIn": "Logging in...",
+    "signedInAs": "Signed in as {{username}}"
+  },
+  "skillhub": {
+    "title": "SkillHub",
+    "subtitle": "Browse, search, and install public skills.",
+    "searchPlaceholder": "Search skills",
+    "search": "Search",
+    "refresh": "Refresh",
+    "empty": "No public skills yet.",
+    "emptyHint": "Search SkillHub or refresh the list.",
+    "download": "Download",
+    "downloaded": "Skill downloaded. Check My Skills to use it.",
+    "downloadedOverwrite": "Local skill overwritten. Check My Skills to use it.",
+    "overwriteTitle": "Overwrite local skill?",
+    "overwriteDescription": "A local skill named {{name}} already exists. Downloading will replace that skill's files.",
+    "overwriteConfirm": "Overwrite",
+    "freshness": {
+      "localNewer": "Local copy looks newer than the server package.",
+      "remoteNewer": "Server package looks newer than the local copy.",
+      "same": "Local and server versions look the same.",
+      "unknown": "Could not compare which copy is newer.",
+      "versions": "Local: {{local}} · Server: {{remote}}",
+      "na": "n/a"
+    }
+  },
+  "mySkills": {
+    "title": "My Skills",
+    "subtitle": "Local user skills with optional cloud review badges.",
+    "count": "{{count}} local skills",
+    "empty": "No local user skills found.",
+    "emptyHint": "Install or create a local skill first.",
+    "noMatches": "No skills match the current filters.",
+    "noDescription": "No description",
+    "searchPlaceholder": "Search local skills",
+    "refreshLocal": "Refresh status",
+    "refreshStatus": "Refresh status",
+    "retry": "Retry",
+    "openDirectory": "Open directory",
+    "refreshCloud": "Sync cloud status",
+    "refreshCloudPrompt": "Log in to Hope Cloud before syncing cloud status.",
+    "submitReview": "Submit review",
+    "submitSuccess": "Submitted for review.",
+    "loginToSubmit": "Log in to submit",
+    "loginToSubmitPrompt": "Log in to Hope Cloud before submitting for review.",
+    "filter": {
+      "all": "All",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "needsConfig": "Needs setup",
+      "draft": "Draft",
+      "local": "Local",
+      "pendingReview": "In review",
+      "published": "Published"
+    },
+    "localState": {
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "needsConfig": "Needs setup",
+      "draft": "Draft"
+    },
+    "state": {
+      "published": "Published",
+      "pendingReview": "In review",
+      "notPublished": "Local",
+      "unknown": "Unknown",
+      "cloudFailed": "Cloud failed"
     }
   }
 }

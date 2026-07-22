@@ -43,10 +43,10 @@
     "updateHistoryLatest": "最新",
     "updateHistoryNoNotes": "这个版本暂时没有可显示的发布说明。",
     "updateHistoryUndated": "发布说明",
-    "updateInstalled": "更新已安装，正在重新启动 Hope Agent…",
+    "updateInstalled": "更新已安装，正在重新启动 TPA CoWork…",
     "updateInstalling": "正在安装 v{{version}}…",
-    "updateRestartManually": "更新已安装，但自动重启失败，请手动退出后重新打开 Hope Agent。",
-    "updateReady": "可以在 GitHub Releases 查看新版本，也可以让 Hope Agent 直接安装桌面更新。",
+    "updateRestartManually": "更新已安装，但自动重启失败，请手动退出后重新打开 TPA CoWork。",
+    "updateReady": "可以在 GitHub Releases 查看新版本，也可以让 TPA CoWork 直接安装桌面更新。",
     "updateUpToDate": "当前已是最新版本 v{{version}}。",
     "updateAndRestart": "更新并重启",
     "updateOnly": "仅更新",
@@ -144,7 +144,7 @@
       },
       "mac_control_action": {
         "title": "Mac 控制操作",
-        "body": "这次 macOS 控制会改变桌面焦点/状态。Hope Agent 激活其他 App 前需要你确认。"
+        "body": "这次 macOS 控制会改变桌面焦点/状态。TPA CoWork 激活其他 App 前需要你确认。"
       },
       "mac_control_dangerous_action": {
         "title": "危险 Mac 控制动作",
@@ -163,7 +163,7 @@
   "auth": {
     "tokenLabel": "Bearer Token",
     "tokenPlaceholder": "粘贴你的 Token",
-    "tokenRequiredBody": "当前 Hope Agent 服务器开启了 Bearer Token 鉴权。请粘贴管理员发给你的 Token 继续。",
+    "tokenRequiredBody": "当前 TPA CoWork 服务器开启了 Bearer Token 鉴权。请粘贴管理员发给你的 Token 继续。",
     "tokenRequiredTitle": "需要服务器鉴权",
     "tokenSave": "保存并重新加载"
   },
@@ -567,7 +567,7 @@
         "manualEntry": "手动填写",
         "chooseRecent": "选择最近对话",
         "loadingConversations": "读取最近对话…",
-        "noRecentConversations": "还没有可选的最近对话，可以先从目标 IM 给 Hope Agent 发一条消息，或手动填写。",
+        "noRecentConversations": "还没有可选的最近对话，可以先从目标 IM 给 TPA CoWork 发一条消息，或手动填写。",
         "refreshConversations": "刷新最近对话",
         "chatId": "Chat ID",
         "chatIdPlaceholder": "如 123456789 或 @username",
@@ -950,7 +950,7 @@
     "reasoningDisabledHint": "该模型未启用推理。如需调节推理深度，请在「设置 → 模型服务商」中编辑该模型并开启「支持推理/思考」。",
     "browserExtensionNudge": {
       "installTitle": "让 AI 操作你已登录的 Chrome",
-      "installBody": "安装 Hope Agent 扩展即可操作你已登录的 Chrome；当前正使用隔离浏览器运行。",
+      "installBody": "安装 TPA CoWork 扩展即可操作你已登录的 Chrome；当前正使用隔离浏览器运行。",
       "reloadTitle": "请重载 Chrome 扩展",
       "reloadBody": "已安装的扩展与宿主版本不匹配，重载扩展即可恢复对真实 Chrome 的控制。",
       "openSettings": "去设置",
@@ -2283,7 +2283,7 @@
     },
     "system": {
       "cores": "核",
-      "cpuDesc": "Hope Agent 占用 {{percent}}% CPU（共 {{cores}} 核）",
+      "cpuDesc": "TPA CoWork 占用 {{percent}}% CPU（共 {{cores}} 核）",
       "cpuUsage": "CPU 使用率",
       "diskIO": "磁盘 I/O",
       "diskRead": "读取",
@@ -3188,12 +3188,12 @@
     "agentDesc": "每个 Agent 的通知开关覆盖。设为「默认」时跟随全局设置。",
     "agentSection": "Agent 通知",
     "approvalRequired": "需要工具审批",
-    "approvalRequiredFallback": "Hope Agent 正在等待你确认一次工具调用",
+    "approvalRequiredFallback": "TPA CoWork 正在等待你确认一次工具调用",
     "approvalTimedOut": "工具审批已超时",
     "approvalTimedOut_denied": "待审批工具调用已在 {{seconds}} 秒后被拒绝。",
     "approvalTimedOut_proceeded": "待审批工具调用已在 {{seconds}} 秒后继续执行。",
     "askUserRequired": "Agent 在等你回答",
-    "askUserRequiredFallback": "Hope Agent 提了一个问题等你回答",
+    "askUserRequiredFallback": "TPA CoWork 提了一个问题等你回答",
     "askUserTimedOut": "问题已超时",
     "askUserTimedOutDefaults": "{{seconds}} 秒内未收到回答，已使用默认答案。",
     "askUserTimedOutNoDefaults": "{{seconds}} 秒内未收到回答。",
@@ -3202,7 +3202,7 @@
     "channelAuthFailedFallback": "有 IM 渠道账号凭据被拒绝，需要重新登录",
     "chatCompleted": "对话已完成",
     "chatCompletedGenericBody": "对话已完成，打开应用查看最新回复。",
-    "chatCompletedGenericTitle": "Hope Agent",
+    "chatCompletedGenericTitle": "TPA CoWork",
     "chatError": "对话出错",
     "cronEmpty": "定时任务已完成（无输出）",
     "cronError": "定时任务失败",
@@ -3253,7 +3253,7 @@
         "whatsapp": "WhatsApp"
       },
       "macOnly": "仅 macOS",
-      "subtitle": "通过 Telegram、Slack、微信等聊天软件与 Hope Agent 对话。点击任一选项可跳转到完整配置。",
+      "subtitle": "通过 Telegram、Slack、微信等聊天软件与 TPA CoWork 对话。点击任一选项可跳转到完整配置。",
       "title": "接入 IM 渠道（可选）"
     },
     "exit": {
@@ -3310,11 +3310,11 @@
       "warningsTitle": "注意事项"
     },
     "mode": {
-      "localDesc": "在当前设备运行 Hope Agent，接下来选择模型服务商并完成后续配置。",
+      "localDesc": "在当前设备运行 TPA CoWork，接下来选择模型服务商并完成后续配置。",
       "localTitle": "本地配置",
-      "remoteDesc": "已有一台运行 Hope Agent 服务的机器？填写地址连上后直接使用，跳过后续本地配置。",
+      "remoteDesc": "已有一台运行 TPA CoWork 服务的机器？填写地址连上后直接使用，跳过后续本地配置。",
       "remoteTitle": "连接远程服务",
-      "subtitle": "可以在这台设备上本地运行 Hope Agent，也可以连接到另一台已有的 Hope Agent 服务。",
+      "subtitle": "可以在这台设备上本地运行 TPA CoWork，也可以连接到另一台已有的 TPA CoWork 服务。",
       "title": "选择运行方式"
     },
     "nav": {
@@ -3393,7 +3393,7 @@
         "desc": "可在“设置 → 安全”中修改超时时间，或为某个 IM 渠道（Telegram / 飞书 / Slack / 微信等）单独开启自动批准。",
         "title": "随时可调"
       },
-      "subtitle": "默认情况下，Hope Agent 在执行命令或修改文件前会先征求你的同意。",
+      "subtitle": "默认情况下，TPA CoWork 在执行命令或修改文件前会先征求你的同意。",
       "title": "工具审批保障你的控制权",
       "toggle": "需要审批",
       "toggleHint": "关闭后工具调用将不再弹窗——不推荐。"
@@ -3411,7 +3411,7 @@
       "previewLabel": "Web GUI 地址",
       "restartHint": "绑定地址的变更将在下次重启生效。",
       "subtitle": "内嵌 HTTP 服务让你在任意浏览器里打开同一个 App。",
-      "title": "你想如何使用 Hope Agent?"
+      "title": "你想如何使用 TPA CoWork?"
     },
     "skills": {
       "empty": "未找到技能。点击「下一步」继续。",
@@ -3452,7 +3452,7 @@
       "languageHint": "当前显示：{{current}}",
       "languageLabel": "界面语言",
       "subtitle": "越用越懂你的 AI 助手——桌面、云端、IM，随叫随到。\n下面是一个简短的引导——除了选择模型，其它每一步都可以跳过。",
-      "title": "欢迎使用 Hope Agent"
+      "title": "欢迎使用 TPA CoWork"
     }
   },
   "plans": {
@@ -3675,7 +3675,7 @@
     "projectLogo": "标识",
     "projectLogoHint": "可选。图片会自动压缩到 256×256。",
     "projectName": "项目名称",
-    "projectNamePlaceholder": "例如：Hope Agent 开发",
+    "projectNamePlaceholder": "例如：TPA CoWork 开发",
     "projects": "项目",
     "removeFromProject": "移出项目",
     "removeLogo": "移除",
@@ -4403,7 +4403,7 @@
       "deleteConfirmDesc": "该配置的所有 cookie、登录态和缓存数据都会被清除，不可恢复。",
       "deleteConfirmTitle": "删除配置 '{{name}}'？",
       "deleteDisabledActive": "删除前先停止正在使用该配置的浏览器",
-      "desc": "Hope Agent 可以直接托管一个 Chrome 实例供你使用。为每种登录态（Google、GitHub、工作账号…）创建独立的专属配置，cookie 和登录会持久保留；你和 Agent 共享同一个浏览器会话——你登录过的网站，Agent 就能直接操作。",
+      "desc": "TPA CoWork 可以直接托管一个 Chrome 实例供你使用。为每种登录态（Google、GitHub、工作账号…）创建独立的专属配置，cookie 和登录会持久保留；你和 Agent 共享同一个浏览器会话——你登录过的网站，Agent 就能直接操作。",
       "disconnect": "停止",
       "doctorChromeFound": "已在 {{url}} 找到 Chrome",
       "doctorChromeMissing": "标准调试端口未检测到 Chrome",
@@ -4430,7 +4430,7 @@
       "minutesAgo": "{{count}} 分钟前",
       "modeConnect": "已接管外部 Chrome",
       "modeLabel": "模式",
-      "modeLaunch": "由 Hope Agent 托管",
+      "modeLaunch": "由 TPA CoWork 托管",
       "modeStandalone": "独立浏览器",
       "modeStandaloneHint": "hope-agent 维护一个独立的 Chrome 实例，推荐用于自动化。",
       "modeUserChrome": "接管用户 Chrome",
@@ -4483,10 +4483,10 @@
         "kindBrokerUnavailable": "代理未运行",
         "kindVersionMismatch": "协议版本不匹配",
         "kindExtensionMissing": "未连接",
-        "statusReady": "Hope Agent Chrome 扩展已连接。",
+        "statusReady": "TPA CoWork Chrome 扩展已连接。",
         "statusHostMissing": "Chrome 原生消息主机未安装。",
         "statusBrokerUnavailable": "Chrome 扩展代理未运行。",
-        "statusExtensionMissing": "Hope Agent Chrome 扩展未连接。",
+        "statusExtensionMissing": "TPA CoWork Chrome 扩展未连接。",
         "statusVersionMismatch": "扩展的协议版本与主机不匹配。请重新加载扩展以更新。",
         "versionLine": "扩展 {{version}} · 协议 {{protocol}}",
         "unknown": "未知",
@@ -4536,7 +4536,7 @@
         "managed": "托管 Chrome",
         "attach": "连接 Chrome",
         "extensionDesc": "通过扩展驱动你已登录的真实 Chrome——共享你的 Cookie 和会话。推荐。",
-        "managedDesc": "Hope Agent 启动并维护独立的 Chrome 实例。适合自动化。",
+        "managedDesc": "TPA CoWork 启动并维护独立的 Chrome 实例。适合自动化。",
         "attachDesc": "连接到你自己用 --remote-debugging-port 启动的 Chrome。"
       },
       "rawCdpConfirm": {
@@ -5194,7 +5194,7 @@
     "issueReportingToken": "GitHub Token",
     "issueReportingTokenCleared": "GitHub Token 已清除",
     "issueReportingTokenConfigured": "已配置 Token。",
-    "issueReportingTokenMissing": "尚未配置 Token。Hope Agent 会尝试使用已登录的 gh CLI。",
+    "issueReportingTokenMissing": "尚未配置 Token。TPA CoWork 会尝试使用已登录的 gh CLI。",
     "issueReportingTokenPlaceholderClear": "留空并保存即可清除",
     "issueReportingTokenPlaceholderNew": "Fine-grained PAT",
     "issueReportingTokenSaveFailed": "保存 GitHub Token 失败",
@@ -5978,7 +5978,7 @@
     "permCheck": "去确认",
     "permContacts": "通讯录",
     "permContactsDesc": "允许读取联系人信息",
-    "permDesc": "Hope Agent 需要以下系统权限来控制电脑。请在系统设置中授权。",
+    "permDesc": "TPA CoWork 需要以下系统权限来控制电脑。请在系统设置中授权。",
     "permFilesAndFolders": "文件和文件夹",
     "permFilesAndFoldersDesc": "允许访问桌面、文稿、下载等用户目录",
     "permFullDiskAccess": "完全磁盘访问权限",
@@ -6082,7 +6082,7 @@
       },
       "homekit": {
         "label": "HomeKit（家庭）",
-        "note": "Hope Agent 当前未使用 HomeKit 工作流。",
+        "note": "TPA CoWork 当前未使用 HomeKit 工作流。",
         "usage": "仅当后续启用家庭工作流时访问家庭数据。"
       },
       "input_monitoring": {
@@ -6312,7 +6312,7 @@
     "serverModeEmbedded": "内嵌",
     "serverModeEmbeddedDesc": "桌面应用在本地运行 HTTP 服务",
     "serverModeRemote": "远程",
-    "serverModeRemoteDesc": "连接外部 Hope Agent 服务器",
+    "serverModeRemoteDesc": "连接外部 TPA CoWork 服务器",
     "serverNotStarted": "未启动",
     "serverRemoteUrl": "远程服务器地址",
     "serverRemoteUrlPlaceholder": "http://192.168.1.100:8420",
@@ -6528,7 +6528,7 @@
         },
         "autoCuratorEnabled": {
           "label": "定期运行草稿合并扫描",
-          "help": "开启后，Hope Agent 会周期性扫描草稿技能里的主题重叠，并把合并建议显示在这里。"
+          "help": "开启后，TPA CoWork 会周期性扫描草稿技能里的主题重叠，并把合并建议显示在这里。"
         },
         "autoCuratorIntervalDays": {
           "label": "合并扫描间隔",
@@ -6537,7 +6537,7 @@
       }
     },
     "skillsEvolutionHero": {
-      "body": "Hope Agent 不会停在原地。每聊一阵，会回看对话、把你重复做过的事提炼成可复用的技能 —— 下次再遇到，直接就会了。",
+      "body": "TPA CoWork 不会停在原地。每聊一阵，会回看对话、把你重复做过的事提炼成可复用的技能 —— 下次再遇到，直接就会了。",
       "note": "默认开启 · 越用越懂你。关闭后不影响日常对话，只是不再自动沉淀新技能。",
       "statusOff": "已暂停",
       "statusOn": "进化中",
@@ -6666,7 +6666,7 @@
     "subagentTitle": "子 Agent 调用",
     "system": "系统",
     "systemAutostart": "开机自动启动",
-    "systemAutostartDesc": "登录系统时自动启动 Hope Agent",
+    "systemAutostartDesc": "登录系统时自动启动 TPA CoWork",
     "systemPreventSleep": "阻止电脑休眠",
     "systemPreventSleepDesc": "保持电脑唤醒，避免长时间任务、下载与后台活动被系统休眠打断；屏幕仍可正常熄灭。",
     "tabAppearance": "外观与语言",
@@ -6876,7 +6876,7 @@
     "toolCoreMemoryDesc": "读取和维护全局、Agent 与项目范围内有界且始终加载的核心记忆。",
     "toolProjectMemoryDesc": "搜索和维护当前项目本地的 MEMORY.md 索引及主题文件。",
     "toolMacControlDesc": "检查并控制本机 macOS 应用、窗口、菜单、界面元素、截图、剪贴板和对话框。",
-    "toolIssueReportDesc": "搜索、起草，或经用户确认后创建 Hope Agent GitHub Issue。",
+    "toolIssueReportDesc": "搜索、起草，或经用户确认后创建 TPA CoWork GitHub Issue。",
     "toolArtifactDesc": "创建、查看、更新、恢复并验证持久化且带版本的本地产物。",
     "toolDesignDesc": "创建和管理设计系统、设计项目及带版本的视觉产物。",
     "toolSubmitPlanDesc": "提交最终书面计划，供用户审阅和批准。",
@@ -6896,7 +6896,7 @@
     "toolLoopRecordProgressDesc": "为当前循环记录轻量的进度、状态或交接说明。",
     "toolLoopWatchDesc": "添加或重新启用可及时唤醒循环的持久事件监听。",
     "toolLoopUnwatchDesc": "停用循环事件监听，但不停止循环或其兜底计划。",
-    "toolAppUpdateDesc": "在桌面、服务器和 CLI 模式下检查、安装、查看或回滚 Hope Agent 更新。",
+    "toolAppUpdateDesc": "在桌面、服务器和 CLI 模式下检查、安装、查看或回滚 TPA CoWork 更新。",
     "toolJobStatusDesc": "查看、列出、短暂等待、取消后台工具任务或获取其结果。",
     "toolScheduleWakeupDesc": "安排一次性唤醒，在延迟后继续当前会话。",
     "toolRuntimeCancelDesc": "取消正在运行的异步任务、子 Agent、进程或定时任务。",
@@ -7189,8 +7189,8 @@
     "memoryExternalPolicyBidirectional": "双向同步",
     "memoryExternalPolicyOffDesc": "此服务商已禁用。",
     "memoryExternalPolicyManualDesc": "只在你明确启动时同步。",
-    "memoryExternalPolicyPullOnlyDesc": "只把外部记忆读入 Hope Agent 的待审核队列。",
-    "memoryExternalPolicyPushOnlyDesc": "只把选定的 Hope Agent 记忆发送出去。",
+    "memoryExternalPolicyPullOnlyDesc": "只把外部记忆读入 TPA CoWork 的待审核队列。",
+    "memoryExternalPolicyPushOnlyDesc": "只把选定的 TPA CoWork 记忆发送出去。",
     "memoryExternalPolicyBidirectionalDesc": "在明确配置后进行双向对账同步。",
     "memoryExternalProvidersOverviewOff": "外部提供方同步已关闭；不会通过提供方发送任何记忆数据。",
     "memoryExternalProvidersOverviewNeedsSetup": "{{count}} 个提供方需要配置端点；本地记忆仍可正常使用。",
@@ -7653,11 +7653,11 @@
       "safetyProfileConflicts": "画像作用域冲突默认跳过，除非用户明确开启替换。"
     },
     "memoryBackupPreviewIssues": {
-      "invalidArchive": "备份包不是有效的 Hope Agent 记忆归档",
+      "invalidArchive": "备份包不是有效的 TPA CoWork 记忆归档",
       "invalidJson": "备份文件不是有效 JSON",
       "encryptedPassphraseRequired": "此备份已加密；请输入口令后再预览或恢复。",
       "encryptedDecryptFailed": "加密备份无法解密",
-      "encryptedPlaintextInvalid": "加密备份已解密，但解密后的 bundle 不是有效的 Hope Agent 记忆备份",
+      "encryptedPlaintextInvalid": "加密备份已解密，但解密后的 bundle 不是有效的 TPA CoWork 记忆备份",
       "unsupportedSchema": "不支持的记忆备份 schema",
       "invalidBundleShape": "已识别备份 schema，但 bundle 内容不完整",
       "sourceBundlePartial": "源备份导出时带有警告；恢复前请检查 manifest.warnings。",
@@ -7706,7 +7706,7 @@
     "memoryBackupRestorePlanRows": {
       "invalid": {
         "label": "备份文件不兼容",
-        "detail": "请先用兼容的 Hope Agent 记忆备份重新预览，再执行恢复。"
+        "detail": "请先用兼容的 TPA CoWork 记忆备份重新预览，再执行恢复。"
       },
       "legacy-import": {
         "label": "缺失的普通记忆",
@@ -7916,7 +7916,7 @@
     "memoryExternalProviderKind": "提供方",
     "memoryExternalProviderPolicy": "同步策略",
     "memoryExternalProviderEnabled": "启用提供方",
-    "memoryExternalProviderEndpointConfigured": "端点在 Hope Agent 外部配置",
+    "memoryExternalProviderEndpointConfigured": "端点在 TPA CoWork 外部配置",
     "memoryExternalProviderAdd": "添加提供方",
     "memoryExternalProvidersNoActive": "已启用，但没有活跃提供方",
     "memoryBackupPassphraseStrong": "强",
@@ -7934,7 +7934,7 @@
     "memoryBackupEncryptedPassphraseConfirm": "确认密码",
     "memoryBackupEncryptedUnlock": "解锁备份",
     "memoryBackupPreviewDesc": "恢复前先检查此备份包含的内容。",
-    "memoryBackupPreviewInvalidDesc": "此文件不是兼容的 Hope Agent 记忆备份。",
+    "memoryBackupPreviewInvalidDesc": "此文件不是兼容的 TPA CoWork 记忆备份。",
     "memoryBackupPreviewMemories": "记忆",
     "memoryBackupPreviewNew": "新增候选",
     "memoryBackupPreviewClaims": "结构化结论",
@@ -8775,7 +8775,7 @@
     "loop_record_progress": "记录循环进度",
     "loop_watch": "监听循环事件",
     "loop_unwatch": "移除循环监听",
-    "app_update": "更新 Hope Agent",
+    "app_update": "更新 TPA CoWork",
     "job_status": "后台任务状态",
     "schedule_wakeup": "安排唤醒",
     "runtime_cancel": "取消运行中任务",
@@ -8930,30 +8930,30 @@
     },
     "appUpdate": {
       "rollback": {
-        "context": "Hope Agent 回滚：从 ~/.hope-agent/updater/backup/ 恢复上一个二进制文件并重启服务。",
-        "text": "要回滚到上一个已安装的 Hope Agent 二进制文件吗？替换完成后服务会立即重启。",
-        "header": "Hope Agent 回滚",
+        "context": "TPA CoWork 回滚：从 ~/.hope-agent/updater/backup/ 恢复上一个二进制文件并重启服务。",
+        "text": "要回滚到上一个已安装的 TPA CoWork 二进制文件吗？替换完成后服务会立即重启。",
+        "header": "TPA CoWork 回滚",
         "confirm": "立即回滚",
         "cancel": "取消"
       },
       "install": {
-        "context": "Hope Agent 自更新确认。安装来源：{{installSource}}。推荐路径：{{path}}。",
-        "header": "Hope Agent {{from}} → {{to}}",
+        "context": "TPA CoWork 自更新确认。安装来源：{{installSource}}。推荐路径：{{path}}。",
+        "header": "TPA CoWork {{from}} → {{to}}",
         "text": {
-          "packageManager": "要升级 Hope Agent {{from}} → {{to}} 吗？\n路径：包管理器（{{installSource}}）{{notes}}\n\n用户级服务会在二进制替换后立即重启（通常停机 1-2 秒）。正在进行的对话、定时任务或 IM 流都会被取消，请先暂停重要工作。",
-          "selfContained": "要升级 Hope Agent {{from}} → {{to}} 吗？\n路径：下载独立二进制、校验 Minisign 签名、原子替换。{{notes}}\n\n用户级服务会在二进制替换后立即重启（通常停机 1-2 秒）。正在进行的对话、定时任务或 IM 流都会被取消，请先暂停重要工作。",
-          "tauri": "要升级 Hope Agent {{from}} → {{to}} 吗？\n路径：Tauri 桌面更新器（已签名安装包）。{{notes}}\n\n用户级服务会在二进制替换后立即重启（通常停机 1-2 秒）。正在进行的对话、定时任务或 IM 流都会被取消，请先暂停重要工作。",
-          "manualPrompt": "要升级 Hope Agent {{from}} → {{to}} 吗？\n路径：手动下载（没有匹配的自动升级路径）。{{notes}}\n\n用户级服务会在二进制替换后立即重启（通常停机 1-2 秒）。正在进行的对话、定时任务或 IM 流都会被取消，请先暂停重要工作。"
+          "packageManager": "要升级 TPA CoWork {{from}} → {{to}} 吗？\n路径：包管理器（{{installSource}}）{{notes}}\n\n用户级服务会在二进制替换后立即重启（通常停机 1-2 秒）。正在进行的对话、定时任务或 IM 流都会被取消，请先暂停重要工作。",
+          "selfContained": "要升级 TPA CoWork {{from}} → {{to}} 吗？\n路径：下载独立二进制、校验 Minisign 签名、原子替换。{{notes}}\n\n用户级服务会在二进制替换后立即重启（通常停机 1-2 秒）。正在进行的对话、定时任务或 IM 流都会被取消，请先暂停重要工作。",
+          "tauri": "要升级 TPA CoWork {{from}} → {{to}} 吗？\n路径：Tauri 桌面更新器（已签名安装包）。{{notes}}\n\n用户级服务会在二进制替换后立即重启（通常停机 1-2 秒）。正在进行的对话、定时任务或 IM 流都会被取消，请先暂停重要工作。",
+          "manualPrompt": "要升级 TPA CoWork {{from}} → {{to}} 吗？\n路径：手动下载（没有匹配的自动升级路径）。{{notes}}\n\n用户级服务会在二进制替换后立即重启（通常停机 1-2 秒）。正在进行的对话、定时任务或 IM 流都会被取消，请先暂停重要工作。"
         },
         "confirm": "立即升级",
         "cancel": "暂不升级"
       },
       "manual": {
-        "dockerContext": "Hope Agent 正在 Docker 容器中运行。自更新无法替换镜像，请拉取新 tag 并重新创建容器。",
-        "dockerText": "Hope Agent 正在 Docker 容器中运行（{{from}} → {{to}}）。\n\n请拉取新镜像并重新创建容器：\n\n    docker pull ghcr.io/shiwenwen/hope-agent:v{{to}}\n    docker compose up -d\n\n若 compose 文件使用 `latest`，也可以固定到 `latest` 标签。",
+        "dockerContext": "TPA CoWork 正在 Docker 容器中运行。自更新无法替换镜像，请拉取新 tag 并重新创建容器。",
+        "dockerText": "TPA CoWork 正在 Docker 容器中运行（{{from}} → {{to}}）。\n\n请拉取新镜像并重新创建容器：\n\n    docker pull ghcr.io/shiwenwen/hope-agent:v{{to}}\n    docker compose up -d\n\n若 compose 文件使用 `latest`，也可以固定到 `latest` 标签。",
         "dockerHeader": "需要 Docker 升级",
-        "context": "Hope Agent 无法为当前安装选择自动升级路径。请选择下一步。",
-        "text": "Hope Agent {{from}} → {{to}} 没有可用的自动升级路径。检测到的安装来源：{{installSource}}。请选择处理方式：",
+        "context": "TPA CoWork 无法为当前安装选择自动升级路径。请选择下一步。",
+        "text": "TPA CoWork {{from}} → {{to}} 没有可用的自动升级路径。检测到的安装来源：{{installSource}}。请选择处理方式：",
         "header": "需要手动升级",
         "openReleases": "在浏览器中打开发布页面",
         "openReleasesManual": "在浏览器中打开发布页面（手动下载）",
@@ -11767,15 +11767,15 @@
       "unbound": "已解除关联",
       "err": "关联失败",
       "sourceDir": "来源：本机目录",
-      "sourceHaProject": "来源：Hope Agent 项目",
+      "sourceHaProject": "来源：TPA CoWork 项目",
       "stale": "已失效（目录或项目不存在）",
       "unbind": "解除关联",
       "modeDir": "本机目录",
-      "modeHaProject": "Hope Agent 项目",
+      "modeHaProject": "TPA CoWork 项目",
       "dir": "仓库目录",
       "dirPlaceholder": "选择或输入代码仓库根目录",
       "choose": "选择…",
-      "haProject": "Hope Agent 项目",
+      "haProject": "TPA CoWork 项目",
       "haProjectPlaceholder": "选择项目…",
       "haProjectHint": "目录取自该项目的工作目录，项目工作目录变更会自动跟随。",
       "bind": "关联"
@@ -12164,14 +12164,14 @@
   },
   "configRecovery": {
     "title": "需要恢复配置",
-    "subtitle": "Hope Agent 无法读取现有 config.json。为保护服务商、MCP 服务器和初始设置状态，配置写入已暂停。",
+    "subtitle": "TPA CoWork 无法读取现有 config.json。为保护服务商、MCP 服务器和初始设置状态，配置写入已暂停。",
     "path": "配置文件",
     "error": "读取错误",
     "details": "保护说明",
     "retry": "重新读取",
     "restart": "重启应用",
     "backupsTitle": "恢复配置快照",
-    "backupsDesc": "恢复后，Hope Agent 将重新读取配置并继续启动。无法读取的文件会保留在原位置，并在可能时复制为 .corrupt-<timestamp> 副本。",
+    "backupsDesc": "恢复后，TPA CoWork 将重新读取配置并继续启动。无法读取的文件会保留在原位置，并在可能时复制为 .corrupt-<timestamp> 副本。",
     "loading": "正在加载快照…",
     "empty": "未找到配置快照",
     "emptyHint": "请手动修复 config.json，或从 backups/autosave、config.json.corrupt-* 中恢复可用版本后重试。",
@@ -12179,7 +12179,7 @@
     "source": "来源",
     "retrying": "正在读取",
     "restoring": "正在恢复",
-    "restartFailed": "无法自动重启。请手动关闭并重新打开 Hope Agent。",
+    "restartFailed": "无法自动重启。请手动关闭并重新打开 TPA CoWork。",
     "categoryValues": {
       "providers": "服务商配置",
       "proxy": "代理设置",
@@ -12200,6 +12200,85 @@
     "kindValues": {
       "config": "配置",
       "user": "用户设置"
+    }
+  },
+  "cloud": {
+    "title": "云端账号",
+    "notSignedIn": "未登录云端账号",
+    "login": "登录",
+    "logout": "退出登录",
+    "loginTitle": "登录 TPA CoWork 云端账号",
+    "loginDescription": "输入 TPA CoWork 云端账号以刷新 SkillHub 与审核状态。",
+    "serverUrl": "云端服务地址",
+    "username": "用户名",
+    "password": "密码",
+    "loggingIn": "登录中...",
+    "signedInAs": "已登录：{{username}}"
+  },
+  "skillhub": {
+    "title": "SkillHub",
+    "subtitle": "浏览、搜索并安装公开技能。",
+    "searchPlaceholder": "搜索技能",
+    "search": "搜索",
+    "refresh": "刷新",
+    "empty": "暂无公开技能",
+    "emptyHint": "搜索 SkillHub 或刷新列表。",
+    "download": "下载",
+    "downloaded": "技能已下载。请到我的 Skill 查看。",
+    "downloadedOverwrite": "已覆盖本地技能。请到我的 Skill 查看。",
+    "overwriteTitle": "覆盖本地 Skill？",
+    "overwriteDescription": "本地已存在名为 {{name}} 的 Skill。继续下载会替换该 Skill 的文件。",
+    "overwriteConfirm": "覆盖",
+    "freshness": {
+      "localNewer": "本地版本看起来比服务端更新。",
+      "remoteNewer": "服务端版本看起来比本地更新。",
+      "same": "本地与服务端版本看起来相同。",
+      "unknown": "无法比较本地与服务端哪个更新。",
+      "versions": "本地：{{local}} · 服务端：{{remote}}",
+      "na": "未知"
+    }
+  },
+  "mySkills": {
+    "title": "我的 Skill",
+    "subtitle": "本地用户技能，云端审核结果仅作次级标记。",
+    "count": "共 {{count}} 个本地技能",
+    "empty": "未找到本地用户技能。",
+    "emptyHint": "请先安装或创建本地 skill。",
+    "noMatches": "没有符合当前筛选的技能。",
+    "noDescription": "暂无描述",
+    "searchPlaceholder": "搜索本地技能",
+    "refreshLocal": "刷新状态",
+    "refreshStatus": "刷新状态",
+    "retry": "重试",
+    "openDirectory": "打开目录",
+    "refreshCloud": "同步云端状态",
+    "refreshCloudPrompt": "请先登录 Hope 云端账号以同步云端状态。",
+    "submitReview": "提交审核",
+    "submitSuccess": "已提交审核。",
+    "loginToSubmit": "登录后提交",
+    "loginToSubmitPrompt": "请先登录 Hope 云端账号以提交审核。",
+    "filter": {
+      "all": "全部",
+      "enabled": "已启用",
+      "disabled": "已禁用",
+      "needsConfig": "需配置",
+      "draft": "草稿",
+      "local": "本地",
+      "pendingReview": "待审核",
+      "published": "已发布"
+    },
+    "localState": {
+      "enabled": "已启用",
+      "disabled": "已禁用",
+      "needsConfig": "需配置",
+      "draft": "草稿"
+    },
+    "state": {
+      "published": "已发布",
+      "pendingReview": "待审核",
+      "notPublished": "本地",
+      "unknown": "未知",
+      "cloudFailed": "云端失败"
     }
   }
 }

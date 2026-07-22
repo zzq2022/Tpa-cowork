@@ -42,6 +42,8 @@ import {
   CheckCheck,
   ScrollText,
   PackageOpen,
+  Globe,
+  FolderDown,
 } from "lucide-react"
 import { useTheme } from "@/hooks/useTheme"
 import { openHelpWindow } from "@/lib/manual/openHelpWindow"
@@ -68,6 +70,8 @@ interface IconSidebarProps {
     | "knowledge"
     | "design"
     | "artifacts"
+    | "skillhub"
+    | "mySkills"
   onOpenSettings: (section?: SettingsSection) => void
   onOpenChat: () => void
   onOpenAgents: () => void
@@ -82,6 +86,8 @@ interface IconSidebarProps {
   onOpenKnowledge: () => void
   onOpenDesign: () => void
   onOpenArtifacts: () => void
+  onOpenSkillHub?: () => void
+  onOpenMySkills?: () => void
   userAvatar?: string | null
   totalUnreadCount?: number
   onMarkAllRead?: () => void
@@ -103,6 +109,8 @@ export default function IconSidebar({
   onOpenKnowledge,
   onOpenDesign,
   onOpenArtifacts,
+  onOpenSkillHub,
+  onOpenMySkills,
   userAvatar,
   totalUnreadCount,
   onMarkAllRead,
@@ -386,6 +394,48 @@ export default function IconSidebar({
               )}
             </div>
           </div>
+
+          {/* SkillHub entry */}
+          {onOpenSkillHub && (
+            <div className="w-full flex justify-center mt-1">
+              <IconTip label={t("skillhub.title", "SkillHub")} side="right">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={cn(
+                    "rounded-xl h-8 w-8",
+                    view === "skillhub"
+                      ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
+                      : "text-muted-foreground hover:text-foreground",
+                  )}
+                  onClick={onOpenSkillHub}
+                >
+                  <Globe className="h-4 w-4" />
+                </Button>
+              </IconTip>
+            </div>
+          )}
+
+          {/* My Skills entry */}
+          {onOpenMySkills && (
+            <div className="w-full flex justify-center mt-1">
+              <IconTip label={t("mySkills.title", "My Skills")} side="right">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={cn(
+                    "rounded-xl h-8 w-8",
+                    view === "mySkills"
+                      ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
+                      : "text-muted-foreground hover:text-foreground",
+                  )}
+                  onClick={onOpenMySkills}
+                >
+                  <FolderDown className="h-4 w-4" />
+                </Button>
+              </IconTip>
+            </div>
+          )}
 
           {/* Memory entry */}
           <div className="w-full flex justify-center mt-1">

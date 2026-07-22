@@ -43,10 +43,10 @@
     "updateHistoryLatest": "En yeni",
     "updateHistoryNoNotes": "Bu sürüm için not yok.",
     "updateHistoryUndated": "Sürüm notları",
-    "updateInstalled": "Güncelleme yüklendi. Hope Agent yeniden başlatılıyor...",
+    "updateInstalled": "Güncelleme yüklendi. TPA CoWork yeniden başlatılıyor...",
     "updateInstalling": "v{{version}} sürümü yükleniyor...",
-    "updateRestartManually": "Güncelleme yüklendi ancak otomatik yeniden başlatma başarısız oldu. Lütfen Hope Agent'ı manuel olarak kapatıp yeniden açın.",
-    "updateReady": "Yeni bir masaüstü sürümünü GitHub Releases'ten kontrol edebilir veya Hope Agent'ın güncellemeyi senin için kurmasına izin verebilirsin.",
+    "updateRestartManually": "Güncelleme yüklendi ancak otomatik yeniden başlatma başarısız oldu. Lütfen TPA CoWork'ı manuel olarak kapatıp yeniden açın.",
+    "updateReady": "Yeni bir masaüstü sürümünü GitHub Releases'ten kontrol edebilir veya TPA CoWork'ın güncellemeyi senin için kurmasına izin verebilirsin.",
     "updateUpToDate": "v{{version}} sürümünde güncelsin.",
     "updateAndRestart": "Güncelle ve yeniden başlat",
     "updateOnly": "Yalnızca güncelle",
@@ -144,7 +144,7 @@
       },
       "mac_control_action": {
         "title": "Mac Control işlemi",
-        "body": "Bu macOS kontrol çağrısı masaüstü odağını/durumunu değiştirir. Hope Agent başka bir uygulamayı etkinleştirmeden önce onaylayın."
+        "body": "Bu macOS kontrol çağrısı masaüstü odağını/durumunu değiştirir. TPA CoWork başka bir uygulamayı etkinleştirmeden önce onaylayın."
       },
       "mac_control_dangerous_action": {
         "title": "Tehlikeli Mac Control eylemi",
@@ -163,7 +163,7 @@
   "auth": {
     "tokenLabel": "Bearer Token",
     "tokenPlaceholder": "Tokeninizi yapıştırın",
-    "tokenRequiredBody": "Bu Hope Agent sunucusu Bearer Token ile korunuyor. Yöneticinizden aldığınız tokeni yapıştırarak devam edin.",
+    "tokenRequiredBody": "Bu TPA CoWork sunucusu Bearer Token ile korunuyor. Yöneticinizden aldığınız tokeni yapıştırarak devam edin.",
     "tokenRequiredTitle": "Sunucu kimlik doğrulaması gerekli",
     "tokenSave": "Kaydet ve yeniden yükle"
   },
@@ -567,7 +567,7 @@
         "manualEntry": "Elle gir",
         "chooseRecent": "Son sohbet seç",
         "loadingConversations": "Son sohbetler yükleniyor…",
-        "noRecentConversations": "Henüz kullanılabilir son sohbet yok. Hedef IM sohbetinden Hope Agent'a mesaj gönderin veya elle girin.",
+        "noRecentConversations": "Henüz kullanılabilir son sohbet yok. Hedef IM sohbetinden TPA CoWork'a mesaj gönderin veya elle girin.",
         "refreshConversations": "Son sohbetleri yenile",
         "chatId": "Sohbet kimliği",
         "chatIdPlaceholder": "örn. 123456789 veya @username",
@@ -950,7 +950,7 @@
     "reasoningDisabledHint": "Bu model için muhakeme etkinleştirilmemiştir. Akıl yürütme derinliğini ayarlamak için, Ayarlar → Model Sağlayıcılar altında modeli düzenleyin ve \"Akıl Yürütme\"yi açın.",
     "browserExtensionNudge": {
       "installTitle": "Yapay zekânın gerçek Chrome'unuzu yönetmesine izin verin",
-      "installBody": "Oturum açtığınız Chrome'u kullanmak için Hope Agent uzantısını yükleyin. Şimdilik yalıtılmış bir tarayıcıda çalışıyor.",
+      "installBody": "Oturum açtığınız Chrome'u kullanmak için TPA CoWork uzantısını yükleyin. Şimdilik yalıtılmış bir tarayıcıda çalışıyor.",
       "reloadTitle": "Chrome uzantısını yeniden yükleyin",
       "reloadBody": "Yüklü uzantı ana bilgisayarla eşleşmiyor. Gerçek Chrome'unuzun denetimini geri kazanmak için yeniden yükleyin.",
       "openSettings": "Ayarları aç",
@@ -2283,7 +2283,7 @@
     },
     "system": {
       "cores": "Çekirdek",
-      "cpuDesc": "Hope Agent %{{percent}} CPU kullanıyor (toplam {{cores}} çekirdek)",
+      "cpuDesc": "TPA CoWork %{{percent}} CPU kullanıyor (toplam {{cores}} çekirdek)",
       "cpuUsage": "CPU kullanımı",
       "diskIO": "Disk G/Ç",
       "diskRead": "Okuma",
@@ -3188,12 +3188,12 @@
     "agentDesc": "Agent başına bildirim geçersiz kılmaları. Varsayılan olarak ayarlandığında genel ayarı kullanır.",
     "agentSection": "Agent bildirimleri",
     "approvalRequired": "Araç onayı gerekiyor",
-    "approvalRequiredFallback": "Hope Agent bir araç çağrısını onaylamanızı bekliyor",
+    "approvalRequiredFallback": "TPA CoWork bir araç çağrısını onaylamanızı bekliyor",
     "approvalTimedOut": "Araç onayı zaman aşımına uğradı",
     "approvalTimedOut_denied": "Bekleyen araç çağrısı {{seconds}} sn sonra reddedildi.",
     "approvalTimedOut_proceeded": "Bekleyen araç çağrısı {{seconds}} sn sonra devam etti.",
     "askUserRequired": "Agent yanıtınızı bekliyor",
-    "askUserRequiredFallback": "Hope Agent'in size bir sorusu var",
+    "askUserRequiredFallback": "TPA CoWork'in size bir sorusu var",
     "askUserTimedOut": "Soru zaman aşımına uğradı",
     "askUserTimedOutDefaults": "{{seconds}} sn sonra varsayılan yanıtlar kullanıldı.",
     "askUserTimedOutNoDefaults": "{{seconds}} sn içinde yanıt alınmadı.",
@@ -3202,7 +3202,7 @@
     "channelAuthFailedFallback": "Bir IM kanalı hesabının kimlik bilgileri reddedildi — yeniden kimlik doğrulayın",
     "chatCompleted": "Sohbet tamamlandı",
     "chatCompletedGenericBody": "Sohbet tamamlandı. En son yanıtı görmek için uygulamayı açın.",
-    "chatCompletedGenericTitle": "Hope Agent",
+    "chatCompletedGenericTitle": "TPA CoWork",
     "chatError": "Sohbet hatası",
     "cronEmpty": "Zamanlanmış görev tamamlandı (çıktı yok)",
     "cronError": "Zamanlanmış görev başarısız",
@@ -3253,7 +3253,7 @@
         "whatsapp": "WhatsApp"
       },
       "macOnly": "yalnızca macOS",
-      "subtitle": "Telegram, Slack, WeChat ve daha fazlasından Hope Agent ile sohbet edin. Tam konfigürasyona geçmek için herhangi birini seçin.",
+      "subtitle": "Telegram, Slack, WeChat ve daha fazlasından TPA CoWork ile sohbet edin. Tam konfigürasyona geçmek için herhangi birini seçin.",
       "title": "Bir sohbet kanalı bağlayın (isteğe bağlı)"
     },
     "exit": {
@@ -3310,11 +3310,11 @@
       "warningsTitle": "Uyarı"
     },
     "mode": {
-      "localDesc": "Hope Agent'ı bu cihazda çalıştırın. Sonra model sağlayıcısını seçersiniz.",
+      "localDesc": "TPA CoWork'ı bu cihazda çalıştırın. Sonra model sağlayıcısını seçersiniz.",
       "localTitle": "Yerel kurulum",
-      "remoteDesc": "Başka bir yerde çalışan bir Hope Agent sunucunuz mu var? Adresini verip yerel kurulumu atlayın.",
+      "remoteDesc": "Başka bir yerde çalışan bir TPA CoWork sunucunuz mu var? Adresini verip yerel kurulumu atlayın.",
       "remoteTitle": "Uzak sunucuya bağlan",
-      "subtitle": "Hope Agent'ı bu cihazda yerel olarak çalıştırın ya da mevcut bir Hope Agent sunucusuna bağlanın.",
+      "subtitle": "TPA CoWork'ı bu cihazda yerel olarak çalıştırın ya da mevcut bir TPA CoWork sunucusuna bağlanın.",
       "title": "Çalıştırma biçimini seçin"
     },
     "nav": {
@@ -3393,7 +3393,7 @@
         "desc": "Ayarlar → Güvenlik'ten zaman aşımını değiştirebilir veya belirli bir mesajlaşma kanalı (Telegram / Slack / Discord vb.) için otomatik onayı açabilirsiniz.",
         "title": "Daha sonra ayarlanabilir"
       },
-      "subtitle": "Varsayılan olarak Hope Agent, kabuk komutlarını çalıştırmadan veya dosyaları düzenlemeden önce sorar.",
+      "subtitle": "Varsayılan olarak TPA CoWork, kabuk komutlarını çalıştırmadan veya dosyaları düzenlemeden önce sorar.",
       "title": "Araç onayları kontrolün sizde olmasını sağlar",
       "toggle": "Onay gerektir",
       "toggleHint": "Bunu kapatmak, araçların sorulmadan çalışması anlamına gelir; önerilmez."
@@ -3411,7 +3411,7 @@
       "previewLabel": "Web GUI URL'si",
       "restartHint": "Bağlantı adresi değişiklikleri bir sonraki yeniden başlatmanın ardından etkili olur.",
       "subtitle": "Yerleşik HTTP sunucusu, aynı uygulamayı herhangi bir tarayıcıda açmanıza olanak tanır.",
-      "title": "Hope Agent'e nasıl erişmek istersiniz?"
+      "title": "TPA CoWork'e nasıl erişmek istersiniz?"
     },
     "skills": {
       "empty": "Yetenek bulunamadı. Devam etmek için Sonraki'ye tıklayın.",
@@ -3452,7 +3452,7 @@
       "languageHint": "Şu anda gösterilen: {{current}}",
       "languageLabel": "Arayüz dili",
       "subtitle": "Kullandıkça seni daha iyi tanıyan bir AI asistanı — masaüstü, bulut ve IM; her an hazır.\nAşağıda kısa bir kurulum var — model seçimi dışındaki tüm adımlar atlanabilir.",
-      "title": "Hope Agent'e hoş geldiniz"
+      "title": "TPA CoWork'e hoş geldiniz"
     }
   },
   "plans": {
@@ -3675,7 +3675,7 @@
     "projectLogo": "Logo",
     "projectLogoHint": "İsteğe bağlı. Görüntüler otomatik olarak 256×256 boyutuna getirilir.",
     "projectName": "Proje adı",
-    "projectNamePlaceholder": "örn. Hope Agent Geliştirme",
+    "projectNamePlaceholder": "örn. TPA CoWork Geliştirme",
     "projects": "Projeler",
     "removeFromProject": "Projeden kaldır",
     "removeLogo": "Kaldır",
@@ -4403,7 +4403,7 @@
       "deleteConfirmDesc": "Bu profilin tüm çerezleri, oturum açmaları ve önbelleğe alınan verileri kaldırılacak. Geri alınamaz.",
       "deleteConfirmTitle": "'{{name}}' profili silinsin mi?",
       "deleteDisabledActive": "Profilini silmeden önce tarayıcıyı durdurun",
-      "desc": "Hope Agent, sizin için özel bir Chrome örneği başlatıp yönetebilir. Girişleri (Google, GitHub, iş araçları…) ayrı tutmak için farklı profiller oluşturun — agent ve siz aynı oturumu paylaşırsınız, böylece giriş yaptığınız her şeyde agent da çalışabilir.",
+      "desc": "TPA CoWork, sizin için özel bir Chrome örneği başlatıp yönetebilir. Girişleri (Google, GitHub, iş araçları…) ayrı tutmak için farklı profiller oluşturun — agent ve siz aynı oturumu paylaşırsınız, böylece giriş yaptığınız her şeyde agent da çalışabilir.",
       "disconnect": "Durdur",
       "doctorChromeFound": "{{url}} adresinde Chrome bulundu",
       "doctorChromeMissing": "Standart hata ayıklama portunda Chrome algılanmadı",
@@ -4430,7 +4430,7 @@
       "minutesAgo": "{{count}} dk önce",
       "modeConnect": "Harici Chrome'a bağlı",
       "modeLabel": "Mod",
-      "modeLaunch": "Hope Agent tarafından başlatıldı",
+      "modeLaunch": "TPA CoWork tarafından başlatıldı",
       "modeStandalone": "Bağımsız tarayıcı",
       "modeStandaloneHint": "hope-agent yalıtılmış bir Chrome örneğini yönetir. Otomasyon için önerilir.",
       "modeUserChrome": "Kullanıcı Chrome'unu devral",
@@ -4483,10 +4483,10 @@
         "kindBrokerUnavailable": "Aracı çalışmıyor",
         "kindVersionMismatch": "Protokol uyuşmazlığı",
         "kindExtensionMissing": "Bağlı değil",
-        "statusReady": "Hope Agent Chrome uzantısı bağlandı.",
+        "statusReady": "TPA CoWork Chrome uzantısı bağlandı.",
         "statusHostMissing": "Chrome yerel mesajlaşma ana bilgisayarı kurulu değil.",
         "statusBrokerUnavailable": "Chrome uzantısı aracısı çalışmıyor.",
-        "statusExtensionMissing": "Hope Agent Chrome uzantısı bağlı değil.",
+        "statusExtensionMissing": "TPA CoWork Chrome uzantısı bağlı değil.",
         "statusVersionMismatch": "Uzantının protokol sürümü ana bilgisayarla eşleşmiyor. Güncellemek için uzantıyı yeniden yükleyin.",
         "versionLine": "Uzantı {{version}} · protokol {{protocol}}",
         "unknown": "bilinmiyor",
@@ -4536,7 +4536,7 @@
         "managed": "Yönetilen Chrome",
         "attach": "Chrome'a bağlan",
         "extensionDesc": "Oturum açtığınız gerçek Chrome'u uzantı aracılığıyla yönetin; çerezlerinizi ve oturumlarınızı paylaşır. Önerilir.",
-        "managedDesc": "Hope Agent kendi yalıtılmış Chrome örneğini başlatır ve sürdürür. Otomasyon için idealdir.",
+        "managedDesc": "TPA CoWork kendi yalıtılmış Chrome örneğini başlatır ve sürdürür. Otomasyon için idealdir.",
         "attachDesc": "--remote-debugging-port ile kendiniz başlattığınız bir Chrome'a bağlanın."
       },
       "rawCdpConfirm": {
@@ -5194,7 +5194,7 @@
     "issueReportingToken": "GitHub jetonu",
     "issueReportingTokenCleared": "GitHub token temizlendi",
     "issueReportingTokenConfigured": "Bir token yapılandırıldı.",
-    "issueReportingTokenMissing": "Token yapılandırılmadı. Hope Agent kimliği doğrulanmış gh CLI kullanmayı dener.",
+    "issueReportingTokenMissing": "Token yapılandırılmadı. TPA CoWork kimliği doğrulanmış gh CLI kullanmayı dener.",
     "issueReportingTokenPlaceholderClear": "Temizlemek için boş bırakıp kaydedin",
     "issueReportingTokenPlaceholderNew": "Fine-grained PAT",
     "issueReportingTokenSaveFailed": "GitHub token kaydedilemedi",
@@ -5978,7 +5978,7 @@
     "permCheck": "Doğrula",
     "permContacts": "Kişiler",
     "permContactsDesc": "Kişi bilgilerini oku",
-    "permDesc": "Hope Agent'ın bilgisayarınızı kontrol edebilmesi için aşağıdaki sistem izinleri gerekir. Lütfen Sistem Ayarlarında verin.",
+    "permDesc": "TPA CoWork'ın bilgisayarınızı kontrol edebilmesi için aşağıdaki sistem izinleri gerekir. Lütfen Sistem Ayarlarında verin.",
     "permFilesAndFolders": "Dosyalar ve klasörler",
     "permFilesAndFoldersDesc": "Masaüstü, Belgeler, İndirilenler ve diğer kullanıcı dizinlerine eriş",
     "permFullDiskAccess": "Tam disk erişimi",
@@ -6082,7 +6082,7 @@
       },
       "homekit": {
         "label": "HomeKit (ev)",
-        "note": "Hope Agent şu anda HomeKit iş akışlarını kullanmaz.",
+        "note": "TPA CoWork şu anda HomeKit iş akışlarını kullanmaz.",
         "usage": "Ev verilerine yalnızca gelecekte HomeKit iş akışları etkinleştirilirse eriş."
       },
       "input_monitoring": {
@@ -6312,7 +6312,7 @@
     "serverModeEmbedded": "Gömülü",
     "serverModeEmbeddedDesc": "Masaüstü uygulaması localhost'ta bir HTTP sunucusu çalıştırır",
     "serverModeRemote": "Uzak",
-    "serverModeRemoteDesc": "Harici bir Hope Agent sunucusuna bağlan",
+    "serverModeRemoteDesc": "Harici bir TPA CoWork sunucusuna bağlan",
     "serverNotStarted": "Başlatılmadı",
     "serverRemoteUrl": "Uzak sunucu URL",
     "serverRemoteUrlPlaceholder": "http://192.168.1.100:8420",
@@ -6528,7 +6528,7 @@
         },
         "autoCuratorEnabled": {
           "label": "Curatorı zamanlı çalıştır",
-          "help": "Açıkken Hope Agent taslak becerilerdeki örtüşmeleri düzenli olarak tarar ve birleştirme önerilerini burada gösterir."
+          "help": "Açıkken TPA CoWork taslak becerilerdeki örtüşmeleri düzenli olarak tarar ve birleştirme önerilerini burada gösterir."
         },
         "autoCuratorIntervalDays": {
           "label": "Curator aralığı",
@@ -6537,7 +6537,7 @@
       }
     },
     "skillsEvolutionHero": {
-      "body": "Hope Agent yerinde durmaz. Arada sohbetleri gözden geçirir, tekrar ettiğin şeyleri yeniden kullanılabilir yeteneklere dönüştürür — bir dahaki sefere konu zaten öğrenilmiş olur.",
+      "body": "TPA CoWork yerinde durmaz. Arada sohbetleri gözden geçirir, tekrar ettiğin şeyleri yeniden kullanılabilir yeteneklere dönüştürür — bir dahaki sefere konu zaten öğrenilmiş olur.",
       "note": "Varsayılan açık · kullandıkça daha iyi uyum sağlar. Kapatınca günlük sohbet etkilenmez, yalnızca yeni yetenekler kendiliğinden birikmez.",
       "statusOff": "Duraklatıldı",
       "statusOn": "Evrimleşiyor",
@@ -6666,7 +6666,7 @@
     "subagentTitle": "Sub-Agent devri",
     "system": "Sistem",
     "systemAutostart": "Oturum açıldığında başlat",
-    "systemAutostartDesc": "Bilgisayarınızda oturum açtığınızda Hope Agent'ı otomatik olarak başlat",
+    "systemAutostartDesc": "Bilgisayarınızda oturum açtığınızda TPA CoWork'ı otomatik olarak başlat",
     "systemPreventSleep": "Uykuyu engelle",
     "systemPreventSleepDesc": "Uzun süren görevlerin, indirmelerin ve arka plan etkinliğinin sistem uykusuyla kesilmemesi için bilgisayarınızı uyanık tutun. Ekran yine de kapanabilir.",
     "tabAppearance": "Görünüm ve dil",
@@ -6876,7 +6876,7 @@
     "toolCoreMemoryDesc": "Genel, Agent ve Proje kapsamlarındaki sınırlı ve her zaman yüklü çekirdek belleği okur ve yönetir.",
     "toolProjectMemoryDesc": "Geçerli projenin yerel MEMORY.md dizinini ve konu dosyalarını arar ve yönetir.",
     "toolMacControlDesc": "Yerel macOS uygulamalarını, pencereleri, menüleri, arayüz öğelerini, ekran görüntülerini, panoyu ve iletişim kutularını inceler ve denetler.",
-    "toolIssueReportDesc": "Hope Agent GitHub sorunlarını arar, taslak hazırlar veya onaydan sonra oluşturur.",
+    "toolIssueReportDesc": "TPA CoWork GitHub sorunlarını arar, taslak hazırlar veya onaydan sonra oluşturur.",
     "toolArtifactDesc": "Kalıcı ve sürümlü yerel yapıtları oluşturur, inceler, günceller, geri yükler ve doğrular.",
     "toolDesignDesc": "Tasarım sistemlerini, tasarım projelerini ve sürümlü görsel yapıtları oluşturur ve yönetir.",
     "toolSubmitPlanDesc": "Tamamlanmış yazılı planı kullanıcının inceleme ve onayına sunar.",
@@ -6896,7 +6896,7 @@
     "toolLoopRecordProgressDesc": "Etkin döngü için hafif bir ilerleme, durum veya devir notu kaydeder.",
     "toolLoopWatchDesc": "Etkin döngüyü hızla uyandırabilen kalıcı bir olay izlemesi ekler veya yeniden kurar.",
     "toolLoopUnwatchDesc": "Döngüyü ya da yedek planını durdurmadan olay izlemesini devre dışı bırakır.",
-    "toolAppUpdateDesc": "Masaüstü, sunucu ve CLI kiplerinde Hope Agent güncellemelerini denetler, kurar, inceler veya geri alır.",
+    "toolAppUpdateDesc": "Masaüstü, sunucu ve CLI kiplerinde TPA CoWork güncellemelerini denetler, kurar, inceler veya geri alır.",
     "toolJobStatusDesc": "Arka plan araç işlerini inceler, listeler, kısa süre bekler, iptal eder veya sonuçlarını getirir.",
     "toolScheduleWakeupDesc": "Bir gecikmeden sonra bu oturumu sürdüren tek seferlik uyandırma planlar.",
     "toolRuntimeCancelDesc": "Çalışan bir eşzamansız işi, alt Agent'ı, süreci veya zamanlanmış görevi iptal eder.",
@@ -7189,10 +7189,10 @@
     "memoryExternalPolicyBidirectional": "Çift yönlü",
     "memoryExternalPolicyOffDesc": "Bu sağlayıcı için devre dışı.",
     "memoryExternalPolicyManualDesc": "Yalnızca açıkça başlattığınızda senkronize edin.",
-    "memoryExternalPolicyPullOnlyDesc": "Harici belleği yalnızca Hope Agent'in inceleme kuyruğuna okuyun.",
-    "memoryExternalPolicyPushOnlyDesc": "Seçilen Hope Agent belleğini yalnızca dışarıya gönderin.",
+    "memoryExternalPolicyPullOnlyDesc": "Harici belleği yalnızca TPA CoWork'in inceleme kuyruğuna okuyun.",
+    "memoryExternalPolicyPushOnlyDesc": "Seçilen TPA CoWork belleğini yalnızca dışarıya gönderin.",
     "memoryExternalPolicyBidirectionalDesc": "Açık kurulumdan sonra her iki yönü de uzlaştırın.",
-    "memoryExternalProvidersOverviewOff": "Harici sağlayıcı senkronizasyonu kapalı. Sağlayıcılar aracılığıyla Hope Agent'ten hiçbir bellek verisi çıkmaz.",
+    "memoryExternalProvidersOverviewOff": "Harici sağlayıcı senkronizasyonu kapalı. Sağlayıcılar aracılığıyla TPA CoWork'ten hiçbir bellek verisi çıkmaz.",
     "memoryExternalProvidersOverviewNeedsSetup": "{{count}} sağlayıcılarının uç nokta kurulumuna ihtiyacı var. Yerel bellek kullanılabilir durumda kalır.",
     "memoryExternalProvidersOverviewUnsupportedPolicy": "{{count}} sağlayıcı yapılandırmaları desteklenmeyen bir senkronizasyon ilkesi kullanıyor. Senkronizasyonun çalıştırılabilmesi için desteklenen bir politika seçin.",
     "memoryExternalProvidersOverviewAdapterPending": "{{count}} sağlayıcı yapılandırmaları bir çalışma zamanı bağdaştırıcısını bekliyor. Hiçbir senkronizasyon çalışmayacak; yerel bellek kullanılabilir durumda kalır.",
@@ -7205,7 +7205,7 @@
     "memoryExternalProviderLocalFirstAdapterPending": "Uç nokta meta verileri yapılandırıldı ancak bu çalışma zamanı bağdaştırıcısı henüz kullanılamıyor. Hiçbir senkronizasyon çalışmayacak.",
     "memoryExternalProviderLocalFirstUnsupportedPolicy": "Seçilen senkronizasyon ilkesi bu sağlayıcı bağdaştırıcısı tarafından desteklenmiyor. Hiçbir senkronizasyon çalışmayacak.",
     "memoryExternalProviderLocalFirstNeedsSetup": "Senkronizasyon henüz çalıştırılamıyor. Yerel bellek kullanılabilir durumda kalır.",
-    "memoryExternalProviderLocalFirstOff": "Sağlayıcı senkronizasyonu etkin değil; Hope Agent üzerinden bu sağlayıcı üzerinden hiçbir bellek verisi ayrılmıyor.",
+    "memoryExternalProviderLocalFirstOff": "Sağlayıcı senkronizasyonu etkin değil; TPA CoWork üzerinden bu sağlayıcı üzerinden hiçbir bellek verisi ayrılmıyor.",
     "memoryExternalProviderPrivacyOff": "Bu sağlayıcı veya genel senkronizasyon kapalıyken hiçbir sağlayıcı verisi taşınmaz.",
     "memoryExternalProviderPrivacyBlocked": "Kurulum, politika ve bağdaştırıcının hazır olma durumu başarıyla tamamlanana kadar hiçbir sağlayıcı verisi taşınmayacaktır.",
     "memoryExternalProviderPrivacyManual": "Manuel senkronizasyon, seçilen belleği veya alma içeriğini yalnızca açık bir eylemin ardından gönderebilir.",
@@ -7653,11 +7653,11 @@
       "safetyProfileConflicts": "Kullanıcı açıkça değiştirmeyi etkinleştirmediği sürece profil kapsamı çakışmaları atlanır."
     },
     "memoryBackupPreviewIssues": {
-      "invalidArchive": "Yedekleme paketi geçerli bir Hope Agent bellek arşivi değil",
+      "invalidArchive": "Yedekleme paketi geçerli bir TPA CoWork bellek arşivi değil",
       "invalidJson": "Yedekleme dosyası geçerli değil JSON",
       "encryptedPassphraseRequired": "Bu yedekleme şifrelenmiştir; önizlemek veya geri yüklemek için parolasını girin.",
       "encryptedDecryptFailed": "Şifrelenmiş yedeklemenin şifresi çözülemedi",
-      "encryptedPlaintextInvalid": "Şifrelenmiş yedeklemenin şifresi çözüldü, ancak şifresi çözülen paket geçerli bir Hope Agent bellek yedeği değil",
+      "encryptedPlaintextInvalid": "Şifrelenmiş yedeklemenin şifresi çözüldü, ancak şifresi çözülen paket geçerli bir TPA CoWork bellek yedeği değil",
       "unsupportedSchema": "Desteklenmeyen bellek yedekleme şeması",
       "invalidBundleShape": "Yedekleme şeması tanındı ancak paket eksik",
       "sourceBundlePartial": "Kaynak paketi uyarılarla birlikte dışa aktarıldı; geri yüklemeden önce manifest.warnings'i inceleyin.",
@@ -7706,7 +7706,7 @@
     "memoryBackupRestorePlanRows": {
       "invalid": {
         "label": "Yedekleme dosyası uyumlu değil",
-        "detail": "Geri yüklemeden önce önizlemeyi uyumlu bir Hope Agent bellek yedeklemesiyle çalıştırın."
+        "detail": "Geri yüklemeden önce önizlemeyi uyumlu bir TPA CoWork bellek yedeklemesiyle çalıştırın."
       },
       "legacy-import": {
         "label": "Eski anılar eksik",
@@ -7916,7 +7916,7 @@
     "memoryExternalProviderKind": "Sağlayıcı",
     "memoryExternalProviderPolicy": "Senkronizasyon politikası",
     "memoryExternalProviderEnabled": "Sağlayıcı etkinleştirildi",
-    "memoryExternalProviderEndpointConfigured": "Hope Agent dışında yapılandırılmış uç nokta",
+    "memoryExternalProviderEndpointConfigured": "TPA CoWork dışında yapılandırılmış uç nokta",
     "memoryExternalProviderAdd": "Sağlayıcı ekle",
     "memoryExternalProvidersNoActive": "Etkin sağlayıcı yok",
     "memoryBackupPassphraseStrong": "Güçlü",
@@ -7934,7 +7934,7 @@
     "memoryBackupEncryptedPassphraseConfirm": "Parolayı onaylayın",
     "memoryBackupEncryptedUnlock": "Yedeklemenin kilidini açın",
     "memoryBackupPreviewDesc": "Herhangi bir geri yükleme çalışmasına izin verilmeden önce bu yedeklemenin neleri içerdiğini inceleyin.",
-    "memoryBackupPreviewInvalidDesc": "Bu dosya uyumlu bir Hope Agent bellek yedeği değil.",
+    "memoryBackupPreviewInvalidDesc": "Bu dosya uyumlu bir TPA CoWork bellek yedeği değil.",
     "memoryBackupPreviewMemories": "Anılar",
     "memoryBackupPreviewNew": "Yeni adaylar",
     "memoryBackupPreviewClaims": "İddialar",
@@ -8775,7 +8775,7 @@
     "loop_record_progress": "Döngü ilerlemesini kaydet",
     "loop_watch": "Döngü olayını izle",
     "loop_unwatch": "Döngü izlemesini kaldır",
-    "app_update": "Hope Agent'ı güncelle",
+    "app_update": "TPA CoWork'ı güncelle",
     "job_status": "Arka plan işi durumu",
     "schedule_wakeup": "Uyandırma planla",
     "runtime_cancel": "Çalışan görevi iptal et",
@@ -8930,30 +8930,30 @@
     },
     "appUpdate": {
       "rollback": {
-        "context": "Hope Agent geri alma — önceki ikili dosyayı ~/.hope-agent/updater/backup/ adresinden geri yükleyin ve hizmeti yeniden başlatın.",
-        "text": "Önceden yüklenen Hope Agent ikili dosyasına geri dönülsün mü? Hizmet, değiştirme işleminden hemen sonra yeniden başlatılacaktır.",
-        "header": "Hope Agent geri alma",
+        "context": "TPA CoWork geri alma — önceki ikili dosyayı ~/.hope-agent/updater/backup/ adresinden geri yükleyin ve hizmeti yeniden başlatın.",
+        "text": "Önceden yüklenen TPA CoWork ikili dosyasına geri dönülsün mü? Hizmet, değiştirme işleminden hemen sonra yeniden başlatılacaktır.",
+        "header": "TPA CoWork geri alma",
         "confirm": "Şimdi geri dön",
         "cancel": "İptal etmek"
       },
       "install": {
-        "context": "Hope Agent kendi kendine güncelleme onayı. Kaynağı yükleyin: {{installSource}}. Önerilen yol: {{path}}.",
-        "header": "Hope Agent {{from}} → {{to}}",
+        "context": "TPA CoWork kendi kendine güncelleme onayı. Kaynağı yükleyin: {{installSource}}. Önerilen yol: {{path}}.",
+        "header": "TPA CoWork {{from}} → {{to}}",
         "text": {
-          "packageManager": "Hope Agent {{from}} sürümünden {{to}} sürümüne yükseltilsin mi?\nYöntem: paket yöneticisi ({{installSource}}){{notes}}\n\nKullanıcı hizmeti, çalıştırılabilir dosya değiştirildikten hemen sonra yeniden başlatılır (genellikle 1-2 saniye kesinti). Devam eden sohbet turu, zamanlanmış görev veya IM akışı iptal edilir; önce önemli çalışmaları duraklatın.",
-          "selfContained": "Hope Agent {{from}} sürümünden {{to}} sürümüne yükseltilsin mi?\nYöntem: bağımsız çalıştırılabilir dosyayı indir, Minisign imzasını doğrula ve dosyayı atomik olarak değiştir.{{notes}}\n\nKullanıcı hizmeti, çalıştırılabilir dosya değiştirildikten hemen sonra yeniden başlatılır (genellikle 1-2 saniye kesinti). Devam eden sohbet turu, zamanlanmış görev veya IM akışı iptal edilir; önce önemli çalışmaları duraklatın.",
-          "tauri": "Hope Agent {{from}} sürümünden {{to}} sürümüne yükseltilsin mi?\nYöntem: Tauri paket güncelleyicisi (imzalı yükleyici).{{notes}}\n\nKullanıcı hizmeti, çalıştırılabilir dosya değiştirildikten hemen sonra yeniden başlatılır (genellikle 1-2 saniye kesinti). Devam eden sohbet turu, zamanlanmış görev veya IM akışı iptal edilir; önce önemli çalışmaları duraklatın.",
-          "manualPrompt": "Hope Agent {{from}} sürümünden {{to}} sürümüne yükseltilsin mi?\nYöntem: manuel indirme (uygun otomatik yöntem bulunamadı).{{notes}}\n\nKullanıcı hizmeti, çalıştırılabilir dosya değiştirildikten hemen sonra yeniden başlatılır (genellikle 1-2 saniye kesinti). Devam eden sohbet turu, zamanlanmış görev veya IM akışı iptal edilir; önce önemli çalışmaları duraklatın."
+          "packageManager": "TPA CoWork {{from}} sürümünden {{to}} sürümüne yükseltilsin mi?\nYöntem: paket yöneticisi ({{installSource}}){{notes}}\n\nKullanıcı hizmeti, çalıştırılabilir dosya değiştirildikten hemen sonra yeniden başlatılır (genellikle 1-2 saniye kesinti). Devam eden sohbet turu, zamanlanmış görev veya IM akışı iptal edilir; önce önemli çalışmaları duraklatın.",
+          "selfContained": "TPA CoWork {{from}} sürümünden {{to}} sürümüne yükseltilsin mi?\nYöntem: bağımsız çalıştırılabilir dosyayı indir, Minisign imzasını doğrula ve dosyayı atomik olarak değiştir.{{notes}}\n\nKullanıcı hizmeti, çalıştırılabilir dosya değiştirildikten hemen sonra yeniden başlatılır (genellikle 1-2 saniye kesinti). Devam eden sohbet turu, zamanlanmış görev veya IM akışı iptal edilir; önce önemli çalışmaları duraklatın.",
+          "tauri": "TPA CoWork {{from}} sürümünden {{to}} sürümüne yükseltilsin mi?\nYöntem: Tauri paket güncelleyicisi (imzalı yükleyici).{{notes}}\n\nKullanıcı hizmeti, çalıştırılabilir dosya değiştirildikten hemen sonra yeniden başlatılır (genellikle 1-2 saniye kesinti). Devam eden sohbet turu, zamanlanmış görev veya IM akışı iptal edilir; önce önemli çalışmaları duraklatın.",
+          "manualPrompt": "TPA CoWork {{from}} sürümünden {{to}} sürümüne yükseltilsin mi?\nYöntem: manuel indirme (uygun otomatik yöntem bulunamadı).{{notes}}\n\nKullanıcı hizmeti, çalıştırılabilir dosya değiştirildikten hemen sonra yeniden başlatılır (genellikle 1-2 saniye kesinti). Devam eden sohbet turu, zamanlanmış görev veya IM akışı iptal edilir; önce önemli çalışmaları duraklatın."
         },
         "confirm": "Şimdi yükseltin",
         "cancel": "Şimdi değil"
       },
       "manual": {
-        "dockerContext": "Hope Agent bir Docker kapsayıcısında çalışıyor. Kendi kendine güncelleme görüntünün yerini alamaz; yeni bir etiket çekip kapsayıcıyı yeniden oluşturarak yükseltin.",
-        "dockerText": "Hope Agent bir Docker kapsayıcısında çalışıyor ({{from}} → {{to}}).\n\nYeni görüntüyü çekip kapsayıcıyı yeniden oluşturarak yükseltin:\n\n    docker pull ghcr.io/shiwenwen/hope-agent:v{{to}}\n    docker compose up -d\n\nveya oluşturma dosyanız bunu kullanıyorsa `latest`'ye sabitleyin.",
+        "dockerContext": "TPA CoWork bir Docker kapsayıcısında çalışıyor. Kendi kendine güncelleme görüntünün yerini alamaz; yeni bir etiket çekip kapsayıcıyı yeniden oluşturarak yükseltin.",
+        "dockerText": "TPA CoWork bir Docker kapsayıcısında çalışıyor ({{from}} → {{to}}).\n\nYeni görüntüyü çekip kapsayıcıyı yeniden oluşturarak yükseltin:\n\n    docker pull ghcr.io/shiwenwen/hope-agent:v{{to}}\n    docker compose up -d\n\nveya oluşturma dosyanız bunu kullanıyorsa `latest`'ye sabitleyin.",
         "dockerHeader": "Docker yükseltme gerekli",
-        "context": "Hope Agent bu yükleme için otomatik bir yükseltme yolu seçemiyor. Nasıl ilerleyeceğinize karar verin.",
-        "text": "Hope Agent {{from}} → {{to}} için otomatik yükseltme yolu mevcut değil. Şu şekilde algılanan yükleme kaynağı: {{installSource}}. Bir kurtarma seçin:",
+        "context": "TPA CoWork bu yükleme için otomatik bir yükseltme yolu seçemiyor. Nasıl ilerleyeceğinize karar verin.",
+        "text": "TPA CoWork {{from}} → {{to}} için otomatik yükseltme yolu mevcut değil. Şu şekilde algılanan yükleme kaynağı: {{installSource}}. Bir kurtarma seçin:",
         "header": "Manuel yükseltme gerekli",
         "openReleases": "Sürüm sayfasını tarayıcıda aç",
         "openReleasesManual": "Sürüm sayfasını tarayıcıda açın (manuel indirme)",
@@ -11767,15 +11767,15 @@
       "unbound": "Bağlantı kaldırıldı",
       "err": "Bağlama başarısız",
       "sourceDir": "Kaynak: yerel dizin",
-      "sourceHaProject": "Kaynak: Hope Agent projesi",
+      "sourceHaProject": "Kaynak: TPA CoWork projesi",
       "stale": "Geçersiz (dizin veya proje artık yok)",
       "unbind": "Bağlantıyı kaldır",
       "modeDir": "Yerel dizin",
-      "modeHaProject": "Hope Agent projesi",
+      "modeHaProject": "TPA CoWork projesi",
       "dir": "Depo dizini",
       "dirPlaceholder": "Depo kökünü seçin veya yazın",
       "choose": "Seç…",
-      "haProject": "Hope Agent projesi",
+      "haProject": "TPA CoWork projesi",
       "haProjectPlaceholder": "Proje seçin…",
       "haProjectHint": "Dizin, projenin çalışma dizininden alınır ve değişiklikleri otomatik izler.",
       "bind": "Bağla"
@@ -12164,14 +12164,14 @@
   },
   "configRecovery": {
     "title": "Yapılandırma Kurtarma Gerekli",
-    "subtitle": "Hope Agent mevcut config.json dosyasını okuyamadı. Sağlayıcıyı, MCP sunucusunu ve ilk kurulum durumunu korumak için yapılandırma yazma işlemleri duraklatıldı.",
+    "subtitle": "TPA CoWork mevcut config.json dosyasını okuyamadı. Sağlayıcıyı, MCP sunucusunu ve ilk kurulum durumunu korumak için yapılandırma yazma işlemleri duraklatıldı.",
     "path": "Yapılandırma dosyası",
     "error": "Okuma hatası",
     "details": "Koruma notu",
     "retry": "Yeniden oku",
     "restart": "Uygulamayı yeniden başlat",
     "backupsTitle": "Yapılandırma anlık görüntüsünü geri yükle",
-    "backupsDesc": "Geri yüklemeden sonra Hope Agent yapılandırmayı yeniden yükleyip başlatmaya devam eder. Okunamayan dosya özgün konumunda tutulur ve mümkünse .corrupt-<timestamp> adlı bir yan dosyaya kopyalanır.",
+    "backupsDesc": "Geri yüklemeden sonra TPA CoWork yapılandırmayı yeniden yükleyip başlatmaya devam eder. Okunamayan dosya özgün konumunda tutulur ve mümkünse .corrupt-<timestamp> adlı bir yan dosyaya kopyalanır.",
     "loading": "Anlık görüntüler yükleniyor…",
     "empty": "Yapılandırma anlık görüntüsü bulunamadı",
     "emptyHint": "config.json dosyasını elle onarın veya backups/autosave ya da config.json.corrupt-* içinden kullanılabilir bir sürümü kurtarıp yeniden deneyin.",
@@ -12179,7 +12179,7 @@
     "source": "Kaynak",
     "retrying": "Okunuyor",
     "restoring": "Geri yükleniyor",
-    "restartFailed": "Otomatik yeniden başlatma burada kullanılamıyor. Hope Agent uygulamasını elle kapatıp yeniden açın.",
+    "restartFailed": "Otomatik yeniden başlatma burada kullanılamıyor. TPA CoWork uygulamasını elle kapatıp yeniden açın.",
     "categoryValues": {
       "providers": "Sağlayıcılar",
       "proxy": "Ara sunucu",
@@ -12200,6 +12200,85 @@
     "kindValues": {
       "config": "Yapılandırma",
       "user": "Kullanıcı ayarları"
+    }
+  },
+  "cloud": {
+    "title": "Cloud account",
+    "notSignedIn": "Not signed in to TPA CoWork Cloud",
+    "login": "Log in",
+    "logout": "Log out",
+    "loginTitle": "Log in to TPA CoWork Cloud",
+    "loginDescription": "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+    "serverUrl": "Cloud server URL",
+    "username": "Username",
+    "password": "Password",
+    "loggingIn": "Logging in...",
+    "signedInAs": "Signed in as {{username}}"
+  },
+  "skillhub": {
+    "title": "SkillHub",
+    "subtitle": "Browse, search, and install public skills.",
+    "searchPlaceholder": "Search skills",
+    "search": "Search",
+    "refresh": "Refresh",
+    "empty": "No public skills yet.",
+    "emptyHint": "Search SkillHub or refresh the list.",
+    "download": "Download",
+    "downloaded": "Skill downloaded. Check My Skills to use it.",
+    "downloadedOverwrite": "Local skill overwritten. Check My Skills to use it.",
+    "overwriteTitle": "Overwrite local skill?",
+    "overwriteDescription": "A local skill named {{name}} already exists. Downloading will replace that skill's files.",
+    "overwriteConfirm": "Overwrite",
+    "freshness": {
+      "localNewer": "Local copy looks newer than the server package.",
+      "remoteNewer": "Server package looks newer than the local copy.",
+      "same": "Local and server versions look the same.",
+      "unknown": "Could not compare which copy is newer.",
+      "versions": "Local: {{local}} · Server: {{remote}}",
+      "na": "n/a"
+    }
+  },
+  "mySkills": {
+    "title": "My Skills",
+    "subtitle": "Local user skills with optional cloud review badges.",
+    "count": "{{count}} local skills",
+    "empty": "No local user skills found.",
+    "emptyHint": "Install or create a local skill first.",
+    "noMatches": "No skills match the current filters.",
+    "noDescription": "No description",
+    "searchPlaceholder": "Search local skills",
+    "refreshLocal": "Refresh status",
+    "refreshStatus": "Refresh status",
+    "retry": "Retry",
+    "openDirectory": "Open directory",
+    "refreshCloud": "Sync cloud status",
+    "refreshCloudPrompt": "Log in to Hope Cloud before syncing cloud status.",
+    "submitReview": "Submit review",
+    "submitSuccess": "Submitted for review.",
+    "loginToSubmit": "Log in to submit",
+    "loginToSubmitPrompt": "Log in to Hope Cloud before submitting for review.",
+    "filter": {
+      "all": "All",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "needsConfig": "Needs setup",
+      "draft": "Draft",
+      "local": "Local",
+      "pendingReview": "In review",
+      "published": "Published"
+    },
+    "localState": {
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "needsConfig": "Needs setup",
+      "draft": "Draft"
+    },
+    "state": {
+      "published": "Published",
+      "pendingReview": "In review",
+      "notPublished": "Local",
+      "unknown": "Unknown",
+      "cloudFailed": "Cloud failed"
     }
   }
 }

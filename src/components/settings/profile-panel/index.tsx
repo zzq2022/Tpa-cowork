@@ -4,13 +4,15 @@ import { useTranslation } from "react-i18next"
 import { cn } from "@/lib/utils"
 import { logger } from "@/lib/logger"
 import { Button } from "@/components/ui/button"
-import { Check, Loader2 } from "lucide-react"
+import { Check, Loader2, LogIn, LogOut } from "lucide-react"
 
 import { type UserConfig, LANGUAGE_OPTIONS, PRESET_STYLES } from "./types"
 import AvatarSection from "./AvatarSection"
 import ProfileForm from "./ProfileForm"
 import PersonalInfoSection from "./PersonalInfoSection"
 import { useAvatarUpload } from "@/hooks/useAvatarUpload"
+import { useCloudSession } from "@/hooks/useCloudSession"
+import CloudLoginDialog from "@/components/cloud/CloudLoginDialog"
 
 export default function UserProfilePanel({ onSaved }: { onSaved?: () => void } = {}) {
   const { t, i18n } = useTranslation()
@@ -20,6 +22,10 @@ export default function UserProfilePanel({ onSaved }: { onSaved?: () => void } =
   const [customStyle, setCustomStyle] = useState(false)
   const [customGender, setCustomGender] = useState(false)
   const composingRef = useRef(false)
+
+  const cloud = useCloudSession()
+  const cloudUsername = cloud.session?.user.username
+  const [showCloudLogin, setShowCloudLogin] = useState(false)
 
   const { cropSrc, handleAvatarPick, handleCropCancel, handleCropConfirm } =
     useAvatarUpload({
@@ -92,6 +98,13 @@ export default function UserProfilePanel({ onSaved }: { onSaved?: () => void } =
 
   return (
     <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
+      {showCloudLogin && (
+        <CloudLoginDialog
+          open={showCloudLogin}
+          onOpenChange={setShowCloudLogin}
+          onLoggedIn={() => void cloud.reload()}
+        />
+      )}
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto p-6">
         <div className="w-full">
@@ -99,6 +112,36 @@ export default function UserProfilePanel({ onSaved }: { onSaved?: () => void } =
           <p className="text-xs text-muted-foreground mb-5">{t("settings.profileDesc")}</p>
 
           <div className="space-y-5">
+            {/* Cloud account (SkillHub session) */}
+            <div className="rounded-xl border border-border-soft bg-secondary/10 p-4 text-sm">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="font-semibold text-foreground">{t("cloud.title", "Cloud account")}</h3>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {cloudUsername
+                      ? t("cloud.signedInAs", { username: cloudUsername })
+                      : t("cloud.notSignedIn", "Not signed in")}
+                  </p>
+                </div>
+                {cloudUsername ? (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-destructive border-destructive/20 hover:bg-destructive/10 hover:text-destructive transition-colors"
+                    onClick={() => void cloud.logout()}
+                  >
+                    <LogOut className="h-3.5 w-3.5 mr-1.5" />
+                    {t("cloud.logout", "Log out")}
+                  </Button>
+                ) : (
+                  <Button variant="default" size="sm" onClick={() => setShowCloudLogin(true)}>
+                    <LogIn className="h-3.5 w-3.5 mr-1.5" />
+                    {t("cloud.login", "Log in")}
+                  </Button>
+                )}
+              </div>
+            </div>
+
             <AvatarSection
               avatar={config.avatar}
               cropSrc={cropSrc}

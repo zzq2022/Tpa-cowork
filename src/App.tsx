@@ -65,6 +65,8 @@ const KnowledgeView = lazy(() => import("@/components/knowledge/KnowledgeView"))
 const DesignView = lazy(() => import("@/components/design/DesignView"))
 const ArtifactsView = lazy(() => import("@/components/artifacts/ArtifactsView"))
 const SettingsView = lazy(() => import("@/components/settings/SettingsView"))
+const SkillHubView = lazy(() => import("@/components/skillhub/SkillHubView"))
+const MySkillsView = lazy(() => import("@/components/skills/MySkillsView"))
 
 type AppView =
   | "loading"
@@ -85,6 +87,8 @@ type AppView =
   | "knowledge"
   | "design"
   | "artifacts"
+  | "skillhub"
+  | "mySkills"
 
 interface PendingChatFocus extends ChatFocusTarget {
   nonce: number
@@ -735,6 +739,8 @@ export default function App() {
                 onOpenKnowledge={handleOpenKnowledge}
                 onOpenDesign={() => setView("design")}
                 onOpenArtifacts={() => setView("artifacts")}
+                onOpenSkillHub={() => setView("skillhub")}
+                onOpenMySkills={() => setView("mySkills")}
                 userAvatar={userAvatar}
                 totalUnreadCount={totalUnreadCount}
                 onMarkAllRead={() => setSessionsRefreshTrigger((n) => n + 1)}
@@ -918,6 +924,28 @@ export default function App() {
                   }
                 >
                   <ArtifactsView onBack={() => setView("chat")} />
+                </Suspense>
+              )}
+              {view === "skillhub" && (
+                <Suspense
+                  fallback={
+                    <div className="flex-1 flex items-center justify-center">
+                      <div className="animate-spin h-6 w-6 border-2 border-foreground border-t-transparent rounded-full" />
+                    </div>
+                  }
+                >
+                  <SkillHubView onBack={() => setView("chat")} />
+                </Suspense>
+              )}
+              {view === "mySkills" && (
+                <Suspense
+                  fallback={
+                    <div className="flex-1 flex items-center justify-center">
+                      <div className="animate-spin h-6 w-6 border-2 border-foreground border-t-transparent rounded-full" />
+                    </div>
+                  }
+                >
+                  <MySkillsView onBack={() => setView("chat")} />
                 </Suspense>
               )}
               <div className={view === "chat" ? "flex-1 flex overflow-hidden" : "hidden"}>

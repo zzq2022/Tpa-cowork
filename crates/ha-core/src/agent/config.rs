@@ -11,7 +11,7 @@ pub(super) const ANTHROPIC_API_URL: &str = "https://api.anthropic.com/v1/message
 /// Some API providers (e.g. DashScope CodingPlan) use WAF rules that filter
 /// requests based on User-Agent. Using a recognized coding-tool-style UA
 /// ensures compatibility with these services.
-pub const USER_AGENT: &str = "Hope Agent/1.0";
+pub const USER_AGENT: &str = "TPA CoWork/1.0";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum CompleteEndpointKind {

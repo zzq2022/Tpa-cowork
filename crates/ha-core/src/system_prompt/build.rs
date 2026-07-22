@@ -125,7 +125,7 @@ pub(crate) fn build_with_resolved_session(
 
         // Minimal identity line
         sections.push(format!(
-            "You are {}, running in Hope Agent on {} {}.",
+            "You are {}, running in TPA CoWork on {} {}.",
             definition.config.name, os, arch
         ));
         push_avatar_line(&mut sections, definition.config.avatar.as_deref());
@@ -182,7 +182,7 @@ pub(crate) fn build_with_resolved_session(
                 .unwrap_or_default()
         };
         sections.push(format!(
-            "You are {}{}, running in Hope Agent on {} {}.",
+            "You are {}{}, running in TPA CoWork on {} {}.",
             definition.config.name, role_suffix, os, arch
         ));
         push_avatar_line(&mut sections, definition.config.avatar.as_deref());

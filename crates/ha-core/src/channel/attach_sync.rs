@@ -202,9 +202,9 @@ async fn send_handover_notice(
     in_flight: bool,
 ) {
     let text = if in_flight {
-        "📨 Session handed over from Hope Agent. A reply is already in progress; live updates will continue here."
+        "📨 Session handed over from TPA CoWork. A reply is already in progress; live updates will continue here."
     } else {
-        "📨 Session handed over from Hope Agent."
+        "📨 Session handed over from TPA CoWork."
     };
     let target = DeliveryTarget {
         account_id: &account.id,

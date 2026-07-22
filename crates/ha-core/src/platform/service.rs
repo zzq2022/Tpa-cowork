@@ -433,7 +433,7 @@ fn install_systemd(
 
     let content = format!(
         "[Unit]\n\
-         Description=Hope Agent Server\n\
+         Description=TPA CoWork Server\n\
          After=network.target\n\
          \n\
          [Service]\n\
@@ -566,7 +566,7 @@ mod windows_task {
     /// Task name as it appears in Task Scheduler. Mirrors the launchd
     /// label convention but uses the native forward-slash-free style
     /// that `schtasks.exe` expects.
-    const TASK_NAME: &str = "Hope Agent";
+    const TASK_NAME: &str = "TPA CoWork";
 
     /// Double every embedded double-quote so the argument survives the
     /// Windows command line quoting rules when passed through

@@ -28,7 +28,7 @@ pub enum ModeOutcome {
 
 pub fn run(step: u32, total: u32) -> Result<ModeOutcome> {
     println_step(step, total, "Install mode");
-    println!("  Pick how this Hope Agent install should run.");
+    println!("  Pick how this TPA CoWork install should run.");
     println!();
 
     let choice = prompt_select(

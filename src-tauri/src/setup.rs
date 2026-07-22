@@ -110,7 +110,7 @@ pub(crate) fn app_setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::
         let hide_quit = MenuItemBuilder::with_id("hide_quit", labels.hide)
             .accelerator("CmdOrCtrl+Q")
             .build(app)?;
-        let app_submenu = SubmenuBuilder::new(app, "Hope Agent")
+        let app_submenu = SubmenuBuilder::new(app, "TPA CoWork")
             .item(&about)
             .separator()
             .item(&check_updates)

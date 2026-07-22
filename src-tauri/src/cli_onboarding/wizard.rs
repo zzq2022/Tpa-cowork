@@ -34,7 +34,7 @@ const REMOTE_TOTAL: u32 = 4;
 /// was skipped with the user's awareness); propagates I/O / persistence
 /// errors when they happen.
 pub fn run() -> Result<()> {
-    println_header("Hope Agent — First-run setup");
+    println_header("TPA CoWork — First-run setup");
     println!(
         "  Walking through up to {} short steps. Each can be skipped",
         LOCAL_TOTAL
@@ -49,7 +49,7 @@ pub fn run() -> Result<()> {
     if mode == ModeOutcome::Remote {
         println_step(4, REMOTE_TOTAL, "All done");
         print_saved("Remote target saved.");
-        println!("  Launch any Hope Agent client (web GUI / desktop app) and it");
+        println!("  Launch any TPA CoWork client (web GUI / desktop app) and it");
         println!("  will route through the remote server you just configured.");
         mark_completed()?;
         return Ok(());

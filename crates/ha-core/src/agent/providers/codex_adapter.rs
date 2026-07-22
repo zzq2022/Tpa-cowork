@@ -35,7 +35,7 @@ pub(in crate::agent) fn codex_user_agent() -> &'static str {
     static UA: OnceLock<String> = OnceLock::new();
     UA.get_or_init(|| {
         format!(
-            "Hope Agent ({} {}; {})",
+            "TPA CoWork ({} {}; {})",
             std::env::consts::OS,
             os_version(),
             std::env::consts::ARCH,

@@ -1,5 +1,5 @@
 {
-  "name": "hope-agent",
+  "name": "tpa-cowork",
   "private": true,
   "version": "0.22.0",
   "license": "MIT",
@@ -45,7 +45,12 @@
     "tauri": "tauri",
     "version": "node scripts/sync-version.mjs",
     "prepare": "husky && node scripts/setup-ssh-keepalive.mjs",
-    "postinstall": "node scripts/patch-codemirror-edit-context.mjs"
+    "postinstall": "node scripts/patch-codemirror-edit-context.mjs",
+    "pack:local": "node scripts/pack-local.mjs",
+    "pack:local:bundle": "node scripts/pack-local.mjs --bundle",
+    "pack:local:quick": "node scripts/pack-local.mjs --skip-frontend --skip-host --skip-eval-sidecar",
+    "pack:local:ship": "node scripts/pack-local.mjs --ship",
+    "prepare:zip-venv": "node scripts/prepare-zip-venv.mjs"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.20.2",
@@ -143,5 +148,6 @@
     "unplugin-icons": "^23.0.1",
     "vite": "^8.0.10",
     "vitest": "^4.1.5"
-  }
+  },
+  "description": "TPA CoWork local-first AI assistant desktop application"
 }

@@ -838,7 +838,7 @@ fn wipe_dir_contents(dir: &std::path::Path) -> std::io::Result<()> {
 /// window).
 ///
 /// We target the current process by Unix PID rather than app name. App name
-/// matching (`tell application "Hope Agent"`) fails in dev mode where the
+/// matching (`tell application "TPA CoWork"`) fails in dev mode where the
 /// Tauri binary is loaded under its process name (`hope-agent`), not the
 /// productName, and varies across release / debug / packaged builds. Unix
 /// id is stable regardless.

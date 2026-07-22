@@ -219,7 +219,7 @@ impl AcpAgent {
             },
             agent_info: AgentInfo {
                 name: "hope-agent-acp".to_string(),
-                title: "Hope Agent ACP Agent".to_string(),
+                title: "TPA CoWork ACP Agent".to_string(),
                 version: env!("CARGO_PKG_VERSION").to_string(),
             },
             auth_methods: vec![],

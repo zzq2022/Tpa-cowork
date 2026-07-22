@@ -28,9 +28,9 @@ pub(super) const MEMORY_GUIDELINES: &str =
      Do NOT save: ephemeral task details, code snippets, debugging steps, or anything derivable from the codebase.";
 
 /// Brief description of the host application, injected once right after the
-/// identity line so the model knows what "Hope Agent" actually is.
+/// identity line so the model knows what "TPA CoWork" actually is.
 pub(super) const APP_INTRO: &str =
-    "Hope Agent is a local, open-source AI assistant with configurable model providers, tools, skills, and persistent memory.";
+    "TPA CoWork is a local, open-source AI assistant with configurable model providers, tools, skills, and persistent memory.";
 
 /// Embodiment guidance appended after injecting a SOUL.md block so the
 /// model commits to the persona rather than treating it as ambient text.

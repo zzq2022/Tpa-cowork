@@ -62,7 +62,7 @@ impl ToolProvider for DesignToolProvider {
 
     fn instructions(&self) -> Option<&'static str> {
         Some(
-            "Use design_* tools to read and edit Hope Agent Design Space artifacts. \
+            "Use design_* tools to read and edit TPA CoWork Design Space artifacts. \
              Call design_get_active_context to see what the user is currently viewing. \
              design_get_artifact returns oid-annotated source for precise design_edit_element edits.",
         )

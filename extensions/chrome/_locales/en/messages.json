@@ -1,11 +1,11 @@
 {
   "app_name": {
-    "message": "Hope Agent Browser Control",
-    "description": "Extension name shown in the toolbar, the extensions page, and the popup heading. 'Hope Agent' is the product brand and stays untranslated."
+    "message": "TPA CoWork Browser Control",
+    "description": "Extension name shown in the toolbar, the extensions page, and the popup heading. 'TPA CoWork' is the product brand and stays untranslated."
   },
   "app_description": {
-    "message": "Control Chrome with Hope Agent.",
-    "description": "Short extension description (a tagline) shown on the extensions page and the Chrome Web Store tile. Keep it short, under 132 characters. 'Hope Agent' and 'Chrome' stay untranslated."
+    "message": "Control Chrome with TPA CoWork.",
+    "description": "Short extension description (a tagline) shown on the extensions page and the Chrome Web Store tile. Keep it short, under 132 characters. 'TPA CoWork' and 'Chrome' stay untranslated."
   },
   "status_checking": {
     "message": "Checking connection…",
@@ -13,18 +13,18 @@
   },
   "btn_stop_current": {
     "message": "Stop current tab",
-    "description": "Popup button that detaches Hope Agent control from the active tab."
+    "description": "Popup button that detaches TPA CoWork control from the active tab."
   },
   "btn_stop_all": {
     "message": "Stop all controlled tabs",
-    "description": "Popup button that detaches Hope Agent control from every tab it currently controls."
+    "description": "Popup button that detaches TPA CoWork control from every tab it currently controls."
   },
   "status_native_connected": {
     "message": "Native host connected",
     "description": "Status fragment meaning the local desktop app is reachable. Used inside status_summary."
   },
   "status_native_offline": {
-    "message": "Native host offline — make sure the Hope Agent desktop app is running.",
+    "message": "Native host offline — make sure the TPA CoWork desktop app is running.",
     "description": "Popup status line shown when the desktop app cannot be reached. Includes an actionable hint."
   },
   "status_summary": {
@@ -78,11 +78,11 @@
     "description": "Status line shown when the popup cannot read the extension's state at all."
   },
   "overlay_controlling": {
-    "message": "Hope Agent is controlling this tab",
-    "description": "Label in the on-page overlay shown while Hope Agent controls a tab. 'Hope Agent' is the product brand and stays untranslated."
+    "message": "TPA CoWork is controlling this tab",
+    "description": "Label in the on-page overlay shown while TPA CoWork controls a tab. 'TPA CoWork' is the product brand and stays untranslated."
   },
   "overlay_stop": {
     "message": "Stop",
-    "description": "Button in the on-page control overlay that stops Hope Agent's control of the current tab."
+    "description": "Button in the on-page control overlay that stops TPA CoWork's control of the current tab."
   }
 }

@@ -570,7 +570,7 @@ pub(super) fn build_acp_section() -> String {
          Available ACP backends:\n\
          {}\n\n\
          When to use external agents vs sub-agents:\n\
-         - Use `subagent` for tasks within Hope Agent's internal agent pool\n\
+         - Use `subagent` for tasks within TPA CoWork's internal agent pool\n\
          - Use `acp_spawn` when you need an external agent's specific capabilities \
          (e.g., Claude Code's file editing, Codex's code generation)\n\n\
          Actions: spawn (start), check (poll/wait), list, result, kill, kill_all, steer (follow-up), backends (list available)\n\n\

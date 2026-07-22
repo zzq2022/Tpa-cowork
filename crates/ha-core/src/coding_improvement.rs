@@ -9278,7 +9278,7 @@ fn append_agents_managed_include(current: &str, include_line: &str) -> String {
     }
     out.push_str(START);
     out.push('\n');
-    out.push_str("# Hope Agent Coding Improvements\n\n");
+    out.push_str("# TPA CoWork Coding Improvements\n\n");
     out.push_str(include_line);
     out.push('\n');
     out.push_str(END);

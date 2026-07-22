@@ -229,7 +229,7 @@ async fn login_codex_async(open_browser: bool) -> Result<TokenData> {
 }
 
 fn print_help() {
-    println!("Hope Agent auth");
+    println!("TPA CoWork auth");
     println!();
     println!("Usage: hope-agent auth <provider> <command> [OPTIONS]");
     println!();
@@ -244,7 +244,7 @@ fn print_help() {
 }
 
 fn print_codex_help() {
-    println!("Hope Agent Codex auth");
+    println!("TPA CoWork Codex auth");
     println!();
     println!("Usage: hope-agent auth codex <command> [OPTIONS]");
     println!();

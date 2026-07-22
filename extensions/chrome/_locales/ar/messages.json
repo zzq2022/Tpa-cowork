@@ -1,11 +1,11 @@
 {
   "app_name": {
-    "message": "التحكم في المتصفح من Hope Agent",
-    "description": "Extension name shown in the toolbar, the extensions page, and the popup heading. 'Hope Agent' is the product brand and stays untranslated."
+    "message": "التحكم في المتصفح من TPA CoWork",
+    "description": "Extension name shown in the toolbar, the extensions page, and the popup heading. 'TPA CoWork' is the product brand and stays untranslated."
   },
   "app_description": {
-    "message": "التحكم في Chrome من Hope Agent",
-    "description": "Extension description shown on the extensions page and the Chrome Web Store tile. Keep it under 132 characters. 'Hope Agent' stays untranslated."
+    "message": "التحكم في Chrome من TPA CoWork",
+    "description": "Extension description shown on the extensions page and the Chrome Web Store tile. Keep it under 132 characters. 'TPA CoWork' stays untranslated."
   },
   "status_checking": {
     "message": "جارٍ التحقق من الاتصال…",
@@ -13,18 +13,18 @@
   },
   "btn_stop_current": {
     "message": "إيقاف التحكم في علامة التبويب الحالية",
-    "description": "Popup button that detaches Hope Agent control from the active tab."
+    "description": "Popup button that detaches TPA CoWork control from the active tab."
   },
   "btn_stop_all": {
     "message": "إيقاف التحكم في كل علامات التبويب",
-    "description": "Popup button that detaches Hope Agent control from every tab it currently controls."
+    "description": "Popup button that detaches TPA CoWork control from every tab it currently controls."
   },
   "status_native_connected": {
     "message": "المضيف الأصلي متصل",
     "description": "Status fragment meaning the local desktop app is reachable. Used inside status_summary."
   },
   "status_native_offline": {
-    "message": "المضيف الأصلي غير متصل — تأكد من تشغيل تطبيق سطح المكتب Hope Agent.",
+    "message": "المضيف الأصلي غير متصل — تأكد من تشغيل تطبيق سطح المكتب TPA CoWork.",
     "description": "Popup status line shown when the desktop app cannot be reached. Includes an actionable hint."
   },
   "status_summary": {
@@ -78,11 +78,11 @@
     "description": "Status line shown when the popup cannot read the extension's state at all."
   },
   "overlay_controlling": {
-    "message": "يتحكم Hope Agent في علامة التبويب هذه",
-    "description": "Label in the on-page overlay shown while Hope Agent controls a tab. 'Hope Agent' is the product brand and stays untranslated."
+    "message": "يتحكم TPA CoWork في علامة التبويب هذه",
+    "description": "Label in the on-page overlay shown while TPA CoWork controls a tab. 'TPA CoWork' is the product brand and stays untranslated."
   },
   "overlay_stop": {
     "message": "إيقاف",
-    "description": "Button in the on-page control overlay that stops Hope Agent's control of the current tab."
+    "description": "Button in the on-page control overlay that stops TPA CoWork's control of the current tab."
   }
 }

@@ -44,7 +44,7 @@ fn main() {
         return;
     }
 
-    // Platform MCP subcommand: `hope-agent mcp` — exposes Hope Agent subsystems
+    // Platform MCP subcommand: `hope-agent mcp` — exposes TPA CoWork subsystems
     // (design first) as a stdio MCP server. Read-only by default; --allow-writes
     // enables the write tools.
     if args.len() >= 2 && args[1] == "mcp" {
@@ -153,7 +153,7 @@ fn parse_knowledge_mcp_args(
 }
 
 fn print_knowledge_mcp_help() {
-    println!("Hope Agent Knowledge MCP Server");
+    println!("TPA CoWork Knowledge MCP Server");
     println!();
     println!("Usage: hope-agent knowledge-mcp [OPTIONS]");
     println!();
@@ -205,11 +205,11 @@ fn parse_mcp_args(args: &[String]) -> Option<ha_core::mcp_server::McpServerOptio
 }
 
 fn print_mcp_help() {
-    println!("Hope Agent MCP Server (platform)");
+    println!("TPA CoWork MCP Server (platform)");
     println!();
     println!("Usage: hope-agent mcp [OPTIONS]");
     println!();
-    println!("Exposes Hope Agent subsystems (Design Space) over stdio MCP. Read-only by default.");
+    println!("Exposes TPA CoWork subsystems (Design Space) over stdio MCP. Read-only by default.");
     println!("(Knowledge Space tools remain under `hope-agent knowledge-mcp`.)");
     println!();
     println!("Options:");
@@ -298,7 +298,7 @@ fn run_acp_server(args: &[String]) {
                 return;
             }
             "--help" | "-h" => {
-                println!("Hope Agent ACP Server");
+                println!("TPA CoWork ACP Server");
                 println!();
                 println!("Usage: hope-agent acp [OPTIONS]");
                 println!();
@@ -323,7 +323,7 @@ fn run_acp_server(args: &[String]) {
 
     if verbose {
         eprintln!(
-            "[acp] Starting Hope Agent ACP server v{}",
+            "[acp] Starting TPA CoWork ACP server v{}",
             env!("CARGO_PKG_VERSION")
         );
         eprintln!("[acp] Agent ID: {}", agent_id);
@@ -336,7 +336,7 @@ fn run_acp_server(args: &[String]) {
     // no provider and producing opaque failures later.
     match ha_core::onboarding::state::get_state() {
         Ok(s) if s.completed_version < ha_core::onboarding::CURRENT_ONBOARDING_VERSION => {
-            eprintln!("ERROR: Hope Agent is not configured yet.");
+            eprintln!("ERROR: TPA CoWork is not configured yet.");
             eprintln!("       Run 'hope-agent server setup' interactively,");
             eprintln!("       or launch the desktop app to finish first-run setup.");
             std::process::exit(2);
@@ -457,7 +457,7 @@ fn run_server(args: &[String]) {
     }
 
     let Some((bind_addr, api_key)) = parse_server_args(args, "server") else {
-        println!("Hope Agent HTTP/WebSocket Server");
+        println!("TPA CoWork HTTP/WebSocket Server");
         println!();
         println!("Usage: hope-agent server [COMMAND] [OPTIONS]");
         println!();
@@ -511,7 +511,7 @@ fn run_server(args: &[String]) {
     };
 
     eprintln!(
-        "[server] Starting Hope Agent server v{}",
+        "[server] Starting TPA CoWork server v{}",
         env!("CARGO_PKG_VERSION")
     );
     eprintln!("[server] Bind address: {}", bind_addr);
@@ -700,7 +700,7 @@ fn parse_server_args(args: &[String], context: &str) -> Option<(String, Option<S
 /// Handle `hope-agent server install [--bind ADDR] [--api-key KEY]`
 fn run_server_install(args: &[String]) {
     let Some((bind_addr, api_key)) = parse_server_args(args, "server install") else {
-        println!("Install Hope Agent server as a system service");
+        println!("Install TPA CoWork server as a system service");
         println!();
         println!("Usage: hope-agent server install [OPTIONS]");
         println!();

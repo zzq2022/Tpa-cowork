@@ -385,7 +385,7 @@ fn build_profile_preview(
     match kind {
         "oauth" => {
             warnings.push(format!(
-                "OAuth profile '{}'{} 不会导入，请在 Hope Agent 中重新登录",
+                "OAuth profile '{}'{} 不会导入，请在 TPA CoWork 中重新登录",
                 profile_id,
                 email
                     .as_ref()
@@ -398,7 +398,7 @@ fn build_profile_preview(
                 credential_kind: CredentialKind::OAuth,
                 email,
                 will_import: false,
-                note: Some("OAuth: re-authenticate in Hope Agent".to_string()),
+                note: Some("OAuth: re-authenticate in TPA CoWork".to_string()),
             }
         }
         "api_key" => match resolve_api_key(cred, warnings, profile_id) {
@@ -496,7 +496,7 @@ fn resolve_api_key(
             }
             "file" => {
                 warnings.push(format!(
-                    "Profile '{}' uses file keyRef (not supported in Hope Agent import); please paste the key manually after import",
+                    "Profile '{}' uses file keyRef (not supported in TPA CoWork import); please paste the key manually after import",
                     profile_id
                 ));
                 None

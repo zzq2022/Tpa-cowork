@@ -79,7 +79,7 @@ impl Guard {
 
         #[cfg(all(unix, not(target_os = "macos")))]
         cmd.arg("--what=sleep:idle")
-            .arg("--who=Hope Agent")
+            .arg("--who=TPA CoWork")
             .arg("--why=Keep system awake (user setting)")
             .arg("--mode=block")
             // Inhibited command: blocks until our pid dies, then exits so the

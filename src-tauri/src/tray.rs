@@ -347,7 +347,7 @@ fn current_tray_status_lines(labels: &TrayStatusLabels) -> Vec<String> {
 }
 
 fn build_tray_tooltip(lines: &[String]) -> String {
-    format!("Hope Agent\n{}", lines.join("\n"))
+    format!("TPA CoWork\n{}", lines.join("\n"))
 }
 
 fn format_tray_status_lines(

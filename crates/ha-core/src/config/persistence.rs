@@ -162,7 +162,7 @@ fn load_failure_message(failure: &ConfigLoadFailure) -> String {
     format!(
         "Refusing to use the default in-memory config because an existing config.json failed \
          to load at {:?}: {}. Repair config.json, restore an autosave, or restart after the \
-         transient read error clears; Hope Agent will not overwrite the existing file with \
+         transient read error clears; TPA CoWork will not overwrite the existing file with \
          defaults.",
         failure.path, failure.error
     )

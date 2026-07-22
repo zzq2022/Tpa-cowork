@@ -12,8 +12,8 @@
 
 - Chrome Web Store assigns the production extension ID after the first upload.
 - Record that production ID.
-- Update Hope Agent default config so `browser.extension.extensionIds` includes the production ID.
-- Update Hope Agent default config so `browser.extension.storeUrl` points to the published listing.
+- Update TPA CoWork default config so `browser.extension.extensionIds` includes the production ID.
+- Update TPA CoWork default config so `browser.extension.storeUrl` points to the published listing.
 - Keep the unpacked development ID `ejafepfkhjdjopjonfgalbkelimgeeji` allowed for Alpha/dev fallback.
 
 ## Native host trust
@@ -26,7 +26,7 @@
 ## After publish
 
 - Install from Chrome Web Store in a clean Chrome profile.
-- Open Hope Agent Settings -> Browser.
+- Open TPA CoWork Settings -> Browser.
 - Install or repair the native host.
 - Verify Settings reports Connected.
 - Run a manual smoke on the local fixture with `pnpm chrome:extension:smoke-pages`.

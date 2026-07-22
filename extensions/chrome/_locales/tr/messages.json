@@ -1,11 +1,11 @@
 {
   "app_name": {
-    "message": "Hope Agent Tarayıcı Kontrolü",
-    "description": "Extension name shown in the toolbar, the extensions page, and the popup heading. 'Hope Agent' is the product brand and stays untranslated."
+    "message": "TPA CoWork Tarayıcı Kontrolü",
+    "description": "Extension name shown in the toolbar, the extensions page, and the popup heading. 'TPA CoWork' is the product brand and stays untranslated."
   },
   "app_description": {
-    "message": "Chrome'u Hope Agent ile kontrol edin.",
-    "description": "Extension description shown on the extensions page and the Chrome Web Store tile. Keep it under 132 characters. 'Hope Agent' stays untranslated."
+    "message": "Chrome'u TPA CoWork ile kontrol edin.",
+    "description": "Extension description shown on the extensions page and the Chrome Web Store tile. Keep it under 132 characters. 'TPA CoWork' stays untranslated."
   },
   "status_checking": {
     "message": "Bağlantı denetleniyor…",
@@ -13,18 +13,18 @@
   },
   "btn_stop_current": {
     "message": "Geçerli sekmeyi durdur",
-    "description": "Popup button that detaches Hope Agent control from the active tab."
+    "description": "Popup button that detaches TPA CoWork control from the active tab."
   },
   "btn_stop_all": {
     "message": "Kontrol edilen tüm sekmeleri durdur",
-    "description": "Popup button that detaches Hope Agent control from every tab it currently controls."
+    "description": "Popup button that detaches TPA CoWork control from every tab it currently controls."
   },
   "status_native_connected": {
     "message": "Yerel ana bilgisayar bağlandı",
     "description": "Status fragment meaning the local desktop app is reachable. Used inside status_summary."
   },
   "status_native_offline": {
-    "message": "Yerel ana bilgisayar çevrimdışı — Hope Agent masaüstü uygulamasının çalıştığından emin olun.",
+    "message": "Yerel ana bilgisayar çevrimdışı — TPA CoWork masaüstü uygulamasının çalıştığından emin olun.",
     "description": "Popup status line shown when the desktop app cannot be reached. Includes an actionable hint."
   },
   "status_summary": {
@@ -78,11 +78,11 @@
     "description": "Status line shown when the popup cannot read the extension's state at all."
   },
   "overlay_controlling": {
-    "message": "Hope Agent bu sekmeyi kontrol ediyor",
-    "description": "Label in the on-page overlay shown while Hope Agent controls a tab. 'Hope Agent' is the product brand and stays untranslated."
+    "message": "TPA CoWork bu sekmeyi kontrol ediyor",
+    "description": "Label in the on-page overlay shown while TPA CoWork controls a tab. 'TPA CoWork' is the product brand and stays untranslated."
   },
   "overlay_stop": {
     "message": "Durdur",
-    "description": "Button in the on-page control overlay that stops Hope Agent's control of the current tab."
+    "description": "Button in the on-page control overlay that stops TPA CoWork's control of the current tab."
   }
 }

@@ -456,7 +456,7 @@ mod imp {
     fn notification_status() -> SystemPermissionStatus {
         // `UNUserNotificationCenter.currentNotificationCenter()` raises an
         // Objective-C NSException when the process is a bare debug binary
-        // (`target/debug/hope-agent`) instead of a real `.app` bundle. Rust
+        // (`target/debug/tpa-cowork`) instead of a real `.app` bundle. Rust
         // cannot catch that exception, so skip the native query in unbundled
         // dev/CLI contexts and let the UI present this as a manual check.
         if !running_from_app_bundle() {
@@ -583,17 +583,17 @@ mod imp {
         #[test]
         fn detects_executable_inside_app_bundle() {
             assert!(path_is_in_app_bundle(Path::new(
-                "/Applications/Hope Agent.app/Contents/MacOS/hope-agent"
+                "/Applications/TPA CoWork.app/Contents/MacOS/tpa-cowork"
             )));
             assert!(path_is_in_app_bundle(Path::new(
-                "/tmp/target/debug/bundle/macos/Hope Agent.app/Contents/MacOS/hope-agent"
+                "/tmp/target/debug/bundle/macos/TPA CoWork.app/Contents/MacOS/tpa-cowork"
             )));
         }
 
         #[test]
         fn rejects_bare_debug_executable() {
             assert!(!path_is_in_app_bundle(Path::new(
-                "/Users/me/Codes/hope-agent/target/debug/hope-agent"
+                "/Users/me/Codes/hope-agent/target/debug/tpa-cowork"
             )));
         }
     }

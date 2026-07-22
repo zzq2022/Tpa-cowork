@@ -4354,7 +4354,7 @@ pub fn sync_code_binding(id: i64) -> Result<BindingSyncReport> {
     }
     // 溯源清单（specific 文件名，避免撞项目 README）。
     let manifest = format!(
-        "# Design tokens（自动生成，请勿手改）\n\n由 Hope Agent 设计空间从设计系统「{}」同步。\n\n文件：\n{}\n",
+        "# Design tokens（自动生成，请勿手改）\n\n由 TPA CoWork 设计空间从设计系统「{}」同步。\n\n文件：\n{}\n",
         binding.system_id,
         written.iter().map(|f| format!("- `{f}`")).collect::<Vec<_>>().join("\n")
     );

@@ -267,7 +267,7 @@ pub(super) fn import_single_agent(
 
     if source.tools.is_some() {
         warnings.push(format!(
-            "Agent '{}': OpenClaw tool allow/deny settings were not imported; review Hope Agent tool switches manually",
+            "Agent '{}': OpenClaw tool allow/deny settings were not imported; review TPA CoWork tool switches manually",
             source.id
         ));
     }

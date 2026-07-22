@@ -1,0 +1,974 @@
+﻿{
+    "vi":  {
+               "mySkills":  {
+                                "title":  "My Skills",
+                                "subtitle":  "Local user skills with optional cloud review badges.",
+                                "count":  "{{count}} local skills",
+                                "empty":  "No local user skills found.",
+                                "emptyHint":  "Install or create a local skill first.",
+                                "noMatches":  "No skills match the current filters.",
+                                "noDescription":  "No description",
+                                "searchPlaceholder":  "Search local skills",
+                                "refreshLocal":  "Refresh status",
+                                "refreshStatus":  "Refresh status",
+                                "retry":  "Retry",
+                                "openDirectory":  "Open directory",
+                                "refreshCloud":  "Sync cloud status",
+                                "refreshCloudPrompt":  "Log in to Hope Cloud before syncing cloud status.",
+                                "submitReview":  "Submit review",
+                                "submitSuccess":  "Submitted for review.",
+                                "loginToSubmit":  "Log in to submit",
+                                "loginToSubmitPrompt":  "Log in to Hope Cloud before submitting for review.",
+                                "filter":  {
+                                               "all":  "All",
+                                               "enabled":  "Enabled",
+                                               "disabled":  "Disabled",
+                                               "needsConfig":  "Needs setup",
+                                               "draft":  "Draft",
+                                               "local":  "Local",
+                                               "pendingReview":  "In review",
+                                               "published":  "Published"
+                                           },
+                                "localState":  {
+                                                   "enabled":  "Enabled",
+                                                   "disabled":  "Disabled",
+                                                   "needsConfig":  "Needs setup",
+                                                   "draft":  "Draft"
+                                               },
+                                "state":  {
+                                              "published":  "Published",
+                                              "pendingReview":  "In review",
+                                              "notPublished":  "Local",
+                                              "unknown":  "Unknown",
+                                              "cloudFailed":  "Cloud failed"
+                                          }
+                            },
+               "cloud":  {
+                             "title":  "Cloud account",
+                             "notSignedIn":  "Not signed in to TPA CoWork Cloud",
+                             "login":  "Log in",
+                             "logout":  "Log out",
+                             "loginTitle":  "Log in to TPA CoWork Cloud",
+                             "loginDescription":  "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+                             "serverUrl":  "Cloud server URL",
+                             "username":  "Username",
+                             "password":  "Password",
+                             "loggingIn":  "Logging in...",
+                             "signedInAs":  "Signed in as {{username}}"
+                         },
+               "skillhub":  {
+                                "title":  "SkillHub",
+                                "subtitle":  "Browse, search, and install public skills.",
+                                "searchPlaceholder":  "Search skills",
+                                "search":  "Search",
+                                "refresh":  "Refresh",
+                                "empty":  "No public skills yet.",
+                                "emptyHint":  "Search SkillHub or refresh the list.",
+                                "download":  "Download",
+                                "downloaded":  "Skill downloaded. Check My Skills to use it.",
+                                "downloadedOverwrite":  "Local skill overwritten. Check My Skills to use it.",
+                                "overwriteTitle":  "Overwrite local skill?",
+                                "overwriteDescription":  "A local skill named {{name}} already exists. Downloading will replace that skill\u0027s files.",
+                                "overwriteConfirm":  "Overwrite",
+                                "freshness":  {
+                                                  "localNewer":  "Local copy looks newer than the server package.",
+                                                  "remoteNewer":  "Server package looks newer than the local copy.",
+                                                  "same":  "Local and server versions look the same.",
+                                                  "unknown":  "Could not compare which copy is newer.",
+                                                  "versions":  "Local: {{local}} · Server: {{remote}}",
+                                                  "na":  "n/a"
+                                              }
+                            }
+           },
+    "tr":  {
+               "mySkills":  {
+                                "title":  "My Skills",
+                                "subtitle":  "Local user skills with optional cloud review badges.",
+                                "count":  "{{count}} local skills",
+                                "empty":  "No local user skills found.",
+                                "emptyHint":  "Install or create a local skill first.",
+                                "noMatches":  "No skills match the current filters.",
+                                "noDescription":  "No description",
+                                "searchPlaceholder":  "Search local skills",
+                                "refreshLocal":  "Refresh status",
+                                "refreshStatus":  "Refresh status",
+                                "retry":  "Retry",
+                                "openDirectory":  "Open directory",
+                                "refreshCloud":  "Sync cloud status",
+                                "refreshCloudPrompt":  "Log in to Hope Cloud before syncing cloud status.",
+                                "submitReview":  "Submit review",
+                                "submitSuccess":  "Submitted for review.",
+                                "loginToSubmit":  "Log in to submit",
+                                "loginToSubmitPrompt":  "Log in to Hope Cloud before submitting for review.",
+                                "filter":  {
+                                               "all":  "All",
+                                               "enabled":  "Enabled",
+                                               "disabled":  "Disabled",
+                                               "needsConfig":  "Needs setup",
+                                               "draft":  "Draft",
+                                               "local":  "Local",
+                                               "pendingReview":  "In review",
+                                               "published":  "Published"
+                                           },
+                                "localState":  {
+                                                   "enabled":  "Enabled",
+                                                   "disabled":  "Disabled",
+                                                   "needsConfig":  "Needs setup",
+                                                   "draft":  "Draft"
+                                               },
+                                "state":  {
+                                              "published":  "Published",
+                                              "pendingReview":  "In review",
+                                              "notPublished":  "Local",
+                                              "unknown":  "Unknown",
+                                              "cloudFailed":  "Cloud failed"
+                                          }
+                            },
+               "cloud":  {
+                             "title":  "Cloud account",
+                             "notSignedIn":  "Not signed in to TPA CoWork Cloud",
+                             "login":  "Log in",
+                             "logout":  "Log out",
+                             "loginTitle":  "Log in to TPA CoWork Cloud",
+                             "loginDescription":  "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+                             "serverUrl":  "Cloud server URL",
+                             "username":  "Username",
+                             "password":  "Password",
+                             "loggingIn":  "Logging in...",
+                             "signedInAs":  "Signed in as {{username}}"
+                         },
+               "skillhub":  {
+                                "title":  "SkillHub",
+                                "subtitle":  "Browse, search, and install public skills.",
+                                "searchPlaceholder":  "Search skills",
+                                "search":  "Search",
+                                "refresh":  "Refresh",
+                                "empty":  "No public skills yet.",
+                                "emptyHint":  "Search SkillHub or refresh the list.",
+                                "download":  "Download",
+                                "downloaded":  "Skill downloaded. Check My Skills to use it.",
+                                "downloadedOverwrite":  "Local skill overwritten. Check My Skills to use it.",
+                                "overwriteTitle":  "Overwrite local skill?",
+                                "overwriteDescription":  "A local skill named {{name}} already exists. Downloading will replace that skill\u0027s files.",
+                                "overwriteConfirm":  "Overwrite",
+                                "freshness":  {
+                                                  "localNewer":  "Local copy looks newer than the server package.",
+                                                  "remoteNewer":  "Server package looks newer than the local copy.",
+                                                  "same":  "Local and server versions look the same.",
+                                                  "unknown":  "Could not compare which copy is newer.",
+                                                  "versions":  "Local: {{local}} · Server: {{remote}}",
+                                                  "na":  "n/a"
+                                              }
+                            }
+           },
+    "ja":  {
+               "mySkills":  {
+                                "title":  "My Skills",
+                                "subtitle":  "Local user skills with optional cloud review badges.",
+                                "count":  "{{count}} local skills",
+                                "empty":  "No local user skills found.",
+                                "emptyHint":  "Install or create a local skill first.",
+                                "noMatches":  "No skills match the current filters.",
+                                "noDescription":  "No description",
+                                "searchPlaceholder":  "Search local skills",
+                                "refreshLocal":  "Refresh status",
+                                "refreshStatus":  "Refresh status",
+                                "retry":  "Retry",
+                                "openDirectory":  "Open directory",
+                                "refreshCloud":  "Sync cloud status",
+                                "refreshCloudPrompt":  "Log in to Hope Cloud before syncing cloud status.",
+                                "submitReview":  "Submit review",
+                                "submitSuccess":  "Submitted for review.",
+                                "loginToSubmit":  "Log in to submit",
+                                "loginToSubmitPrompt":  "Log in to Hope Cloud before submitting for review.",
+                                "filter":  {
+                                               "all":  "All",
+                                               "enabled":  "Enabled",
+                                               "disabled":  "Disabled",
+                                               "needsConfig":  "Needs setup",
+                                               "draft":  "Draft",
+                                               "local":  "Local",
+                                               "pendingReview":  "In review",
+                                               "published":  "Published"
+                                           },
+                                "localState":  {
+                                                   "enabled":  "Enabled",
+                                                   "disabled":  "Disabled",
+                                                   "needsConfig":  "Needs setup",
+                                                   "draft":  "Draft"
+                                               },
+                                "state":  {
+                                              "published":  "Published",
+                                              "pendingReview":  "In review",
+                                              "notPublished":  "Local",
+                                              "unknown":  "Unknown",
+                                              "cloudFailed":  "Cloud failed"
+                                          }
+                            },
+               "cloud":  {
+                             "title":  "Cloud account",
+                             "notSignedIn":  "Not signed in to TPA CoWork Cloud",
+                             "login":  "Log in",
+                             "logout":  "Log out",
+                             "loginTitle":  "Log in to TPA CoWork Cloud",
+                             "loginDescription":  "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+                             "serverUrl":  "Cloud server URL",
+                             "username":  "Username",
+                             "password":  "Password",
+                             "loggingIn":  "Logging in...",
+                             "signedInAs":  "Signed in as {{username}}"
+                         },
+               "skillhub":  {
+                                "title":  "SkillHub",
+                                "subtitle":  "Browse, search, and install public skills.",
+                                "searchPlaceholder":  "Search skills",
+                                "search":  "Search",
+                                "refresh":  "Refresh",
+                                "empty":  "No public skills yet.",
+                                "emptyHint":  "Search SkillHub or refresh the list.",
+                                "download":  "Download",
+                                "downloaded":  "Skill downloaded. Check My Skills to use it.",
+                                "downloadedOverwrite":  "Local skill overwritten. Check My Skills to use it.",
+                                "overwriteTitle":  "Overwrite local skill?",
+                                "overwriteDescription":  "A local skill named {{name}} already exists. Downloading will replace that skill\u0027s files.",
+                                "overwriteConfirm":  "Overwrite",
+                                "freshness":  {
+                                                  "localNewer":  "Local copy looks newer than the server package.",
+                                                  "remoteNewer":  "Server package looks newer than the local copy.",
+                                                  "same":  "Local and server versions look the same.",
+                                                  "unknown":  "Could not compare which copy is newer.",
+                                                  "versions":  "Local: {{local}} · Server: {{remote}}",
+                                                  "na":  "n/a"
+                                              }
+                            }
+           },
+    "zh-TW":  {
+                  "mySkills":  {
+                                   "title":  "我的 Skill",
+                                   "subtitle":  "本機使用者技能，雲端審核結果僅作次級標記。",
+                                   "count":  "共 {{count}} 個本機技能",
+                                   "empty":  "找不到本機使用者技能。",
+                                   "emptyHint":  "請先安裝或建立本機 skill。",
+                                   "noMatches":  "沒有符合目前篩選的技能。",
+                                   "noDescription":  "暫無描述",
+                                   "searchPlaceholder":  "搜尋本機技能",
+                                   "refreshLocal":  "重新整理狀態",
+                                   "refreshStatus":  "重新整理狀態",
+                                   "retry":  "重試",
+                                   "openDirectory":  "開啟目錄",
+                                   "refreshCloud":  "同步雲端狀態",
+                                   "refreshCloudPrompt":  "請先登入 Hope 雲端帳號以同步雲端狀態。",
+                                   "submitReview":  "提交審核",
+                                   "submitSuccess":  "已提交審核。",
+                                   "loginToSubmit":  "登入後提交",
+                                   "loginToSubmitPrompt":  "請先登入 Hope 雲端帳號以提交審核。",
+                                   "filter":  {
+                                                  "all":  "全部",
+                                                  "enabled":  "已啟用",
+                                                  "disabled":  "已停用",
+                                                  "needsConfig":  "需設定",
+                                                  "draft":  "草稿",
+                                                  "local":  "本地",
+                                                  "pendingReview":  "待審核",
+                                                  "published":  "已發布"
+                                              },
+                                   "localState":  {
+                                                      "enabled":  "已啟用",
+                                                      "disabled":  "已停用",
+                                                      "needsConfig":  "需設定",
+                                                      "draft":  "草稿"
+                                                  },
+                                   "state":  {
+                                                 "published":  "已發布",
+                                                 "pendingReview":  "待審核",
+                                                 "notPublished":  "本地",
+                                                 "unknown":  "未知",
+                                                 "cloudFailed":  "雲端失敗"
+                                             }
+                               },
+                  "cloud":  {
+                                "title":  "雲端帳號",
+                                "notSignedIn":  "尚未登入雲端帳號",
+                                "login":  "登入",
+                                "logout":  "登出",
+                                "loginTitle":  "登入 TPA CoWork 雲端帳號",
+                                "loginDescription":  "輸入 TPA CoWork 雲端帳號以重新整理 SkillHub 與審核狀態。",
+                                "serverUrl":  "雲端服務位址",
+                                "username":  "使用者名稱",
+                                "password":  "密碼",
+                                "loggingIn":  "登入中...",
+                                "signedInAs":  "已登入：{{username}}"
+                            },
+                  "skillhub":  {
+                                   "title":  "SkillHub",
+                                   "subtitle":  "瀏覽、搜尋並安裝公開技能。",
+                                   "searchPlaceholder":  "搜尋技能",
+                                   "search":  "搜尋",
+                                   "refresh":  "重新整理",
+                                   "empty":  "目前沒有公開技能",
+                                   "emptyHint":  "搜尋 SkillHub 或重新整理清單。",
+                                   "download":  "下載",
+                                   "downloaded":  "技能已下載。請到我的 Skill 查看。",
+                                   "downloadedOverwrite":  "已覆蓋本地技能。請到我的 Skill 查看。",
+                                   "overwriteTitle":  "覆蓋本地 Skill？",
+                                   "overwriteDescription":  "本地已存在名為 {{name}} 的 Skill。繼續下載會替換該 Skill 的檔案。",
+                                   "overwriteConfirm":  "覆蓋",
+                                   "freshness":  {
+                                                     "localNewer":  "本地版本看起來比伺服器更新。",
+                                                     "remoteNewer":  "伺服器版本看起來比本地更新。",
+                                                     "same":  "本地與伺服器版本看起來相同。",
+                                                     "unknown":  "無法比較本地與伺服器哪個更新。",
+                                                     "versions":  "本地：{{local}} · 伺服器：{{remote}}",
+                                                     "na":  "未知"
+                                                 }
+                               }
+              },
+    "pt":  {
+               "mySkills":  {
+                                "title":  "My Skills",
+                                "subtitle":  "Local user skills with optional cloud review badges.",
+                                "count":  "{{count}} local skills",
+                                "empty":  "No local user skills found.",
+                                "emptyHint":  "Install or create a local skill first.",
+                                "noMatches":  "No skills match the current filters.",
+                                "noDescription":  "No description",
+                                "searchPlaceholder":  "Search local skills",
+                                "refreshLocal":  "Refresh status",
+                                "refreshStatus":  "Refresh status",
+                                "retry":  "Retry",
+                                "openDirectory":  "Open directory",
+                                "refreshCloud":  "Sync cloud status",
+                                "refreshCloudPrompt":  "Log in to Hope Cloud before syncing cloud status.",
+                                "submitReview":  "Submit review",
+                                "submitSuccess":  "Submitted for review.",
+                                "loginToSubmit":  "Log in to submit",
+                                "loginToSubmitPrompt":  "Log in to Hope Cloud before submitting for review.",
+                                "filter":  {
+                                               "all":  "All",
+                                               "enabled":  "Enabled",
+                                               "disabled":  "Disabled",
+                                               "needsConfig":  "Needs setup",
+                                               "draft":  "Draft",
+                                               "local":  "Local",
+                                               "pendingReview":  "In review",
+                                               "published":  "Published"
+                                           },
+                                "localState":  {
+                                                   "enabled":  "Enabled",
+                                                   "disabled":  "Disabled",
+                                                   "needsConfig":  "Needs setup",
+                                                   "draft":  "Draft"
+                                               },
+                                "state":  {
+                                              "published":  "Published",
+                                              "pendingReview":  "In review",
+                                              "notPublished":  "Local",
+                                              "unknown":  "Unknown",
+                                              "cloudFailed":  "Cloud failed"
+                                          }
+                            },
+               "cloud":  {
+                             "title":  "Cloud account",
+                             "notSignedIn":  "Not signed in to TPA CoWork Cloud",
+                             "login":  "Log in",
+                             "logout":  "Log out",
+                             "loginTitle":  "Log in to TPA CoWork Cloud",
+                             "loginDescription":  "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+                             "serverUrl":  "Cloud server URL",
+                             "username":  "Username",
+                             "password":  "Password",
+                             "loggingIn":  "Logging in...",
+                             "signedInAs":  "Signed in as {{username}}"
+                         },
+               "skillhub":  {
+                                "title":  "SkillHub",
+                                "subtitle":  "Browse, search, and install public skills.",
+                                "searchPlaceholder":  "Search skills",
+                                "search":  "Search",
+                                "refresh":  "Refresh",
+                                "empty":  "No public skills yet.",
+                                "emptyHint":  "Search SkillHub or refresh the list.",
+                                "download":  "Download",
+                                "downloaded":  "Skill downloaded. Check My Skills to use it.",
+                                "downloadedOverwrite":  "Local skill overwritten. Check My Skills to use it.",
+                                "overwriteTitle":  "Overwrite local skill?",
+                                "overwriteDescription":  "A local skill named {{name}} already exists. Downloading will replace that skill\u0027s files.",
+                                "overwriteConfirm":  "Overwrite",
+                                "freshness":  {
+                                                  "localNewer":  "Local copy looks newer than the server package.",
+                                                  "remoteNewer":  "Server package looks newer than the local copy.",
+                                                  "same":  "Local and server versions look the same.",
+                                                  "unknown":  "Could not compare which copy is newer.",
+                                                  "versions":  "Local: {{local}} · Server: {{remote}}",
+                                                  "na":  "n/a"
+                                              }
+                            }
+           },
+    "ko":  {
+               "mySkills":  {
+                                "title":  "My Skills",
+                                "subtitle":  "Local user skills with optional cloud review badges.",
+                                "count":  "{{count}} local skills",
+                                "empty":  "No local user skills found.",
+                                "emptyHint":  "Install or create a local skill first.",
+                                "noMatches":  "No skills match the current filters.",
+                                "noDescription":  "No description",
+                                "searchPlaceholder":  "Search local skills",
+                                "refreshLocal":  "Refresh status",
+                                "refreshStatus":  "Refresh status",
+                                "retry":  "Retry",
+                                "openDirectory":  "Open directory",
+                                "refreshCloud":  "Sync cloud status",
+                                "refreshCloudPrompt":  "Log in to Hope Cloud before syncing cloud status.",
+                                "submitReview":  "Submit review",
+                                "submitSuccess":  "Submitted for review.",
+                                "loginToSubmit":  "Log in to submit",
+                                "loginToSubmitPrompt":  "Log in to Hope Cloud before submitting for review.",
+                                "filter":  {
+                                               "all":  "All",
+                                               "enabled":  "Enabled",
+                                               "disabled":  "Disabled",
+                                               "needsConfig":  "Needs setup",
+                                               "draft":  "Draft",
+                                               "local":  "Local",
+                                               "pendingReview":  "In review",
+                                               "published":  "Published"
+                                           },
+                                "localState":  {
+                                                   "enabled":  "Enabled",
+                                                   "disabled":  "Disabled",
+                                                   "needsConfig":  "Needs setup",
+                                                   "draft":  "Draft"
+                                               },
+                                "state":  {
+                                              "published":  "Published",
+                                              "pendingReview":  "In review",
+                                              "notPublished":  "Local",
+                                              "unknown":  "Unknown",
+                                              "cloudFailed":  "Cloud failed"
+                                          }
+                            },
+               "cloud":  {
+                             "title":  "Cloud account",
+                             "notSignedIn":  "Not signed in to TPA CoWork Cloud",
+                             "login":  "Log in",
+                             "logout":  "Log out",
+                             "loginTitle":  "Log in to TPA CoWork Cloud",
+                             "loginDescription":  "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+                             "serverUrl":  "Cloud server URL",
+                             "username":  "Username",
+                             "password":  "Password",
+                             "loggingIn":  "Logging in...",
+                             "signedInAs":  "Signed in as {{username}}"
+                         },
+               "skillhub":  {
+                                "title":  "SkillHub",
+                                "subtitle":  "Browse, search, and install public skills.",
+                                "searchPlaceholder":  "Search skills",
+                                "search":  "Search",
+                                "refresh":  "Refresh",
+                                "empty":  "No public skills yet.",
+                                "emptyHint":  "Search SkillHub or refresh the list.",
+                                "download":  "Download",
+                                "downloaded":  "Skill downloaded. Check My Skills to use it.",
+                                "downloadedOverwrite":  "Local skill overwritten. Check My Skills to use it.",
+                                "overwriteTitle":  "Overwrite local skill?",
+                                "overwriteDescription":  "A local skill named {{name}} already exists. Downloading will replace that skill\u0027s files.",
+                                "overwriteConfirm":  "Overwrite",
+                                "freshness":  {
+                                                  "localNewer":  "Local copy looks newer than the server package.",
+                                                  "remoteNewer":  "Server package looks newer than the local copy.",
+                                                  "same":  "Local and server versions look the same.",
+                                                  "unknown":  "Could not compare which copy is newer.",
+                                                  "versions":  "Local: {{local}} · Server: {{remote}}",
+                                                  "na":  "n/a"
+                                              }
+                            }
+           },
+    "en":  {
+               "mySkills":  {
+                                "title":  "My Skills",
+                                "subtitle":  "Local user skills with optional cloud review badges.",
+                                "count":  "{{count}} local skills",
+                                "empty":  "No local user skills found.",
+                                "emptyHint":  "Install or create a local skill first.",
+                                "noMatches":  "No skills match the current filters.",
+                                "noDescription":  "No description",
+                                "searchPlaceholder":  "Search local skills",
+                                "refreshLocal":  "Refresh status",
+                                "refreshStatus":  "Refresh status",
+                                "retry":  "Retry",
+                                "openDirectory":  "Open directory",
+                                "refreshCloud":  "Sync cloud status",
+                                "refreshCloudPrompt":  "Log in to Hope Cloud before syncing cloud status.",
+                                "submitReview":  "Submit review",
+                                "submitSuccess":  "Submitted for review.",
+                                "loginToSubmit":  "Log in to submit",
+                                "loginToSubmitPrompt":  "Log in to Hope Cloud before submitting for review.",
+                                "filter":  {
+                                               "all":  "All",
+                                               "enabled":  "Enabled",
+                                               "disabled":  "Disabled",
+                                               "needsConfig":  "Needs setup",
+                                               "draft":  "Draft",
+                                               "local":  "Local",
+                                               "pendingReview":  "In review",
+                                               "published":  "Published"
+                                           },
+                                "localState":  {
+                                                   "enabled":  "Enabled",
+                                                   "disabled":  "Disabled",
+                                                   "needsConfig":  "Needs setup",
+                                                   "draft":  "Draft"
+                                               },
+                                "state":  {
+                                              "published":  "Published",
+                                              "pendingReview":  "In review",
+                                              "notPublished":  "Local",
+                                              "unknown":  "Unknown",
+                                              "cloudFailed":  "Cloud failed"
+                                          }
+                            },
+               "cloud":  {
+                             "title":  "Cloud account",
+                             "notSignedIn":  "Not signed in to TPA CoWork Cloud",
+                             "login":  "Log in",
+                             "logout":  "Log out",
+                             "loginTitle":  "Log in to TPA CoWork Cloud",
+                             "loginDescription":  "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+                             "serverUrl":  "Cloud server URL",
+                             "username":  "Username",
+                             "password":  "Password",
+                             "loggingIn":  "Logging in...",
+                             "signedInAs":  "Signed in as {{username}}"
+                         },
+               "skillhub":  {
+                                "title":  "SkillHub",
+                                "subtitle":  "Browse, search, and install public skills.",
+                                "searchPlaceholder":  "Search skills",
+                                "search":  "Search",
+                                "refresh":  "Refresh",
+                                "empty":  "No public skills yet.",
+                                "emptyHint":  "Search SkillHub or refresh the list.",
+                                "download":  "Download",
+                                "downloaded":  "Skill downloaded. Check My Skills to use it.",
+                                "downloadedOverwrite":  "Local skill overwritten. Check My Skills to use it.",
+                                "overwriteTitle":  "Overwrite local skill?",
+                                "overwriteDescription":  "A local skill named {{name}} already exists. Downloading will replace that skill\u0027s files.",
+                                "overwriteConfirm":  "Overwrite",
+                                "freshness":  {
+                                                  "localNewer":  "Local copy looks newer than the server package.",
+                                                  "remoteNewer":  "Server package looks newer than the local copy.",
+                                                  "same":  "Local and server versions look the same.",
+                                                  "unknown":  "Could not compare which copy is newer.",
+                                                  "versions":  "Local: {{local}} · Server: {{remote}}",
+                                                  "na":  "n/a"
+                                              }
+                            }
+           },
+    "ru":  {
+               "mySkills":  {
+                                "title":  "My Skills",
+                                "subtitle":  "Local user skills with optional cloud review badges.",
+                                "count":  "{{count}} local skills",
+                                "empty":  "No local user skills found.",
+                                "emptyHint":  "Install or create a local skill first.",
+                                "noMatches":  "No skills match the current filters.",
+                                "noDescription":  "No description",
+                                "searchPlaceholder":  "Search local skills",
+                                "refreshLocal":  "Refresh status",
+                                "refreshStatus":  "Refresh status",
+                                "retry":  "Retry",
+                                "openDirectory":  "Open directory",
+                                "refreshCloud":  "Sync cloud status",
+                                "refreshCloudPrompt":  "Log in to Hope Cloud before syncing cloud status.",
+                                "submitReview":  "Submit review",
+                                "submitSuccess":  "Submitted for review.",
+                                "loginToSubmit":  "Log in to submit",
+                                "loginToSubmitPrompt":  "Log in to Hope Cloud before submitting for review.",
+                                "filter":  {
+                                               "all":  "All",
+                                               "enabled":  "Enabled",
+                                               "disabled":  "Disabled",
+                                               "needsConfig":  "Needs setup",
+                                               "draft":  "Draft",
+                                               "local":  "Local",
+                                               "pendingReview":  "In review",
+                                               "published":  "Published"
+                                           },
+                                "localState":  {
+                                                   "enabled":  "Enabled",
+                                                   "disabled":  "Disabled",
+                                                   "needsConfig":  "Needs setup",
+                                                   "draft":  "Draft"
+                                               },
+                                "state":  {
+                                              "published":  "Published",
+                                              "pendingReview":  "In review",
+                                              "notPublished":  "Local",
+                                              "unknown":  "Unknown",
+                                              "cloudFailed":  "Cloud failed"
+                                          }
+                            },
+               "cloud":  {
+                             "title":  "Cloud account",
+                             "notSignedIn":  "Not signed in to TPA CoWork Cloud",
+                             "login":  "Log in",
+                             "logout":  "Log out",
+                             "loginTitle":  "Log in to TPA CoWork Cloud",
+                             "loginDescription":  "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+                             "serverUrl":  "Cloud server URL",
+                             "username":  "Username",
+                             "password":  "Password",
+                             "loggingIn":  "Logging in...",
+                             "signedInAs":  "Signed in as {{username}}"
+                         },
+               "skillhub":  {
+                                "title":  "SkillHub",
+                                "subtitle":  "Browse, search, and install public skills.",
+                                "searchPlaceholder":  "Search skills",
+                                "search":  "Search",
+                                "refresh":  "Refresh",
+                                "empty":  "No public skills yet.",
+                                "emptyHint":  "Search SkillHub or refresh the list.",
+                                "download":  "Download",
+                                "downloaded":  "Skill downloaded. Check My Skills to use it.",
+                                "downloadedOverwrite":  "Local skill overwritten. Check My Skills to use it.",
+                                "overwriteTitle":  "Overwrite local skill?",
+                                "overwriteDescription":  "A local skill named {{name}} already exists. Downloading will replace that skill\u0027s files.",
+                                "overwriteConfirm":  "Overwrite",
+                                "freshness":  {
+                                                  "localNewer":  "Local copy looks newer than the server package.",
+                                                  "remoteNewer":  "Server package looks newer than the local copy.",
+                                                  "same":  "Local and server versions look the same.",
+                                                  "unknown":  "Could not compare which copy is newer.",
+                                                  "versions":  "Local: {{local}} · Server: {{remote}}",
+                                                  "na":  "n/a"
+                                              }
+                            }
+           },
+    "ms":  {
+               "mySkills":  {
+                                "title":  "My Skills",
+                                "subtitle":  "Local user skills with optional cloud review badges.",
+                                "count":  "{{count}} local skills",
+                                "empty":  "No local user skills found.",
+                                "emptyHint":  "Install or create a local skill first.",
+                                "noMatches":  "No skills match the current filters.",
+                                "noDescription":  "No description",
+                                "searchPlaceholder":  "Search local skills",
+                                "refreshLocal":  "Refresh status",
+                                "refreshStatus":  "Refresh status",
+                                "retry":  "Retry",
+                                "openDirectory":  "Open directory",
+                                "refreshCloud":  "Sync cloud status",
+                                "refreshCloudPrompt":  "Log in to Hope Cloud before syncing cloud status.",
+                                "submitReview":  "Submit review",
+                                "submitSuccess":  "Submitted for review.",
+                                "loginToSubmit":  "Log in to submit",
+                                "loginToSubmitPrompt":  "Log in to Hope Cloud before submitting for review.",
+                                "filter":  {
+                                               "all":  "All",
+                                               "enabled":  "Enabled",
+                                               "disabled":  "Disabled",
+                                               "needsConfig":  "Needs setup",
+                                               "draft":  "Draft",
+                                               "local":  "Local",
+                                               "pendingReview":  "In review",
+                                               "published":  "Published"
+                                           },
+                                "localState":  {
+                                                   "enabled":  "Enabled",
+                                                   "disabled":  "Disabled",
+                                                   "needsConfig":  "Needs setup",
+                                                   "draft":  "Draft"
+                                               },
+                                "state":  {
+                                              "published":  "Published",
+                                              "pendingReview":  "In review",
+                                              "notPublished":  "Local",
+                                              "unknown":  "Unknown",
+                                              "cloudFailed":  "Cloud failed"
+                                          }
+                            },
+               "cloud":  {
+                             "title":  "Cloud account",
+                             "notSignedIn":  "Not signed in to TPA CoWork Cloud",
+                             "login":  "Log in",
+                             "logout":  "Log out",
+                             "loginTitle":  "Log in to TPA CoWork Cloud",
+                             "loginDescription":  "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+                             "serverUrl":  "Cloud server URL",
+                             "username":  "Username",
+                             "password":  "Password",
+                             "loggingIn":  "Logging in...",
+                             "signedInAs":  "Signed in as {{username}}"
+                         },
+               "skillhub":  {
+                                "title":  "SkillHub",
+                                "subtitle":  "Browse, search, and install public skills.",
+                                "searchPlaceholder":  "Search skills",
+                                "search":  "Search",
+                                "refresh":  "Refresh",
+                                "empty":  "No public skills yet.",
+                                "emptyHint":  "Search SkillHub or refresh the list.",
+                                "download":  "Download",
+                                "downloaded":  "Skill downloaded. Check My Skills to use it.",
+                                "downloadedOverwrite":  "Local skill overwritten. Check My Skills to use it.",
+                                "overwriteTitle":  "Overwrite local skill?",
+                                "overwriteDescription":  "A local skill named {{name}} already exists. Downloading will replace that skill\u0027s files.",
+                                "overwriteConfirm":  "Overwrite",
+                                "freshness":  {
+                                                  "localNewer":  "Local copy looks newer than the server package.",
+                                                  "remoteNewer":  "Server package looks newer than the local copy.",
+                                                  "same":  "Local and server versions look the same.",
+                                                  "unknown":  "Could not compare which copy is newer.",
+                                                  "versions":  "Local: {{local}} · Server: {{remote}}",
+                                                  "na":  "n/a"
+                                              }
+                            }
+           },
+    "es":  {
+               "mySkills":  {
+                                "title":  "My Skills",
+                                "subtitle":  "Local user skills with optional cloud review badges.",
+                                "count":  "{{count}} local skills",
+                                "empty":  "No local user skills found.",
+                                "emptyHint":  "Install or create a local skill first.",
+                                "noMatches":  "No skills match the current filters.",
+                                "noDescription":  "No description",
+                                "searchPlaceholder":  "Search local skills",
+                                "refreshLocal":  "Refresh status",
+                                "refreshStatus":  "Refresh status",
+                                "retry":  "Retry",
+                                "openDirectory":  "Open directory",
+                                "refreshCloud":  "Sync cloud status",
+                                "refreshCloudPrompt":  "Log in to Hope Cloud before syncing cloud status.",
+                                "submitReview":  "Submit review",
+                                "submitSuccess":  "Submitted for review.",
+                                "loginToSubmit":  "Log in to submit",
+                                "loginToSubmitPrompt":  "Log in to Hope Cloud before submitting for review.",
+                                "filter":  {
+                                               "all":  "All",
+                                               "enabled":  "Enabled",
+                                               "disabled":  "Disabled",
+                                               "needsConfig":  "Needs setup",
+                                               "draft":  "Draft",
+                                               "local":  "Local",
+                                               "pendingReview":  "In review",
+                                               "published":  "Published"
+                                           },
+                                "localState":  {
+                                                   "enabled":  "Enabled",
+                                                   "disabled":  "Disabled",
+                                                   "needsConfig":  "Needs setup",
+                                                   "draft":  "Draft"
+                                               },
+                                "state":  {
+                                              "published":  "Published",
+                                              "pendingReview":  "In review",
+                                              "notPublished":  "Local",
+                                              "unknown":  "Unknown",
+                                              "cloudFailed":  "Cloud failed"
+                                          }
+                            },
+               "cloud":  {
+                             "title":  "Cloud account",
+                             "notSignedIn":  "Not signed in to TPA CoWork Cloud",
+                             "login":  "Log in",
+                             "logout":  "Log out",
+                             "loginTitle":  "Log in to TPA CoWork Cloud",
+                             "loginDescription":  "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+                             "serverUrl":  "Cloud server URL",
+                             "username":  "Username",
+                             "password":  "Password",
+                             "loggingIn":  "Logging in...",
+                             "signedInAs":  "Signed in as {{username}}"
+                         },
+               "skillhub":  {
+                                "title":  "SkillHub",
+                                "subtitle":  "Browse, search, and install public skills.",
+                                "searchPlaceholder":  "Search skills",
+                                "search":  "Search",
+                                "refresh":  "Refresh",
+                                "empty":  "No public skills yet.",
+                                "emptyHint":  "Search SkillHub or refresh the list.",
+                                "download":  "Download",
+                                "downloaded":  "Skill downloaded. Check My Skills to use it.",
+                                "downloadedOverwrite":  "Local skill overwritten. Check My Skills to use it.",
+                                "overwriteTitle":  "Overwrite local skill?",
+                                "overwriteDescription":  "A local skill named {{name}} already exists. Downloading will replace that skill\u0027s files.",
+                                "overwriteConfirm":  "Overwrite",
+                                "freshness":  {
+                                                  "localNewer":  "Local copy looks newer than the server package.",
+                                                  "remoteNewer":  "Server package looks newer than the local copy.",
+                                                  "same":  "Local and server versions look the same.",
+                                                  "unknown":  "Could not compare which copy is newer.",
+                                                  "versions":  "Local: {{local}} · Server: {{remote}}",
+                                                  "na":  "n/a"
+                                              }
+                            }
+           },
+    "zh":  {
+               "mySkills":  {
+                                "title":  "我的 Skill",
+                                "subtitle":  "本地用户技能，云端审核结果仅作次级标记。",
+                                "count":  "共 {{count}} 个本地技能",
+                                "empty":  "未找到本地用户技能。",
+                                "emptyHint":  "请先安装或创建本地 skill。",
+                                "noMatches":  "没有符合当前筛选的技能。",
+                                "noDescription":  "暂无描述",
+                                "searchPlaceholder":  "搜索本地技能",
+                                "refreshLocal":  "刷新状态",
+                                "refreshStatus":  "刷新状态",
+                                "retry":  "重试",
+                                "openDirectory":  "打开目录",
+                                "refreshCloud":  "同步云端状态",
+                                "refreshCloudPrompt":  "请先登录 Hope 云端账号以同步云端状态。",
+                                "submitReview":  "提交审核",
+                                "submitSuccess":  "已提交审核。",
+                                "loginToSubmit":  "登录后提交",
+                                "loginToSubmitPrompt":  "请先登录 Hope 云端账号以提交审核。",
+                                "filter":  {
+                                               "all":  "全部",
+                                               "enabled":  "已启用",
+                                               "disabled":  "已禁用",
+                                               "needsConfig":  "需配置",
+                                               "draft":  "草稿",
+                                               "local":  "本地",
+                                               "pendingReview":  "待审核",
+                                               "published":  "已发布"
+                                           },
+                                "localState":  {
+                                                   "enabled":  "已启用",
+                                                   "disabled":  "已禁用",
+                                                   "needsConfig":  "需配置",
+                                                   "draft":  "草稿"
+                                               },
+                                "state":  {
+                                              "published":  "已发布",
+                                              "pendingReview":  "待审核",
+                                              "notPublished":  "本地",
+                                              "unknown":  "未知",
+                                              "cloudFailed":  "云端失败"
+                                          }
+                            },
+               "cloud":  {
+                             "title":  "云端账号",
+                             "notSignedIn":  "未登录云端账号",
+                             "login":  "登录",
+                             "logout":  "退出登录",
+                             "loginTitle":  "登录 TPA CoWork 云端账号",
+                             "loginDescription":  "输入 TPA CoWork 云端账号以刷新 SkillHub 与审核状态。",
+                             "serverUrl":  "云端服务地址",
+                             "username":  "用户名",
+                             "password":  "密码",
+                             "loggingIn":  "登录中...",
+                             "signedInAs":  "已登录：{{username}}"
+                         },
+               "skillhub":  {
+                                "title":  "SkillHub",
+                                "subtitle":  "浏览、搜索并安装公开技能。",
+                                "searchPlaceholder":  "搜索技能",
+                                "search":  "搜索",
+                                "refresh":  "刷新",
+                                "empty":  "暂无公开技能",
+                                "emptyHint":  "搜索 SkillHub 或刷新列表。",
+                                "download":  "下载",
+                                "downloaded":  "技能已下载。请到我的 Skill 查看。",
+                                "downloadedOverwrite":  "已覆盖本地技能。请到我的 Skill 查看。",
+                                "overwriteTitle":  "覆盖本地 Skill？",
+                                "overwriteDescription":  "本地已存在名为 {{name}} 的 Skill。继续下载会替换该 Skill 的文件。",
+                                "overwriteConfirm":  "覆盖",
+                                "freshness":  {
+                                                  "localNewer":  "本地版本看起来比服务端更新。",
+                                                  "remoteNewer":  "服务端版本看起来比本地更新。",
+                                                  "same":  "本地与服务端版本看起来相同。",
+                                                  "unknown":  "无法比较本地与服务端哪个更新。",
+                                                  "versions":  "本地：{{local}} · 服务端：{{remote}}",
+                                                  "na":  "未知"
+                                              }
+                            }
+           },
+    "ar":  {
+               "mySkills":  {
+                                "title":  "My Skills",
+                                "subtitle":  "Local user skills with optional cloud review badges.",
+                                "count":  "{{count}} local skills",
+                                "empty":  "No local user skills found.",
+                                "emptyHint":  "Install or create a local skill first.",
+                                "noMatches":  "No skills match the current filters.",
+                                "noDescription":  "No description",
+                                "searchPlaceholder":  "Search local skills",
+                                "refreshLocal":  "Refresh status",
+                                "refreshStatus":  "Refresh status",
+                                "retry":  "Retry",
+                                "openDirectory":  "Open directory",
+                                "refreshCloud":  "Sync cloud status",
+                                "refreshCloudPrompt":  "Log in to Hope Cloud before syncing cloud status.",
+                                "submitReview":  "Submit review",
+                                "submitSuccess":  "Submitted for review.",
+                                "loginToSubmit":  "Log in to submit",
+                                "loginToSubmitPrompt":  "Log in to Hope Cloud before submitting for review.",
+                                "filter":  {
+                                               "all":  "All",
+                                               "enabled":  "Enabled",
+                                               "disabled":  "Disabled",
+                                               "needsConfig":  "Needs setup",
+                                               "draft":  "Draft",
+                                               "local":  "Local",
+                                               "pendingReview":  "In review",
+                                               "published":  "Published"
+                                           },
+                                "localState":  {
+                                                   "enabled":  "Enabled",
+                                                   "disabled":  "Disabled",
+                                                   "needsConfig":  "Needs setup",
+                                                   "draft":  "Draft"
+                                               },
+                                "state":  {
+                                              "published":  "Published",
+                                              "pendingReview":  "In review",
+                                              "notPublished":  "Local",
+                                              "unknown":  "Unknown",
+                                              "cloudFailed":  "Cloud failed"
+                                          }
+                            },
+               "cloud":  {
+                             "title":  "Cloud account",
+                             "notSignedIn":  "Not signed in to TPA CoWork Cloud",
+                             "login":  "Log in",
+                             "logout":  "Log out",
+                             "loginTitle":  "Log in to TPA CoWork Cloud",
+                             "loginDescription":  "Enter TPA CoWork Cloud credentials to refresh SkillHub and review status.",
+                             "serverUrl":  "Cloud server URL",
+                             "username":  "Username",
+                             "password":  "Password",
+                             "loggingIn":  "Logging in...",
+                             "signedInAs":  "Signed in as {{username}}"
+                         },
+               "skillhub":  {
+                                "title":  "SkillHub",
+                                "subtitle":  "Browse, search, and install public skills.",
+                                "searchPlaceholder":  "Search skills",
+                                "search":  "Search",
+                                "refresh":  "Refresh",
+                                "empty":  "No public skills yet.",
+                                "emptyHint":  "Search SkillHub or refresh the list.",
+                                "download":  "Download",
+                                "downloaded":  "Skill downloaded. Check My Skills to use it.",
+                                "downloadedOverwrite":  "Local skill overwritten. Check My Skills to use it.",
+                                "overwriteTitle":  "Overwrite local skill?",
+                                "overwriteDescription":  "A local skill named {{name}} already exists. Downloading will replace that skill\u0027s files.",
+                                "overwriteConfirm":  "Overwrite",
+                                "freshness":  {
+                                                  "localNewer":  "Local copy looks newer than the server package.",
+                                                  "remoteNewer":  "Server package looks newer than the local copy.",
+                                                  "same":  "Local and server versions look the same.",
+                                                  "unknown":  "Could not compare which copy is newer.",
+                                                  "versions":  "Local: {{local}} · Server: {{remote}}",
+                                                  "na":  "n/a"
+                                              }
+                            }
+           }
+}

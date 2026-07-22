@@ -51,7 +51,6 @@ docs/plan/*
 .claude/
 
 # Temporary build & scratch artifacts
-.scratch/*
-!.scratch/tpa-cowork-customization-spec.md
+.scratch/pack-local-tauri-config.json
 pack.md
 

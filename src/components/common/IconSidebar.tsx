@@ -159,10 +159,10 @@ export default function IconSidebar({
                 variant="ghost"
                 size="icon"
                 className={cn(
-                  "rounded-xl h-8 w-8",
+                  "rounded-xl h-8 w-8 transition-all duration-200",
                   view === "chat"
-                    ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                    : "text-muted-foreground hover:text-foreground",
+                    ? "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400"
+                    : "text-muted-foreground hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-500/10",
                 )}
                 onClick={onOpenChat}
                 aria-label={conversationsAriaLabel}
@@ -204,10 +204,10 @@ export default function IconSidebar({
                 variant="ghost"
                 size="icon"
                 className={cn(
-                  "rounded-xl h-8 w-8",
+                  "rounded-xl h-8 w-8 transition-all duration-200",
                   view === "knowledge"
-                    ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                    : "text-muted-foreground hover:text-foreground",
+                    ? "bg-blue-500/15 text-blue-600 dark:text-blue-400"
+                    : "text-muted-foreground hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-500/10",
                 )}
                 onClick={onOpenKnowledge}
               >
@@ -222,10 +222,10 @@ export default function IconSidebar({
                 variant="ghost"
                 size="icon"
                 className={cn(
-                  "rounded-xl h-8 w-8",
+                  "rounded-xl h-8 w-8 transition-all duration-200",
                   view === "design"
-                    ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                    : "text-muted-foreground hover:text-foreground",
+                    ? "bg-purple-500/15 text-purple-600 dark:text-purple-400"
+                    : "text-muted-foreground hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-500/10",
                 )}
                 onClick={onOpenDesign}
               >
@@ -240,10 +240,10 @@ export default function IconSidebar({
                 variant="ghost"
                 size="icon"
                 className={cn(
-                  "rounded-xl h-8 w-8",
+                  "rounded-xl h-8 w-8 transition-all duration-200",
                   view === "artifacts"
-                    ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                    : "text-muted-foreground hover:text-foreground",
+                    ? "bg-yellow-500/15 text-yellow-600 dark:text-yellow-400"
+                    : "text-muted-foreground hover:text-yellow-600 dark:hover:text-yellow-400 hover:bg-yellow-500/10",
                 )}
                 onClick={onOpenArtifacts}
               >
@@ -261,10 +261,10 @@ export default function IconSidebar({
                       variant="ghost"
                       size="icon"
                       className={cn(
-                        "rounded-xl h-8 w-8",
+                        "rounded-xl h-8 w-8 transition-all duration-200",
                         view === "calendar"
-                          ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                          : "text-muted-foreground hover:text-foreground",
+                          ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
+                          : "text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/10",
                       )}
                       onClick={onOpenCalendar}
                     >
@@ -296,10 +296,10 @@ export default function IconSidebar({
                 variant="ghost"
                 size="icon"
                 className={cn(
-                  "rounded-xl h-8 w-8",
+                  "rounded-xl h-8 w-8 transition-all duration-200",
                   view === "dashboard"
-                    ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                    : "text-muted-foreground hover:text-foreground",
+                    ? "bg-amber-500/15 text-amber-600 dark:text-amber-400"
+                    : "text-muted-foreground hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-500/10",
                 )}
                 onClick={onOpenDashboard}
               >
@@ -319,10 +319,10 @@ export default function IconSidebar({
                 variant="ghost"
                 size="icon"
                 className={cn(
-                  "rounded-xl h-8 w-8",
+                  "rounded-xl h-8 w-8 transition-all duration-200",
                   view === "agents"
-                    ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                    : "text-muted-foreground hover:text-foreground",
+                    ? "bg-violet-500/15 text-violet-600 dark:text-violet-400"
+                    : "text-muted-foreground hover:text-violet-600 dark:hover:text-violet-400 hover:bg-violet-500/10",
                 )}
                 onClick={onOpenAgents}
               >
@@ -338,10 +338,10 @@ export default function IconSidebar({
                 variant="ghost"
                 size="icon"
                 className={cn(
-                  "rounded-xl h-8 w-8",
+                  "rounded-xl h-8 w-8 transition-all duration-200",
                   view === "modelConfig"
-                    ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                    : "text-muted-foreground hover:text-foreground",
+                    ? "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400"
+                    : "text-muted-foreground hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-500/10",
                 )}
                 onClick={onOpenModelConfig}
               >
@@ -357,10 +357,10 @@ export default function IconSidebar({
                 variant="ghost"
                 size="icon"
                 className={cn(
-                  "rounded-xl h-8 w-8",
+                  "rounded-xl h-8 w-8 transition-all duration-200",
                   view === "channels"
-                    ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                    : "text-muted-foreground hover:text-foreground",
+                    ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
+                    : "text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/10",
                 )}
                 onClick={onOpenChannels}
               >
@@ -377,10 +377,10 @@ export default function IconSidebar({
                   variant="ghost"
                   size="icon"
                   className={cn(
-                    "rounded-xl h-8 w-8",
+                    "rounded-xl h-8 w-8 transition-all duration-200",
                     view === "skills"
-                      ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                      : "text-muted-foreground hover:text-foreground",
+                      ? "bg-amber-500/15 text-amber-600 dark:text-amber-400"
+                      : "text-muted-foreground hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-500/10",
                   )}
                   onClick={onOpenSkills}
                 >
@@ -403,10 +403,10 @@ export default function IconSidebar({
                   variant="ghost"
                   size="icon"
                   className={cn(
-                    "rounded-xl h-8 w-8",
+                    "rounded-xl h-8 w-8 transition-all duration-200",
                     view === "skillhub"
-                      ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                      : "text-muted-foreground hover:text-foreground",
+                      ? "bg-orange-500/15 text-orange-600 dark:text-orange-400"
+                      : "text-muted-foreground hover:text-orange-600 dark:hover:text-orange-400 hover:bg-orange-500/10",
                   )}
                   onClick={onOpenSkillHub}
                 >
@@ -424,10 +424,10 @@ export default function IconSidebar({
                   variant="ghost"
                   size="icon"
                   className={cn(
-                    "rounded-xl h-8 w-8",
+                    "rounded-xl h-8 w-8 transition-all duration-200",
                     view === "mySkills"
-                      ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                      : "text-muted-foreground hover:text-foreground",
+                      ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
+                      : "text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/10",
                   )}
                   onClick={onOpenMySkills}
                 >
@@ -444,10 +444,10 @@ export default function IconSidebar({
                 variant="ghost"
                 size="icon"
                 className={cn(
-                  "rounded-xl h-8 w-8",
+                  "rounded-xl h-8 w-8 transition-all duration-200",
                   view === "memory"
-                    ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                    : "text-muted-foreground hover:text-foreground",
+                    ? "bg-pink-500/15 text-pink-600 dark:text-pink-400"
+                    : "text-muted-foreground hover:text-pink-600 dark:hover:text-pink-400 hover:bg-pink-500/10",
                 )}
                 onClick={onOpenMemory}
               >
@@ -472,10 +472,10 @@ export default function IconSidebar({
               variant="ghost"
               size="icon"
               className={cn(
-                "rounded-xl h-8 w-8",
+                "rounded-xl h-8 w-8 transition-all duration-200",
                 view === "plans"
-                  ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                  : "text-muted-foreground hover:text-foreground",
+                  ? "bg-rose-500/15 text-rose-600 dark:text-rose-400"
+                  : "text-muted-foreground hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-500/10",
               )}
               onClick={onOpenPlans}
             >
@@ -490,7 +490,7 @@ export default function IconSidebar({
             <Button
               variant="ghost"
               size="icon"
-              className="rounded-xl h-8 w-8 text-muted-foreground hover:text-foreground"
+              className="rounded-xl h-8 w-8 text-muted-foreground hover:text-slate-600 dark:hover:text-slate-400 hover:bg-slate-500/10 transition-all duration-200"
               onClick={() => onOpenSettings("logs")}
             >
               <ScrollText className="h-4 w-4" />
@@ -511,10 +511,10 @@ export default function IconSidebar({
                 variant="ghost"
                 size="icon"
                 className={cn(
-                  "rounded-xl h-8 w-8",
+                  "rounded-xl h-8 w-8 transition-all duration-200",
                   view === "profile"
-                    ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                    : "text-muted-foreground hover:text-foreground",
+                    ? "bg-sky-500/15 text-sky-600 dark:text-sky-400"
+                    : "text-muted-foreground hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-500/10",
                 )}
                 onClick={onOpenProfile}
               >
@@ -527,7 +527,7 @@ export default function IconSidebar({
               <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-xl text-muted-foreground hover:text-foreground h-8 w-8"
+                className="rounded-xl h-8 w-8 text-muted-foreground hover:text-amber-600 hover:bg-amber-500/10 transition-all duration-200"
                 onClick={cycleTheme}
               >
                 {theme === "auto" ? (
@@ -546,7 +546,7 @@ export default function IconSidebar({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="rounded-xl text-muted-foreground hover:text-foreground h-8 w-8"
+                  className="rounded-xl h-8 w-8 text-muted-foreground hover:text-purple-600 hover:bg-purple-500/10 transition-all duration-200"
                   onClick={() => setShowLangMenu(!showLangMenu)}
                 >
                   <Languages className="h-4 w-4" />
@@ -613,7 +613,7 @@ export default function IconSidebar({
                 variant="ghost"
                 size="icon"
                 aria-label={t("help.title")}
-                className="rounded-xl h-8 w-8 text-muted-foreground hover:text-foreground"
+                className="rounded-xl h-8 w-8 text-muted-foreground hover:text-cyan-600 hover:bg-cyan-500/10 transition-all duration-200"
                 onClick={() => void openHelpWindow()}
               >
                 <BookOpenText className="h-4 w-4" />
@@ -627,10 +627,10 @@ export default function IconSidebar({
                 variant="ghost"
                 size="icon"
                 className={cn(
-                  "rounded-xl h-8 w-8",
+                  "rounded-xl h-8 w-8 transition-all duration-200",
                   view === "settings"
-                    ? "bg-secondary/70 text-foreground hover:bg-secondary/70"
-                    : "text-muted-foreground hover:text-foreground",
+                    ? "bg-slate-500/15 text-slate-700 dark:text-slate-300"
+                    : "text-muted-foreground hover:text-slate-600 hover:bg-slate-500/10",
                 )}
                 onClick={() => onOpenSettings()}
               >

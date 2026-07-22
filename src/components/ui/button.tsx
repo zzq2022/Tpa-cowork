@@ -15,7 +15,7 @@ const buttonVariants = cva(
         outline: "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground active:bg-accent/80",
         gradient: "bg-gradient-to-r from-primary via-indigo-600 to-purple-600 text-white shadow-md shadow-primary/20 hover:brightness-110 hover:shadow-lg hover:shadow-primary/30",
         glow: "bg-primary text-primary-foreground shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/35 hover:brightness-105",
-        soft: "border border-border/80 bg-surface-floating/90 text-foreground hover:bg-accent/70 hover:border-border shadow-xs",
+        soft: "border border-border/80 bg-surface-floating/90 text-foreground hover:bg-accent/70 shadow-xs",
       },
       size: {
         default: "h-9 px-4 py-2",

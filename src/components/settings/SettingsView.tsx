@@ -112,157 +112,188 @@ const HELP_CHAPTER_BY_SECTION: Partial<Record<SettingsSection, number>> = {
 const SECTIONS: SettingsSectionItem[] = [
   {
     id: "profile",
-    icon: <User className="h-4 w-4" />,
+    icon: <User className="h-3.5 w-3.5" />,
+    colorClass: "bg-sky-500",
     labelKey: "settings.profileSettings",
   },
   {
     id: "general",
-    icon: <Settings2 className="h-4 w-4" />,
+    icon: <Settings2 className="h-3.5 w-3.5" />,
+    colorClass: "bg-slate-500",
     labelKey: "settings.general",
   },
   {
     id: "modelConfig",
-    icon: <Server className="h-4 w-4" />,
+    icon: <Server className="h-3.5 w-3.5" />,
+    colorClass: "bg-indigo-500",
     labelKey: "settings.modelConfig",
   },
   {
     id: "agents",
-    icon: <Bot className="h-4 w-4" />,
+    icon: <Bot className="h-3.5 w-3.5" />,
+    colorClass: "bg-violet-500",
     labelKey: "settings.agents",
   },
   {
     id: "teams",
-    icon: <Users2 className="h-4 w-4" />,
+    icon: <Users2 className="h-3.5 w-3.5" />,
+    colorClass: "bg-teal-500",
     labelKey: "settings.teams",
   },
   {
     id: "channels",
-    icon: <MessageCircle className="h-4 w-4" />,
+    icon: <MessageCircle className="h-3.5 w-3.5" />,
+    colorClass: "bg-emerald-500",
     labelKey: "settings.channels",
   },
   {
     id: "skills",
-    icon: <Puzzle className="h-4 w-4" />,
+    icon: <Puzzle className="h-3.5 w-3.5" />,
+    colorClass: "bg-amber-500",
     labelKey: "settings.skills",
   },
   {
     id: "tools",
-    icon: <Wrench className="h-4 w-4" />,
+    icon: <Wrench className="h-3.5 w-3.5" />,
+    colorClass: "bg-cyan-600",
     labelKey: "settings.tools",
   },
   {
     id: "mcp",
-    icon: <Plug className="h-4 w-4" />,
+    icon: <Plug className="h-3.5 w-3.5" />,
+    colorClass: "bg-rose-500",
     labelKey: "settings.mcp.tabTitle",
   },
   {
     id: "memory",
-    icon: <Brain className="h-4 w-4" />,
+    icon: <Brain className="h-3.5 w-3.5" />,
+    colorClass: "bg-pink-500",
     labelKey: "settings.memory",
   },
   {
     id: "knowledge",
-    icon: <Library className="h-4 w-4" />,
+    icon: <Library className="h-3.5 w-3.5" />,
+    colorClass: "bg-blue-600",
     labelKey: "settings.knowledge.tab",
   },
   {
     id: "design",
-    icon: <Palette className="h-4 w-4" />,
+    icon: <Palette className="h-3.5 w-3.5" />,
+    colorClass: "bg-purple-600",
     labelKey: "design.title",
   },
   {
     id: "chat",
-    icon: <MessageSquare className="h-4 w-4" />,
+    icon: <MessageSquare className="h-3.5 w-3.5" />,
+    colorClass: "bg-fuchsia-500",
     labelKey: "settings.chat",
   },
   {
     id: "cron",
-    icon: <CalendarClock className="h-4 w-4" />,
+    icon: <CalendarClock className="h-3.5 w-3.5" />,
+    colorClass: "bg-red-500",
     labelKey: "settings.cron",
   },
   {
     id: "voice",
-    icon: <Mic className="h-4 w-4" />,
+    icon: <Mic className="h-3.5 w-3.5" />,
+    colorClass: "bg-violet-600",
     labelKey: "voice.settings.tab",
   },
   {
     id: "plan",
-    icon: <ClipboardList className="h-4 w-4" />,
+    icon: <ClipboardList className="h-3.5 w-3.5" />,
+    colorClass: "bg-lime-600",
     labelKey: "settings.plan",
   },
   {
     id: "recap",
-    icon: <LineChart className="h-4 w-4" />,
+    icon: <LineChart className="h-3.5 w-3.5" />,
+    colorClass: "bg-amber-600",
     labelKey: "settings.recap",
   },
   {
     id: "server",
-    icon: <Globe className="h-4 w-4" />,
+    icon: <Globe className="h-3.5 w-3.5" />,
+    colorClass: "bg-sky-500",
     labelKey: "settings.server",
   },
   {
     id: "files",
-    icon: <Files className="h-4 w-4" />,
+    icon: <Files className="h-3.5 w-3.5" />,
+    colorClass: "bg-zinc-600",
     labelKey: "settings.files.title",
   },
   {
     id: "sandbox",
-    icon: <Container className="h-4 w-4" />,
+    icon: <Container className="h-3.5 w-3.5" />,
+    colorClass: "bg-blue-500",
     labelKey: "settings.sandbox",
   },
   {
     id: "browser",
-    icon: <Compass className="h-4 w-4" />,
+    icon: <Compass className="h-3.5 w-3.5" />,
+    colorClass: "bg-sky-600",
     labelKey: "settings.browser.title",
   },
   {
     id: "acp",
-    icon: <Cable className="h-4 w-4" />,
+    icon: <Cable className="h-3.5 w-3.5" />,
+    colorClass: "bg-zinc-500",
     labelKey: "settings.acpControl",
   },
   {
     id: "notifications",
-    icon: <Bell className="h-4 w-4" />,
+    icon: <Bell className="h-3.5 w-3.5" />,
+    colorClass: "bg-yellow-500",
     labelKey: "settings.notifications",
   },
   {
     id: "approval",
-    icon: <ShieldCheck className="h-4 w-4" />,
+    icon: <ShieldCheck className="h-3.5 w-3.5" />,
+    colorClass: "bg-emerald-600",
     labelKey: "settings.approvalNav",
   },
   {
     id: "hooks",
-    icon: <Webhook className="h-4 w-4" />,
+    icon: <Webhook className="h-3.5 w-3.5" />,
+    colorClass: "bg-purple-600",
     labelKey: "settings.hooks.nav",
   },
   {
     id: "permissions",
-    icon: <Shield className="h-4 w-4" />,
+    icon: <Shield className="h-3.5 w-3.5" />,
+    colorClass: "bg-emerald-500",
     labelKey: "settings.permissions",
   },
   {
     id: "security",
-    icon: <ShieldCheck className="h-4 w-4" />,
+    icon: <ShieldCheck className="h-3.5 w-3.5" />,
+    colorClass: "bg-red-600",
     labelKey: "settings.security",
   },
   {
     id: "health",
-    icon: <HeartPulse className="h-4 w-4" />,
+    icon: <HeartPulse className="h-3.5 w-3.5" />,
+    colorClass: "bg-rose-500",
     labelKey: "settings.health",
   },
   {
     id: "logs",
-    icon: <ScrollText className="h-4 w-4" />,
+    icon: <ScrollText className="h-3.5 w-3.5" />,
+    colorClass: "bg-stone-500",
     labelKey: "settings.logs",
   },
   {
     id: "about",
-    icon: <Info className="h-4 w-4" />,
+    icon: <Info className="h-3.5 w-3.5" />,
+    colorClass: "bg-slate-400",
     labelKey: "settings.about",
   },
   {
     id: "updates",
-    icon: <History className="h-4 w-4" />,
+    icon: <History className="h-3.5 w-3.5" />,
+    colorClass: "bg-blue-500",
     labelKey: "about.updateHistory",
   },
   // Developer entry only present in dev builds — see DeveloperPanel comment
@@ -272,7 +303,8 @@ const SECTIONS: SettingsSectionItem[] = [
     ? [
         {
           id: "developer" as const,
-          icon: <Code className="h-4 w-4" />,
+          icon: <Code className="h-3.5 w-3.5" />,
+          colorClass: "bg-violet-600",
           labelKey: "settings.developer",
         },
       ]
@@ -370,21 +402,21 @@ export default function SettingsView({
               key={section.id}
               variant="ghost"
               className={cn(
-                "h-auto w-full justify-start gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors duration-150",
+                "h-auto w-full justify-start gap-2.5 rounded-lg border border-transparent px-3 py-2 text-sm transition-all duration-150",
                 activeSection === section.id
-                  ? "bg-secondary/70 text-foreground font-medium hover:bg-secondary/70 hover:text-foreground"
+                  ? "bg-secondary/70 border-border/50 text-foreground font-medium hover:bg-secondary/70 hover:text-foreground"
                   : "text-muted-foreground hover:bg-secondary/40 hover:text-foreground",
               )}
               onClick={() => setActiveSection(section.id)}
             >
-              <span
+              <div
                 className={cn(
-                  "shrink-0",
-                  "text-muted-foreground",
+                  "w-6 h-6 rounded-md flex items-center justify-center text-white shrink-0 shadow-[0_1px_2px_rgba(0,0,0,0.08)]",
+                  section.colorClass || "bg-zinc-400",
                 )}
               >
                 {section.icon}
-              </span>
+              </div>
               <span className="flex-1 truncate text-left">{t(section.labelKey)}</span>
               {section.id === "about" && globalPendingUpdate && (
                 <span className="relative flex h-2.5 w-2.5 shrink-0">

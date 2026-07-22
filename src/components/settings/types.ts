@@ -40,6 +40,7 @@ export type SettingsSection = (typeof SETTINGS_SECTION_IDS)[number]
 export interface SettingsSectionItem {
   id: SettingsSection
   icon: React.ReactNode
+  colorClass?: string
   labelKey: string
 }
 

@@ -75,7 +75,7 @@ interface IconSidebarProps {
   onOpenChat: () => void
   onOpenAgents: () => void
   onOpenModelConfig: () => void
-  onOpenChannels: () => void
+  onOpenChannels?: () => void
   onOpenSkills: () => void
   onOpenMemory: () => void
   onOpenProfile: () => void
@@ -98,7 +98,6 @@ export default function IconSidebar({
   onOpenChat,
   onOpenAgents,
   onOpenModelConfig,
-  onOpenChannels: _onOpenChannels,
   onOpenSkills,
   onOpenMemory,
   onOpenProfile,

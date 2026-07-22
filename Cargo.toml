@@ -175,6 +175,13 @@ strip = "symbols"
 # itself runs in the separately packaged Hope product binary.  Whole-program
 # size optimization therefore removes otherwise retained ha-core code without
 # slowing the product binary or changing the normal release/CI profile.
+# Local packaging ladder (`pnpm pack:local`) — release optimizations without
+# thin LTO so iterative desktop compiles stay practical on mid-RAM machines.
+[profile.release-fast]
+inherits = "release"
+lto = false
+codegen-units = 16
+
 [profile.eval-sidecar]
 inherits = "release"
 opt-level = "z"

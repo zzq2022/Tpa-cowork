@@ -1010,7 +1010,7 @@ pub fn agent_venv_bin_dir() -> Option<PathBuf> {
         if let Err(error) = ensure_agent_venv_extracted() {
             eprintln!("[agent-venv] recovery extract failed: {error}");
         }
-        return find_agent_venv_bin_dir();
+        find_agent_venv_bin_dir()
     }
 
     #[cfg(not(windows))]

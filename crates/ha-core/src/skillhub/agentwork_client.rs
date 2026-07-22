@@ -83,11 +83,11 @@ impl AgentWorkSkillHubClient {
         session: &StoredCloudSession,
         request: reqwest::RequestBuilder,
     ) -> Result<reqwest::Response> {
-        Ok(request
+        request
             .bearer_auth(&session.access_token)
             .send()
             .await
-            .context("AgentWork request")?)
+            .context("AgentWork request")
     }
 
     fn public_search_request(&self, request: SkillHubSearchRequest) -> Result<reqwest::Request> {

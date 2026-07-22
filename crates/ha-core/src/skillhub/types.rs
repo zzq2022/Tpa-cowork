@@ -179,19 +179,19 @@ where
         where
             E: de::Error,
         {
-            self.from_timestamp(value)
+            self.timestamp_to_rfc3339(value)
         }
 
         fn visit_u64<E>(self, value: u64) -> Result<Self::Value, E>
         where
             E: de::Error,
         {
-            self.from_timestamp(value as i64)
+            self.timestamp_to_rfc3339(value as i64)
         }
     }
 
     impl OptionalTimestampOrStringVisitor {
-        fn from_timestamp<E>(&self, value: i64) -> Result<Option<String>, E>
+        fn timestamp_to_rfc3339<E>(&self, value: i64) -> Result<Option<String>, E>
         where
             E: de::Error,
         {

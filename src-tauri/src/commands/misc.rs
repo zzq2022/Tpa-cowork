@@ -172,14 +172,17 @@ pub fn set_dangerous_skip_all_approvals(enabled: bool) -> Result<(), CmdError> {
 }
 
 #[tauri::command]
-pub async fn set_window_theme(is_dark: bool, app_handle: tauri::AppHandle) -> Result<(), CmdError> {
+pub async fn set_window_theme(
+    _is_dark: bool,
+    _app_handle: tauri::AppHandle,
+) -> Result<(), CmdError> {
     #[cfg(target_os = "macos")]
     {
         use tauri::Manager;
-        if let Some(window) = app_handle.get_webview_window("main") {
+        if let Some(window) = _app_handle.get_webview_window("main") {
             let _ = window.with_webview(move |webview| unsafe {
                 let ns_window: &objc2_app_kit::NSWindow = &*webview.ns_window().cast();
-                let (r, g, b) = if is_dark {
+                let (r, g, b) = if _is_dark {
                     (15.0 / 255.0, 15.0 / 255.0, 15.0 / 255.0)
                 } else {
                     (1.0, 1.0, 1.0)

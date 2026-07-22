@@ -6,7 +6,7 @@
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:1420",
-    "beforeDevCommand": "pnpm dev:browser-host && pnpm dev:eval-sidecar && pnpm dev",
+    "beforeDevCommand": "pnpm dev",
     "beforeBuildCommand": "pnpm prepare:browser-host && pnpm prepare:eval-sidecar && pnpm prepare:zip-venv && pnpm build"
   },
   "app": {

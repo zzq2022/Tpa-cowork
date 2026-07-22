@@ -48,7 +48,16 @@ const jobsExplicit =
     ? Number(args[jobsIndex + 1])
     : null
 
-const hostBinaryName = isWindows ? "ha-browser-host.exe" : "ha-browser-host"
+const targetIndex = args.indexOf("--target")
+const targetExplicit =
+  targetIndex >= 0 && args[targetIndex + 1] && !args[targetIndex + 1].startsWith("-")
+    ? args[targetIndex + 1]
+    : null
+
+const hostBinaryName =
+  (targetExplicit ? targetExplicit.includes("windows") : isWindows)
+    ? "ha-browser-host.exe"
+    : "ha-browser-host"
 const hostResourcePath = join(
   repoRoot,
   "src-tauri",
@@ -246,6 +255,12 @@ function modeLabel() {
 }
 
 const env = { ...process.env }
+if (targetExplicit) {
+  env.TAURI_ENV_TARGET_TRIPLE = targetExplicit
+  env.CARGO_BUILD_TARGET = targetExplicit
+  env.HA_BROWSER_HOST_TARGET = targetExplicit
+  env.HA_EVAL_SIDECAR_TARGET = targetExplicit
+}
 const jobs = resolveJobs()
 if (jobs !== null) env.CARGO_BUILD_JOBS = String(jobs)
 if (bundle && !ship) {
@@ -255,8 +270,11 @@ if (bundle && !ship) {
 
 const startedAt = Date.now()
 log(
-  `mode=${modeLabel()} cores=${cpus().length} jobs=${env.CARGO_BUILD_JOBS ?? "cargo-default"} skips={frontend:${skipFrontend},host:${skipHost},eval:${skipEvalSidecar},venv:${skipVenv}}`,
+  `mode=${modeLabel()} target=${targetExplicit || "default"} cores=${cpus().length} jobs=${env.CARGO_BUILD_JOBS ?? "cargo-default"} skips={frontend:${skipFrontend},host:${skipHost},eval:${skipEvalSidecar},venv:${skipVenv}}`,
 )
+
+const isTargetWindows = targetExplicit ? targetExplicit.includes("windows") : isWindows
+const bundleTargetFormat = isTargetWindows ? "nsis" : "deb,appimage"
 
 if (bundle) {
   // Own the prepare pipeline so --skip-* actually works. tauri.conf.json
@@ -268,12 +286,20 @@ if (bundle) {
   // Write config to a file so Windows shell:true spawn does not mangle JSON quotes.
   const tauriConfigPath = join(repoRoot, ".scratch", "pack-local-tauri-config.json")
   mkdirSync(dirname(tauriConfigPath), { recursive: true })
+  const tauriConfig = { build: { beforeBuildCommand: "" } }
+  if (!process.env.TAURI_SIGNING_PRIVATE_KEY) {
+    tauriConfig.bundle = { createUpdaterArtifacts: false }
+  }
   writeFileSync(
     tauriConfigPath,
-    JSON.stringify({ build: { beforeBuildCommand: "" } }, null, 2) + "\n",
+    JSON.stringify(tauriConfig, null, 2) + "\n",
     "utf8",
   )
-  pnpm(["tauri", "build", "--bundles", "nsis", "--config", tauriConfigPath], env)
+  const tauriBuildArgs = ["tauri", "build", "--bundles", bundleTargetFormat, "--config", tauriConfigPath]
+  if (targetExplicit) {
+    tauriBuildArgs.push("--target", targetExplicit)
+  }
+  pnpm(tauriBuildArgs, env)
   report("release")
 } else {
   const profile = "release-fast"
@@ -281,20 +307,20 @@ if (bundle) {
   prepareHost(env, profile)
   prepareEvalSidecar(env)
   prepareFrontend(env)
-  run(
-    "cargo",
-    [
-      "build",
-      "-p",
-      "tpa-cowork",
-      "--profile",
-      profile,
-      "--features",
-      "tauri/custom-protocol",
-      "--locked",
-    ],
-    env,
-  )
+  const cargoBuildArgs = [
+    "build",
+    "-p",
+    "tpa-cowork",
+    "--profile",
+    profile,
+    "--features",
+    "tauri/custom-protocol",
+    "--locked",
+  ]
+  if (targetExplicit) {
+    cargoBuildArgs.push("--target", targetExplicit)
+  }
+  run("cargo", cargoBuildArgs, env)
   report(profile)
 }
 

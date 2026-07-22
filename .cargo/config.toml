@@ -1,0 +1,19 @@
+# Workspace Cargo Configuration for Build Acceleration
+
+[build]
+rustc-wrapper = "sccache"
+
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "link-args=/STACK:16777216"]
+
+[target.aarch64-pc-windows-msvc]
+rustflags = ["-C", "link-args=/STACK:16777216"]
+
+[target.i686-pc-windows-msvc]
+rustflags = ["-C", "link-args=/STACK:16777216"]
+
+# High-performance LLD Linker (optional for MSVC target)
+# Requires LLVM installed on system (e.g., `winget install LLVM.LLVM`)
+# [target.x86_64-pc-windows-msvc]
+# linker = "lld-link"
+

@@ -1,10 +1,17 @@
-import { describe, expect, test } from "vitest"
+import { beforeAll, describe, expect, test } from "vitest"
+
+import i18n, { i18nReady } from "@/i18n/i18n"
 
 import {
   goalSlashCommandDisplay,
   parseGoalObjectiveAndCriteria,
   parseGoalUpsertSlashCommand,
 } from "./goalSlashCommand"
+
+beforeAll(async () => {
+  await i18nReady
+  await i18n.changeLanguage("en")
+})
 
 describe("goal slash command parsing", () => {
   test("treats exact control words as commands", () => {

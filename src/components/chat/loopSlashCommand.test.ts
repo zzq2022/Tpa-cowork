@@ -1,10 +1,17 @@
-import { describe, expect, test } from "vitest"
+import { beforeAll, describe, expect, test } from "vitest"
+
+import i18n, { i18nReady } from "@/i18n/i18n"
 
 import {
   isLoopCreateSlashCommand,
   loopSlashCommandDisplay,
   parseLoopCreateSlashCommand,
 } from "./loopSlashCommand"
+
+beforeAll(async () => {
+  await i18nReady
+  await i18n.changeLanguage("en")
+})
 
 describe("loop slash command parsing", () => {
   test("treats control words as normal slash controls", () => {

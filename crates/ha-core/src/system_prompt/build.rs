@@ -1978,65 +1978,79 @@ mod memory_section_tests {
 
     #[test]
     fn default_static_prompt_stays_within_six_k_token_budget() {
-        let definition = mk_definition();
-        let out = build(
-            &definition,
-            Some("gpt-5.4"),
-            Some("OpenAI"),
-            &[],
-            &MemoryBudgetConfig::default(),
-            None,
-            None,
-            None,
-            None,
-            None,
-            false,
-            None,
-            None,
-            SessionMode::Default,
-            ExecutionMode::Off,
-            crate::workflow_mode::WorkflowMode::Off,
-        );
-        let static_prompt_tokens = conservative_core_token_estimate(&out) as u32;
-        assert!(
-            static_prompt_tokens <= 6_000,
-            "default static prompt exceeds 6k conservative estimate: {static_prompt_tokens} tokens"
-        );
+        // build() injects host skills / user profile from the process data dir.
+        // Isolate to a temp root so a developer's local ~/.tpa-cowork skills do
+        // not inflate the static prefix and flake this budget gate.
+        let data_dir = tempfile::tempdir().expect("temp data dir");
+        crate::test_support::with_env_vars(
+            &[
+                ("TPA_DATA_DIR", data_dir.path()),
+                ("HA_DATA_DIR", data_dir.path()),
+            ],
+            || {
+                let _config =
+                    crate::test_support::replace_config_cache(crate::config::AppConfig::default());
+                let definition = mk_definition();
+                let out = build(
+                    &definition,
+                    Some("gpt-5.4"),
+                    Some("OpenAI"),
+                    &[],
+                    &MemoryBudgetConfig::default(),
+                    None,
+                    None,
+                    None,
+                    None,
+                    None,
+                    false,
+                    None,
+                    None,
+                    SessionMode::Default,
+                    ExecutionMode::Off,
+                    crate::workflow_mode::WorkflowMode::Off,
+                );
+                let static_prompt_tokens = conservative_core_token_estimate(&out) as u32;
+                assert!(
+                    static_prompt_tokens <= 6_000,
+                    "default static prompt exceeds 6k conservative estimate: {static_prompt_tokens} tokens"
+                );
 
-        let app_config = crate::config::AppConfig::default();
-        let dispatch_ctx = crate::tools::dispatch::DispatchContext {
-            agent_id: crate::agent_loader::DEFAULT_AGENT_ID,
-            incognito: false,
-            mcp_enabled: definition.config.capabilities.mcp_enabled,
-            memory_enabled: definition.config.memory.enabled,
-            use_memories: true,
-            contribute_to_memories: true,
-            tools_filter: &definition.config.capabilities.tools,
-            app_config: &app_config,
-        };
-        let eager_schema_tokens: u32 = crate::tools::dispatch::all_dispatchable_tools()
-            .iter()
-            .filter(|tool| !crate::tools::is_kb_scoped_tool(&tool.name))
-            .filter(|tool| {
-                matches!(
-                    crate::tools::dispatch::resolve_tool_fate(tool, &dispatch_ctx),
-                    crate::tools::dispatch::ToolFate::InjectEager
-                )
-            })
-            .map(|tool| {
-                crate::context_compact::estimate_tokens(
-                    &tool.to_provider_schema(crate::tools::ToolProvider::OpenAI),
-                )
-            })
-            .sum();
-        let hi_tokens = crate::context_compact::estimate_tokens(&serde_json::json!({
-            "role": "user",
-            "content": "hi"
-        }));
-        let total = static_prompt_tokens + eager_schema_tokens + hi_tokens;
-        assert!(
-            total <= 10_000,
-            "canonical empty hi request exceeds 10k heuristic: {total} tokens"
+                let app_config = crate::config::AppConfig::default();
+                let dispatch_ctx = crate::tools::dispatch::DispatchContext {
+                    agent_id: crate::agent_loader::DEFAULT_AGENT_ID,
+                    incognito: false,
+                    mcp_enabled: definition.config.capabilities.mcp_enabled,
+                    memory_enabled: definition.config.memory.enabled,
+                    use_memories: true,
+                    contribute_to_memories: true,
+                    tools_filter: &definition.config.capabilities.tools,
+                    app_config: &app_config,
+                };
+                let eager_schema_tokens: u32 = crate::tools::dispatch::all_dispatchable_tools()
+                    .iter()
+                    .filter(|tool| !crate::tools::is_kb_scoped_tool(&tool.name))
+                    .filter(|tool| {
+                        matches!(
+                            crate::tools::dispatch::resolve_tool_fate(tool, &dispatch_ctx),
+                            crate::tools::dispatch::ToolFate::InjectEager
+                        )
+                    })
+                    .map(|tool| {
+                        crate::context_compact::estimate_tokens(
+                            &tool.to_provider_schema(crate::tools::ToolProvider::OpenAI),
+                        )
+                    })
+                    .sum();
+                let hi_tokens = crate::context_compact::estimate_tokens(&serde_json::json!({
+                    "role": "user",
+                    "content": "hi"
+                }));
+                let total = static_prompt_tokens + eager_schema_tokens + hi_tokens;
+                assert!(
+                    total <= 10_000,
+                    "canonical empty hi request exceeds 10k heuristic: {total} tokens"
+                );
+            },
         );
     }
 

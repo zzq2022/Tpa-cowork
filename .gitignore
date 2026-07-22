@@ -49,3 +49,9 @@ docs/plan/*
 
 # Local assistant state（worktrees / settings.local.json 等）
 .claude/
+
+# Temporary build & scratch artifacts
+.scratch/*
+!.scratch/tpa-cowork-customization-spec.md
+pack.md
+

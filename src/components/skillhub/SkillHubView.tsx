@@ -341,7 +341,7 @@ export default function SkillHubView({ onBack, onDownloaded }: SkillHubViewProps
       await new Promise((resolve) => setTimeout(resolve, 1200))
       const original = selectedDetail?.skillMd || ""
       // Simple mockup translation replacing basic layout
-      let translated = original
+      const translated = original
         .replace(/# Prerequisites/gi, "# 安装前置要求")
         .replace(/# Description/gi, "# 技能描述")
         .replace(/# Instructions/gi, "# 使用指导")
@@ -349,7 +349,7 @@ export default function SkillHubView({ onBack, onDownloaded }: SkillHubViewProps
       setTranslatedText(translated)
       setShowTranslation(true)
       toast.success("翻译成功")
-    } catch (err) {
+    } catch {
       toast.error("翻译失败")
     } finally {
       setIsTranslating(false)

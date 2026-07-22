@@ -234,16 +234,9 @@ export default function AboutPanel({
     }
   })
 
-  // Auto-check for updates once whenever the About page is opened, so the
-  // version status is always fresh without the user clicking. Guarded to one
-  // run per mount; a no-op off the desktop shell (and dev builds short-circuit
-  // the real check). Manual re-checks still go through the button.
-  const autoCheckedRef = useRef(false)
-  useEffect(() => {
-    if (!desktopUpdaterAvailable || autoCheckedRef.current) return
-    autoCheckedRef.current = true
-    checkRef.current()
-  }, [desktopUpdaterAvailable])
+  // UPDATE-001: TPA CoWork does not auto-check on About open. Background
+  // check_enabled / auto_download default off; users still re-check manually
+  // via the button (and the desktop menu `desktop-update-check` listener).
 
   // `relaunchAfter` true ⇒ "更新并重启", false ⇒ "仅更新". The download / install
   // / staged-restart lifecycle (and failure handling) lives in the shared hook;
@@ -426,10 +419,20 @@ export default function AboutPanel({
                   {t("about.updateHistory")}
                 </Button>
               )}
-              <Button variant="ghost" onClick={() => openExternal(HOPE_AGENT_URLS.feedback)}>
-                {t("about.feedback")}
-                <ExternalLink className="ml-1.5 h-4 w-4" />
-              </Button>
+              {HOPE_AGENT_URLS.enterpriseSupport ? (
+                <Button
+                  variant="ghost"
+                  onClick={() => openExternal(HOPE_AGENT_URLS.enterpriseSupport ?? "")}
+                >
+                  {t("about.feedback")}
+                  <ExternalLink className="ml-1.5 h-4 w-4" />
+                </Button>
+              ) : (
+                <Button variant="ghost" onClick={() => openExternal(HOPE_AGENT_URLS.feedback)}>
+                  {t("about.feedback")}
+                  <ExternalLink className="ml-1.5 h-4 w-4" />
+                </Button>
+              )}
             </div>
           </div>
         </section>

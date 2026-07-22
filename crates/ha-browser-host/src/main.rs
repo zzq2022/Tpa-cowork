@@ -243,12 +243,12 @@ fn parse_pipe_endpoint(path: &str) -> Result<BrokerEndpoint> {
 #[cfg(windows)]
 fn connect_pipe_endpoint(path: &str) -> Result<BrokerStream> {
     use std::os::windows::fs::OpenOptionsExt;
-    use windows_sys::Win32::Storage::FileSystem::{SECURITY_IDENTIFICATION, SECURITY_SQOS_PRESENT};
+    use windows_sys::Win32::Storage::FileSystem::{SECURITY_IMPERSONATION, SECURITY_SQOS_PRESENT};
 
     let file = std::fs::OpenOptions::new()
         .read(true)
         .write(true)
-        .custom_flags(SECURITY_SQOS_PRESENT | SECURITY_IDENTIFICATION)
+        .custom_flags(SECURITY_SQOS_PRESENT | SECURITY_IMPERSONATION)
         .open(path)
         .with_context(|| format!("connecting Windows named pipe broker {path}"))?;
     Ok(BrokerStream::Pipe(file))
@@ -273,13 +273,15 @@ fn discovery_path() -> Result<PathBuf> {
     if let Some(path) = std::env::var_os("HOPE_AGENT_BROWSER_BROKER_DISCOVERY") {
         return Ok(PathBuf::from(path));
     }
-    let root = if let Some(path) = std::env::var_os("HA_DATA_DIR") {
-        PathBuf::from(path)
-    } else {
-        dirs::home_dir()
-            .ok_or_else(|| anyhow::anyhow!("Cannot find home directory"))?
-            .join(".hope-agent")
-    };
+    let root = std::env::var_os("TPA_DATA_DIR")
+        .filter(|value| !value.is_empty())
+        .or_else(|| std::env::var_os("HA_DATA_DIR").filter(|value| !value.is_empty()))
+        .map(PathBuf::from)
+        .unwrap_or(
+            dirs::home_dir()
+                .ok_or_else(|| anyhow::anyhow!("Cannot find home directory"))?
+                .join(".tpa-cowork"),
+        );
     Ok(root.join("browser-extension").join("broker.json"))
 }
 

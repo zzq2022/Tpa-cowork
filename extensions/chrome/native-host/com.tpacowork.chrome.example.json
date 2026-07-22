@@ -1,6 +1,6 @@
 {
-  "name": "com.hope_agent.chrome",
-  "description": "Hope Agent Chrome Native Messaging Host",
+  "name": "com.tpacowork.chrome",
+  "description": "TPA CoWork Chrome Native Messaging Host",
   "path": "/absolute/path/to/ha-browser-host",
   "type": "stdio",
   "allowed_origins": [

@@ -1,6 +1,6 @@
 // @ts-check
 
-const HOST_NAME = "com.hope_agent.chrome"
+const HOST_NAME = "com.tpacowork.chrome"
 const PROTOCOL_VERSION = 1
 const MAX_DIRECT_RESPONSE_BYTES = 768 * 1024
 const RESPONSE_BLOB_CHUNK_BYTES = 192 * 1024

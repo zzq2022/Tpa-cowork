@@ -7,6 +7,7 @@ export const HOPE_AGENT_URLS = {
   github: "https://github.com/shiwenwen/hope-agent",
   releases: "https://github.com/shiwenwen/hope-agent/releases",
   feedback: "https://github.com/shiwenwen/hope-agent/issues",
+  enterpriseSupport: import.meta.env.VITE_TPA_SUPPORT_URL?.trim() || null,
 } as const
 
 let appVersionPromise: Promise<string> | null = null

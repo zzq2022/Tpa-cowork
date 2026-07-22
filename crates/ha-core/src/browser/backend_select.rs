@@ -181,7 +181,7 @@ fn cached_backend_satisfies_requirement(
 
 fn extension_required_error(reason: &str) -> anyhow::Error {
     anyhow!(
-        "This browser action requires the Hope Agent Chrome Extension. {}. \
+        "This browser action requires the TPA CoWork Chrome Extension. {}. \
          Install or enable the extension to use real Chrome tabs and logged-in sessions, \
          or explicitly choose an isolated CDP browser instead.",
         reason
@@ -265,7 +265,7 @@ mod tests {
             Ok(_) => panic!("ExtensionRequired must not fall back to CDP"),
             Err(err) => err.to_string(),
         };
-        assert!(msg.contains("requires the Hope Agent Chrome Extension"));
+        assert!(msg.contains("requires the TPA CoWork Chrome Extension"));
         reset_backend().await;
     }
 }

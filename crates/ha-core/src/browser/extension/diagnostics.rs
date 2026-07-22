@@ -90,7 +90,7 @@ pub fn current_status() -> BrowserExtensionStatus {
             (
                 BrowserExtensionStatusKind::VersionMismatch,
                 format!(
-                    "Hope Agent Chrome Extension protocol mismatch: expected {}, got {}{}.",
+                    "TPA CoWork Chrome Extension protocol mismatch: expected {}, got {}{}.",
                     EXPECTED_EXTENSION_PROTOCOL_VERSION,
                     protocol_version
                         .map(|v| v.to_string())
@@ -105,7 +105,7 @@ pub fn current_status() -> BrowserExtensionStatus {
         } else if extension_connected {
             (
                 BrowserExtensionStatusKind::Ready,
-                "Hope Agent Chrome Extension is connected.".to_string(),
+                "TPA CoWork Chrome Extension is connected.".to_string(),
                 None,
             )
         } else if !broker_running {
@@ -126,7 +126,7 @@ pub fn current_status() -> BrowserExtensionStatus {
         } else {
             (
                 BrowserExtensionStatusKind::ExtensionMissing,
-                "Hope Agent Chrome Extension is not connected.".to_string(),
+                "TPA CoWork Chrome Extension is not connected.".to_string(),
                 Some("open_extension_page".to_string()),
             )
         };
@@ -135,15 +135,15 @@ pub fn current_status() -> BrowserExtensionStatus {
         kind,
         backend_available: matches!(kind, BrowserExtensionStatusKind::Ready),
         native_host_name,
-        native_host_manifest_path: manifest_path.map(|p| p.to_string_lossy().to_string()),
+        native_host_manifest_path: manifest_path.map(|p| clean_windows_path(&p)),
         native_host_manifest_exists: manifest_exists,
         extension_connected,
         extension_protocol_version: protocol_version,
         extension_version,
         extension_ids: effective_extension_ids(&cfg.extension_ids),
         store_url: cfg.store_url,
-        unpacked_extension_path: unpacked_extension_path().map(|p| p.to_string_lossy().to_string()),
-        native_host_binary_hint: native_host_binary_hint().map(|p| p.to_string_lossy().to_string()),
+        unpacked_extension_path: unpacked_extension_path().map(|p| clean_windows_path(&p)),
+        native_host_binary_hint: native_host_binary_hint().map(|p| clean_windows_path(&p)),
         message,
         next_action,
     }
@@ -181,8 +181,8 @@ pub fn install_native_host_manifest(
     let allowed_origin = format!("chrome-extension://{}/", request.extension_id);
     let manifest = json!({
         "name": native_host_name,
-        "description": "Hope Agent Chrome Native Messaging Host",
-        "path": host_path.to_string_lossy(),
+        "description": "TPA CoWork Chrome Native Messaging Host",
+        "path": clean_windows_path(&host_path),
         "type": "stdio",
         "allowed_origins": [allowed_origin.clone()],
     });
@@ -402,7 +402,7 @@ fn write_manifest_if_changed(
     host_path: &std::path::Path,
     extension_ids: &[String],
 ) -> Result<bool> {
-    let host_path_str = host_path.to_string_lossy().to_string();
+    let host_path_str = clean_windows_path(host_path);
     let mut origins: Vec<String> = extension_ids
         .iter()
         .map(|id| format!("chrome-extension://{id}/"))
@@ -438,7 +438,7 @@ fn write_manifest_if_changed(
     }
     let manifest = json!({
         "name": host_name,
-        "description": "Hope Agent Chrome Native Messaging Host",
+        "description": "TPA CoWork Chrome Native Messaging Host",
         "path": host_path_str,
         "type": "stdio",
         "allowed_origins": origins,
@@ -468,7 +468,7 @@ pub fn native_host_manifest_path(host_name: &str) -> Option<PathBuf> {
             .map(PathBuf::from)
             .or_else(|| dirs::home_dir().map(|home| home.join("AppData").join("Local")))?;
         return Some(
-            base.join("HopeAgent")
+            base.join("TpaCoWork")
                 .join("extension")
                 .join(format!("{host_name}.json")),
         );
@@ -486,6 +486,14 @@ pub fn native_host_manifest_path(host_name: &str) -> Option<PathBuf> {
 
     #[allow(unreachable_code)]
     None
+}
+
+fn clean_windows_path(path: &std::path::Path) -> String {
+    let value = path.to_string_lossy();
+    value
+        .strip_prefix(r#"\\?\"#)
+        .unwrap_or(&value)
+        .to_string()
 }
 
 pub fn default_native_host_manifest_path() -> Option<PathBuf> {
@@ -867,7 +875,7 @@ fn resolve_host_path(input: Option<String>) -> Result<PathBuf> {
         return Ok(path);
     }
     bail!(
-        "Native host path is required. Bundle ha-browser-host with Hope Agent, pass its absolute path, or set HOPE_AGENT_BROWSER_HOST_PATH."
+        "Native host path is required. Bundle ha-browser-host with TPA CoWork, pass its absolute path, or set HOPE_AGENT_BROWSER_HOST_PATH."
     );
 }
 
@@ -967,6 +975,19 @@ fn register_windows_native_host(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    
+    #[test]
+    fn strips_windows_extended_path_prefix_for_browser_manifests() {
+        assert_eq!(
+            clean_windows_path(std::path::Path::new(r#"\\?\C:\Program Files\host.exe"#)),
+            r"C:\Program Files\host.exe"
+        );
+        assert_eq!(
+            clean_windows_path(std::path::Path::new(r"C:\host.exe")),
+            r"C:\host.exe"
+        );
+    }
 
     #[test]
     fn status_is_fail_closed_without_broker() {

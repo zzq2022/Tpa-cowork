@@ -2300,12 +2300,12 @@ fn validate_cdp_method(method: &str) -> Result<()> {
         .iter()
         .any(|prefix| method.starts_with(prefix))
     {
-        bail!("CDP method '{method}' is blocked by Hope Agent browser policy");
+        bail!("CDP method '{method}' is blocked by TPA CoWork browser policy");
     }
     if ALLOWED_CDP_METHODS.contains(&method) {
         return Ok(());
     }
-    bail!("CDP method '{method}' is not allowed by Hope Agent browser policy");
+    bail!("CDP method '{method}' is not allowed by TPA CoWork browser policy");
 }
 
 fn validate_raw_cdp_method(method: &str) -> Result<()> {
@@ -2317,11 +2317,11 @@ fn validate_raw_cdp_method(method: &str) -> Result<()> {
         .iter()
         .any(|prefix| method.starts_with(prefix))
     {
-        bail!("CDP method '{method}' is blocked by Hope Agent browser policy and cannot be used via raw_cdp");
+        bail!("CDP method '{method}' is blocked by TPA CoWork browser policy and cannot be used via raw_cdp");
     }
     if BLOCKED_RAW_CDP_METHODS.contains(&method) {
         bail!(
-            "CDP method '{method}' is blocked by Hope Agent browser policy \
+            "CDP method '{method}' is blocked by TPA CoWork browser policy \
              (cookie/credential access is not permitted via raw_cdp)"
         );
     }

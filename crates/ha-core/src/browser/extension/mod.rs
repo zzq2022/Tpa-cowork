@@ -110,4 +110,4 @@ impl BrowserExtensionConfig {
     }
 }
 
-pub const DEFAULT_NATIVE_HOST_NAME: &str = "com.hope_agent.chrome";
+pub const DEFAULT_NATIVE_HOST_NAME: &str = "com.tpacowork.chrome";

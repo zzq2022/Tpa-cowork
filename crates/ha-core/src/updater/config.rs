@@ -25,16 +25,16 @@ fn default_check_interval_hours() -> u32 {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AutoUpdateConfig {
-    /// Run a periodic background check for new releases. Default `true`.
-    #[serde(default = "crate::default_true")]
+    /// Run a periodic background check for new releases. Default `false`.
+    #[serde(default)]
     pub check_enabled: bool,
     /// Hours between background checks. Clamped to
     /// `[MIN_CHECK_INTERVAL_HOURS, MAX_CHECK_INTERVAL_HOURS]`. Default 12.
     #[serde(default = "default_check_interval_hours")]
     pub check_interval_hours: u32,
     /// Silently pre-download + verify the new build when a check finds one, so
-    /// installing is instant. Default `true`.
-    #[serde(default = "crate::default_true")]
+    /// installing is instant. Default `false`.
+    #[serde(default)]
     pub auto_download: bool,
     /// Surface "update available" / "ready to install" to the user (desktop
     /// toast / headless log + event). Default `true`.
@@ -45,9 +45,9 @@ pub struct AutoUpdateConfig {
 impl Default for AutoUpdateConfig {
     fn default() -> Self {
         Self {
-            check_enabled: true,
+            check_enabled: false,
             check_interval_hours: default_check_interval_hours(),
-            auto_download: true,
+            auto_download: false,
             notify: true,
         }
     }
@@ -68,8 +68,8 @@ mod tests {
     #[test]
     fn defaults_are_opt_out() {
         let c = AutoUpdateConfig::default();
-        assert!(c.check_enabled);
-        assert!(c.auto_download);
+        assert!(!c.check_enabled);
+        assert!(!c.auto_download);
         assert!(c.notify);
         assert_eq!(c.check_interval_hours, 12);
     }
@@ -91,7 +91,8 @@ mod tests {
     #[test]
     fn empty_object_deserializes_to_defaults() {
         let c: AutoUpdateConfig = serde_json::from_str("{}").unwrap();
-        assert!(c.check_enabled);
+        assert!(!c.check_enabled);
+        assert!(!c.auto_download);
         assert_eq!(c.check_interval_hours, 12);
     }
 }

@@ -2621,6 +2621,35 @@ fn build_router_with_cors(
             "/skills/{name}/env",
             delete(routes::skills::remove_skill_env_var),
         )
+        // SkillHub / Cloud
+        .route("/cloud/session", get(routes::skillhub::cloud_get_session))
+        .route("/cloud/login", post(routes::skillhub::cloud_login))
+        .route("/cloud/logout", post(routes::skillhub::cloud_logout))
+        .route(
+            "/cloud/session/refresh",
+            post(routes::skillhub::cloud_refresh_session),
+        )
+        .route("/my-skills", get(routes::skillhub::my_skills_list))
+        .route(
+            "/my-skills/refresh-cloud",
+            post(routes::skillhub::my_skills_refresh_cloud),
+        )
+        .route(
+            "/my-skills/submit-review",
+            post(routes::skillhub::my_skills_submit_review),
+        )
+        .route(
+            "/skillhub/public/search",
+            post(routes::skillhub::skillhub_search_public),
+        )
+        .route(
+            "/skillhub/public/detail",
+            post(routes::skillhub::skillhub_get_public_detail),
+        )
+        .route(
+            "/skillhub/download",
+            post(routes::skillhub::skillhub_download_skill),
+        )
         // Channel
         .route("/channel/plugins", get(routes::channel::list_plugins))
         .route("/channel/accounts", get(routes::channel::list_accounts))

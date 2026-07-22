@@ -60,6 +60,7 @@ pub mod runtime_tasks;
 pub mod searxng;
 pub mod server_status;
 pub mod sessions;
+pub mod skillhub;
 pub mod skills;
 pub mod slash;
 pub mod stt;

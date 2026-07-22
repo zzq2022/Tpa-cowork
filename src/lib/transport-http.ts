@@ -1453,6 +1453,18 @@ const COMMAND_MAP: Record<string, EndpointDef> = {
   get_manual_bundle: { method: "GET", path: "/api/manual/bundle" },
   search_manual: { method: "GET", path: "/api/manual/search" },
 
+  // -- Cloud session + SkillHub --
+  cloud_get_session: { method: "GET", path: "/api/cloud/session" },
+  cloud_login: { method: "POST", path: "/api/cloud/login" },
+  cloud_logout: { method: "POST", path: "/api/cloud/logout" },
+  cloud_refresh_session: { method: "POST", path: "/api/cloud/session/refresh" },
+  my_skills_list: { method: "GET", path: "/api/my-skills" },
+  my_skills_refresh_cloud: { method: "POST", path: "/api/my-skills/refresh-cloud" },
+  my_skills_submit_review: { method: "POST", path: "/api/my-skills/submit-review" },
+  skillhub_search_public: { method: "POST", path: "/api/skillhub/public/search" },
+  skillhub_get_public_detail: { method: "POST", path: "/api/skillhub/public/detail" },
+  skillhub_download_skill: { method: "POST", path: "/api/skillhub/download" },
+
   // -- Skills --
   get_skills: { method: "GET", path: "/api/skills" },
   list_mentionable_skills: { method: "GET", path: "/api/skills/mentionable" },
@@ -1874,6 +1886,16 @@ function normalizeHttpCommandArgs(
   args: Record<string, unknown> | undefined,
 ): Record<string, unknown> | undefined {
   if (command === "import_artifact") {
+    const request = args?.request
+    return request && typeof request === "object" && !Array.isArray(request)
+      ? (request as Record<string, unknown>)
+      : args
+  }
+  if (
+    command === "cloud_login" ||
+    command === "skillhub_search_public" ||
+    command === "skillhub_get_public_detail"
+  ) {
     const request = args?.request
     return request && typeof request === "object" && !Array.isArray(request)
       ? (request as Record<string, unknown>)

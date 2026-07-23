@@ -925,12 +925,7 @@ pub async fn chat(
             // session behind (no hidden zombie, no stray regular row in the
             // main list / picker / FTS). Drop the freshly auto-created session;
             // `blocked_reason` still carries the notice to the transport.
-            if new_session_created
-                && matches!(
-                    body.tool_scope.as_deref(),
-                    Some("knowledge") | Some("design")
-                )
-            {
+            if new_session_created && body.tool_scope.as_deref() == Some("knowledge") {
                 let _ = {
                     let sid = sid.clone();
                     db.run(move |db| db.delete_session(&sid)).await
@@ -999,14 +994,6 @@ pub async fn chat(
                 &kb_id,
                 body.kb_anchor_note.as_deref(),
             );
-        }
-    }
-
-    // Design-space per-project chat: promote the freshly-created session into a
-    // design thread anchored to the open project (mirrors the KB branch above).
-    if new_session_created && body.tool_scope.as_deref() == Some("design") {
-        if let Some(project_id) = body.design_project_id.as_deref() {
-            ha_core::design::service::mark_session_as_design_thread(&sid, project_id);
         }
     }
 

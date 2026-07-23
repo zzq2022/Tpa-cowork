@@ -155,16 +155,7 @@ Tauri 命令 → `invoke_handler!`；HTTP 端点 → `build_router_with_cors`；
 - **写入三闸**：`WorkspaceScope::for_knowledge`（外部 root 只读、**桌面也拒**（刻意反「桌面不受限」通例），须 `allow_external_writes`；HTTP 再叠 `allow_remote_writes`；**后台维护永不写外部**）→ `platform::write_atomic`（**禁回退 `fs::write`**）→ `expected_file_hash` 比磁盘 raw BLAKE3（**非索引 `content_hash`**）
 - **检索独立**：笔记 store **绝不折进 `recall_memory`**（`knowledge_recall` 两段不混排）；`knowledge_embedding` 与 `memory_embedding` 物理隔离、**不寄生不回退**；embedding / chunk 重 reindex 故 **GUI-only 不进 `ha-settings`**（设置三件套例外）
 - **读取即 untrusted**：`[[note]]` 与 `knowledge_passive_recall` 套 `<untrusted_external_data>` 信封，**永不升为 system 指令**；incognito 零召回 / 零精灵
-- **接线**：会话独立 `SessionKind::Knowledge`（主列表 / `/sessions` / 全局 FTS 隐藏，与 design 同谓词）；**新增 KB 工具须同步 `tools/note.rs` + `core_tools.rs`（schema）+ `execution.rs`（dispatch）**
-
-### 设计空间（Design Space）
-
-详见 [design-space](docs/architecture/design-space.md)。**新增 action / 端点：工具进 `tools/design/mod.rs`，Tauri / HTTP 薄壳只调 `design::service`，逻辑全在 ha-core**。
-
-- **浏览器零编译**：iframe 只载后端编译落盘的静态产物（`component` 经 `design::compile`）；**禁 in-browser Babel / esbuild-wasm / Tailwind JIT**（旧版 `feat/atelier` 白屏卡顿根因）；编译失败降错误页，**不白屏 / 不 panic**。**刻意不做无限画布**（同一卡顿根因）
-- **回写确定性**：磁盘即真相源，`design.db` 仅可重建注册表；微调回写单一命中 + `expected_hash` stale-write 守卫，写盘**一律** `platform::write_atomic`。**component 编译产物 ≠ 源码故无 oid 微调**，仅 `supports_oid_edit` kind（非 image/audio/component）可 `edit_element`
-- **边界**：owner（`service.rs`，本机 / API key 信任，**刻意不经 access 检查**）与 agent `design` 工具两平面隔离；iframe 恒 `sandbox="allow-scripts"`；`ToolScope::Design` 仅收窄 schema、**非安全边界**；**incognito 零设计**（fail-closed）；`SessionKind::Design` **与 knowledge 同谓词从主侧栏 / `/sessions` / 全局 FTS 隐藏**，新增专属空间**必须**同步该谓词
-- **小改必须就地精改**（实测曾抹空整页）：`get_artifact` → `edit_element(oid)`，**绝不整段 `update_artifact` 重造、绝不 web_fetch 读产物**
+- **接线**：会话独立 `SessionKind::Knowledge`（主列表 / `/sessions` / 全局 FTS 隐藏）；**新增 KB 工具须同步 `tools/note.rs` + `core_tools.rs`（schema）+ `execution.rs`（dispatch）**
 
 ### Agent 控制平面 / 通用场景
 

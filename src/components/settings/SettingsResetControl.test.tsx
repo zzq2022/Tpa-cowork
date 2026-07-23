@@ -95,8 +95,8 @@ function confirmReset() {
 }
 
 describe("SettingsResetControl", () => {
-  it("only exposes the 18 approved scopes and excludes global model settings", () => {
-    expect(Object.keys(RESET_SCOPE_BY_SECTION)).toHaveLength(18)
+  it("only exposes the 17 approved scopes and excludes global model settings", () => {
+    expect(Object.keys(RESET_SCOPE_BY_SECTION)).toHaveLength(17)
     expect(RESET_SCOPE_BY_SECTION.modelConfig).toBeUndefined()
 
     const { container } = render(

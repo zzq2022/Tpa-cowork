@@ -62,7 +62,6 @@ const DashboardView = lazy(() => import("@/components/dashboard/DashboardView"))
 const CronCalendarView = lazy(() => import("@/components/cron/CronCalendarView"))
 const PlansView = lazy(() => import("@/components/plans/PlansView"))
 const KnowledgeView = lazy(() => import("@/components/knowledge/KnowledgeView"))
-const DesignView = lazy(() => import("@/components/design/DesignView"))
 const ArtifactsView = lazy(() => import("@/components/artifacts/ArtifactsView"))
 const SettingsView = lazy(() => import("@/components/settings/SettingsView"))
 const SkillHubView = lazy(() => import("@/components/skillhub/SkillHubView"))
@@ -85,7 +84,6 @@ type AppView =
   | "dashboard"
   | "plans"
   | "knowledge"
-  | "design"
   | "artifacts"
   | "skillhub"
   | "mySkills"
@@ -720,7 +718,6 @@ export default function App() {
                 view={view}
                 onOpenSettings={handleOpenSettings}
                 onOpenChat={handleOpenChat}
-                onOpenMemory={() => setView("memory")}
                 onOpenProfile={() => {
                   setView("profile")
                 }}
@@ -728,7 +725,6 @@ export default function App() {
                 onOpenDashboard={() => handleOpenDashboard()}
                 onOpenPlans={() => setView("plans")}
                 onOpenKnowledge={handleOpenKnowledge}
-                onOpenDesign={() => setView("design")}
                 onOpenArtifacts={() => setView("artifacts")}
                 onOpenSkillHub={() => setView("skillhub")}
                 onOpenMySkills={() => setView("mySkills")}
@@ -883,26 +879,6 @@ export default function App() {
                   <KnowledgeView
                     onBack={() => setView("chat")}
                     onOpenSettings={() => handleOpenSettings("knowledge")}
-                  />
-                </Suspense>
-              )}
-              {view === "design" && (
-                <Suspense
-                  fallback={
-                    <div className="flex-1 flex items-center justify-center">
-                      <div className="animate-spin h-6 w-6 border-2 border-foreground border-t-transparent rounded-full" />
-                    </div>
-                  }
-                >
-                  <DesignView
-                    onBack={() => setView("chat")}
-                    onOpenSettings={() => handleOpenSettings("design")}
-                    onImplementToCode={(sessionId, message) => {
-                      // 不设 pendingSessionId：auto-send 的 sessionIdOverride 已原子切会话，
-                      // 避免与导航半边竞争加载空历史（review F2）。
-                      setPendingAutoSend({ sessionId, message, nonce: Date.now() })
-                      setView("chat")
-                    }}
                   />
                 </Suspense>
               )}

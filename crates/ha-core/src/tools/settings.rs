@@ -566,7 +566,6 @@ fn read_category(category: &str) -> Result<Value> {
             }))
         }
         "canvas" => Ok(serde_json::to_value(&cfg.canvas)?),
-        "design" => Ok(serde_json::to_value(&cfg.design)?),
         "image" => Ok(serde_json::to_value(&cfg.image)?),
         "pdf" => Ok(serde_json::to_value(&cfg.pdf)?),
         "async_tools" => Ok(serde_json::to_value(&cfg.async_tools)?),
@@ -1173,7 +1172,6 @@ fn apply_app_config_update(
             }
         }
         "canvas" => merge_field(&mut store.canvas, values)?,
-        "design" => merge_field(&mut store.design, values)?,
         "image" => merge_field(&mut store.image, values)?,
         "pdf" => merge_field(&mut store.pdf, values)?,
         "async_tools" => merge_field(&mut store.async_tools, values)?,

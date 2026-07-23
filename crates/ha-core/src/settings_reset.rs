@@ -22,7 +22,6 @@ pub enum SettingsResetScope {
     Tools,
     Memory,
     Knowledge,
-    Design,
     Chat,
     Cron,
     Plan,
@@ -45,7 +44,6 @@ impl SettingsResetScope {
             Self::Tools => "tools",
             Self::Memory => "memory",
             Self::Knowledge => "knowledge",
-            Self::Design => "design",
             Self::Chat => "chat",
             Self::Cron => "cron",
             Self::Plan => "plan",
@@ -72,7 +70,6 @@ impl FromStr for SettingsResetScope {
             "tools" => Self::Tools,
             "memory" => Self::Memory,
             "knowledge" => Self::Knowledge,
-            "design" => Self::Design,
             "chat" => Self::Chat,
             "cron" => Self::Cron,
             "plan" => Self::Plan,
@@ -471,11 +468,6 @@ fn apply_app_target(config: &mut AppConfig, target: SettingsResetTarget) {
             config.knowledge_source_limits = defaults.knowledge_source_limits;
             config.sprite = defaults.sprite;
         }
-        SettingsResetScope::Design => {
-            let last_model = config.design.last_model.clone();
-            config.design = defaults.design;
-            config.design.last_model = last_model;
-        }
         SettingsResetScope::Chat => {
             config.compact = defaults.compact;
             config.session_title = defaults.session_title;
@@ -867,12 +859,11 @@ mod tests {
     use super::*;
     use serde_json::json;
 
-    const ALL_SCOPES: [(SettingsResetScope, &str); 18] = [
+    const ALL_SCOPES: [(SettingsResetScope, &str); 17] = [
         (SettingsResetScope::General, "general"),
         (SettingsResetScope::Tools, "tools"),
         (SettingsResetScope::Memory, "memory"),
         (SettingsResetScope::Knowledge, "knowledge"),
-        (SettingsResetScope::Design, "design"),
         (SettingsResetScope::Chat, "chat"),
         (SettingsResetScope::Cron, "cron"),
         (SettingsResetScope::Plan, "plan"),
@@ -1180,10 +1171,6 @@ mod tests {
                 source: None,
             });
         config.memory_providers.enabled = true;
-        config.design.last_model = Some(crate::provider::ActiveModel {
-            provider_id: "provider".into(),
-            model_id: "model".into(),
-        });
         config.browser = Some(crate::browser::BrowserConfig::default());
         config.browser.as_mut().unwrap().profiles.insert(
             "custom".into(),
@@ -1204,9 +1191,6 @@ mod tests {
         apply_app_scope(&mut config, SettingsResetScope::Memory);
         assert_eq!(config.embedding_models.len(), 1);
         assert!(config.memory_providers.enabled);
-
-        apply_app_scope(&mut config, SettingsResetScope::Design);
-        assert!(config.design.last_model.is_some());
 
         apply_app_scope(&mut config, SettingsResetScope::Browser);
         assert!(config

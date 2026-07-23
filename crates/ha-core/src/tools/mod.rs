@@ -12,7 +12,6 @@ pub mod canvas;
 mod core_memory;
 mod cron;
 mod definitions;
-pub mod design;
 pub(crate) mod diff_util;
 pub mod dispatch;
 mod edit;

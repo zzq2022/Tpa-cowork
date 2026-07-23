@@ -5,7 +5,6 @@ export type SettingsResetScope =
   | "tools"
   | "memory"
   | "knowledge"
-  | "design"
   | "chat"
   | "cron"
   | "plan"
@@ -63,7 +62,6 @@ export const RESET_SCOPE_BY_SECTION: Partial<Record<SettingsSection, SettingsRes
   tools: "tools",
   memory: "memory",
   knowledge: "knowledge",
-  design: "design",
   chat: "chat",
   cron: "cron",
   plan: "plan",

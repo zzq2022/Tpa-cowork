@@ -20,14 +20,12 @@ import appLogoUrl from "@/assets/logo.png"
 import {
   MessageSquare,
   BookOpenText,
-  Brain,
   Settings,
   Languages,
   CalendarDays,
   BarChart3,
   ClipboardList,
   Library,
-  Palette,
   Sun,
   Moon,
   SunMoon,
@@ -62,7 +60,6 @@ interface IconSidebarProps {
   | "dashboard"
   | "plans"
   | "knowledge"
-  | "design"
   | "artifacts"
   | "skillhub"
   | "mySkills"
@@ -71,13 +68,11 @@ interface IconSidebarProps {
   onOpenAgents?: () => void
   onOpenModelConfig?: () => void
   onOpenSkills?: () => void
-  onOpenMemory: () => void
   onOpenProfile: () => void
   onOpenCalendar: () => void
   onOpenDashboard: () => void
   onOpenPlans: () => void
   onOpenKnowledge: () => void
-  onOpenDesign: () => void
   onOpenArtifacts: () => void
   onOpenSkillHub?: () => void
   onOpenMySkills?: () => void
@@ -90,13 +85,11 @@ export default function IconSidebar({
   view,
   onOpenSettings,
   onOpenChat,
-  onOpenMemory,
   onOpenProfile,
   onOpenCalendar,
   onOpenDashboard,
   onOpenPlans,
   onOpenKnowledge,
-  onOpenDesign,
   onOpenArtifacts,
   onOpenSkillHub,
   onOpenMySkills,
@@ -199,24 +192,6 @@ export default function IconSidebar({
               onClick={onOpenKnowledge}
             >
               <Library className="h-4 w-4" />
-            </Button>
-          </IconTip>
-        </div>
-        {/* Design Space entry — grouped directly under Knowledge Space */}
-        <div className="w-full flex justify-center">
-          <IconTip label={t("design.title", "Design Space")} side="right">
-            <Button
-              variant="ghost"
-              size="icon"
-              className={cn(
-                "rounded-xl h-8 w-8 transition-all duration-200",
-                view === "design"
-                  ? "bg-purple-500/15 text-purple-600 dark:text-purple-400"
-                  : "text-muted-foreground hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-500/10",
-              )}
-              onClick={onOpenDesign}
-            >
-              <Palette className="h-4 w-4" />
             </Button>
           </IconTip>
         </div>
@@ -340,25 +315,6 @@ export default function IconSidebar({
             </IconTip>
           </div>
         )}
-
-        {/* Memory entry */}
-        <div className="w-full flex justify-center mt-1">
-          <IconTip label={t("settings.memory")} side="right">
-            <Button
-              variant="ghost"
-              size="icon"
-              className={cn(
-                "rounded-xl h-8 w-8 transition-all duration-200",
-                view === "memory"
-                  ? "bg-pink-500/15 text-pink-600 dark:text-pink-400"
-                  : "text-muted-foreground hover:text-pink-600 dark:hover:text-pink-400 hover:bg-pink-500/10",
-              )}
-              onClick={onOpenMemory}
-            >
-              <Brain className="h-4 w-4" />
-            </Button>
-          </IconTip>
-        </div>
       </div>
 
       <div className="icon-sidebar-settings-shortcuts-trailing-divider my-1 h-px w-6 bg-border-soft/60" />

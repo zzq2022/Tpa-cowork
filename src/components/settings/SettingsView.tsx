@@ -12,7 +12,6 @@ import {
   Code,
   Compass,
   Library,
-  Palette,
   Globe,
   Info,
   MessageSquare,
@@ -42,7 +41,6 @@ import ProviderEditPage from "@/components/settings/ProviderEditPage"
 import GeneralPanel from "@/components/settings/general-panel"
 import ModelConfigPanel from "@/components/settings/ModelConfigPanel"
 import ToolSettingsPanel from "@/components/settings/ToolSettingsPanel"
-import DesignSettingsPanel from "@/components/settings/DesignSettingsPanel"
 import ChatSettingsPanel from "@/components/settings/ChatSettingsPanel"
 import CronSettingsPanel from "@/components/settings/CronSettingsPanel"
 import PlanSettingsPanel from "@/components/settings/PlanSettingsPanel"
@@ -88,7 +86,6 @@ const HELP_CHAPTER_BY_SECTION: Partial<Record<SettingsSection, number>> = {
   modelConfig: 2,
   memory: 4,
   knowledge: 5,
-  design: 6,
   tools: 7,
   permissions: 7,
   approval: 7,
@@ -163,12 +160,6 @@ const SECTIONS: SettingsSectionItem[] = [
     icon: <Library className="h-3.5 w-3.5" />,
     colorClass: "bg-blue-600",
     labelKey: "settings.knowledge.tab",
-  },
-  {
-    id: "design",
-    icon: <Palette className="h-3.5 w-3.5" />,
-    colorClass: "bg-purple-600",
-    labelKey: "design.title",
   },
   {
     id: "chat",
@@ -481,7 +472,6 @@ export default function SettingsView({
             {activeSection === "profile" && <UserProfilePanel onSaved={onProfileSaved} />}
             {activeSection === "memory" && <MemoryPanel />}
             {activeSection === "knowledge" && <KnowledgePanel />}
-            {activeSection === "design" && <DesignSettingsPanel />}
             {activeSection === "notifications" && <NotificationPanel />}
             {activeSection === "tools" && <ToolSettingsPanel />}
             {activeSection === "mcp" && <McpServersPanel />}

@@ -78,7 +78,7 @@ pub enum ToolFate {
 /// alone decides them.
 pub fn is_globally_configured(name: &str, app_config: &AppConfig) -> bool {
     use crate::tools::{
-        TOOL_ARTIFACT, TOOL_AUDIO_GENERATE, TOOL_CANVAS, TOOL_DESIGN, TOOL_IMAGE_GENERATE,
+        TOOL_ARTIFACT, TOOL_AUDIO_GENERATE, TOOL_CANVAS, TOOL_IMAGE_GENERATE,
         TOOL_SEND_NOTIFICATION, TOOL_SUBAGENT, TOOL_WEB_SEARCH,
     };
     match name {
@@ -96,7 +96,6 @@ pub fn is_globally_configured(name: &str, app_config: &AppConfig) -> bool {
                     .has_capable_provider(crate::media_gen::MediaModality::Audio)
         }
         TOOL_CANVAS | TOOL_ARTIFACT => app_config.canvas.enabled,
-        TOOL_DESIGN => app_config.design.enabled,
         TOOL_SEND_NOTIFICATION => app_config.notification.enabled,
         TOOL_SUBAGENT => true,
         _ => true,
@@ -377,9 +376,8 @@ pub fn resolve_tool_fate(def: &ToolDefinition, ctx: &DispatchContext) -> ToolFat
 static ALL_DISPATCHABLE_TOOLS: LazyLock<Vec<ToolDefinition>> = LazyLock::new(|| {
     use super::definitions::{
         get_artifact_tool, get_audio_generate_tool_dynamic, get_available_tools, get_canvas_tool,
-        get_design_tool, get_enter_plan_mode_tool, get_image_generate_tool_dynamic,
-        get_notification_tool, get_subagent_tool, get_submit_plan_tool, get_tool_search_tool,
-        get_web_search_tool,
+        get_enter_plan_mode_tool, get_image_generate_tool_dynamic, get_notification_tool,
+        get_subagent_tool, get_submit_plan_tool, get_tool_search_tool, get_web_search_tool,
     };
     let mut tools = get_available_tools();
     tools.extend([
@@ -388,7 +386,6 @@ static ALL_DISPATCHABLE_TOOLS: LazyLock<Vec<ToolDefinition>> = LazyLock::new(|| 
         get_image_generate_tool_dynamic(&crate::media_gen::MediaGenConfig::default()),
         get_audio_generate_tool_dynamic(&crate::media_gen::MediaGenConfig::default()),
         get_canvas_tool(),
-        get_design_tool(),
         get_artifact_tool(),
         get_tool_search_tool(),
         get_web_search_tool(),

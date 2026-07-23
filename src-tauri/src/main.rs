@@ -177,8 +177,7 @@ fn run_mcp(args: &[String]) {
     ha_core::set_app_version(env!("CARGO_PKG_VERSION"));
     ha_core::init_runtime("mcp");
 
-    let providers: Vec<Box<dyn ha_core::mcp_server::ToolProvider>> =
-        vec![Box::new(ha_core::design::mcp_provider::DesignToolProvider)];
+    let providers: Vec<Box<dyn ha_core::mcp_server::ToolProvider>> = vec![];
     if let Err(e) = ha_core::mcp_server::run_stdio(options, providers) {
         eprintln!("[mcp] Server error: {}", e);
         std::process::exit(1);

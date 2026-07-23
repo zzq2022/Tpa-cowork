@@ -299,26 +299,18 @@ pub fn binary_in_path_public(name: &str) -> bool {
 
 /// Check whether a binary exists anywhere in PATH.
 fn binary_in_path(name: &str) -> bool {
-    let aliases: &[&str] = if cfg!(target_os = "windows") && name == "python3" {
-        &["python3", "python"]
-    } else {
-        &[name]
-    };
-
     if let Ok(path_var) = std::env::var("PATH") {
         for dir in std::env::split_paths(&path_var) {
-            for alias in aliases {
-                let candidate = dir.join(alias);
-                if candidate.is_file() {
+            let candidate = dir.join(name);
+            if candidate.is_file() {
+                return true;
+            }
+            // Windows: also check .exe
+            #[cfg(target_os = "windows")]
+            {
+                let exe = dir.join(format!("{}.exe", name));
+                if exe.is_file() {
                     return true;
-                }
-                // Windows: also check .exe
-                #[cfg(target_os = "windows")]
-                {
-                    let exe = dir.join(format!("{}.exe", alias));
-                    if exe.is_file() {
-                        return true;
-                    }
                 }
             }
         }

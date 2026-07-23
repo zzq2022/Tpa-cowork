@@ -819,6 +819,19 @@ pub(crate) async fn tool_exec(args: &Value, ctx: &super::ToolExecContext) -> Res
         }
     }
 
+    // Always prepend agent-venv bin dir to PATH so bundled Python environment
+    // takes precedence over system Python for all executed tools and commands.
+    if let Some(venv_bin) = crate::paths::agent_venv_bin_dir() {
+        let current_path = std::env::var("PATH").unwrap_or_default();
+        let separator = if cfg!(windows) { ";" } else { ":" };
+        let mut venv_path = venv_bin.into_os_string();
+        if !current_path.is_empty() {
+            venv_path.push(separator);
+            venv_path.push(&current_path);
+        }
+        cmd.env("PATH", venv_path);
+    }
+
     // Create a session for tracking
     let session_id = create_session_id();
     let session = ProcessSession {

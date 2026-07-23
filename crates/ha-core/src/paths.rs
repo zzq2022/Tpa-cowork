@@ -1060,15 +1060,18 @@ fn find_agent_venv_bin_dir() -> Option<PathBuf> {
 
 fn usable_agent_venv_bin(root: &Path, require_sentinel: bool) -> Option<PathBuf> {
     let bin = agent_venv_scripts_dir(root);
-    let python = if cfg!(windows) {
-        bin.join("python.exe")
+    let python_exists = if cfg!(windows) {
+        bin.join("python.exe").is_file() || bin.join("python3.exe").is_file()
     } else {
-        bin.join("python")
+        bin.join("python").is_file() || bin.join("python3").is_file()
     };
-    if !python.is_file() {
+    if !python_exists {
         return None;
     }
-    if require_sentinel && !root.join(AGENT_VENV_SENTINEL).is_file() {
+    if require_sentinel
+        && !root.join(AGENT_VENV_SENTINEL).is_file()
+        && !root.join(".hope-agent-venv-complete").is_file()
+    {
         return None;
     }
     Some(bin)

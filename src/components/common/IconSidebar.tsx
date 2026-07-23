@@ -6,10 +6,8 @@ import { Button } from "@/components/ui/button"
 import { FloatingMenu } from "@/components/ui/floating-menu"
 import { IconTip } from "@/components/ui/tooltip"
 import ServerStatusIndicator from "@/components/common/ServerStatusIndicator"
-import BrowserStatusIndicator from "@/components/common/BrowserStatusIndicator"
 import type { SettingsSection } from "@/components/settings/types"
 import { useDesktopUpdateStore } from "@/hooks/useDesktopUpdateStore"
-import { useDraftSkillsStore } from "@/hooks/useDraftSkillsStore"
 import { useCronUnreadStore, markAllCronRead } from "@/hooks/useCronUnreadStore"
 import {
   ContextMenu,
@@ -22,18 +20,14 @@ import appLogoUrl from "@/assets/logo.png"
 import {
   MessageSquare,
   BookOpenText,
-  Bot,
   Brain,
   Settings,
   Languages,
-  Puzzle,
-  MessageCircle,
   CalendarDays,
   BarChart3,
   ClipboardList,
   Library,
   Palette,
-  Server,
   Sun,
   Moon,
   SunMoon,
@@ -74,10 +68,9 @@ interface IconSidebarProps {
   | "mySkills"
   onOpenSettings: (section?: SettingsSection) => void
   onOpenChat: () => void
-  onOpenAgents: () => void
-  onOpenModelConfig: () => void
-  onOpenChannels: () => void
-  onOpenSkills: () => void
+  onOpenAgents?: () => void
+  onOpenModelConfig?: () => void
+  onOpenSkills?: () => void
   onOpenMemory: () => void
   onOpenProfile: () => void
   onOpenCalendar: () => void
@@ -97,10 +90,6 @@ export default function IconSidebar({
   view,
   onOpenSettings,
   onOpenChat,
-  onOpenAgents,
-  onOpenModelConfig,
-  onOpenChannels,
-  onOpenSkills,
   onOpenMemory,
   onOpenProfile,
   onOpenCalendar,
@@ -119,8 +108,6 @@ export default function IconSidebar({
   const { theme, cycleTheme } = useTheme()
   const [showLangMenu, setShowLangMenu] = useState(false)
   const { pendingUpdate } = useDesktopUpdateStore()
-  const { draftCount: skillDraftCount } = useDraftSkillsStore()
-  const skillDraftBadgeLabel = skillDraftCount > 99 ? "99+" : String(skillDraftCount)
   const { cronUnreadCount } = useCronUnreadStore()
   const cronUnreadBadgeLabel = cronUnreadCount > 99 ? "99+" : String(cronUnreadCount)
   const regularUnreadBadgeLabel =
@@ -312,89 +299,6 @@ export default function IconSidebar({
       <div className="my-1 h-px w-6 bg-border-soft/80" />
 
       <div className="icon-sidebar-settings-shortcuts flex w-full flex-col items-center">
-        {/* Agents entry */}
-        <div className="w-full flex justify-center mt-1">
-          <IconTip label={t("settings.agents")} side="right">
-            <Button
-              variant="ghost"
-              size="icon"
-              className={cn(
-                "rounded-xl h-8 w-8 transition-all duration-200",
-                view === "agents"
-                  ? "bg-violet-500/15 text-violet-600 dark:text-violet-400"
-                  : "text-muted-foreground hover:text-violet-600 dark:hover:text-violet-400 hover:bg-violet-500/10",
-              )}
-              onClick={onOpenAgents}
-            >
-              <Bot className="h-4 w-4" />
-            </Button>
-          </IconTip>
-        </div>
-
-        {/* Model configuration entry */}
-        <div className="w-full flex justify-center mt-1">
-          <IconTip label={t("settings.modelConfig")} side="right">
-            <Button
-              variant="ghost"
-              size="icon"
-              className={cn(
-                "rounded-xl h-8 w-8 transition-all duration-200",
-                view === "modelConfig"
-                  ? "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400"
-                  : "text-muted-foreground hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-500/10",
-              )}
-              onClick={onOpenModelConfig}
-            >
-              <Server className="h-4 w-4" />
-            </Button>
-          </IconTip>
-        </div>
-
-        {/* Channels entry */}
-        <div className="w-full flex justify-center mt-1">
-          <IconTip label={t("settings.channels")} side="right">
-            <Button
-              variant="ghost"
-              size="icon"
-              className={cn(
-                "rounded-xl h-8 w-8 transition-all duration-200",
-                view === "channels"
-                  ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
-                  : "text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/10",
-              )}
-              onClick={onOpenChannels}
-            >
-              <MessageCircle className="h-4 w-4" />
-            </Button>
-          </IconTip>
-        </div>
-
-        {/* Skills entry */}
-        <div className="w-full flex justify-center mt-1">
-          <div className="relative">
-            <IconTip label={t("settings.skills")} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(
-                  "rounded-xl h-8 w-8 transition-all duration-200",
-                  view === "skills"
-                    ? "bg-amber-500/15 text-amber-600 dark:text-amber-400"
-                    : "text-muted-foreground hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-500/10",
-                )}
-                onClick={onOpenSkills}
-              >
-                <Puzzle className="h-4 w-4" />
-              </Button>
-            </IconTip>
-            {skillDraftCount > 0 && (
-              <span className="pointer-events-none absolute -right-1.5 -top-1 z-10 inline-flex h-[15px] min-w-[15px] items-center justify-center rounded-full border border-background bg-amber-500 px-1 text-[9px] font-bold leading-none text-white tabular-nums animate-in zoom-in-0 duration-200">
-                {skillDraftBadgeLabel}
-              </span>
-            )}
-          </div>
-        </div>
-
         {/* SkillHub entry */}
         {onOpenSkillHub && (
           <div className="w-full flex justify-center mt-1">
@@ -458,12 +362,6 @@ export default function IconSidebar({
       </div>
 
       <div className="icon-sidebar-settings-shortcuts-trailing-divider my-1 h-px w-6 bg-border-soft/60" />
-
-      {/* Browser backend — status indicator + entry to Settings → Browser.
-            Green dot when a backend is live; hover shows details. */}
-      <div className="w-full flex justify-center mt-1">
-        <BrowserStatusIndicator onOpen={() => onOpenSettings("browser")} />
-      </div>
 
       {/* Plans (read-only history viewer) entry */}
       <div className="w-full flex justify-center mt-1">

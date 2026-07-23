@@ -720,15 +720,7 @@ export default function App() {
                 view={view}
                 onOpenSettings={handleOpenSettings}
                 onOpenChat={handleOpenChat}
-                onOpenAgents={() => {
-                  setAgentIdForSettings(undefined)
-                  setAgentTabForSettings(undefined)
-                  setView("agents")
-                }}
-                onOpenModelConfig={() => setView("modelConfig")}
-                onOpenSkills={() => setView("skills")}
                 onOpenMemory={() => setView("memory")}
-                onOpenChannels={() => setView("channels")}
                 onOpenProfile={() => {
                   setView("profile")
                 }}

@@ -95,15 +95,17 @@
   - **严禁**在散落的业务页面组件（如 `ChatWindow.tsx`, `SettingsView.tsx`）中手写分散的硬编码动效类名。
 - **验收**：全站所有调用 `<Button>` 的组件均能无缝自动获得动效与色彩质感；后续同步上游升级代码时，业务页面零冲突，迁移改造成本接近于零。
 
-### UI-003：最左侧图标栏与设置菜单色彩动效与视觉对齐
+### UI-003：最左侧图标栏与设置菜单色彩动效与精简导航规范
 
-- **最左侧图标栏 (IconSidebar)**：
-  - 侧边栏所有功能按钮（对话、知识空间、设计空间、制品库、定时任务、仪表盘、Agent、模型配置、IM 渠道、技能、SkillHub、我的技能、记忆、计划、日志、个人资料、主题切换、语言切换、帮助手册、设置等）按业务主题配备独立的 **Hover / Active 炫彩变色与平滑过渡** (`transition-all duration-200`)。
-- **设置菜单导航 (SettingsView)**：
-  - 设置页左侧导航列表每一项配置（个人资料、通用、模型配置、Agent、团队、IM 渠道、技能、工具、MCP、记忆、知识空间、设计空间、定时任务、复盘报告、服务器、Docker 沙箱、浏览器、ACP 控制面、通知、安全、日志等）包含 24x24 像素的独立色彩圆角图标容器 (`w-6 h-6 rounded-md flex items-center justify-center text-white ... shadow-[0_1px_2px_rgba(0,0,0,0.08)]`)。
+- **最左侧图标栏 (IconSidebar) 精简与变色**：
+  - 精简重复快捷图标：移除最左侧图标栏中已在设置页存在的**技能、模型配置、Agent 关联/智能体、浏览器设置状态**及**IM 渠道**等重复快捷按钮，保持左侧边栏干净高凝聚。
+  - 侧边栏所有功能按钮（对话、知识空间、设计空间、制品库、定时任务、仪表盘、SkillHub、我的技能、记忆、计划、日志、个人资料、主题切换、语言切换、帮助手册、设置等）按业务主题配备独立的 **Hover / Active 炫彩变色与平滑过渡** (`transition-all duration-200`)。
+- **设置菜单导航 (SettingsView) 精简**：
+  - 移除冗余与不需要的控制面板：精简设置页左侧导航中的 **IM 渠道 (`channels`)**、**ACP 面板 (`acp`)** 及 **Docker 沙箱 (`sandbox`)** 项。
+  - 设置页左侧导航列表每一项配置（个人资料、通用、模型配置、Agent、团队、技能、工具、MCP、记忆、知识空间、设计空间、定时任务、复盘报告、服务器、浏览器、通知、安全、日志等）包含 24x24 像素的独立色彩圆角图标容器 (`w-6 h-6 rounded-md flex items-center justify-center text-white ... shadow-[0_1px_2px_rgba(0,0,0,0.08)]`)。
 - **验收**：
-  - 鼠标移入最左侧图标按钮时产生对应业务主题颜色的背景与图标变色反馈。
-  - 打开设置面板后，左侧导航列表图标呈多彩圆角徽章格式显示。
+  - 最左侧图标栏仅保留核心全局视图与必要辅助入口，不展示与设置页重复的技能/模型配置/Agent/浏览器/IM快捷入口。
+  - 打开设置面板后，导航列表中无 IM 渠道、ACP 面板及 Docker 沙箱页面。
 
 ### SUPPORT-001：企业支持入口
 
@@ -128,13 +130,14 @@
 
 - **Docker 模块清理**：
   - 移除根目录 `Dockerfile`、`docker-compose.yml`、`.dockerignore` 及 `docker/` 构建打包目录。
-  - 在打包与 CI 流程中跳过 Docker 镜像构建逻辑与引擎探测，执行沙箱退回宿主机/轻量隔离。
+  - 清理设置视图中的 Docker 沙箱 (`sandbox`) 设置入口，在打包与 CI 流程中跳过 Docker 镜像构建逻辑与引擎探测，执行沙箱退回宿主机/轻量隔离。
 - **IM 消息渠道模块清理**：
-  - 裁剪后端 `crates/ha-core/src/im/`（Telegram、Slack、Discord、微信、飞书、钉钉等第三方通道与轮询逻辑）。
-  - 清理前端设置面板中的 IM 配置入口，移除 `sessions.db` 中的 `im_channel_conversations` 表与关联凭据。
-- **评估旁路与辅助模块裁剪**：
+  - 清理最左侧图标栏 (`IconSidebar`) 与设置视图 (`SettingsView`) 中的 IM 渠道 (`channels`) 配置与快捷入口。
+  - 裁剪后端 `crates/ha-core/src/im/`（Telegram、Slack、Discord、微信、飞书、钉钉等第三方通道与轮询逻辑），清理 `sessions.db` 中的 `im_channel_conversations` 表与关联凭据。
+- **ACP 与评估旁路模块清理**：
+  - 清理设置视图中的 ACP 面板 (`acp`) 导航配置项。
   - 打包流程（`pack-local.mjs`）中保持 `--skip-eval-sidecar` 默认跳过，按需裁剪 `scripts/prepare-browser-host.mjs` 独立宿主。
-- **验收**：裁剪后软件体积与资源占用明显减少，且不影响主对话、Memory 系统、知识空间、设计空间及 Tauri / HTTP 运行模式的核心功能。
+- **验收**：裁剪后软件体积与资源占用明显减少，设置项更加聚焦于核心 AI 智能体能力，且不影响主对话、Memory 系统、知识空间、设计空间及 Tauri / HTTP 运行模式的核心功能。
 
 ## 5. P2 可选择优化
 

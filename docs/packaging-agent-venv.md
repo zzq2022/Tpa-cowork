@@ -31,6 +31,14 @@ If installer extraction fails, the archive remains. The Rust runtime retries
 the same verified staging flow on first launch. A partial directory without the
 completion marker is never treated as usable.
 
+## Uninstall contract
+
+The NSIS uninstaller hook (`NSIS_HOOK_PREUNINSTALL` in `installer-hooks.nsh`)
+recursively deletes `$INSTDIR\agent-venv` and any leftover staging/backup
+folders (`.agent-venv-staging`, `.agent-venv-backup`), ensuring the installation
+directory is cleanly removed during uninstallation.
+
+
 ## Local packaging modes
 
 See [`packaging-local.md`](./packaging-local.md) for compile / quick / bundle / ship usage and skip flags.

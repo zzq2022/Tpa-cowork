@@ -87,3 +87,13 @@
   agent_venv_done:
   RMDir "$INSTDIR\resources"
 !macroend
+
+!macro NSIS_HOOK_PREUNINSTALL
+  DetailPrint "Removing Python environment (agent-venv)..."
+  RMDir /r "$INSTDIR\agent-venv"
+  RMDir /r "$INSTDIR\.agent-venv-staging"
+  RMDir /r "$INSTDIR\.agent-venv-backup"
+  Delete "$INSTDIR\agent-venv.zip"
+  Delete "$INSTDIR\resources\agent-venv.zip"
+!macroend
+

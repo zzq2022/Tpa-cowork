@@ -171,8 +171,15 @@ function prepareHost(env, profile) {
     pnpm(["prepare:browser-host"], env)
     return
   }
-  run("cargo", ["build", "-p", "ha-browser-host", "--profile", profile, "--locked"], env)
-  const source = join(repoRoot, "target", profile, hostBinaryName)
+  const cargoHostArgs = ["build", "-p", "ha-browser-host", "--profile", profile, "--locked"]
+  if (targetExplicit) {
+    cargoHostArgs.push("--target", targetExplicit)
+  }
+  run("cargo", cargoHostArgs, env)
+  const sourceDir = targetExplicit
+    ? join(repoRoot, "target", targetExplicit, profile)
+    : join(repoRoot, "target", profile)
+  const source = join(sourceDir, hostBinaryName)
   requireExisting("browser-host build output", source, "cargo build -p ha-browser-host failed to produce binary.")
   const destinationDir = join(repoRoot, "src-tauri", "resources", "browser-host")
   mkdirSync(destinationDir, { recursive: true })
@@ -234,8 +241,11 @@ function artifact(label, path) {
 }
 
 function report(profile) {
-  const executable = isWindows ? "tpa-cowork.exe" : "tpa-cowork"
-  artifact("main executable", join(repoRoot, "target", profile, executable))
+  const executable = isTargetWindows ? "tpa-cowork.exe" : "tpa-cowork"
+  const targetDir = targetExplicit
+    ? join(repoRoot, "target", targetExplicit, profile)
+    : join(repoRoot, "target", profile)
+  artifact("main executable", join(targetDir, executable))
   artifact("browser host", join(repoRoot, "src-tauri", "resources", "browser-host"))
   artifact("eval sidecar", binariesDir)
   artifact("embedded extension source", join(repoRoot, "extensions", "chrome"))

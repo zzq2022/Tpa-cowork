@@ -51,26 +51,14 @@ fn locale_index(locale: &str) -> usize {
 /// locales fall back to the English column.
 pub(super) fn localized_section_title(key: &str, locale: &str) -> &'static str {
     let row: [&'static str; 3] = match key {
-        "project_areas" => [
-            "你的工作领域",
-            "你的工作領域",
-            "What you work on",
-        ],
+        "project_areas" => ["你的工作领域", "你的工作領域", "What you work on"],
         "interaction_style" => [
             "你如何使用 TPA CoWork",
             "你如何使用 TPA CoWork",
             "How you use TPA CoWork",
         ],
-        "what_works" => [
-            "哪些做得好",
-            "哪些做得好",
-            "What's working well",
-        ],
-        "friction_analysis" => [
-            "卡点在哪",
-            "卡點在哪",
-            "Where things get stuck",
-        ],
+        "what_works" => ["哪些做得好", "哪些做得好", "What's working well"],
+        "friction_analysis" => ["卡点在哪", "卡點在哪", "Where things get stuck"],
         "agent_tool_optimization" => [
             "智能体与工具优化",
             "智能體與工具最佳化",
@@ -81,31 +69,11 @@ pub(super) fn localized_section_title(key: &str, locale: &str) -> &'static str {
             "記憶與技能建議",
             "Memory & skill recommendations",
         ],
-        "cost_optimization" => [
-            "成本优化",
-            "成本最佳化",
-            "Cost optimization",
-        ],
-        "suggestions" => [
-            "建议",
-            "建議",
-            "Suggestions",
-        ],
-        "on_the_horizon" => [
-            "未来可期",
-            "未來可期",
-            "On the horizon",
-        ],
-        "fun_ending" => [
-            "难忘瞬间",
-            "難忘瞬間",
-            "Memorable moment",
-        ],
-        "at_a_glance" => [
-            "一览",
-            "一覽",
-            "At a glance",
-        ],
+        "cost_optimization" => ["成本优化", "成本最佳化", "Cost optimization"],
+        "suggestions" => ["建议", "建議", "Suggestions"],
+        "on_the_horizon" => ["未来可期", "未來可期", "On the horizon"],
+        "fun_ending" => ["难忘瞬间", "難忘瞬間", "Memorable moment"],
+        "at_a_glance" => ["一览", "一覽", "At a glance"],
         _ => return "",
     };
     row[locale_index(locale)]

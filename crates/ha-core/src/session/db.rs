@@ -277,15 +277,27 @@ impl SessionDB {
             );
 
             CREATE TABLE IF NOT EXISTS channel_conversations (
-                session_id TEXT PRIMARY KEY REFERENCES sessions(id) ON DELETE CASCADE,
-                channel_id TEXT NOT NULL,
-                account_id TEXT NOT NULL,
-                chat_id TEXT NOT NULL,
-                chat_type TEXT NOT NULL,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                channel_id TEXT NOT NULL DEFAULT '',
+                account_id TEXT NOT NULL DEFAULT '',
+                chat_id TEXT NOT NULL DEFAULT '',
+                thread_id TEXT,
+                session_id TEXT NOT NULL,
+                sender_id TEXT,
                 sender_name TEXT,
+                chat_type TEXT NOT NULL DEFAULT 'dm',
+                source TEXT NOT NULL DEFAULT 'inbound',
+                attached_at TEXT,
                 created_at TEXT NOT NULL DEFAULT (datetime('now')),
-                updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+                updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+                FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE CASCADE
             );
+            CREATE UNIQUE INDEX IF NOT EXISTS uq_channel_conv_chat
+                ON channel_conversations(channel_id, account_id, chat_id, COALESCE(thread_id, ''));
+            CREATE UNIQUE INDEX IF NOT EXISTS uq_channel_conv_session
+                ON channel_conversations(session_id);
+            CREATE INDEX IF NOT EXISTS idx_channel_conv_lookup
+                ON channel_conversations(channel_id, account_id, chat_id);
 
             -- Design-space per-project chat threads. Binds a `kind='design'`
             -- session to the design project it iterates on. Truth source in

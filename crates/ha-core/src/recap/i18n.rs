@@ -24,21 +24,12 @@ pub(super) fn language_name(locale: &str) -> &'static str {
     crate::i18n::language_name(locale)
 }
 
-/// Localized report list title, e.g. `复盘 2024-01-01 → 2024-02-01 (12 个会话)`.
+///// Localized report list title, e.g. `复盘 2024-01-01 → 2024-02-01 (12 个会话)`.
 /// Uses an invariant `count + word` form to avoid per-language plural rules.
 pub(super) fn report_title(locale: &str, start: &str, end: &str, sessions: u32) -> String {
     let (prefix, word) = match locale {
         "zh" => ("复盘", "个会话"),
         "zh-TW" => ("回顧", "個對話"),
-        "ja" => ("振り返り", "セッション"),
-        "ko" => ("돌아보기", "세션"),
-        "es" => ("Resumen", "sesiones"),
-        "pt" => ("Retrospectiva", "sessões"),
-        "ru" => ("Обзор", "сессий"),
-        "ar" => ("مراجعة", "جلسة"),
-        "tr" => ("Özet", "oturum"),
-        "vi" => ("Tổng kết", "phiên"),
-        "ms" => ("Imbasan", "sesi"),
         _ => ("Recap", "sessions"),
     };
     format!("{prefix} {start} → {end} ({sessions} {word})")
@@ -56,163 +47,64 @@ fn locale_index(locale: &str) -> usize {
 }
 
 /// Localized title for a recap section `key`. Rows are ordered
-/// `[zh, zh-TW, en, ja, ko, es, pt, ru, ar, tr, vi, ms]`. Unknown keys fall
-/// back to the English title; unknown locales fall back to the English column.
+/// `[zh, zh-TW, en]`. Unknown keys fall back to the English title; unknown
+/// locales fall back to the English column.
 pub(super) fn localized_section_title(key: &str, locale: &str) -> &'static str {
-    let row: [&'static str; 12] = match key {
+    let row: [&'static str; 3] = match key {
         "project_areas" => [
             "你的工作领域",
             "你的工作領域",
             "What you work on",
-            "取り組んでいる領域",
-            "작업 중인 영역",
-            "En qué trabajas",
-            "No que você trabalha",
-            "Над чем вы работаете",
-            "مجالات عملك",
-            "Üzerinde çalıştıklarınız",
-            "Lĩnh vực bạn làm việc",
-            "Bidang kerja anda",
         ],
         "interaction_style" => [
-            "你如何使用 Hope Agent",
-            "你如何使用 Hope Agent",
-            "How you use Hope Agent",
-            "Hope Agent の使い方",
-            "Hope Agent 사용 방식",
-            "Cómo usas Hope Agent",
-            "Como você usa o Hope Agent",
-            "Как вы используете Hope Agent",
-            "كيف تستخدم Hope Agent",
-            "Hope Agent'ı nasıl kullanıyorsunuz",
-            "Cách bạn dùng Hope Agent",
-            "Cara anda guna Hope Agent",
+            "你如何使用 TPA CoWork",
+            "你如何使用 TPA CoWork",
+            "How you use TPA CoWork",
         ],
         "what_works" => [
             "哪些做得好",
             "哪些做得好",
             "What's working well",
-            "うまくいっていること",
-            "잘 되고 있는 점",
-            "Lo que funciona bien",
-            "O que está funcionando bem",
-            "Что работает хорошо",
-            "ما الذي ينجح",
-            "Neler iyi gidiyor",
-            "Điều đang hiệu quả",
-            "Apa yang berkesan",
         ],
         "friction_analysis" => [
             "卡点在哪",
             "卡點在哪",
             "Where things get stuck",
-            "詰まりやすいところ",
-            "막히는 지점",
-            "Dónde te atascas",
-            "Onde as coisas travam",
-            "Где возникают затруднения",
-            "أين تتعثر الأمور",
-            "Nerede tıkanıyorsunuz",
-            "Chỗ hay bị tắc",
-            "Di mana tersekat",
         ],
         "agent_tool_optimization" => [
             "智能体与工具优化",
             "智能體與工具最佳化",
             "Agent & tool optimization",
-            "エージェントとツールの最適化",
-            "에이전트 및 도구 최적화",
-            "Optimización de agentes y herramientas",
-            "Otimização de agentes e ferramentas",
-            "Оптимизация агентов и инструментов",
-            "تحسين الوكيل والأدوات",
-            "Aracı ve araç optimizasyonu",
-            "Tối ưu agent & công cụ",
-            "Pengoptimuman ejen & alat",
         ],
         "memory_skill_recommendations" => [
             "记忆与技能建议",
             "記憶與技能建議",
             "Memory & skill recommendations",
-            "メモリとスキルの推奨",
-            "메모리 및 스킬 추천",
-            "Recomendaciones de memoria y habilidades",
-            "Recomendações de memória e habilidades",
-            "Рекомендации по памяти и навыкам",
-            "توصيات الذاكرة والمهارات",
-            "Bellek ve beceri önerileri",
-            "Đề xuất bộ nhớ & kỹ năng",
-            "Cadangan memori & kemahiran",
         ],
         "cost_optimization" => [
             "成本优化",
             "成本最佳化",
             "Cost optimization",
-            "コスト最適化",
-            "비용 최적화",
-            "Optimización de costos",
-            "Otimização de custos",
-            "Оптимизация затрат",
-            "تحسين التكلفة",
-            "Maliyet optimizasyonu",
-            "Tối ưu chi phí",
-            "Pengoptimuman kos",
         ],
         "suggestions" => [
             "建议",
             "建議",
             "Suggestions",
-            "提案",
-            "제안",
-            "Sugerencias",
-            "Sugestões",
-            "Предложения",
-            "اقتراحات",
-            "Öneriler",
-            "Gợi ý",
-            "Cadangan",
         ],
         "on_the_horizon" => [
             "未来可期",
             "未來可期",
             "On the horizon",
-            "これからの展望",
-            "앞으로의 전망",
-            "En el horizonte",
-            "No horizonte",
-            "На горизонте",
-            "في الأفق",
-            "Ufukta",
-            "Triển vọng sắp tới",
-            "Di kaki langit",
         ],
         "fun_ending" => [
             "难忘瞬间",
             "難忘瞬間",
             "Memorable moment",
-            "思い出に残る瞬間",
-            "기억에 남는 순간",
-            "Momento memorable",
-            "Momento memorável",
-            "Запоминающийся момент",
-            "لحظة لا تُنسى",
-            "Unutulmaz an",
-            "Khoảnh khắc đáng nhớ",
-            "Detik tak dilupakan",
         ],
         "at_a_glance" => [
             "一览",
             "一覽",
             "At a glance",
-            "ひと目で",
-            "한눈에 보기",
-            "De un vistazo",
-            "Visão geral",
-            "Кратко",
-            "لمحة سريعة",
-            "Bir bakışta",
-            "Tổng quan nhanh",
-            "Sekilas pandang",
         ],
         _ => return "",
     };
@@ -285,22 +177,10 @@ mod tests {
 
     #[test]
     fn locale_columns_are_not_misaligned() {
-        // Anchor every column of one row so a swap/insert of ANY two columns
-        // (including non-adjacent mid-array) fails fast — length alone is
-        // guarded by the [&str; 12] type, but per-column correctness is not.
         let expected = [
             ("zh", "你的工作领域"),
             ("zh-TW", "你的工作領域"),
             ("en", "What you work on"),
-            ("ja", "取り組んでいる領域"),
-            ("ko", "작업 중인 영역"),
-            ("es", "En qué trabajas"),
-            ("pt", "No que você trabalha"),
-            ("ru", "Над чем вы работаете"),
-            ("ar", "مجالات عملك"),
-            ("tr", "Üzerinde çalıştıklarınız"),
-            ("vi", "Lĩnh vực bạn làm việc"),
-            ("ms", "Bidang kerja anda"),
         ];
         for (loc, title) in expected {
             assert_eq!(
@@ -309,9 +189,8 @@ mod tests {
                 "{loc}"
             );
         }
-        assert_eq!(localized_section_title("at_a_glance", "ja"), "ひと目で");
+        assert_eq!(localized_section_title("at_a_glance", "zh"), "一览");
         assert_eq!(locale_index("en"), 2);
-        assert_eq!(SUPPORTED_LOCALES[locale_index("ms")], "ms");
     }
 
     #[test]
@@ -331,7 +210,5 @@ mod tests {
         assert_eq!(effective_recap_locale(&cfg), "zh-TW");
         cfg.recap.language = Some("ZH".to_string());
         assert_eq!(effective_recap_locale(&cfg), "zh");
-        cfg.recap.language = Some("de".to_string());
-        assert_eq!(effective_recap_locale(&cfg), "en");
     }
 }

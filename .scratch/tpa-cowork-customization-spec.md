@@ -126,7 +126,8 @@
 - 明确支持 **Windows 64位 (`x86_64-pc-windows-msvc`)** 与 **麒麟 ARM 桌面 (`aarch64-unknown-linux-gnu`)** 两类平台目标的独立打包。
 - 打包辅助脚本 `scripts/pack-local.mjs` 支持解析 `--target <target-triple>` 参数并自动将平台变量传播至 `ha-browser-host` 与 `hope-agent-eval` Sidecar。
 - 根据目标平台自适应生成安装包格式：Windows 目标输出 NSIS `.exe`；Linux/麒麟目标输出 `.deb` 与 `.AppImage`。
-- **验收**：在对应编译环境下通过 `pnpm pack:local:bundle -- --target <triple>` 能准确打出完整可安装的软件包。
+- **Windows 免管理员权限安装（currentUser）**：`src-tauri/tauri.conf.json` 中的 NSIS 安装模式强制配置为 `"installMode": "currentUser"`，默认安装至 `%LOCALAPPDATA%\Programs\TPA CoWork` 目录，确保在无系统管理员权限的普通电脑用户环境下即可直接安装运行，无需 UAC 提权。
+- **验收**：在普通用户账号下双击打出的 Windows 安装包不触发管理员提权弹窗并能顺利安装完成；在对应编译环境下通过 `pnpm pack:local:bundle -- --target <triple>` 能准确打出完整可安装的软件包。
 
 ### DEV-001：Dev 开发模式无锁就绪配置
 
@@ -134,7 +135,7 @@
 - 避免在前置任务中串行链式执行 `cargo build`（如 Sidecar）导致与 Tauri 主进程 `cargo run` 并发争抢 `target/.cargo-lock` 构建锁而发生死锁。
 - **验收**：执行 `pnpm tauri dev` 时，Vite 开发服务器在 `http://localhost:1420` 秒级启动就绪，开发过程顺畅无阻。
 
-### CLEANUP-001：Docker、IM 消息渠道及非必要模块裁剪与轻量化
+### CLEANUP-001：Docker、IM 消息渠道、设计空间及非必要模块裁剪与轻量化
 
 - **Docker 模块清理**：
   - 移除根目录 `Dockerfile`、`docker-compose.yml`、`.dockerignore` 及 `docker/` 构建打包目录。
@@ -142,10 +143,14 @@
 - **IM 消息渠道模块清理**：
   - 清理最左侧图标栏 (`IconSidebar`) 与设置视图 (`SettingsView`) 中的 IM 渠道 (`channels`) 配置与快捷入口。
   - 裁剪后端 `crates/ha-core/src/im/`（Telegram、Slack、Discord、微信、飞书、钉钉等第三方通道与轮询逻辑），清理 `sessions.db` 中的 `im_channel_conversations` 表与关联凭据。
+- **设计空间（Design Space）模块清理**：
+  - 彻底裁剪后端 `crates/ha-core/src/design/`、路由 `routes/design.rs`、Tauri 命令 `commands/design.rs` 及前端 `src/components/design/` 所有组件与设置面板 `DesignSettingsPanel`。
 - **ACP 与评估旁路模块清理**：
   - 清理设置视图中的 ACP 面板 (`acp`) 导航配置项。
   - 打包流程（`pack-local.mjs`）中保持 `--skip-eval-sidecar` 默认跳过，按需裁剪 `scripts/prepare-browser-host.mjs` 独立宿主。
-- **验收**：裁剪后软件体积与资源占用明显减少，设置项更加聚焦于核心 AI 智能体能力，且不影响主对话、Memory 系统、知识空间、设计空间及 Tauri / HTTP 运行模式的核心功能。
+- **最左侧图标栏精简**：
+  - 移除已在设置页中包含的“记忆（Memory）”独立图标入口以及“设计空间”快捷入口。
+- **验收**：裁剪后软件体积与资源占用明显减少，系统干净聚焦于核心 AI 智能体能力，设置项与图标栏无冗余入口，不影响主对话、Memory 系统、知识空间及双模式调用的核心功能。
 
 ## 5. P2 可选择优化
 

@@ -87,7 +87,7 @@ pub fn current_ui_locale() -> &'static str {
     effective_ui_locale(&config)
 }
 
-//// Pick a localized string from a row ordered like [`SUPPORTED_LOCALES`].
+/// Pick a localized string from a row ordered like [`SUPPORTED_LOCALES`].
 pub fn pick_locale(locale: &str, row: [&'static str; 3]) -> &'static str {
     let locale = normalize_locale(locale).unwrap_or(DEFAULT_LOCALE);
     let idx = SUPPORTED_LOCALES

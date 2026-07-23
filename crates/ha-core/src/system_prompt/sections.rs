@@ -187,9 +187,30 @@ pub(super) fn build_async_tools_section() -> Option<String> {
 /// Build the sandbox guidance section. This is behavioral guidance only; the
 /// actual execution location and approvals are enforced by the tool layer.
 pub(super) fn build_sandbox_mode_section(mode: crate::permission::SandboxMode) -> String {
+    let mode_desc = match mode {
+        crate::permission::SandboxMode::Off => {
+            "Sandbox mode is off; tools run directly on the host."
+        }
+        crate::permission::SandboxMode::Standard => {
+            "`exec` runs in a sandbox; approval behavior is unchanged."
+        }
+        crate::permission::SandboxMode::Isolated => {
+            "`exec` runs in a temporary workspace copy; command-created file changes are not durable."
+        }
+        crate::permission::SandboxMode::Workspace => {
+            "`exec` runs with the workspace mounted; routine edit commands inside the workspace may need fewer approvals."
+        }
+        crate::permission::SandboxMode::Trusted => {
+            "`exec` runs with maximum sandbox-side autonomy; strict risks still require approval."
+        }
+    };
     format!(
-        "# Sandbox Mode\n\nCurrent session sandbox mode: `{}`.",
-        mode.as_str()
+        "# Sandbox Mode\n\n\
+         Current session sandbox mode: `{}`.\n\
+         {}\n\n\
+         Direct file tools such as `write`, `edit`, and `apply_patch` are host-side durable operations; they are not automatically sandboxed by the mode.",
+        mode.as_str(),
+        mode_desc
     )
 }
 

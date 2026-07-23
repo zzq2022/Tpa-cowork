@@ -276,6 +276,17 @@ impl SessionDB {
                 forked_from_message_id INTEGER
             );
 
+            CREATE TABLE IF NOT EXISTS channel_conversations (
+                session_id TEXT PRIMARY KEY REFERENCES sessions(id) ON DELETE CASCADE,
+                channel_id TEXT NOT NULL,
+                account_id TEXT NOT NULL,
+                chat_id TEXT NOT NULL,
+                chat_type TEXT NOT NULL,
+                sender_name TEXT,
+                created_at TEXT NOT NULL DEFAULT (datetime('now')),
+                updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+            );
+
             -- Design-space per-project chat threads. Binds a `kind='design'`
             -- session to the design project it iterates on. Truth source in
             -- sessions.db (JOINs sessions/messages for the history picker);

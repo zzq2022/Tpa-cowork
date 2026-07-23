@@ -1778,74 +1778,6 @@ mod tests {
     }
 
     #[test]
-    fn redact_channels_strips_credentials_and_settings() {
-        let original = json!({
-            "accounts": [
-                {
-                    "id": "acc-1",
-                    "channelId": "telegram",
-                    "label": "primary",
-                    "enabled": true,
-                    "credentials": { "token": "secret-bot-token-do-not-leak" },
-                    "settings": { "transport": "polling", "secretChat": "leak-me" },
-                    "autoApproveTools": false
-                },
-                {
-                    "id": "acc-2",
-                    "channelId": "discord",
-                    "label": "fallback",
-                    "enabled": false,
-                    "credentials": { "token": "another-token" },
-                    "settings": { "guildId": "12345" }
-                }
-            ],
-            "defaultAgentId": "ha-main",
-            "defaultModel": null
-        });
-
-        let redacted = redact_channels_value(original);
-        let arr = redacted["accounts"].as_array().unwrap();
-        for acc in arr {
-            assert_eq!(acc["credentials"], json!("[REDACTED]"));
-            assert_eq!(acc["settings"], json!("[REDACTED]"));
-        }
-        // Non-secret fields preserved.
-        assert_eq!(arr[0]["id"], "acc-1");
-        assert_eq!(arr[0]["channelId"], "telegram");
-        assert_eq!(arr[0]["enabled"], true);
-        assert_eq!(arr[0]["autoApproveTools"], false);
-        assert_eq!(redacted["defaultAgentId"], "ha-main");
-    }
-
-    #[test]
-    fn redact_channels_handles_missing_optional_fields() {
-        let original = json!({
-            "accounts": [
-                { "id": "acc-1", "channelId": "telegram", "label": "primary", "enabled": true }
-            ]
-        });
-        // No credentials/settings → nothing to redact, but call must not panic
-        // and the surviving fields stay intact.
-        let redacted = redact_channels_value(original);
-        assert_eq!(redacted["accounts"][0]["id"], "acc-1");
-        assert!(redacted["accounts"][0].get("credentials").is_none());
-        assert!(redacted["accounts"][0].get("settings").is_none());
-    }
-
-    #[test]
-    fn redact_channels_no_panic_on_empty_or_unexpected_shape() {
-        // Empty accounts.
-        let v = redact_channels_value(json!({ "accounts": [] }));
-        assert_eq!(v["accounts"].as_array().unwrap().len(), 0);
-        // Missing accounts key entirely.
-        let v = redact_channels_value(json!({}));
-        assert!(v.is_object());
-        // accounts not an array → leave untouched.
-        let v = redact_channels_value(json!({ "accounts": "not-an-array" }));
-        assert_eq!(v["accounts"], "not-an-array");
-    }
-
-    #[test]
     fn redact_mcp_servers_strips_secrets() {
         let original = json!([
             {
@@ -1959,45 +1891,11 @@ mod tests {
     }
 
     #[test]
-    fn redact_acp_control_masks_backend_env() {
-        let original = json!({
-            "enabled": true,
-            "backends": [
-                {
-                    "id": "claude-code",
-                    "name": "Claude Code",
-                    "binary": "claude",
-                    "enabled": true,
-                    "env": { "ANTHROPIC_API_KEY": "sk-ant-secret", "PATH": "/usr/local/bin" }
-                },
-                {
-                    "id": "no-env",
-                    "name": "Plain",
-                    "binary": "agent",
-                    "enabled": true,
-                    "env": {}
-                }
-            ],
-            "maxConcurrentSessions": 5
-        });
-        let r = redact_acp_control_value(original);
-        assert_eq!(r["backends"][0]["env"], json!("[REDACTED]"));
-        // Empty env stays empty (nothing to leak).
-        assert_eq!(r["backends"][1]["env"], json!({}));
-        // Structural fields preserved on the redacted entry.
-        assert_eq!(r["backends"][0]["id"], "claude-code");
-        assert_eq!(r["backends"][0]["enabled"], true);
-        assert_eq!(r["enabled"], true);
-        assert_eq!(r["maxConcurrentSessions"], 5);
-    }
-
-    #[test]
     fn side_effect_notes_present_for_new_high_risk_categories() {
         for cat in [
             "smart_mode",
             "mcp_global",
             "mcp_servers",
-            "channels",
             "multimodal",
             "dreaming",
             "knowledge_maintenance",

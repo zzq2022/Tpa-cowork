@@ -632,9 +632,6 @@ mod tests {
     fn open_workflow_test_db(name: &str) -> (PathBuf, Arc<SessionDB>) {
         let db_path = temp_db_path(name);
         let db = Arc::new(SessionDB::open(&db_path).expect("open session db"));
-        crate::channel::ChannelDB::new(db.clone())
-            .migrate()
-            .expect("migrate channel table");
         (db_path, db)
     }
 

@@ -12,9 +12,8 @@
 use std::sync::Arc;
 
 use ha_core::globals::{
-    APP_LOGGER, CACHED_AGENT, CHANNEL_CANCELS, CHANNEL_DB, CHANNEL_REGISTRY, CODEX_TOKEN_CACHE,
-    CRON_DB, EVENT_BUS, IDLE_EXTRACT_HANDLES, LOG_DB, MEMORY_BACKEND, PROJECT_DB, REASONING_EFFORT,
-    SESSION_DB, SUBAGENT_CANCELS,
+    APP_LOGGER, CACHED_AGENT, CODEX_TOKEN_CACHE, CRON_DB, EVENT_BUS, IDLE_EXTRACT_HANDLES, LOG_DB,
+    MEMORY_BACKEND, PROJECT_DB, REASONING_EFFORT, SESSION_DB, SUBAGENT_CANCELS,
 };
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
@@ -46,9 +45,6 @@ async fn init_runtime_full_lifecycle() {
     assert!(CRON_DB.get().is_some(), "CRON_DB");
     assert!(SUBAGENT_CANCELS.get().is_some(), "SUBAGENT_CANCELS");
     assert!(IDLE_EXTRACT_HANDLES.get().is_some(), "IDLE_EXTRACT_HANDLES");
-    assert!(CHANNEL_CANCELS.get().is_some(), "CHANNEL_CANCELS");
-    assert!(CHANNEL_REGISTRY.get().is_some(), "CHANNEL_REGISTRY");
-    assert!(CHANNEL_DB.get().is_some(), "CHANNEL_DB");
     assert!(CODEX_TOKEN_CACHE.get().is_some(), "CODEX_TOKEN_CACHE");
     assert!(REASONING_EFFORT.get().is_some(), "REASONING_EFFORT");
     assert!(CACHED_AGENT.get().is_some(), "CACHED_AGENT");
@@ -80,10 +76,6 @@ async fn init_runtime_full_lifecycle() {
     assert!(Arc::ptr_eq(
         &state.subagent_cancels,
         SUBAGENT_CANCELS.get().expect("SUBAGENT_CANCELS"),
-    ));
-    assert!(Arc::ptr_eq(
-        &state.channel_cancels,
-        CHANNEL_CANCELS.get().expect("CHANNEL_CANCELS"),
     ));
     assert!(Arc::ptr_eq(
         &state.codex_token,

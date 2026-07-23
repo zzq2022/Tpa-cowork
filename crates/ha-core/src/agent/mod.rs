@@ -4656,9 +4656,6 @@ mod tests {
             crate::session::SessionDB::open(&dir.path().join("sessions.db"))
                 .expect("open session db"),
         );
-        crate::channel::ChannelDB::new(db.clone())
-            .migrate()
-            .expect("migrate channel table");
         let off_session = db.create_session("ha-main").expect("create off session");
         let on_session = db.create_session("ha-main").expect("create on session");
         let incognito_session = db

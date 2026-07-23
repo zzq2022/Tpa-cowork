@@ -4,7 +4,6 @@ use std::process::Command;
 use std::sync::{Arc, MutexGuard, OnceLock};
 
 use crate::async_jobs::{BackgroundJob, JobKind, JobOrigin, JobStatus, JobsDB};
-use crate::channel::ChannelDB;
 use crate::goal::CreateGoalInput;
 use crate::model_usage::{ModelUsageEvent, KIND_CHAT};
 use crate::permission::SessionMode;
@@ -2580,9 +2579,6 @@ export default async function main(workflow) {
 fn runtime_review_and_verify_create_durable_control_plane_runs() {
     let dir = tempfile::tempdir().expect("tempdir");
     let db = Arc::new(SessionDB::open(&dir.path().join("sessions.db")).expect("open session db"));
-    ChannelDB::new(db.clone())
-        .migrate()
-        .expect("migrate channel db");
     let workspace = dir.path().join("workspace");
     std::fs::create_dir_all(workspace.join("crates/ha-eval/src")).expect("create workspace");
     git(&workspace, &["init"]);

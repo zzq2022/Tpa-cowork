@@ -932,9 +932,6 @@ mod build_api_url_tests {
             crate::session::SessionDB::open(&dir.path().join("sessions.db"))
                 .expect("open isolated session db"),
         );
-        crate::channel::ChannelDB::new(db.clone())
-            .migrate()
-            .expect("migrate channel tables");
         let session = db.create_session("ha-main").expect("create session");
         let goal = db
             .create_goal(crate::goal::CreateGoalInput {

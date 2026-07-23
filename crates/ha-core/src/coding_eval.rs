@@ -5227,9 +5227,6 @@ mod tests {
     fn temp_session_db() -> (tempfile::TempDir, Arc<SessionDB>) {
         let dir = tempfile::tempdir().expect("temp db dir");
         let db = Arc::new(SessionDB::open(&dir.path().join("sessions.db")).expect("session db"));
-        crate::channel::ChannelDB::new(db.clone())
-            .migrate()
-            .expect("channel db migration");
         (dir, db)
     }
 
@@ -6197,9 +6194,6 @@ mod contract_tests {
         });
         let dir = tempfile::tempdir().unwrap();
         let db = Arc::new(SessionDB::open(&dir.path().join("sessions.db")).unwrap());
-        crate::channel::ChannelDB::new(db.clone())
-            .migrate()
-            .unwrap();
         let session = db
             .create_session(crate::agent_loader::DEFAULT_AGENT_ID)
             .unwrap();

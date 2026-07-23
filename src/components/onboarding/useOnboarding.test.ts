@@ -107,7 +107,6 @@ describe("onboarding step order", () => {
       "search-provider",
       "profile",
       "safety",
-      "channels",
     ])
     expect(stepsForMode("local")).toEqual(ONBOARDING_STEPS)
   })
@@ -122,13 +121,13 @@ describe("onboarding step order", () => {
 
   test("resumes removed v2 steps at the next visible step", () => {
     expect(restoreOnboardingStep(5, 2, ONBOARDING_STEPS)).toBe(4)
-    expect(restoreOnboardingStep(7, 2, ONBOARDING_STEPS)).toBe(5)
-    expect(restoreOnboardingStep(8, 2, ONBOARDING_STEPS)).toBe(5)
-    expect(restoreOnboardingStep(10, 2, ONBOARDING_STEPS)).toBe(5)
+    expect(restoreOnboardingStep(7, 2, ONBOARDING_STEPS)).toBe(4)
+    expect(restoreOnboardingStep(8, 2, ONBOARDING_STEPS)).toBe(4)
+    expect(restoreOnboardingStep(10, 2, ONBOARDING_STEPS)).toBe(4)
   })
 
   test("resumes the removed v3 mode step at provider setup", () => {
     expect(restoreOnboardingStep(1, 3, ONBOARDING_STEPS)).toBe(1)
-    expect(restoreOnboardingStep(6, 3, ONBOARDING_STEPS)).toBe(5)
+    expect(restoreOnboardingStep(6, 3, ONBOARDING_STEPS)).toBe(4)
   })
 })

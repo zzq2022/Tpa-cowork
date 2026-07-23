@@ -1863,8 +1863,7 @@ mod memory_section_tests {
 
     #[test]
     fn sandbox_prompt_explains_isolated_persistence_boundary() {
-        let config = crate::sandbox::SandboxConfig::default();
-        let out = build_sandbox_mode_section(crate::permission::SandboxMode::Isolated, &config);
+        let out = build_sandbox_mode_section(crate::permission::SandboxMode::Isolated);
         assert!(
             out.contains("Current session sandbox mode: `isolated`"),
             "current mode should be explicit: {out}"
@@ -1881,8 +1880,7 @@ mod memory_section_tests {
 
     #[test]
     fn sandbox_prompt_explains_file_tools_are_host_side() {
-        let config = crate::sandbox::SandboxConfig::default();
-        let out = build_sandbox_mode_section(crate::permission::SandboxMode::Workspace, &config);
+        let out = build_sandbox_mode_section(crate::permission::SandboxMode::Workspace);
         assert!(
             out.contains("Current session sandbox mode: `workspace`"),
             "current mode should be explicit: {out}"
@@ -1899,29 +1897,10 @@ mod memory_section_tests {
 
     #[test]
     fn sandbox_prompt_reflects_current_docker_config() {
-        let config = crate::sandbox::SandboxConfig {
-            image: "custom:latest".to_string(),
-            read_only: false,
-            network_mode: "bridge".to_string(),
-            cap_drop_all: false,
-            no_new_privileges: false,
-            pids_limit: None,
-            tmpfs: Vec::new(),
-            ..crate::sandbox::SandboxConfig::default()
-        };
-        let out = build_sandbox_mode_section(crate::permission::SandboxMode::Trusted, &config);
-        assert!(out.contains("Container image: `custom:latest`"), "{out}");
-        assert!(out.contains("Docker network mode: `bridge`"), "{out}");
-        assert!(out.contains("Container root filesystem: writable"), "{out}");
+        let out = build_sandbox_mode_section(crate::permission::SandboxMode::Trusted);
         assert!(
-            out.contains("Linux capabilities are not globally dropped"),
+            out.contains("Current session sandbox mode: `trusted`"),
             "{out}"
-        );
-        assert!(out.contains("no-new-privileges is disabled"), "{out}");
-        assert!(out.contains("PID limit: unlimited"), "{out}");
-        assert!(
-            !out.contains("no network, a read-only root filesystem"),
-            "prompt must not hard-code the default sandbox constraints: {out}"
         );
     }
 

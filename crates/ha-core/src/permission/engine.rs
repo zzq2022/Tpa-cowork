@@ -2865,29 +2865,6 @@ mod tests {
 
     #[test]
     fn external_connector_actions_are_strict_and_classified_conservatively() {
-        let args = json!({
-            "summary": "Customer call",
-            "startTime": "2026-07-04T10:00:00Z",
-        });
-        let plan: Vec<String> = vec![];
-        let custom: Vec<String> = vec![];
-        let calendar_ctx = ctx(
-            crate::tools::feishu::TOOL_CALENDAR_CREATE_EVENT,
-            &args,
-            SessionMode::Default,
-            &plan,
-            &custom,
-        );
-        match resolve(&calendar_ctx) {
-            Decision::Ask {
-                reason: AskReason::ExternalConnectorAction { connector, action },
-            } => {
-                assert_eq!(connector, "feishu_calendar");
-                assert_eq!(action, "create calendar event");
-            }
-            other => panic!("expected external connector ask, got {:?}", other),
-        }
-
         let mcp_send = json!({"to": "user@example.com", "body": "hello"});
         let classified = classify_external_connector_action("mcp__gmail__send_email", &mcp_send)
             .expect("gmail send should classify");
@@ -2900,7 +2877,26 @@ mod tests {
         )
         .is_none());
 
-        match resolve(&calendar_ctx) {
+        let plan: Vec<String> = vec![];
+        let custom: Vec<String> = vec![];
+        let ctx_send = ctx(
+            "mcp__gmail__send_email",
+            &mcp_send,
+            SessionMode::Default,
+            &plan,
+            &custom,
+        );
+        match resolve(&ctx_send) {
+            Decision::Ask {
+                reason: AskReason::ExternalConnectorAction { connector, action },
+            } => {
+                assert_eq!(connector, "gmail");
+                assert_eq!(action, "send message");
+            }
+            other => panic!("expected external connector ask, got {:?}", other),
+        }
+
+        match resolve(&ctx_send) {
             Decision::Ask { reason } => assert!(reason.forbids_allow_always()),
             other => panic!("expected Ask, got {:?}", other),
         }

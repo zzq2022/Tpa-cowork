@@ -588,9 +588,6 @@ mod tests {
             uuid::Uuid::new_v4()
         ));
         let db = std::sync::Arc::new(SessionDB::open(&db_path).expect("open session db"));
-        crate::channel::ChannelDB::new(db.clone())
-            .migrate()
-            .expect("migrate channel schema");
         let session = db
             .create_session(crate::agent_loader::DEFAULT_AGENT_ID)
             .expect("create session");

@@ -2896,12 +2896,6 @@ export default async function main(workflow) {
             ..ToolExecContext::default()
         };
         assert!(needs_permission_engine(
-            crate::tools::feishu::TOOL_CALENDAR_CREATE_EVENT,
-            &json!({"summary": "Customer call"}),
-            &ctx,
-            ctx.local_auto_approve()
-        ));
-        assert!(needs_permission_engine(
             "mcp__gmail__send_email",
             &json!({"to": "user@example.com", "body": "hello"}),
             &ctx,
@@ -2916,8 +2910,8 @@ export default async function main(workflow) {
             ..ToolExecContext::default()
         };
         assert!(!needs_permission_engine(
-            crate::tools::feishu::TOOL_CALENDAR_CREATE_EVENT,
-            &json!({"summary": "Customer call"}),
+            "mcp__gmail__send_email",
+            &json!({"to": "user@example.com", "body": "hello"}),
             &ctx,
             ctx.local_auto_approve()
         ));

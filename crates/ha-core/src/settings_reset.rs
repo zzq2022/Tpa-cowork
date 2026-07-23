@@ -1189,7 +1189,6 @@ mod tests {
             "custom".into(),
             crate::browser::BrowserProfileConfig::default(),
         );
-        let backends = config.acp_control.backends.clone();
 
         config.proxy.url = Some("http://127.0.0.1:7890".into());
         config.server.api_key = Some("owner-token".into());
@@ -1218,7 +1217,6 @@ mod tests {
             .contains_key("custom"));
 
         apply_app_scope(&mut config, SettingsResetScope::Acp);
-        assert_eq!(config.acp_control.backends.len(), backends.len());
 
         apply_app_scope(&mut config, SettingsResetScope::Server);
         assert_eq!(config.server.api_key.as_deref(), Some("owner-token"));

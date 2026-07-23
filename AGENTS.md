@@ -27,6 +27,8 @@
 - **评测 GitHub workflow 当前暂停**：仓库无 capability-eval.yml / model-campaign.yml，release.yml 不校验 / 附加 eval evidence；deterministic 与真实模型证据链仍物理分离（policy 各一份 `evals/policy/release.json` / `evals/live/policy/release.json`），恢复远端评测须配置 PR 显式启用，不能只放回旧 workflow
 - **真实模型评测仅本地 App / CLI**：隔离 `config.json` 禁存 Provider Key，只用合成 / 授权脱敏数据、禁个人生产账号与真实用户数据；当前不配置受保护 Runner / GitHub Provider secrets / 自动 Campaign / 签名发布证据，恢复后 Provider-only 防火墙才是网络边界（环境变量只作部署证明）
 
+- **Git 提交被动触发**：修改代码或校验完成后，Agent 绝对禁止自行 `git commit` 或 `git push`，必须等待用户明确下达提交或推送指令后方可执行。
+
 详见 [release-process](docs/release-process.md) / [capability-eval](docs/architecture/capability-eval.md) / [live-model-evaluation](docs/architecture/live-model-evaluation.md)
 
 ## 设置约定

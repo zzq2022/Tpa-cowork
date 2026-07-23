@@ -12,15 +12,6 @@ export const SUPPORTED_LANGUAGES = [
   { code: "zh", label: "简体中文", shortLabel: "ZH" },
   { code: "zh-TW", label: "繁體中文", shortLabel: "TW" },
   { code: "en", label: "English", shortLabel: "EN" },
-  { code: "ja", label: "日本語", shortLabel: "JA" },
-  { code: "tr", label: "Türkçe", shortLabel: "TR" },
-  { code: "vi", label: "Tiếng Việt", shortLabel: "VI" },
-  { code: "pt", label: "Português", shortLabel: "PT" },
-  { code: "ko", label: "한국어", shortLabel: "KO" },
-  { code: "ru", label: "Русский", shortLabel: "RU" },
-  { code: "ar", label: "العربية", shortLabel: "AR" },
-  { code: "es", label: "Español", shortLabel: "ES" },
-  { code: "ms", label: "Bahasa Melayu", shortLabel: "MY" },
 ] as const
 
 const supportedCodes = SUPPORTED_LANGUAGES.map((l) => l.code)
@@ -30,15 +21,6 @@ const supportedCodes = SUPPORTED_LANGUAGES.map((l) => l.code)
 const localeLoaders: Record<string, () => Promise<{ default: Record<string, unknown> }>> = {
   zh: () => import("./locales/zh.json"),
   "zh-TW": () => import("./locales/zh-TW.json"),
-  ja: () => import("./locales/ja.json"),
-  ko: () => import("./locales/ko.json"),
-  tr: () => import("./locales/tr.json"),
-  vi: () => import("./locales/vi.json"),
-  pt: () => import("./locales/pt.json"),
-  ru: () => import("./locales/ru.json"),
-  ar: () => import("./locales/ar.json"),
-  es: () => import("./locales/es.json"),
-  ms: () => import("./locales/ms.json"),
 }
 
 // en 首屏已同步内联，标记为已加载。

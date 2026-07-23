@@ -83,51 +83,51 @@ struct DefaultMeta {
 fn default_meta(locale: &str) -> DefaultMeta {
     match locale {
         "zh" => DefaultMeta {
-            name: "Hope",
+            name: "TPA-Agent",
             description: "通用 AI 助手",
         },
         "zh-TW" => DefaultMeta {
-            name: "Hope",
+            name: "TPA-Agent",
             description: "通用 AI 助手",
         },
         "ja" => DefaultMeta {
-            name: "Hope",
+            name: "TPA-Agent",
             description: "汎用 AI アシスタント",
         },
         "ko" => DefaultMeta {
-            name: "Hope",
+            name: "TPA-Agent",
             description: "범용 AI 어시스턴트",
         },
         "es" => DefaultMeta {
-            name: "Hope",
+            name: "TPA-Agent",
             description: "Asistente de IA de propósito general",
         },
         "pt" => DefaultMeta {
-            name: "Hope",
+            name: "TPA-Agent",
             description: "Assistente de IA de propósito geral",
         },
         "ru" => DefaultMeta {
-            name: "Hope",
+            name: "TPA-Agent",
             description: "Универсальный ИИ-ассистент",
         },
         "ar" => DefaultMeta {
-            name: "Hope",
+            name: "TPA-Agent",
             description: "مساعد ذكاء اصطناعي متعدد الأغراض",
         },
         "tr" => DefaultMeta {
-            name: "Hope",
+            name: "TPA-Agent",
             description: "Genel amaçlı yapay zeka asistanı",
         },
         "vi" => DefaultMeta {
-            name: "Hope",
+            name: "TPA-Agent",
             description: "Trợ lý AI đa năng",
         },
         "ms" => DefaultMeta {
-            name: "Hope",
+            name: "TPA-Agent",
             description: "Pembantu AI pelbagai guna",
         },
         _ => DefaultMeta {
-            name: "Hope",
+            name: "TPA-Agent",
             description: "General-purpose AI assistant",
         },
     }
@@ -236,6 +236,16 @@ pub fn ensure_default_agent() -> Result<()> {
     let config_path = dir.join("agent.json");
 
     if config_path.exists() {
+        if let Ok(data) = std::fs::read_to_string(&config_path) {
+            if let Ok(mut config) = serde_json::from_str::<AgentConfig>(&data) {
+                if config.name == "Hope" {
+                    config.name = "TPA-Agent".to_string();
+                    if let Ok(json) = serde_json::to_string_pretty(&config) {
+                        let _ = crate::platform::write_atomic(&config_path, json.as_bytes());
+                    }
+                }
+            }
+        }
         return Ok(());
     }
 

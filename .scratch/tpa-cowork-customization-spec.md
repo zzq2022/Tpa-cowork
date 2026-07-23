@@ -19,6 +19,8 @@
 ### BRAND-001：TPA CoWork 产品身份
 
 - 产品显示名统一为 `TPA CoWork`。
+- 系统默认主 Agent 名称统一为 `TPA-Agent`。
+- 语言选项仅保留简体中文（`zh`）、繁体中文（`zh-TW`）与英文（`en`），其余语言已清理。
 - Windows/macOS 安装信息、窗口、菜单、托盘、CLI、Server banner 和浏览器扩展保持一致。
 - 图标使用 TPA CoWork 品牌资源。
 - 旧品牌只允许出现在数据迁移、历史兼容或必要的第三方说明中。
@@ -189,3 +191,8 @@
 
 - v0.20 实现盘点：`hope-agent-v0.20-local-migration-checklist.md`
 - 每次升级模板：`upstream-version-migration-template.md`
+
+## 10. Agent 协作与 Git 工作流约定
+
+- **禁止自动执行 Git 提交与推送**：代码修改或验证完成后，Agent **不得自动** 执行 `git commit` 或 `git push`。必须等待用户明确下达提交指令（如“请提交”、“git commit”、“上传远程”等）后方可执行。
+

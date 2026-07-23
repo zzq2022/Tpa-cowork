@@ -10,10 +10,8 @@ use crate::config::AppConfig;
 pub const DEFAULT_LOCALE: &str = "en";
 
 /// Locale order shared by backend translation tables.
-///
-/// Keep English at index 2 for legacy recap title rows.
-pub const SUPPORTED_LOCALES: [&str; 12] = [
-    "zh", "zh-TW", "en", "ja", "ko", "es", "pt", "ru", "ar", "tr", "vi", "ms",
+pub const SUPPORTED_LOCALES: [&str; 3] = [
+    "zh", "zh-TW", "en",
 ];
 
 /// Normalize a raw locale string to one of the backend-supported locale codes.
@@ -91,8 +89,8 @@ pub fn current_ui_locale() -> &'static str {
     effective_ui_locale(&config)
 }
 
-/// Pick a localized string from a row ordered like [`SUPPORTED_LOCALES`].
-pub fn pick_locale(locale: &str, row: [&'static str; 12]) -> &'static str {
+//// Pick a localized string from a row ordered like [`SUPPORTED_LOCALES`].
+pub fn pick_locale(locale: &str, row: [&'static str; 3]) -> &'static str {
     let locale = normalize_locale(locale).unwrap_or(DEFAULT_LOCALE);
     let idx = SUPPORTED_LOCALES
         .iter()
@@ -106,15 +104,6 @@ pub fn language_name(locale: &str) -> &'static str {
     match normalize_locale(locale).unwrap_or(DEFAULT_LOCALE) {
         "zh" => "Simplified Chinese (简体中文)",
         "zh-TW" => "Traditional Chinese (繁體中文)",
-        "ja" => "Japanese (日本語)",
-        "ko" => "Korean (한국어)",
-        "es" => "Spanish (Español)",
-        "pt" => "Portuguese (Português)",
-        "ru" => "Russian (Русский)",
-        "ar" => "Arabic (العربية)",
-        "tr" => "Turkish (Türkçe)",
-        "vi" => "Vietnamese (Tiếng Việt)",
-        "ms" => "Malay (Bahasa Melayu)",
         _ => "English",
     }
 }
@@ -141,31 +130,13 @@ pub fn localized_backend_message(message: BackendMessage, locale: &str) -> &'sta
     let locale = normalize_locale(locale).unwrap_or(DEFAULT_LOCALE);
     match message {
         BackendMessage::StartupBackOnline => match locale {
-            "zh" => "📡 Hope Agent 已恢复在线。如果你正在等回复，请重新发送上一条消息。",
-            "zh-TW" => "📡 Hope Agent 已恢復連線。如果你正在等回覆，請重新傳送上一則訊息。",
-            "ja" => "📡 Hope Agent はオンラインに戻りました。返信を待っていた場合は、最後のメッセージをもう一度送ってください。",
-            "ko" => "📡 Hope Agent가 다시 온라인 상태입니다. 답장을 기다리고 있었다면 마지막 메시지를 다시 보내 주세요.",
-            "es" => "📡 Hope Agent vuelve a estar en línea. Si esperabas una respuesta, envía de nuevo tu último mensaje.",
-            "pt" => "📡 O Hope Agent está online novamente. Se você estava aguardando uma resposta, envie sua última mensagem de novo.",
-            "ru" => "📡 Hope Agent снова в сети. Если вы ждали ответа, отправьте последнее сообщение еще раз.",
-            "ar" => "📡 عاد Hope Agent إلى الاتصال. إذا كنت تنتظر ردا، فأرسل رسالتك الأخيرة مرة أخرى.",
-            "tr" => "📡 Hope Agent tekrar çevrim içi. Yanıt bekliyorsanız son mesajınızı yeniden gönderin.",
-            "vi" => "📡 Hope Agent đã trực tuyến trở lại. Nếu bạn đang chờ phản hồi, hãy gửi lại tin nhắn cuối cùng.",
-            "ms" => "📡 Hope Agent kembali dalam talian. Jika anda sedang menunggu balasan, hantar semula mesej terakhir anda.",
-            _ => "📡 Hope Agent is back online. If you were waiting on a reply, send your last message again.",
+            "zh" => "📡 TPA CoWork 已恢复在线。如果你正在等回复，请重新发送上一条消息。",
+            "zh-TW" => "📡 TPA CoWork 已恢復連線。如果你正在等回覆，請重新傳送上一則訊息。",
+            _ => "📡 TPA CoWork is back online. If you were waiting on a reply, send your last message again.",
         },
         BackendMessage::ChannelSessionEvicted => match locale {
             "zh" => "📢 这个聊天已被另一个入口接管。你已离开之前的会话；发送新消息即可开始新会话。",
             "zh-TW" => "📢 這個聊天已被另一個入口接管。你已離開先前的會話；傳送新訊息即可開始新會話。",
-            "ja" => "📢 このチャットは別の入口に引き継がれました。前のセッションから離れています。新しいメッセージを送ると新規セッションを開始します。",
-            "ko" => "📢 이 채팅은 다른 엔드포인트에서 이어받았습니다. 이전 세션에서 분리되었습니다. 새 메시지를 보내면 새 세션이 시작됩니다.",
-            "es" => "📢 Otro punto de acceso tomó este chat. Saliste de la sesión anterior; envía un mensaje nuevo para iniciar otra.",
-            "pt" => "📢 Este chat foi assumido por outro ponto de acesso. Você saiu da sessão anterior; envie uma nova mensagem para começar outra.",
-            "ru" => "📢 Этот чат был перехвачен другой точкой доступа. Вы вышли из прежней сессии; отправьте новое сообщение, чтобы начать новую.",
-            "ar" => "📢 تولت نقطة وصول أخرى هذا الدردشة. غادرت الجلسة السابقة؛ أرسل رسالة جديدة لبدء جلسة جديدة.",
-            "tr" => "📢 Bu sohbet başka bir uç nokta tarafından devralındı. Önceki oturumdan ayrıldınız; yeni bir oturum başlatmak için yeni bir mesaj gönderin.",
-            "vi" => "📢 Cuộc trò chuyện này đã được một điểm truy cập khác tiếp quản. Bạn đã rời phiên trước; hãy gửi tin nhắn mới để bắt đầu phiên mới.",
-            "ms" => "📢 Sembang ini telah diambil alih oleh titik akses lain. Anda telah meninggalkan sesi sebelumnya; hantar mesej baharu untuk memulakan sesi baharu.",
             _ => "📢 This chat has been taken over by another endpoint. You've left the previous session; send a new message to start a fresh one.",
         },
     }
@@ -179,7 +150,6 @@ mod tests {
     fn normalize_locale_handles_supported_aliases() {
         assert_eq!(normalize_locale("zh-CN"), Some("zh"));
         assert_eq!(normalize_locale("zh_Hant"), Some("zh-TW"));
-        assert_eq!(normalize_locale("pt-BR"), Some("pt"));
         assert_eq!(normalize_locale("ZH"), Some("zh"));
         assert_eq!(normalize_locale("auto"), None);
         assert_eq!(normalize_locale("de"), None);

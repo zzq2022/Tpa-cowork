@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { ChevronDown, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -22,12 +22,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { OpenClawHintBanner } from "./CustomTab"
-import { DockerSetupHint } from "../../DockerSetupHint"
-import type { DockerStatus } from "../../dockerSetup"
 import type { AgentConfig, AsyncToolPolicy, SkillSummary } from "../types"
 import type { SandboxMode } from "@/types/chat"
-import { getTransport } from "@/lib/transport-provider"
-import { logger } from "@/lib/logger"
 
 /** Ordered policy options. First entry is the implicit default. The
  * `i18nKey` segment plugs into `settings.agentAsyncToolPolicy.<key>` —
@@ -166,30 +162,11 @@ export default function CapabilitiesTab({
   const [standardOpen, setStandardOpen] = useState(false)
   const [mcpOpen, setMcpOpen] = useState(false)
   const [skillsOpen, setSkillsOpen] = useState(false)
-  const [dockerStatus, setDockerStatus] = useState<DockerStatus | null>(null)
-  const [dockerChecking, setDockerChecking] = useState(false)
   const asyncToolPolicyValue =
     config.capabilities.asyncToolPolicy ?? ASYNC_TOOL_POLICY_DEFAULT
   const sandboxMode: SandboxMode =
     config.capabilities.defaultSandboxMode ??
     (config.capabilities.sandbox ? "standard" : "off")
-
-  const refreshDockerStatus = useCallback(async () => {
-    setDockerChecking(true)
-    try {
-      const status = await getTransport().call<DockerStatus>("check_sandbox_available")
-      setDockerStatus(status)
-    } catch (e) {
-      logger.error("settings", "CapabilitiesTab", "Failed to check Docker status", e)
-    } finally {
-      setDockerChecking(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (sandboxMode === "off") return
-    void refreshDockerStatus()
-  }, [refreshDockerStatus, sandboxMode])
 
   const toolDisplayName = (tool: BuiltinTool) => {
     const name = tool.name
@@ -473,16 +450,6 @@ export default function CapabilitiesTab({
               ))}
             </SelectContent>
           </Select>
-          {sandboxMode !== "off" && (
-            <DockerSetupHint
-              status={dockerStatus}
-              checking={dockerChecking}
-              onRefresh={refreshDockerStatus}
-              title={t("chat.sandboxMode.setupTitle", {
-                defaultValue: "配置 Docker 后启用沙箱",
-              })}
-            />
-          )}
         </div>
 
         <div className="border-t border-border/50" />

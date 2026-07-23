@@ -27,9 +27,6 @@
 //! See [`docs/architecture/api-reference.md`] and `AGENTS.md` for the full
 //! contract.
 
-use crate::channel::{
-    ChannelAccountConfig, TelegramChannelConfig, TelegramGroupConfig, TelegramTopicConfig,
-};
 use crate::project::Project;
 
 /// Hardcoded last-resort agent id. Re-exported from [`crate::agent_loader`]
@@ -52,19 +49,12 @@ pub fn normalize_default_agent_id(input: Option<&str>) -> Option<String> {
     })
 }
 
-/// Resolve the default agent id given the optional project and channel-account
-/// context. The `AppConfig.default_agent_id` field is read from the cached
-/// global config snapshot.
-///
-/// Returns a non-empty `String` (always — falls back to `"ha-main"`).
-///
-/// Convenience wrapper around [`resolve_default_agent_id_full`] for callers
-/// without IM topic / group / channel scope (desktop / HTTP).
+/// Resolve the default agent id given the optional project context.
 pub fn resolve_default_agent_id(
     project: Option<&Project>,
-    channel_account: Option<&ChannelAccountConfig>,
+    _channel_account: Option<&()>,
 ) -> String {
-    resolve_default_agent_id_full(None, project, None, None, None, channel_account).0
+    resolve_default_agent_id_full(None, project, None, None, None, None).0
 }
 
 /// Where the resolved agent id came from. Surfaced to the user via /status so
@@ -101,31 +91,20 @@ impl AgentSource {
     }
 }
 
-/// Convenience wrapper retained for desktop / HTTP callers — same as
-/// [`resolve_default_agent_id_full`] without IM topic / group / channel
-/// override scope.
 pub fn resolve_default_agent_id_with_source(
     project: Option<&Project>,
-    channel_account: Option<&ChannelAccountConfig>,
+    _channel_account: Option<&()>,
 ) -> (String, AgentSource) {
-    resolve_default_agent_id_full(None, project, None, None, None, channel_account)
+    resolve_default_agent_id_full(None, project, None, None, None, None)
 }
 
-/// Full agent-resolution helper covering every level of the precedence chain.
-///
-/// Pass `None` for any level you do not have in scope. The function
-/// short-circuits at the first non-empty id and reports its [`AgentSource`].
-///
-/// IM dispatch (topic > group > channel-override > channel-account) is
-/// folded in here so the channel worker doesn't reinvent the chain
-/// privately.
 pub fn resolve_default_agent_id_full(
     explicit: Option<&str>,
     project: Option<&Project>,
-    topic: Option<&TelegramTopicConfig>,
-    group: Option<&TelegramGroupConfig>,
-    channel: Option<&TelegramChannelConfig>,
-    channel_account: Option<&ChannelAccountConfig>,
+    _topic: Option<&()>,
+    _group: Option<&()>,
+    _channel: Option<&()>,
+    _channel_account: Option<&()>,
 ) -> (String, AgentSource) {
     if let Some(id) = explicit {
         let trimmed = id.trim();
@@ -137,34 +116,6 @@ pub fn resolve_default_agent_id_full(
         if let Some(id) = p.default_agent_id.as_ref() {
             if !id.trim().is_empty() {
                 return (id.clone(), AgentSource::Project);
-            }
-        }
-    }
-    if let Some(t) = topic {
-        if let Some(id) = t.agent_id.as_ref() {
-            if !id.trim().is_empty() {
-                return (id.clone(), AgentSource::Topic);
-            }
-        }
-    }
-    if let Some(g) = group {
-        if let Some(id) = g.agent_id.as_ref() {
-            if !id.trim().is_empty() {
-                return (id.clone(), AgentSource::Group);
-            }
-        }
-    }
-    if let Some(c) = channel {
-        if let Some(id) = c.agent_id.as_ref() {
-            if !id.trim().is_empty() {
-                return (id.clone(), AgentSource::ChannelOverride);
-            }
-        }
-    }
-    if let Some(c) = channel_account {
-        if let Some(id) = c.agent_id.as_ref() {
-            if !id.trim().is_empty() {
-                return (id.clone(), AgentSource::ChannelAccount);
             }
         }
     }

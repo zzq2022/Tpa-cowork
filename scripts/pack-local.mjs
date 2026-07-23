@@ -39,7 +39,7 @@ const ship = args.includes("--ship")
 const bundle = ship || args.includes("--bundle")
 const skipFrontend = args.includes("--skip-frontend")
 const skipHost = args.includes("--skip-host")
-const skipEvalSidecar = args.includes("--skip-eval-sidecar") || !args.includes("--with-eval-sidecar")
+const skipEvalSidecar = args.includes("--skip-eval-sidecar")
 // Compile mode never needs the zip; bundle/ship need it unless skipped.
 const skipVenv = args.includes("--skip-venv") || !bundle
 const jobsIndex = args.indexOf("--jobs")

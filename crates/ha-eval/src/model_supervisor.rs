@@ -317,12 +317,12 @@ fn terminate_child(child: &mut Child) -> Result<()> {
     {
         return Ok(());
     }
-    let root_pid = child.id();
+    let _root_pid = child.id();
     #[cfg(target_os = "linux")]
-    let terminated = terminate_linux_process_tree(root_pid)?;
+    let terminated = terminate_linux_process_tree(_root_pid)?;
     #[cfg(all(unix, not(target_os = "linux")))]
     unsafe {
-        libc::kill(-(root_pid as libc::pid_t), libc::SIGKILL);
+        libc::kill(-(_root_pid as libc::pid_t), libc::SIGKILL);
     }
     #[cfg(windows)]
     {

@@ -130,12 +130,11 @@ async fn cleanup_session(
     session_id: &str,
     is_purge: bool,
     descendant_session_ids: Vec<String>,
-    im_chat: Option<(String, String)>,
+    _im_chat: Option<(String, String)>,
 ) {
     crate::ask_user::cancel_owner_question_timeouts_for_session(session_id);
     crate::ask_user::cancel_pending_ask_user_questions_for_session(session_id, "session_deleted")
         .await;
-    crate::channel::worker::ask_user::drop_pending_for_session(session_id).await;
 
     // A-8: cancel active / awaiting-approval background jobs (DELETE-4).
     let cancelled_jobs = crate::async_jobs::JobManager::cancel_for_session(session_id);
@@ -183,22 +182,12 @@ async fn cleanup_session(
             "session_deleted",
         )
         .await;
-        crate::channel::worker::ask_user::drop_pending_for_session(child_sid).await;
         crate::async_jobs::JobManager::cancel_for_session(child_sid);
         let _ = crate::tools::deny_pending_for_session(
             child_sid,
             crate::tools::ApprovalResolutionSource::SessionDeleted,
         )
         .await;
-    }
-
-    // A-9: drop stale IM text-reply approval state for this session (SURFACE-2).
-    crate::channel::worker::approval::drop_pending_for_session(session_id).await;
-    // SURFACE-2: the session-keyed drop above can't resolve the chat once the
-    // `channel_conversations` row is FK-cascade-deleted, so also drop by the IM
-    // coordinates captured pre-delete (no-op when the session wasn't IM-attached).
-    if let Some((account_id, chat_id)) = &im_chat {
-        crate::channel::worker::approval::drop_pending_for_chat(account_id, chat_id).await;
     }
 
     // A-9: clear per-session allowlist rules so they don't linger (INCOG-7).

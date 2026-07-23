@@ -467,19 +467,6 @@ fn update_config_in_place() -> Result<()> {
         let mut changed = false;
         rewrite_legacy_id(&mut cfg.default_agent_id, &mut changed);
         rewrite_legacy_id(&mut cfg.recap.analysis_agent, &mut changed);
-        rewrite_legacy_id(&mut cfg.channels.default_agent_id, &mut changed);
-        for account in cfg.channels.accounts.iter_mut() {
-            rewrite_legacy_id(&mut account.agent_id, &mut changed);
-            for group in account.security.groups.values_mut() {
-                rewrite_legacy_id(&mut group.agent_id, &mut changed);
-                for topic in group.topics.values_mut() {
-                    rewrite_legacy_id(&mut topic.agent_id, &mut changed);
-                }
-            }
-            for channel in account.security.channels.values_mut() {
-                rewrite_legacy_id(&mut channel.agent_id, &mut changed);
-            }
-        }
         if changed {
             app_info!(
                 "agent",

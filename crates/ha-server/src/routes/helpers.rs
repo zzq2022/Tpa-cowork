@@ -5,9 +5,7 @@
 use std::collections::HashMap;
 use std::sync::Arc;
 
-use axum::extract::multipart::Field;
-use axum::extract::Multipart;
-use ha_core::channel::{ChannelDB, ChannelRegistry};
+use axum::extract::multipart::{Field, Multipart};
 use ha_core::cron::CronDB;
 use ha_core::logging::{AppLogger, LogDB};
 use ha_core::session::SessionDB;
@@ -230,13 +228,4 @@ pub fn logger() -> Result<&'static AppLogger, AppError> {
 
 pub fn subagent_cancels() -> Result<&'static Arc<SubagentCancelRegistry>, AppError> {
     Ok(ha_core::require_subagent_cancels()?)
-}
-
-pub fn channel_registry() -> Result<&'static Arc<ChannelRegistry>, AppError> {
-    ha_core::get_channel_registry()
-        .ok_or_else(|| AppError::internal("Channel registry not initialized"))
-}
-
-pub fn channel_db() -> Result<&'static Arc<ChannelDB>, AppError> {
-    ha_core::get_channel_db().ok_or_else(|| AppError::internal("Channel DB not initialized"))
 }

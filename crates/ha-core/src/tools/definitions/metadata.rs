@@ -377,9 +377,7 @@ impl ToolMetadata {
                 render.result_kind = ToolResultKind::Json;
                 render.primary_resource = Some("action".to_string());
             }
-            crate::tools::TOOL_SUBAGENT
-            | crate::tools::TOOL_TEAM
-            | crate::tools::TOOL_ACP_SPAWN => {
+            crate::tools::TOOL_SUBAGENT | crate::tools::TOOL_TEAM => {
                 push_all(&mut aliases, &["delegate", "worker", "agent"]);
                 push_unique(&mut effects, ToolEffect::AgentDelegation);
                 push_unique(&mut effects, ToolEffect::RuntimeControl);

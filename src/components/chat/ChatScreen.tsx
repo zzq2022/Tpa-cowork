@@ -67,7 +67,6 @@ import { FileBrowserPanel } from "@/components/chat/FileBrowserPanel"
 import type { QuotePayload } from "@/components/chat/project/file-browser/FilePreviewPane"
 import type { IncognitoDisabledReason } from "@/components/chat/input/IncognitoToggle"
 import ChatTitleBar from "@/components/chat/ChatTitleBar"
-import HandoverDialog from "@/components/chat/HandoverDialog"
 import MessageList from "@/components/chat/MessageList"
 import { ChatWelcomeHero } from "@/components/chat/ChatWelcomeHero"
 import CrashRecoveryBanner from "@/components/common/CrashRecoveryBanner"
@@ -774,7 +773,6 @@ export default function ChatScreen({
   // In-session "find in page" search bar state
   const [searchBarOpen, setSearchBarOpen] = useState(false)
   const [searchFocusSignal, setSearchFocusSignal] = useState(0)
-  const [handoverSessionId, setHandoverSessionId] = useState<string | null>(null)
   const [subagentPreviewSessionId, setSubagentPreviewSessionId] = useState<string | null>(null)
   const openSessionSearch = useCallback(() => {
     setSearchBarOpen(true)
@@ -3955,7 +3953,6 @@ export default function ChatScreen({
           workingDirSource={workingDirSource}
           project={currentProject}
           onOpenProjectSettings={openProjectOverview}
-          onOpenHandover={(sid) => setHandoverSessionId(sid)}
           agents={session.agents}
           onChangeAgent={handleChangeAgent}
           sidebarCollapsed={sidebarCollapsed}
@@ -4683,14 +4680,6 @@ export default function ChatScreen({
           />
         </div>
       </div>
-
-      <HandoverDialog
-        open={!!handoverSessionId}
-        onOpenChange={(o) => {
-          if (!o) setHandoverSessionId(null)
-        }}
-        sessionId={handoverSessionId}
-      />
 
       <SubagentSessionDialog
         sessionId={subagentPreviewSessionId}

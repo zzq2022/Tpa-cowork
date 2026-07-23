@@ -383,14 +383,6 @@ fn handle_session_info(
         lines.push(format!("- Working dir: `{}`", wd));
     }
 
-    if let Some(channel_db) = crate::globals::get_channel_db() {
-        if let Ok(Some(attach)) = channel_db.get_conversation_by_session(sid) {
-            lines.push(String::new());
-            lines.push("**Attached IM channel**".into());
-            lines.push(super::format_attached_channel_line(&attach, false));
-        }
-    }
-
     Ok(CommandResult {
         content: lines.join("\n"),
         action: Some(CommandAction::DisplayOnly),

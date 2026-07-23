@@ -244,64 +244,11 @@ fn restore_global_agent_references(
         old,
         replacement,
     );
-    restore_slot_from_snapshot(
-        &mut current.channels.default_agent_id,
-        &original.channels.default_agent_id,
-        old,
-        replacement,
-    );
-
     if let Some(original_index) = original.agent_order.iter().position(|id| id == old) {
         if !current.agent_order.iter().any(|id| id == old) {
             current.agent_order.insert(
                 original_index.min(current.agent_order.len()),
                 old.to_string(),
-            );
-        }
-    }
-
-    for original_account in &original.channels.accounts {
-        let Some(current_account) = current.channels.find_account_mut(&original_account.id) else {
-            continue;
-        };
-        restore_slot_from_snapshot(
-            &mut current_account.agent_id,
-            &original_account.agent_id,
-            old,
-            replacement,
-        );
-        for (group_id, original_group) in &original_account.security.groups {
-            let Some(current_group) = current_account.security.groups.get_mut(group_id) else {
-                continue;
-            };
-            restore_slot_from_snapshot(
-                &mut current_group.agent_id,
-                &original_group.agent_id,
-                old,
-                replacement,
-            );
-            for (topic_id, original_topic) in &original_group.topics {
-                let Some(current_topic) = current_group.topics.get_mut(topic_id) else {
-                    continue;
-                };
-                restore_slot_from_snapshot(
-                    &mut current_topic.agent_id,
-                    &original_topic.agent_id,
-                    old,
-                    replacement,
-                );
-            }
-        }
-        for (channel_id, original_channel) in &original_account.security.channels {
-            let Some(current_channel) = current_account.security.channels.get_mut(channel_id)
-            else {
-                continue;
-            };
-            restore_slot_from_snapshot(
-                &mut current_channel.agent_id,
-                &original_channel.agent_id,
-                old,
-                replacement,
             );
         }
     }
@@ -805,21 +752,8 @@ fn restore_cron_payloads(snapshots: &[CronPayloadSnapshot]) -> Result<()> {
 
 fn collect_reference_counts(id: &str) -> Result<AgentReferenceCounts> {
     let cfg = crate::config::cached_config();
-    let mut global_config = usize::from(cfg.default_agent_id.as_deref() == Some(id))
-        + usize::from(cfg.recap.analysis_agent.as_deref() == Some(id))
-        + usize::from(cfg.channels.default_agent_id.as_deref() == Some(id));
-    for account in &cfg.channels.accounts {
-        global_config += usize::from(account.agent_id.as_deref() == Some(id));
-        for group in account.security.groups.values() {
-            global_config += usize::from(group.agent_id.as_deref() == Some(id));
-            for topic in group.topics.values() {
-                global_config += usize::from(topic.agent_id.as_deref() == Some(id));
-            }
-        }
-        for channel in account.security.channels.values() {
-            global_config += usize::from(channel.agent_id.as_deref() == Some(id));
-        }
-    }
+    let global_config = usize::from(cfg.default_agent_id.as_deref() == Some(id))
+        + usize::from(cfg.recap.analysis_agent.as_deref() == Some(id));
 
     let mut counts = AgentReferenceCounts {
         global_config,
@@ -907,20 +841,7 @@ fn rewrite_global_config(old: &str, replacement: &str) -> Result<()> {
     crate::config::mutate_config(("agent.delete", "lifecycle"), |cfg| {
         replace_slot(&mut cfg.default_agent_id, old, replacement);
         replace_slot(&mut cfg.recap.analysis_agent, old, replacement);
-        replace_slot(&mut cfg.channels.default_agent_id, old, replacement);
         cfg.agent_order.retain(|id| id != old);
-        for account in &mut cfg.channels.accounts {
-            replace_slot(&mut account.agent_id, old, replacement);
-            for group in account.security.groups.values_mut() {
-                replace_slot(&mut group.agent_id, old, replacement);
-                for topic in group.topics.values_mut() {
-                    replace_slot(&mut topic.agent_id, old, replacement);
-                }
-            }
-            for channel in account.security.channels.values_mut() {
-                replace_slot(&mut channel.agent_id, old, replacement);
-            }
-        }
         Ok(())
     })
 }

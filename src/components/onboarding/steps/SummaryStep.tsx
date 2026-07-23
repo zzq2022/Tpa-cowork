@@ -7,7 +7,6 @@ import {
   Globe as GlobeIcon,
   Key as KeyIcon,
   Languages,
-  MessageSquare,
   Puzzle,
   Search,
   Server as ServerIcon,
@@ -154,12 +153,6 @@ export function SummaryStep({ draft, skipped }: SummaryStepProps) {
       labelKey: "onboarding.summary.items.server",
       value: bindMode === "lan" ? t("onboarding.server.lan") : t("onboarding.server.local"),
       icon: ServerIcon,
-    },
-    {
-      key: "channels",
-      labelKey: "onboarding.summary.items.channels",
-      value: skipped.has("channels") ? "" : t("onboarding.summary.channelsDone"),
-      icon: MessageSquare,
     },
   ]
 

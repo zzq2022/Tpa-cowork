@@ -347,26 +347,6 @@ fn redact_stt_providers_value(mut value: Value) -> Value {
     value
 }
 
-/// Redact secret-bearing fields from a `ChannelStoreConfig` JSON tree before
-/// returning it to the model. Strips `accounts[*].credentials`, replaces
-/// `settings` with a redacted marker (some channels stash tokens there too),
-/// and leaves only structural / display fields visible.
-fn redact_channels_value(mut value: Value) -> Value {
-    if let Some(accounts) = value.get_mut("accounts").and_then(|v| v.as_array_mut()) {
-        for acc in accounts.iter_mut() {
-            if let Some(obj) = acc.as_object_mut() {
-                if obj.contains_key("credentials") {
-                    obj.insert("credentials".into(), json!("[REDACTED]"));
-                }
-                if obj.contains_key("settings") {
-                    obj.insert("settings".into(), json!("[REDACTED]"));
-                }
-            }
-        }
-    }
-    value
-}
-
 /// Redact OAuth tokens / env / headers from `mcp_servers` entries before
 /// returning to the model.
 fn redact_mcp_servers_value(mut value: Value) -> Value {
@@ -492,25 +472,6 @@ fn read_embedding_from(
     Ok(redact_embedding_value(serde_json::to_value(&config)?))
 }
 
-/// Redact `backends[*].env` from an `AcpControlConfig` JSON tree — env vars
-/// frequently contain `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` / similar.
-fn redact_acp_control_value(mut value: Value) -> Value {
-    if let Some(backends) = value.get_mut("backends").and_then(|v| v.as_array_mut()) {
-        for entry in backends.iter_mut() {
-            if let Some(obj) = entry.as_object_mut() {
-                if obj
-                    .get("env")
-                    .map(|v| v.as_object().is_some_and(|o| !o.is_empty()))
-                    .unwrap_or(false)
-                {
-                    obj.insert("env".into(), json!("[REDACTED]"));
-                }
-            }
-        }
-    }
-    value
-}
-
 // ── get_settings ────────────────────────────────────────────────
 
 pub(crate) async fn tool_get_settings(args: &Value) -> Result<String> {
@@ -634,9 +595,7 @@ fn read_category(category: &str) -> Result<Value> {
             "allowRemoteInstall": cfg.skills.allow_remote_install,
         })),
         "server" => Ok(redact_server_value(serde_json::to_value(&cfg.server)?)),
-        "acp_control" => Ok(redact_acp_control_value(serde_json::to_value(
-            &cfg.acp_control,
-        )?)),
+        "acp_control" => Ok(json!({})),
         "skill_env" => Ok(serde_json::to_value(&cfg.skill_env)?),
         "tool_result_disk_threshold" => Ok(json!({
             "toolResultDiskThreshold": cfg.tool_result_disk_threshold,
@@ -658,7 +617,7 @@ fn read_category(category: &str) -> Result<Value> {
             "config": cfg.issue_reporting,
             "hasToken": crate::issue_reporting::has_token(),
         })),
-        "channels" => Ok(redact_channels_value(serde_json::to_value(&cfg.channels)?)),
+        "channels" => Ok(json!({})),
         "local_llm_auto_maintenance" => Ok(serde_json::to_value(&cfg.local_llm)?),
         "smart_mode" => Ok(serde_json::to_value(&cfg.permission.smart)?),
         // Vision bridge model reference — plain provider/model id, no credentials
@@ -713,25 +672,10 @@ fn read_category(category: &str) -> Result<Value> {
         )?)),
         "active_stt_model" => Ok(json!({ "activeSttModel": cfg.stt.active_model })),
         "stt_fallback_models" => Ok(json!({ "fallbackModels": cfg.stt.fallback_models })),
-        "im_auto_transcribe" => {
-            let accounts: Vec<Value> = cfg
-                .channels
-                .accounts
-                .iter()
-                .map(|a| {
-                    json!({
-                        "id": a.id,
-                        "label": a.label,
-                        "channelId": a.channel_id.to_string(),
-                        "autoTranscribeVoice": a.auto_transcribe_voice(),
-                    })
-                })
-                .collect();
-            Ok(json!({
-                "imFallbackModel": cfg.stt.im_fallback_model,
-                "accounts": accounts,
-            }))
-        }
+        "im_auto_transcribe" => Ok(json!({
+            "imFallbackModel": cfg.stt.im_fallback_model,
+            "accounts": Vec::<Value>::new(),
+        })),
         _ => bail!("Unknown settings category: '{category}'"),
     }
 }
@@ -844,16 +788,15 @@ fn get_all_overview() -> Result<String> {
             "cronTriggerEnabled": cfg.dreaming.cron_trigger.enabled,
         },
         "channels": {
-            "accountCount": cfg.channels.accounts.len(),
-            "defaultAgentId": cfg.channels.default_agent_id,
+            "accountCount": 0,
+            "defaultAgentId": None::<String>,
         },
         "stt": {
             "providerCount": cfg.stt.providers.len(),
             "activeModel": cfg.stt.active_model,
             "fallbackCount": cfg.stt.fallback_models.len(),
             "imFallbackConfigured": cfg.stt.im_fallback_model.is_some(),
-            "imAutoTranscribeAccountCount":
-                cfg.channels.accounts.iter().filter(|a| a.auto_transcribe_voice()).count(),
+            "imAutoTranscribeAccountCount": 0,
         },
     });
 
@@ -1003,18 +946,6 @@ async fn update_im_auto_transcribe(values: &Value) -> Result<String> {
             }
         }
 
-        if let Some(accounts) = values.get("accounts").and_then(|v| v.as_array()) {
-            for entry in accounts {
-                let id = entry
-                    .get("id")
-                    .and_then(|v| v.as_str())
-                    .ok_or_else(|| anyhow::anyhow!("accounts entry missing `id`"))?;
-                let Some(on) = entry.get("autoTranscribeVoice").and_then(|v| v.as_bool()) else {
-                    continue;
-                };
-                crate::channel::accounts::set_account_auto_transcribe_voice(id, on, "skill")?;
-            }
-        }
         Ok(())
     })
     .await?;
@@ -1288,7 +1219,7 @@ fn apply_app_config_update(
             }
         }
         "server" => merge_field(&mut store.server, values)?,
-        "acp_control" => merge_field(&mut store.acp_control, values)?,
+        "acp_control" => {}
         "skill_env" => {
             // Per-skill env vars: support full replace via `skillEnv` or per-skill
             // patches via `set` / `remove` to avoid forcing the model to echo

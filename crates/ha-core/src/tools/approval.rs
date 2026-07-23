@@ -509,19 +509,6 @@ pub(crate) async fn session_has_pending_approval(session_id: &str) -> bool {
         .any(|e| e.request.session_id.as_deref() == Some(session_id))
 }
 
-/// Return the request ids of every pending approval owned by `session_id`.
-/// Used by the IM eviction watcher (G5 / SURFACE-4) to deny each pending
-/// approval when the owning chat is taken over — there is no reverse index, so
-/// this scans the registry (the pending set is tiny in practice).
-pub async fn pending_request_ids_for_session(session_id: &str) -> Vec<String> {
-    let pending = get_pending_approvals().lock().await;
-    pending
-        .iter()
-        .filter(|(_, e)| e.request.session_id.as_deref() == Some(session_id))
-        .map(|(rid, _)| rid.clone())
-        .collect()
-}
-
 /// Per-session aggregate over the pending-approval registry: count plus the
 /// earliest not-yet-expired deadline (and that request's full timeout span)
 /// for the sidebar countdown badge.
@@ -581,19 +568,6 @@ pub async fn list_pending_approval_requests() -> Vec<ApprovalRequest> {
             .then_with(|| a.request_id.cmp(&b.request_id))
     });
     requests
-}
-
-/// Return the originating session id for a pending approval request.
-///
-/// Used by IM button callbacks to verify that the click came from the same
-/// channel conversation that received the approval prompt before submitting
-/// the tool response.
-pub async fn pending_approval_session_id(request_id: &str) -> Result<Option<String>> {
-    let pending = get_pending_approvals().lock().await;
-    pending
-        .get(request_id)
-        .map(|entry| entry.request.session_id.clone())
-        .ok_or_else(|| anyhow::anyhow!("No pending approval request: {}", request_id))
 }
 
 /// Submit an approval response from a given surface (GUI / HTTP / IM).
@@ -659,10 +633,6 @@ pub async fn deny_pending_for_session(session_id: &str, source: ApprovalResoluti
     let count = drained.len();
     for (request_id, entry) in drained {
         let _ = entry.sender.send(ApprovalResponse::Deny);
-        // EventBus delivery is best-effort and the IM listener can lag. Clear
-        // its text-reply state directly so Stop cannot leave a stale prompt
-        // that captures a later ordinary chat message.
-        crate::channel::worker::approval::drop_pending_by_request_id(&request_id).await;
         emit_approval_resolved(&request_id, Some(session_id), "deny", source);
     }
     emit_pending_interactions_changed(Some(session_id));
@@ -684,7 +654,6 @@ pub async fn deny_all_pending(source: ApprovalResolutionSource) -> usize {
     for (request_id, entry) in drained {
         let session_id = entry.request.session_id;
         let _ = entry.sender.send(ApprovalResponse::Deny);
-        crate::channel::worker::approval::drop_pending_by_request_id(&request_id).await;
         emit_approval_resolved(&request_id, session_id.as_deref(), "deny", source);
         emit_pending_interactions_changed(session_id.as_deref());
     }
@@ -1056,10 +1025,6 @@ pub(crate) async fn check_and_request_approval(
             Ok(response)
         }
         Err("cancelled") => {
-            // Drop any IM-side pending entry — if this approval was being
-            // surfaced on a channel without buttons, the user would
-            // otherwise see the prompt linger forever.
-            crate::channel::worker::approval::drop_pending_by_request_id(&request_id).await;
             if let Some(logger) = crate::get_logger() {
                 logger.log(
                     "warn",
@@ -1080,11 +1045,6 @@ pub(crate) async fn check_and_request_approval(
                 pending.remove(&request_id);
             }
             emit_pending_interactions_changed(session_id);
-            // Drop the IM-side `TEXT_PENDING` entry. The companion
-            // `approval_timed_out` event below only carries the user-facing
-            // "timed out" notification; cleanup is unconditional so cancel-
-            // path and timeout-path stay symmetric.
-            crate::channel::worker::approval::drop_pending_by_request_id(&request_id).await;
             // Notify subscribers so IM and desktop clients can clear stale
             // UI and tell the user the approval expired.
             // Compute the EFFECTIVE timeout decision FIRST. A strict reason

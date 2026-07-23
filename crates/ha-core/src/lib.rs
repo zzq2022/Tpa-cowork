@@ -25,7 +25,6 @@ pub(crate) mod test_support;
 
 // ── Core modules (migrated from src-tauri) ────────────────────────
 pub mod acp;
-pub mod acp_control;
 pub mod activity;
 pub mod agent;
 pub mod agent_config;
@@ -39,7 +38,6 @@ pub mod browser;
 pub mod browser_state;
 pub mod browser_ui;
 pub mod canvas_db;
-pub mod channel;
 pub mod chat_engine;
 pub mod coding_eval;
 pub mod coding_improvement;
@@ -100,7 +98,6 @@ pub mod recap;
 pub mod review;
 pub mod runtime_lock;
 pub mod runtime_tasks;
-pub mod sandbox;
 pub mod security;
 pub mod self_diagnosis;
 pub mod server_status;
@@ -140,15 +137,14 @@ pub use app_init::{
 };
 #[allow(deprecated)]
 pub use globals::{
-    get_acp_manager, get_app_handle, get_cached_agent, get_channel_cancels, get_channel_db,
-    get_channel_registry, get_codex_token_cache, get_cron_db, get_event_bus, get_knowledge_db,
-    get_log_db, get_logger, get_memory_backend, get_project_db, get_reasoning_effort_cell,
-    get_session_db, get_subagent_cancels, get_terminal_manager, require_cached_agent,
-    require_channel_cancels, require_codex_token_cache, require_cron_db, require_knowledge_db,
+    get_app_handle, get_cached_agent, get_codex_token_cache, get_cron_db, get_event_bus,
+    get_knowledge_db, get_log_db, get_logger, get_memory_backend, get_project_db,
+    get_reasoning_effort_cell, get_session_db, get_subagent_cancels, get_terminal_manager,
+    require_cached_agent, require_codex_token_cache, require_cron_db, require_knowledge_db,
     require_log_db, require_logger, require_project_db, require_reasoning_effort_cell,
     require_session_db, require_subagent_cancels, require_terminal_manager, set_event_bus,
-    AppState, ACP_MANAGER, APP_LOGGER, CACHED_AGENT, CHANNEL_CANCELS, CHANNEL_DB, CHANNEL_REGISTRY,
-    CODEX_TOKEN_CACHE, CRON_DB, EVENT_BUS, KNOWLEDGE_DB, LOG_DB, MEMORY_BACKEND, PROJECT_DB,
-    REASONING_EFFORT, SESSION_DB, SUBAGENT_CANCELS, TERMINAL_MANAGER,
+    AppState, APP_LOGGER, CACHED_AGENT, CODEX_TOKEN_CACHE, CRON_DB, EVENT_BUS, KNOWLEDGE_DB,
+    LOG_DB, MEMORY_BACKEND, PROJECT_DB, REASONING_EFFORT, SESSION_DB, SUBAGENT_CANCELS,
+    TERMINAL_MANAGER,
 };
 pub use util::*;

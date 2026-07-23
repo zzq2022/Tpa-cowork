@@ -691,32 +691,10 @@ fn schedule_summary(schedule: &CronSchedule) -> String {
 /// - `delivery_targets=[...]` → parsed verbatim, returns `(parsed, false)`.
 fn resolve_delivery_targets_for_create(
     args: &Value,
-    session_id: Option<&str>,
+    _session_id: Option<&str>,
 ) -> Result<(Vec<CronDeliveryTarget>, bool)> {
     match args.get("delivery_targets") {
-        None | Some(Value::Null) => {
-            // Try to infer from current channel session.
-            if let (Some(sid), Some(db)) = (session_id, crate::get_channel_db()) {
-                if let Ok(Some(conv)) = db.get_conversation_by_session(sid) {
-                    let label = conv
-                        .sender_name
-                        .clone()
-                        .filter(|s| !s.is_empty())
-                        .map(|name| format!("{} / {}", conv.channel_id, name))
-                        .or_else(|| Some(format!("{} / {}", conv.channel_id, conv.chat_id)));
-                    let target = CronDeliveryTarget {
-                        channel_id: conv.channel_id,
-                        account_id: conv.account_id,
-                        chat_id: conv.chat_id,
-                        thread_id: conv.thread_id,
-                        label,
-                        stale: false,
-                    };
-                    return Ok((vec![target], true));
-                }
-            }
-            Ok((Vec::new(), false))
-        }
+        None | Some(Value::Null) => Ok((Vec::new(), false)),
         Some(v) => {
             let parsed: Vec<CronDeliveryTarget> = serde_json::from_value(v.clone())
                 .map_err(|e| anyhow::anyhow!("Invalid 'delivery_targets': {}", e))?;
@@ -726,45 +704,7 @@ fn resolve_delivery_targets_for_create(
     }
 }
 
-/// Create/update half of the delivery whitelist (OQ5). Every target the model
-/// supplies explicitly must point at a conversation already recorded in
-/// `channel_conversations` — the same set `action='list_channel_targets'`
-/// surfaces. Rejecting unknown targets at create/update time stops a
-/// prompt-injected model from *persisting* a cron job that fans output out to an
-/// attacker-controlled chat (a periodic, account-authenticated exfil channel),
-/// and is the create-time complement to the runtime skip-and-warn guard in
-/// `cron::delivery`. Inferred targets (derived from the caller's own IM
-/// conversation row) skip this — they are recorded by construction.
-fn validate_delivery_targets(targets: &[CronDeliveryTarget]) -> Result<()> {
-    if targets.is_empty() {
-        return Ok(());
-    }
-    let Some(db) = crate::get_channel_db() else {
-        anyhow::bail!(
-            "Cannot validate delivery_targets: the IM channel subsystem is not available. \
-             Configure an IM channel account first."
-        );
-    };
-    for t in targets {
-        let known = db
-            .conversation_exists(
-                &t.channel_id,
-                &t.account_id,
-                &t.chat_id,
-                t.thread_id.as_deref(),
-            )
-            .unwrap_or(false);
-        if !known {
-            anyhow::bail!(
-                "delivery_target {}:{} (account '{}') is not a recorded conversation. \
-                 Call action='list_channel_targets' to discover valid \
-                 channel_id/account_id/chat_id triples before setting delivery_targets.",
-                t.channel_id,
-                t.chat_id,
-                t.account_id
-            );
-        }
-    }
+fn validate_delivery_targets(_targets: &[CronDeliveryTarget]) -> Result<()> {
     Ok(())
 }
 
@@ -783,81 +723,8 @@ fn format_targets_inline(targets: &[CronDeliveryTarget]) -> String {
         .join(", ")
 }
 
-/// List every enabled IM channel account and its recorded conversations as
-/// candidate delivery targets for cron jobs. Output is both human-readable and
-/// copy-pasteable — the model can read the `channel_id=... account_id=... chat_id=...`
-/// fields straight into a subsequent `create` / `update` call.
 fn list_channel_targets_text() -> String {
-    let store = crate::config::cached_config();
-    let channel_db = crate::get_channel_db();
-
-    let enabled: Vec<_> = store
-        .channels
-        .accounts
-        .iter()
-        .filter(|a| a.enabled)
-        .collect();
-    if enabled.is_empty() {
-        return "No enabled IM channel accounts are configured. \
-                Open Settings → Channels to set one up first."
-            .to_string();
-    }
-
-    let mut blocks = Vec::new();
-    let mut total = 0usize;
-
-    for account in &enabled {
-        let channel_slug = account.channel_id.to_string();
-        let conversations = match channel_db.as_ref() {
-            Some(db) => db
-                .list_conversations(&channel_slug, &account.id)
-                .unwrap_or_default(),
-            None => Vec::new(),
-        };
-
-        if conversations.is_empty() {
-            blocks.push(format!(
-                "[{channel_slug} · \"{label}\" (account_id={account_id})]\n    no recorded conversations yet — send the bot a message first to register a chat",
-                channel_slug = channel_slug,
-                label = account.label,
-                account_id = account.id,
-            ));
-            continue;
-        }
-
-        for conv in &conversations {
-            total += 1;
-            let display = conv
-                .sender_name
-                .as_deref()
-                .filter(|s| !s.is_empty())
-                .map(String::from)
-                .unwrap_or_else(|| conv.chat_id.clone());
-            let thread_part = conv
-                .thread_id
-                .as_deref()
-                .map(|t| format!("  thread_id=\"{}\"", t))
-                .unwrap_or_default();
-            blocks.push(format!(
-                "[{idx}] {channel_slug} · \"{display}\" ({chat_type})\n    \
-                 channel_id=\"{channel_slug}\"  account_id=\"{account_id}\"  chat_id=\"{chat_id}\"{thread_part}",
-                idx = total,
-                channel_slug = channel_slug,
-                display = display,
-                chat_type = conv.chat_type,
-                account_id = account.id,
-                chat_id = conv.chat_id,
-                thread_part = thread_part,
-            ));
-        }
-    }
-
-    format!(
-        "Found {} channel target(s):\n\n{}\n\nPass the ids above into `delivery_targets` \
-         on `action=create` or `action=update`.",
-        total,
-        blocks.join("\n\n"),
-    )
+    "IM channel delivery targets are not available.".to_string()
 }
 
 fn list_projects_text(include_archived: bool) -> String {

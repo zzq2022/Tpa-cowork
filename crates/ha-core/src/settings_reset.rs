@@ -521,11 +521,7 @@ fn apply_app_target(config: &mut AppConfig, target: SettingsResetTarget) {
                 config.browser = Some(next);
             }
         }
-        SettingsResetScope::Acp => {
-            let backends = config.acp_control.backends.clone();
-            config.acp_control = defaults.acp_control;
-            config.acp_control.backends = backends;
-        }
+        SettingsResetScope::Acp => {}
         SettingsResetScope::Notifications => {
             config.notification = defaults.notification;
             config.startup_notification = defaults.startup_notification;
@@ -712,16 +708,10 @@ pub fn reset_settings_section(
     let result_section = target.section.map(|value| value.as_str().to_string());
 
     if scope == SettingsResetScope::Sandbox {
-        let current = crate::sandbox::load_sandbox_config()?;
-        let defaults = crate::sandbox::SandboxConfig::default();
-        changed = json_changed(&current, &defaults)?;
-        if changed {
-            crate::sandbox::save_sandbox_config(&defaults)?;
-        }
         return Ok(SettingsResetResult {
             scope,
             section: result_section,
-            changed,
+            changed: false,
             reindex_started: false,
             warning_codes,
         });

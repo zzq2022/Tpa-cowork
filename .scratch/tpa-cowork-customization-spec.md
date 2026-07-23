@@ -124,6 +124,18 @@
 - 避免在前置任务中串行链式执行 `cargo build`（如 Sidecar）导致与 Tauri 主进程 `cargo run` 并发争抢 `target/.cargo-lock` 构建锁而发生死锁。
 - **验收**：执行 `pnpm tauri dev` 时，Vite 开发服务器在 `http://localhost:1420` 秒级启动就绪，开发过程顺畅无阻。
 
+### CLEANUP-001：Docker、IM 消息渠道及非必要模块裁剪与轻量化
+
+- **Docker 模块清理**：
+  - 移除根目录 `Dockerfile`、`docker-compose.yml`、`.dockerignore` 及 `docker/` 构建打包目录。
+  - 在打包与 CI 流程中跳过 Docker 镜像构建逻辑与引擎探测，执行沙箱退回宿主机/轻量隔离。
+- **IM 消息渠道模块清理**：
+  - 裁剪后端 `crates/ha-core/src/im/`（Telegram、Slack、Discord、微信、飞书、钉钉等第三方通道与轮询逻辑）。
+  - 清理前端设置面板中的 IM 配置入口，移除 `sessions.db` 中的 `im_channel_conversations` 表与关联凭据。
+- **评估旁路与辅助模块裁剪**：
+  - 打包流程（`pack-local.mjs`）中保持 `--skip-eval-sidecar` 默认跳过，按需裁剪 `scripts/prepare-browser-host.mjs` 独立宿主。
+- **验收**：裁剪后软件体积与资源占用明显减少，且不影响主对话、Memory 系统、知识空间、设计空间及 Tauri / HTTP 运行模式的核心功能。
+
 ## 5. P2 可选择优化
 
 ### PERF-001：启动性能与前端稳定性
@@ -174,30 +186,3 @@
 
 - v0.20 实现盘点：`hope-agent-v0.20-local-migration-checklist.md`
 - 每次升级模板：`upstream-version-migration-template.md`
-
-## 10. 模块剪裁与负重优化规范（方案 B：专一桌面 AI 助手）
-
-为了减少 TPA CoWork 的编译等待、缩减打包安装包体积并降低运行时内存开销，实施方案 B 中度瘦身策略：
-
-### 10.1 核心保留功能模块
-- **主对话与消息引擎 (`chat`)**：AI 对话交互、消息流式响应、差异对比与 Worktree 预览。
-- **知识空间 (`knowledge`)**：Markdown 笔记管理与 FTS/向量全文检索。
-- **SkillHub 与本地技能 (`skillhub` / `skills`)**：TPA 特色的技能搜索、下载、审核提交与环境配置。
-- **模型配置与 Provider (`modelConfig`)**：支持 OpenAI / DeepSeek / Ollama 等全量 Provider 接入。
-- **Agent 团队管理 (`agents` / `teams`)**：多 Agent 人设、技能绑定与团队协同。
-- **定时任务与调度 (`cron`)**：一次性提醒与周期性工作流调度。
-
-### 10.2 剪裁/剥离/屏蔽模块 (Slim-down Targets)
-- **TRIM-001：评测系统剥离 (`ha-eval` / `ha-eval-spec`)**
-  - **规则**：默认剥离评测套件，打包脚本 `scripts/pack-local.mjs` 中默认启用 `--skip-eval-sidecar`。
-  - **收益**：避免打包构建 200MB+ 的评测 Sidecar 二进制包，显著提升打包编译速度。
-- **TRIM-002：多渠道 IM 机器人屏蔽 (`channels`)**
-  - **规则**：关闭/隐藏外部企微、飞书、钉钉、Telegram 等 12 种 IM 机器人的通讯逻辑与面板。
-  - **收益**：专一做本地桌面 AI 助手，消除第三方 IM 平台的长连接与网络轮询负重。
-- **TRIM-003：ACP 远程控制面关闭 (`acp`)**
-  - **规则**：关闭 Agent Communication Protocol 通道及设置中的 ACP 控制面板。
-  - **收益**：简化本地通信管道，无需开启后台额外的控制面监听。
-- **TRIM-004：Docker 沙箱默认停用 (`sandbox`)**
-  - **规则**：工具执行默认采用宿主机本地安全路径，免去 Docker 容器镜像绑定。
-  - **收益**：降低系统环境依赖，去除运行期容器开销。
-

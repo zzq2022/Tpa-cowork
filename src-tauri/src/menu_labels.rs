@@ -33,6 +33,7 @@ pub(crate) struct TrayStatusLabels {
 }
 
 /// macOS application menu label translations.
+#[cfg(any(target_os = "macos", test))]
 pub(crate) struct MacosAppMenuLabels {
     pub(crate) about: &'static str,
     pub(crate) check_for_updates: &'static str,
@@ -365,6 +366,7 @@ pub(crate) fn tray_status_labels(lang: &str) -> TrayStatusLabels {
     }
 }
 
+#[cfg(any(target_os = "macos", test))]
 pub(crate) fn macos_app_menu_labels(lang: &str) -> MacosAppMenuLabels {
     match lang {
         "zh" | "zh-CN" => MacosAppMenuLabels {

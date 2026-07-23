@@ -245,11 +245,6 @@ const TOOL_DESC_CANVAS: &str = "\
 - canvas: Create and edit rich content artifacts (diagrams, documents, visualizations).\n\
   - Use for content that benefits from visual rendering";
 
-const TOOL_DESC_ACP_SPAWN: &str = "\
-- acp_spawn: Delegate tasks to external ACP-compatible agents (e.g., Claude Code, Codex).\n\
-  - Similar to subagent but for external processes with their own tools and capabilities\n\
-  - Actions: spawn, check, list, result, kill, kill_all, steer, backends";
-
 const TOOL_DESC_GET_WEATHER: &str = "\
 - get_weather: Get current weather and forecast for a location.\n\
   - Uses Open-Meteo API (free, no key required)\n\
@@ -418,7 +413,6 @@ pub(super) const TOOL_DESCRIPTIONS: &[(&str, &str)] = &[
     ("audio_generate", TOOL_DESC_AUDIO_GENERATE),
     ("pdf", TOOL_DESC_PDF),
     ("canvas", TOOL_DESC_CANVAS),
-    ("acp_spawn", TOOL_DESC_ACP_SPAWN),
     ("get_weather", TOOL_DESC_GET_WEATHER),
     ("ask_user_question", TOOL_DESC_ASK_USER_QUESTION),
     ("task_create", TOOL_DESC_TASK_CREATE),

@@ -28,7 +28,9 @@ import {
   Wrench,
   Bell,
   Container,
+  Cable,
   ClipboardList,
+  MessageCircle,
   LineChart,
   Mic,
   Plug,
@@ -68,9 +70,6 @@ const DeveloperPanel = !import.meta.env.PROD
   ? lazy(() => import("@/components/settings/DeveloperPanel"))
   : null
 const UpdateHistoryPanel = lazy(() => import("@/components/settings/UpdateHistoryPanel"))
-import SandboxPanel from "@/components/settings/SandboxPanel"
-import AcpControlPanel from "@/components/settings/AcpControlPanel"
-import ChannelPanel from "@/components/settings/channel-panel"
 import McpServersPanel from "@/components/settings/mcp-panel/McpServersPanel"
 import ServerPanel from "@/components/settings/ServerPanel"
 import SecurityPanel from "@/components/settings/SecurityPanel"
@@ -137,6 +136,12 @@ const SECTIONS: SettingsSectionItem[] = [
     icon: <Users2 className="h-3.5 w-3.5" />,
     colorClass: "bg-teal-500",
     labelKey: "settings.teams",
+  },
+  {
+    id: "channels",
+    icon: <MessageCircle className="h-3.5 w-3.5" />,
+    colorClass: "bg-emerald-500",
+    labelKey: "settings.channels",
   },
   {
     id: "skills",
@@ -229,6 +234,12 @@ const SECTIONS: SettingsSectionItem[] = [
     labelKey: "settings.browser.title",
   },
   {
+    id: "acp",
+    icon: <Cable className="h-3.5 w-3.5" />,
+    colorClass: "bg-zinc-500",
+    labelKey: "settings.acpControl",
+  },
+  {
     id: "notifications",
     icon: <Bell className="h-3.5 w-3.5" />,
     colorClass: "bg-yellow-500",
@@ -287,13 +298,13 @@ const SECTIONS: SettingsSectionItem[] = [
   // ensures the section vanishes from the sidebar in release.
   ...(!import.meta.env.PROD
     ? [
-        {
-          id: "developer" as const,
-          icon: <Code className="h-3.5 w-3.5" />,
-          colorClass: "bg-violet-600",
-          labelKey: "settings.developer",
-        },
-      ]
+      {
+        id: "developer" as const,
+        icon: <Code className="h-3.5 w-3.5" />,
+        colorClass: "bg-violet-600",
+        labelKey: "settings.developer",
+      },
+    ]
     : []),
 ]
 
@@ -307,7 +318,6 @@ export default function SettingsView({
   initialModelConfigTab,
   initialAgentId,
   initialAgentTab,
-  initialChannelId,
   onProfileSaved,
 }: {
   onBack: () => void
@@ -496,12 +506,7 @@ export default function SettingsView({
             {activeSection === "notifications" && <NotificationPanel />}
             {activeSection === "tools" && <ToolSettingsPanel />}
             {activeSection === "mcp" && <McpServersPanel />}
-            {activeSection === "sandbox" && <SandboxPanel />}
             {activeSection === "browser" && <BrowserPanel />}
-            {activeSection === "acp" && <AcpControlPanel />}
-            {activeSection === "channels" && (
-              <ChannelPanel initialChannelId={initialChannelId} />
-            )}
             {activeSection === "approval" && <ApprovalPanel />}
             {activeSection === "hooks" && <HooksPanel />}
             {activeSection === "permissions" && <PermissionsPanel />}

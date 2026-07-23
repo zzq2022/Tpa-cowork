@@ -563,14 +563,16 @@ html[data-focus-indicators="enhanced"]
  * that can't carry its own variant under Tailwind's `@custom-variant
  * dark` registration.
  */
-::highlight(hope-search-hit) {
-  background-color: rgba(254, 240, 138, 0.85);
-  color: rgb(66, 32, 6);
-  text-decoration-color: rgba(254, 240, 138, 0.85);
-}
-.dark ::highlight(hope-search-hit) {
-  background-color: rgba(250, 204, 21, 0.4);
-  color: rgb(254, 243, 199);
+@supports (selector(::highlight(hope-search-hit))) {
+  ::highlight(hope-search-hit) {
+    background-color: rgba(254, 240, 138, 0.85);
+    color: rgb(66, 32, 6);
+    text-decoration-color: rgba(254, 240, 138, 0.85);
+  }
+  .dark ::highlight(hope-search-hit) {
+    background-color: rgba(250, 204, 21, 0.4);
+    color: rgb(254, 243, 199);
+  }
 }
 
 /* Shimmer highlight sweep across text (thinking / tool titles while running) */
@@ -1441,9 +1443,11 @@ pre.hope-shiki-view {
 }
 
 /* ── Help window in-chapter find (CSS Custom Highlight API) ── */
-::highlight(help-find) {
-  background-color: rgba(250, 204, 21, 0.35);
-}
-::highlight(help-find-active) {
-  background-color: rgba(249, 115, 22, 0.55);
+@supports (selector(::highlight(help-find))) {
+  ::highlight(help-find) {
+    background-color: rgba(250, 204, 21, 0.35);
+  }
+  ::highlight(help-find-active) {
+    background-color: rgba(249, 115, 22, 0.55);
+  }
 }

@@ -272,10 +272,7 @@ pub(crate) async fn execute(args: &Value, session_id: Option<&str>) -> String {
         }
     };
 
-    // Final cleanup: mark persisted row answered and drop any IM-side pending
-    // state so stale entries don't accumulate in the button/text maps.
     let _ = ask_user::mark_group_answered(&request_id);
-    crate::channel::worker::ask_user::drop_pending_by_request_id(&request_id).await;
 
     // ElicitationResult hook (observation): the question group reached a
     // terminal state.

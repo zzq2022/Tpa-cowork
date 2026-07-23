@@ -1,11 +1,9 @@
-use crate::acp_control;
-use crate::channel;
 use crate::cron;
 use crate::globals::AppState;
 use crate::globals::{
-    ACP_MANAGER, APP_LOGGER, CACHED_AGENT, CHANNEL_CANCELS, CHANNEL_DB, CHANNEL_REGISTRY,
-    CODEX_TOKEN_CACHE, CRON_DB, EVENT_BUS, IDLE_EXTRACT_HANDLES, KNOWLEDGE_DB, LOG_DB,
-    MEMORY_BACKEND, PROJECT_DB, REASONING_EFFORT, SESSION_DB, SUBAGENT_CANCELS, TERMINAL_MANAGER,
+    APP_LOGGER, CACHED_AGENT, CODEX_TOKEN_CACHE, CRON_DB, EVENT_BUS, IDLE_EXTRACT_HANDLES,
+    KNOWLEDGE_DB, LOG_DB, MEMORY_BACKEND, PROJECT_DB, REASONING_EFFORT, SESSION_DB,
+    SUBAGENT_CANCELS, TERMINAL_MANAGER,
 };
 use crate::knowledge::KnowledgeRegistry;
 use crate::logging::{self, AppLogger, LogDB};
@@ -359,7 +357,6 @@ pub fn init_runtime(role: &'static str) {
     // Per-AppState fields that desktop reads via OnceLock too. Constructed
     // here so server / acp modes get the same defaults without depending on
     // `build_app_state`.
-    let _ = CHANNEL_CANCELS.set(Arc::new(channel::ChannelCancelRegistry::new()));
     let _ = CODEX_TOKEN_CACHE.set(Arc::new(Mutex::new(None::<(String, String)>)));
     let global_reasoning_effort = crate::config::cached_config().reasoning_effort.clone();
     let _ = REASONING_EFFORT.set(Arc::new(Mutex::new(global_reasoning_effort)));
@@ -415,70 +412,10 @@ pub fn init_runtime(role: &'static str) {
         }
     }
 
-    // Initialize IM Channel system
-    {
-        // Inbound buffer 1024: non-Message events (reactions / read receipts /
-        // membership / etc.) can be high-volume on busy chats and we don't
-        // want them to back-pressure real chat messages. v0.2.0 keeps the
-        // non-Message variants log-only so per-event work is < 1ms.
-        let (mut registry, inbound_rx) = channel::ChannelRegistry::new(1024);
-
-        // Register built-in channel plugins
-        registry.register_plugin(Arc::new(channel::telegram::TelegramPlugin::new()));
-        registry.register_plugin(Arc::new(channel::wechat::WeChatPlugin::new()));
-        registry.register_plugin(Arc::new(channel::slack::SlackPlugin::new()));
-        registry.register_plugin(Arc::new(channel::feishu::FeishuPlugin::new()));
-        registry.register_plugin(Arc::new(channel::discord::DiscordPlugin::new()));
-        registry.register_plugin(Arc::new(channel::qqbot::QqBotPlugin::new()));
-        registry.register_plugin(Arc::new(channel::irc::IrcPlugin::new()));
-        registry.register_plugin(Arc::new(channel::signal::SignalPlugin::new()));
-        registry.register_plugin(Arc::new(channel::imessage::IMessagePlugin::new()));
-        registry.register_plugin(Arc::new(channel::whatsapp::WhatsAppPlugin::new()));
-        registry.register_plugin(Arc::new(channel::googlechat::GoogleChatPlugin::new()));
-        registry.register_plugin(Arc::new(channel::line::LinePlugin::new()));
-
-        let registry = Arc::new(registry);
-        let channel_db = Arc::new(channel::ChannelDB::new(session_db.clone()));
-
-        // Run channel DB migration
-        if let Err(e) = channel_db.migrate() {
-            app_error!(
-                "channel",
-                "init",
-                "Failed to run channel DB migration: {}",
-                e
-            );
-        }
-
-        // Spawn the inbound message dispatcher. Self-hosted on a dedicated
-        // OS thread with its own tokio runtime, so it's safe to call from
-        // sync init regardless of which mode (desktop / server / acp) is
-        // bringing up the runtime.
-        channel::worker::spawn_dispatcher(registry.clone(), channel_db.clone(), inbound_rx);
-
-        // NOTE: approval / ask_user listeners use bare `tokio::spawn` and
-        // require an ambient tokio runtime. They moved to
-        // `start_background_tasks()` so server / acp paths (which call
-        // `init_runtime` from sync stacks) don't panic on missing runtime.
-
-        let _ = CHANNEL_REGISTRY.set(registry);
-        let _ = CHANNEL_DB.set(channel_db);
-    }
-
-    // Initialize ACP control plane (non-async parts only).
-    // This is also the first `cached_config()` call on the Tauri setup path,
-    // which synchronously populates the in-memory provider-store cache so
-    // later async hot paths (tool execution, chat, channel workers) never
-    // block on the initial disk read. Do not remove without auditing.
     {
         let store = crate::config::cached_config();
         if let Some(manager) = TERMINAL_MANAGER.get() {
             manager.set_remote_access_allowed(store.filesystem.allow_remote_writes);
-        }
-        if store.acp_control.enabled {
-            let registry = Arc::new(acp_control::AcpRuntimeRegistry::new());
-            let manager = Arc::new(acp_control::AcpSessionManager::new(registry));
-            let _ = ACP_MANAGER.set(manager);
         }
     }
 
@@ -524,9 +461,6 @@ pub fn build_app_state() -> AppState {
     let subagent_cancels = crate::require_subagent_cancels()
         .expect("init_runtime contract")
         .clone();
-    let channel_cancels = crate::require_channel_cancels()
-        .expect("init_runtime contract")
-        .clone();
     let codex_token = crate::require_codex_token_cache()
         .expect("init_runtime contract")
         .clone();
@@ -557,17 +491,12 @@ pub fn build_app_state() -> AppState {
         logger,
         cron_db,
         subagent_cancels,
-        channel_cancels,
         terminal_manager,
     };
 
     // Guardrail: every OnceLock-backed AppState field must share the
     // same Arc. A drift silently breaks cross-runtime reads — this
     // exact bug class motivated removing the dead `APP_STATE`.
-    debug_assert!(
-        ptr_eq_lock(&CHANNEL_CANCELS, &state.channel_cancels),
-        "CHANNEL_CANCELS OnceLock and AppState.channel_cancels must share the same Arc"
-    );
     debug_assert!(
         ptr_eq_lock(&CODEX_TOKEN_CACHE, &state.codex_token),
         "CODEX_TOKEN_CACHE OnceLock and AppState.codex_token must share the same Arc"
@@ -601,98 +530,6 @@ fn ptr_eq_lock<T>(lock: &std::sync::OnceLock<Arc<T>>, field: &Arc<T>) -> bool {
     lock.get()
         .map(|arc| Arc::ptr_eq(arc, field))
         .unwrap_or(false)
-}
-
-/// Spawn the IM channel approval + ask_user listeners. Both internally
-/// use bare `tokio::spawn` so they require an ambient tokio runtime —
-/// callers are `start_background_tasks` and `start_minimal_background_tasks`,
-/// never `init_runtime` (which can run on a sync stack). No-op if the
-/// channel registry isn't initialised yet.
-fn spawn_channel_listeners() {
-    if let (Some(channel_db), Some(registry)) = (CHANNEL_DB.get(), CHANNEL_REGISTRY.get()) {
-        channel::worker::approval::spawn_channel_approval_listener(
-            channel_db.clone(),
-            registry.clone(),
-        );
-        channel::worker::ask_user::spawn_channel_ask_user_listener(
-            channel_db.clone(),
-            registry.clone(),
-        );
-        channel::worker::spawn_channel_eviction_watcher(registry.clone());
-        spawn_channel_menu_resync_listener(registry.clone());
-        // Send a single "back online" notice to recently-active IM
-        // conversations after a fresh process boot. Self-gates on
-        // runtime_lock::is_primary() + AppConfig.startup_notification.enabled
-        // and is a no-op otherwise.
-        channel::worker::spawn_startup_notifier(registry.clone());
-    }
-}
-
-/// Subscribe to `skills:catalog_changed` and config events that touch the
-/// slash-command catalog (skill enable/disable, extra dirs) and re-sync each
-/// running IM channel's bot menu.
-///
-/// Debounced with a 2s trailing-edge timer so a bulk import or a chain of
-/// `bump_skill_version` calls collapses into one `setMyCommands` /
-/// `bulk_overwrite_global_commands` round-trip per affected account.
-fn spawn_channel_menu_resync_listener(registry: Arc<channel::ChannelRegistry>) {
-    let Some(bus) = crate::globals::get_event_bus() else {
-        app_warn!(
-            "channel",
-            "menu_sync",
-            "EventBus not initialized — IM menu auto-resync disabled"
-        );
-        return;
-    };
-    let mut rx = bus.subscribe();
-
-    tokio::spawn(async move {
-        const DEBOUNCE: std::time::Duration = std::time::Duration::from_secs(2);
-        let mut pending: Option<tokio::time::Instant> = None;
-
-        loop {
-            // Either wake on a new event, or wake when the debounce window
-            // closes for a previously-buffered event.
-            let recv = if let Some(deadline) = pending {
-                tokio::select! {
-                    _ = tokio::time::sleep_until(deadline) => {
-                        pending = None;
-                        let synced = registry.sync_commands_for_all().await;
-                        if synced > 0 {
-                            app_info!(
-                                "channel",
-                                "menu_sync",
-                                "Re-synced slash command menus on {} running account(s)",
-                                synced
-                            );
-                        }
-                        continue;
-                    }
-                    ev = rx.recv() => ev,
-                }
-            } else {
-                rx.recv().await
-            };
-
-            match recv {
-                Ok(event) => {
-                    if menu_resync_event_relevant(&event) {
-                        pending = Some(tokio::time::Instant::now() + DEBOUNCE);
-                    }
-                }
-                Err(tokio::sync::broadcast::error::RecvError::Lagged(n)) => {
-                    app_warn!(
-                        "channel",
-                        "menu_sync",
-                        "EventBus lagged {} events — forcing menu re-sync",
-                        n
-                    );
-                    pending = Some(tokio::time::Instant::now() + DEBOUNCE);
-                }
-                Err(tokio::sync::broadcast::error::RecvError::Closed) => break,
-            }
-        }
-    });
 }
 
 /// Subscribe to `config:changed` and rebuild the global hooks registry when a
@@ -796,32 +633,6 @@ fn hooks_config_event_relevant(event: &crate::event_bus::AppEvent) -> bool {
             .unwrap_or(false)
 }
 
-/// Config categories whose changes can shift the slash-command catalog. Kept
-/// as an explicit list (rather than a `starts_with("skill")` heuristic) so a
-/// future unrelated `skill_*` field can't silently force IM bot menu re-syncs.
-/// Matches the categories used in `skills::commands::*` and `tools::settings`.
-const MENU_RESYNC_CATEGORIES: &[&str] = &[
-    "skills",
-    "extra_skills_dirs",
-    "disabled_skills",
-    "skill_env",
-    "skill_env_check",
-    "skills.auto_review",
-];
-
-fn menu_resync_event_relevant(event: &crate::event_bus::AppEvent) -> bool {
-    match event.name.as_str() {
-        "skills:catalog_changed" => true,
-        "config:changed" => event
-            .payload
-            .get("category")
-            .and_then(|c| c.as_str())
-            .map(|c| MENU_RESYNC_CATEGORIES.contains(&c))
-            .unwrap_or(false),
-        _ => false,
-    }
-}
-
 /// Start background async tasks that require a tokio runtime.
 /// Must be called from within a tokio async context (e.g., Tauri's `.setup()` or a server runtime).
 ///
@@ -891,9 +702,6 @@ fn spawn_embedding_init() {
 
 pub async fn start_background_tasks() {
     let primary = crate::runtime_lock::is_primary();
-
-    // Tier-agnostic: EventBus subscription is multi-subscriber-safe.
-    spawn_channel_listeners();
 
     // Tier-agnostic: local Chrome Extension broker. It only binds loopback and
     // writes a rebuildable discovery file for the Native Messaging host.
@@ -1087,24 +895,6 @@ pub async fn start_background_tasks() {
             }
         });
 
-        // Auto-start enabled channel accounts. Two processes auto-starting
-        // the same Telegram bot would fight over its webhook; users still
-        // start accounts manually via the API/UI in any tier. Boot failures
-        // are picked up by `channel::start_watchdog` and retried in the
-        // background until success or user action.
-        if let Some(registry) = CHANNEL_REGISTRY.get() {
-            let registry = registry.clone();
-            channel::start_watchdog::spawn_loop(registry.clone());
-            let store = crate::config::cached_config();
-            tokio::spawn(async move {
-                for account in store.channels.enabled_accounts() {
-                    if let Err(e) = registry.start_account(account).await {
-                        channel::start_watchdog::register_failure(account, &e).await;
-                    }
-                }
-            });
-        }
-
         // Replay async tool jobs left over from the previous process: mark
         // `running` rows as interrupted (their host process is gone) and inject
         // any terminal-but-not-injected results back into their parent sessions.
@@ -1266,18 +1056,6 @@ pub async fn start_background_tasks() {
         // can leave unreachable memory rows behind. Project deletion is
         // low-frequency, so a startup sweep is enough — no periodic timer.
         crate::project::reconcile::spawn_startup_reconciler();
-
-        // Auto-discover ACP backends
-        if let Some(acp_mgr) = ACP_MANAGER.get() {
-            let store = crate::config::cached_config();
-            if store.acp_control.enabled {
-                let registry = acp_mgr.runtime_registry().clone();
-                let acp_config = store.acp_control.clone();
-                tokio::spawn(async move {
-                    acp_control::registry::auto_discover_and_register(&registry, &acp_config).await;
-                });
-            }
-        }
     }
 
     // Initialize the MCP subsystem. `init_global` is idempotent and the
@@ -1316,9 +1094,6 @@ pub async fn start_background_tasks() {
 /// stay small.
 pub async fn start_minimal_background_tasks() {
     let primary = crate::runtime_lock::is_primary();
-
-    // EventBus listeners — multi-subscriber-safe, tier-agnostic.
-    spawn_channel_listeners();
 
     // Local Chrome Extension broker. Short-lived ACP processes may not need it,
     // but starting it here keeps browser owner-plane diagnostics consistent.

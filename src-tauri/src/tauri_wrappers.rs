@@ -81,24 +81,6 @@ pub async fn tool_recent_actions(
         .and_then(ha_core::tool_actions::ToolActionSource::parse);
     ha_core::tool_actions::recent(source, session_id.as_deref(), limit.unwrap_or(200))
 }
-
-// ── Sandbox ──────────────────────────────────────────────────────
-
-#[tauri::command]
-pub async fn get_sandbox_config() -> Result<ha_core::sandbox::SandboxConfig, String> {
-    ha_core::sandbox::get_sandbox_config().await
-}
-
-#[tauri::command]
-pub async fn set_sandbox_config(config: ha_core::sandbox::SandboxConfig) -> Result<(), String> {
-    ha_core::sandbox::set_sandbox_config(config).await
-}
-
-#[tauri::command]
-pub async fn check_sandbox_available() -> ha_core::sandbox::DockerStatus {
-    ha_core::sandbox::check_sandbox_available().await
-}
-
 // ── Slash Commands ───────────────────────────────────────────────
 // ha-core's slash_commands read cross-runtime singletons (SessionDB,
 // cached agent, etc.) via OnceLock accessors, so these wrappers are

@@ -1,6 +1,4 @@
-use crate::acp_control;
 use crate::agent::AssistantAgent;
-use crate::channel;
 use crate::cron;
 use crate::event_bus::EventBus;
 use crate::knowledge::KnowledgeRegistry;
@@ -17,12 +15,6 @@ use std::sync::Arc;
 use tokio::sync::Mutex;
 
 // ── Global statics (OnceLock) ──────────────────────────────────
-//
-// Every cross-runtime singleton — anything ha-core modules might need from
-// desktop / HTTP / IM-channel / ACP / cron paths — lives here as a
-// `OnceLock<Arc<…>>`. `AppState` below is a Tauri convenience aggregate
-// that shares the same Arcs via `init_app_state()`.
-
 pub static EVENT_BUS: std::sync::OnceLock<Arc<dyn EventBus>> = std::sync::OnceLock::new();
 pub static APP_LOGGER: std::sync::OnceLock<AppLogger> = std::sync::OnceLock::new();
 pub static MEMORY_BACKEND: std::sync::OnceLock<Arc<dyn memory::MemoryBackend>> =
@@ -30,21 +22,11 @@ pub static MEMORY_BACKEND: std::sync::OnceLock<Arc<dyn memory::MemoryBackend>> =
 pub static CRON_DB: std::sync::OnceLock<Arc<cron::CronDB>> = std::sync::OnceLock::new();
 pub static SESSION_DB: std::sync::OnceLock<Arc<SessionDB>> = std::sync::OnceLock::new();
 pub static PROJECT_DB: std::sync::OnceLock<Arc<ProjectDB>> = std::sync::OnceLock::new();
-/// Knowledge base registry (knowledge_bases + session/project attach tables).
-/// Truth source lives in `sessions.db`; shares the `SessionDB` connection.
 pub static KNOWLEDGE_DB: std::sync::OnceLock<Arc<KnowledgeRegistry>> = std::sync::OnceLock::new();
 pub static SUBAGENT_CANCELS: std::sync::OnceLock<Arc<subagent::SubagentCancelRegistry>> =
     std::sync::OnceLock::new();
-pub static ACP_MANAGER: std::sync::OnceLock<Arc<acp_control::AcpSessionManager>> =
-    std::sync::OnceLock::new();
-pub static CHANNEL_REGISTRY: std::sync::OnceLock<Arc<channel::ChannelRegistry>> =
-    std::sync::OnceLock::new();
-pub static CHANNEL_DB: std::sync::OnceLock<Arc<channel::ChannelDB>> = std::sync::OnceLock::new();
 pub static LOG_DB: std::sync::OnceLock<Arc<LogDB>> = std::sync::OnceLock::new();
 pub static TERMINAL_MANAGER: std::sync::OnceLock<Arc<TerminalManager>> = std::sync::OnceLock::new();
-
-pub static CHANNEL_CANCELS: std::sync::OnceLock<Arc<channel::ChannelCancelRegistry>> =
-    std::sync::OnceLock::new();
 
 /// Disk (`crate::oauth::load_token()`) is the source of truth; this cache
 /// lets hot paths avoid a disk read and gives the login flow a publish
@@ -122,21 +104,6 @@ pub fn get_subagent_cancels() -> Option<&'static Arc<subagent::SubagentCancelReg
     SUBAGENT_CANCELS.get()
 }
 
-/// Get stored AcpSessionManager for ACP control plane operations
-pub fn get_acp_manager() -> Option<&'static Arc<acp_control::AcpSessionManager>> {
-    ACP_MANAGER.get()
-}
-
-/// Get stored ChannelRegistry for IM channel operations
-pub fn get_channel_registry() -> Option<&'static Arc<channel::ChannelRegistry>> {
-    CHANNEL_REGISTRY.get()
-}
-
-/// Get stored ChannelDB for channel conversation management
-pub fn get_channel_db() -> Option<&'static Arc<channel::ChannelDB>> {
-    CHANNEL_DB.get()
-}
-
 /// Get stored LogDB for log persistence (separate from the [`AppLogger`]
 /// async writer — routes that page logs need the DB handle directly).
 pub fn get_log_db() -> Option<&'static Arc<LogDB>> {
@@ -145,11 +112,6 @@ pub fn get_log_db() -> Option<&'static Arc<LogDB>> {
 
 pub fn get_terminal_manager() -> Option<&'static Arc<TerminalManager>> {
     TERMINAL_MANAGER.get()
-}
-
-/// Get stored ChannelCancelRegistry for IM-channel stream cancellation
-pub fn get_channel_cancels() -> Option<&'static Arc<channel::ChannelCancelRegistry>> {
-    CHANNEL_CANCELS.get()
 }
 
 /// Get stored in-memory Codex OAuth token cache.
@@ -217,12 +179,6 @@ require_accessor!(
     "Sub-agent cancel registry"
 );
 require_accessor!(
-    require_channel_cancels,
-    get_channel_cancels,
-    Arc<channel::ChannelCancelRegistry>,
-    "Channel cancel registry"
-);
-require_accessor!(
     require_codex_token_cache,
     get_codex_token_cache,
     Arc<Mutex<Option<(String, String)>>>,
@@ -265,6 +221,5 @@ pub struct AppState {
     pub logger: AppLogger,
     pub cron_db: Arc<cron::CronDB>,
     pub subagent_cancels: Arc<subagent::SubagentCancelRegistry>,
-    pub channel_cancels: Arc<channel::ChannelCancelRegistry>,
     pub terminal_manager: Arc<TerminalManager>,
 }

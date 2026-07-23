@@ -17,7 +17,6 @@ mod window_state;
 // eliminating the need for duplicate local copies.
 
 pub use ha_core::acp;
-pub use ha_core::acp_control;
 pub use ha_core::agent;
 pub use ha_core::agent_config;
 pub use ha_core::agent_loader;
@@ -26,7 +25,6 @@ pub use ha_core::backup;
 pub use ha_core::browser_state;
 pub use ha_core::browser_ui;
 pub use ha_core::canvas_db;
-pub use ha_core::channel;
 pub use ha_core::chat_engine;
 pub use ha_core::context_compact;
 pub use ha_core::crash_journal;
@@ -50,7 +48,6 @@ pub use ha_core::plan;
 pub use ha_core::platform;
 pub use ha_core::process_registry;
 pub use ha_core::provider;
-pub use ha_core::sandbox;
 pub use ha_core::self_diagnosis;
 pub use ha_core::service_install;
 pub use ha_core::session;
@@ -72,12 +69,11 @@ pub use ha_core::{default_true, sql_opt_u64, sql_u64, truncate_utf8};
 pub use ha_core::event_bus;
 pub use ha_core::init_app_state;
 pub use ha_core::{
-    get_acp_manager, get_channel_db, get_channel_registry, get_cron_db, get_event_bus, get_logger,
-    get_memory_backend, get_session_db, get_subagent_cancels, set_event_bus,
+    get_cron_db, get_event_bus, get_logger, get_memory_backend, get_session_db,
+    get_subagent_cancels, set_event_bus,
 };
 pub use ha_core::{
-    AppState, ACP_MANAGER, APP_LOGGER, CHANNEL_DB, CHANNEL_REGISTRY, CRON_DB, EVENT_BUS,
-    MEMORY_BACKEND, SESSION_DB, SUBAGENT_CANCELS,
+    AppState, APP_LOGGER, CRON_DB, EVENT_BUS, MEMORY_BACKEND, SESSION_DB, SUBAGENT_CANCELS,
 };
 
 // ── Local re-exports ─────────────────────────────────────────────
@@ -943,10 +939,6 @@ pub fn run() {
             commands::crash::restore_settings_backup_cmd,
             commands::crash::get_guardian_enabled,
             commands::crash::set_guardian_enabled,
-            // Sandbox (thin wrappers over ha-core)
-            tauri_wrappers::get_sandbox_config,
-            tauri_wrappers::set_sandbox_config,
-            tauri_wrappers::check_sandbox_available,
             // Slash commands (thin wrappers over ha-core)
             tauri_wrappers::list_slash_commands,
             tauri_wrappers::execute_slash_command,
@@ -1287,15 +1279,6 @@ pub fn run() {
             // Cross-session plan index (read-only)
             commands::plan_index::list_plans,
             commands::plan_index::resolve_plan_mention,
-            // ACP control plane
-            commands::acp_control::acp_list_backends,
-            commands::acp_control::acp_health_check,
-            commands::acp_control::acp_refresh_backends,
-            commands::acp_control::acp_list_runs,
-            commands::acp_control::acp_kill_run,
-            commands::acp_control::acp_get_run_result,
-            commands::acp_control::acp_get_config,
-            commands::acp_control::acp_set_config,
             // URL preview
             commands::url_preview::fetch_url_preview,
             commands::url_preview::fetch_url_favicon,
@@ -1318,24 +1301,6 @@ pub fn run() {
             commands::browser::browser_get_config,
             commands::browser::browser_set_config,
             commands::browser::browser_install_chromium_runtime,
-            // IM Channel management
-            commands::channel::channel_list_plugins,
-            commands::channel::channel_list_accounts,
-            commands::channel::channel_add_account,
-            commands::channel::channel_update_account,
-            commands::channel::channel_remove_account,
-            commands::channel::channel_set_auto_transcribe_voice,
-            commands::channel::channel_start_account,
-            commands::channel::channel_stop_account,
-            commands::channel::channel_sync_commands,
-            commands::channel::channel_health,
-            commands::channel::channel_health_all,
-            commands::channel::channel_validate_credentials,
-            commands::channel::channel_send_test_message,
-            commands::channel::channel_list_sessions,
-            commands::channel::channel_wechat_start_login,
-            commands::channel::channel_wechat_wait_login,
-            commands::channel::channel_handover_session,
             // MCP (Model Context Protocol) servers
             commands::mcp::mcp_list_servers,
             commands::mcp::mcp_get_server_status,

@@ -13,9 +13,9 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
-import { X, Plus, Send, FolderOpen, AlertTriangle } from "lucide-react"
+import { X, FolderOpen, AlertTriangle } from "lucide-react"
 import { AgentSelectDisplay } from "@/components/common/AgentSelectDisplay"
-import type { CronDeliveryTarget, CronJob, CronSchedule } from "./CronJobForm.types"
+import type { CronJob, CronSchedule } from "./CronJobForm.types"
 
 import type { CronFrequency } from "./CronJobForm.types"
 import {
@@ -24,27 +24,8 @@ import {
   toLocalDatetimeString,
 } from "./cronHelpers"
 import CronExpressionBuilder from "./CronExpressionBuilder"
-import { DockerSetupHint } from "@/components/settings/DockerSetupHint"
-import { useDockerStatus } from "@/hooks/useDockerStatus"
 import type { AgentInfo, SandboxMode, SessionMode } from "@/types/chat"
-import type { ChannelAccountConfig } from "@/components/settings/channel-panel/types"
 import type { ProjectMeta } from "@/types/project"
-
-// Matches the shape returned by `channel_list_sessions` (see
-// `src-tauri/src/commands/channel.rs::channel_list_sessions`).
-interface ChannelConversationDto {
-  id: number
-  channelId: string
-  accountId: string
-  chatId: string
-  threadId?: string | null
-  sessionId: string
-  senderId?: string | null
-  senderName?: string | null
-  chatType: string
-  createdAt: string
-  updatedAt: string
-}
 
 // ── Form Props ────────────────────────────────────────────────────
 
@@ -188,9 +169,6 @@ export default function CronJobForm({
   )
   const [maxFailures, setMaxFailures] = useState(String(job?.maxFailures ?? 5))
   const [notifyOnComplete, setNotifyOnComplete] = useState(job?.notifyOnComplete ?? true)
-  const [prefixDeliveryWithName, setPrefixDeliveryWithName] = useState(
-    job?.prefixDeliveryWithName ?? false,
-  )
   // C19: per-job timeout override; blank string = use the global default.
   const [jobTimeoutSecs, setJobTimeoutSecs] = useState(
     job?.jobTimeoutSecs != null ? String(job.jobTimeoutSecs) : "",
@@ -202,29 +180,9 @@ export default function CronJobForm({
   const [sandboxModeOverride, setSandboxModeOverride] = useState<string>(
     job?.sandboxModeOverride ?? FOLLOW_MODE_VALUE,
   )
-  const {
-    status: dockerStatus,
-    checking: dockerChecking,
-    ready: dockerReady,
-    refresh: checkDocker,
-  } = useDockerStatus()
-  // The selected sandbox needs Docker iff an explicit non-off mode is chosen.
-  // "Follow agent" can't be resolved here without the agent's effective default,
-  // so the hint only shows for an explicit non-off pick (conservative — runtime
-  // still fail-closes if Docker is down at fire time).
-  const sandboxNeedsDocker =
-    sandboxModeOverride !== FOLLOW_MODE_VALUE && sandboxModeOverride !== "off"
-  useEffect(() => {
-    if (sandboxNeedsDocker) void checkDocker()
-  }, [sandboxNeedsDocker, checkDocker])
-  const [deliveryTargets, setDeliveryTargets] = useState<CronDeliveryTarget[]>(
-    () => job?.deliveryTargets?.map((t) => ({ ...t })) ?? [],
-  )
-  const [accounts, setAccounts] = useState<ChannelAccountConfig[]>([])
+  const prefixDeliveryWithName = job?.prefixDeliveryWithName ?? false
+  const deliveryTargets = job?.deliveryTargets ?? []
   const [projects, setProjects] = useState<ProjectMeta[]>([])
-  const [conversationsByAccount, setConversationsByAccount] = useState<
-    Record<string, ChannelConversationDto[]>
-  >({})
   const [agents, setAgents] = useState<AgentInfo[]>([])
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState("")
@@ -238,92 +196,13 @@ export default function CronJobForm({
       .then(setAgents)
       .catch(() => {})
 
-    getTransport().call<ChannelAccountConfig[]>("channel_list_accounts")
-      .then((list) => setAccounts(list.filter((a) => a.enabled)))
-      .catch(() => {})
-
     getTransport().call<ProjectMeta[]>("list_projects_cmd", { includeArchived: true })
       .then((list) => setProjects(Array.isArray(list) ? list : []))
       .catch(() => {})
   }, [])
 
-  // Prefetch conversations for accounts already used in existing targets.
-  useEffect(() => {
-    const needed = new Set(deliveryTargets.map((t) => t.accountId).filter(Boolean))
-    needed.forEach((accountId) => {
-      if (conversationsByAccount[accountId]) return
-      const target = deliveryTargets.find((t) => t.accountId === accountId)
-      if (!target) return
-      void loadConversationsFor(target.channelId, accountId)
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deliveryTargets])
 
-  async function loadConversationsFor(channelId: string, accountId: string) {
-    if (!channelId || !accountId) return
-    try {
-      const list = await getTransport().call<ChannelConversationDto[]>(
-        "channel_list_sessions",
-        { channelId, accountId },
-      )
-      setConversationsByAccount((prev) => ({ ...prev, [accountId]: list }))
-    } catch {
-      setConversationsByAccount((prev) => ({ ...prev, [accountId]: [] }))
-    }
-  }
 
-  function addDeliveryTarget() {
-    setDeliveryTargets((prev) => [
-      ...prev,
-      { channelId: "", accountId: "", chatId: "", threadId: null, label: null },
-    ])
-  }
-
-  function removeDeliveryTarget(idx: number) {
-    setDeliveryTargets((prev) => prev.filter((_, i) => i !== idx))
-  }
-
-  function handlePickAccount(idx: number, accountId: string) {
-    const account = accounts.find((a) => a.id === accountId)
-    if (!account) return
-    setDeliveryTargets((prev) =>
-      prev.map((t, i) =>
-        i === idx
-          ? {
-              ...t,
-              channelId: account.channelId,
-              accountId: account.id,
-              chatId: "",
-              threadId: null,
-              label: null,
-            }
-          : t,
-      ),
-    )
-    void loadConversationsFor(account.channelId, account.id)
-  }
-
-  function handlePickConversation(idx: number, conversationId: string) {
-    const target = deliveryTargets[idx]
-    if (!target) return
-    const list = conversationsByAccount[target.accountId] ?? []
-    const conv = list.find((c) => String(c.id) === conversationId)
-    if (!conv) return
-    const displayName =
-      conv.senderName && conv.senderName.length > 0 ? conv.senderName : conv.chatId
-    setDeliveryTargets((prev) =>
-      prev.map((t, i) =>
-        i === idx
-          ? {
-              ...t,
-              chatId: conv.chatId,
-              threadId: conv.threadId ?? null,
-              label: `${conv.channelId} / ${displayName}`,
-            }
-          : t,
-      ),
-    )
-  }
 
   function toggleWeekday(idx: number) {
     setCronWeekdays((prev) => {
@@ -712,16 +591,6 @@ export default function CronJobForm({
             <p className="text-[10px] text-muted-foreground">
               {t("cron.permissionSandboxHint")}
             </p>
-            {sandboxNeedsDocker && !dockerReady && (
-              <DockerSetupHint
-                status={dockerStatus}
-                checking={dockerChecking}
-                onRefresh={checkDocker}
-                title={t("chat.sandboxMode.setupTitle", {
-                  defaultValue: "配置 Docker 后启用沙箱",
-                })}
-              />
-            )}
             {permissionModeOverride === "yolo" && sandboxModeOverride === "off" && (
               <div className="flex items-start gap-1.5 rounded-md border border-destructive/40 bg-destructive/10 p-2 text-[11px] text-destructive">
                 <AlertTriangle className="h-3.5 w-3.5 mt-0.5 shrink-0" />
@@ -759,155 +628,6 @@ export default function CronJobForm({
               {t("cron.jobTimeoutOverrideHint")}
             </p>
           </div>
-
-          {/* Delivery targets — fan-out job result to IM channel conversations */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-xs font-medium text-muted-foreground block flex items-center gap-1.5">
-                  <Send className="h-3 w-3" />
-                  {t("cron.deliveryTargets")}
-                </label>
-                <p className="text-xs text-muted-foreground/70 mt-0.5">
-                  {t("cron.deliveryTargetsDesc")}
-                </p>
-              </div>
-              <Button
-                variant="outline"
-                size="sm"
-                type="button"
-                onClick={addDeliveryTarget}
-                disabled={accounts.length === 0}
-                className="h-7 px-2 text-xs"
-              >
-                <Plus className="h-3 w-3 mr-1" />
-                {t("cron.addDeliveryTarget")}
-              </Button>
-            </div>
-
-            {deliveryTargets.length === 0 ? (
-              <p className="text-xs text-muted-foreground/60 py-1.5">
-                {accounts.length === 0
-                  ? t("cron.noDeliveryChannels")
-                  : t("cron.noDeliveryTargets")}
-              </p>
-            ) : (
-              <div className="space-y-2">
-                {deliveryTargets.map((target, idx) => {
-                  const convs = conversationsByAccount[target.accountId] ?? []
-                  const selectedConv = convs.find(
-                    (c) => c.chatId === target.chatId && (c.threadId ?? null) === (target.threadId ?? null),
-                  )
-                  return (
-                    <div
-                      key={idx}
-                      className={`flex items-start gap-2 p-2 border rounded-md ${
-                        target.stale
-                          ? "border-destructive/60 bg-destructive/5"
-                          : "border-border bg-muted/20"
-                      }`}
-                    >
-                      <div className="flex-1 space-y-1.5">
-                        {target.stale && (
-                          <p className="text-[11px] text-destructive flex items-center gap-1">
-                            <AlertTriangle className="h-3 w-3" />
-                            {t("cron.deliveryTargetStale")}
-                          </p>
-                        )}
-                        <Select
-                          value={target.accountId || undefined}
-                          onValueChange={(v) => handlePickAccount(idx, v)}
-                        >
-                          <SelectTrigger className="h-8 text-xs">
-                            <SelectValue placeholder={t("cron.selectChannelAccount")} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {accounts.map((a) => (
-                              <SelectItem key={a.id} value={a.id}>
-                                <span className="text-xs">
-                                  <span className="font-mono text-muted-foreground">
-                                    {a.channelId}
-                                  </span>
-                                  {" · "}
-                                  {a.label}
-                                </span>
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-
-                        <Select
-                          value={selectedConv ? String(selectedConv.id) : undefined}
-                          onValueChange={(v) => handlePickConversation(idx, v)}
-                          disabled={!target.accountId}
-                        >
-                          <SelectTrigger className="h-8 text-xs">
-                            <SelectValue
-                              placeholder={
-                                !target.accountId
-                                  ? t("cron.selectAccountFirst")
-                                  : convs.length === 0
-                                    ? t("cron.noConversationsYet")
-                                    : t("cron.selectConversation")
-                              }
-                            />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {convs.map((c) => {
-                              const name =
-                                c.senderName && c.senderName.length > 0
-                                  ? c.senderName
-                                  : c.chatId
-                              return (
-                                <SelectItem key={c.id} value={String(c.id)}>
-                                  <span className="text-xs">
-                                    {name}
-                                    <span className="text-muted-foreground ml-1">
-                                      ({c.chatType})
-                                    </span>
-                                  </span>
-                                </SelectItem>
-                              )
-                            })}
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        type="button"
-                        onClick={() => removeDeliveryTarget(idx)}
-                        className="h-7 w-7 shrink-0 text-muted-foreground hover:text-destructive"
-                        aria-label={t("cron.removeTarget")}
-                      >
-                        <X className="h-3.5 w-3.5" />
-                      </Button>
-                    </div>
-                  )
-                })}
-              </div>
-            )}
-          </div>
-
-          {/* §8: prefix successful deliveries with the task name (opt-in,
-              only meaningful when there are delivery targets) */}
-          {deliveryTargets.length > 0 && (
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-xs font-medium text-muted-foreground block">
-                  {t("cron.prefixDeliveryWithName")}
-                </label>
-                <p className="text-xs text-muted-foreground/70 mt-0.5">
-                  {t("cron.prefixDeliveryWithNameDesc")}
-                </p>
-              </div>
-              <Switch
-                checked={prefixDeliveryWithName}
-                onCheckedChange={setPrefixDeliveryWithName}
-              />
-            </div>
-          )}
 
           {/* Notify on complete */}
           <div className="flex items-center justify-between">

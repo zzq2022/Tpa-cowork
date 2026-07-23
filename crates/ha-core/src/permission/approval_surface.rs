@@ -178,14 +178,7 @@ fn load_session_meta(session_id: &str) -> Option<crate::session::SessionMeta> {
 /// True iff `session_id` is currently attached to an IM channel conversation
 /// (the authoritative 1:1 attach table is the source of truth; falls back to the
 /// denormalized `channel_info` on the session row if the channel DB is absent).
-fn session_is_im_attached(session_id: &str, meta: Option<&crate::session::SessionMeta>) -> bool {
-    if let Some(db) = crate::get_channel_db() {
-        if let Ok(Some(_conv)) = db.get_conversation_by_session(session_id) {
-            return true;
-        }
-        // channel DB present but no row → genuinely not attached.
-        return meta.is_some_and(|m| m.channel_info.is_some());
-    }
+fn session_is_im_attached(_session_id: &str, meta: Option<&crate::session::SessionMeta>) -> bool {
     meta.is_some_and(|m| m.channel_info.is_some())
 }
 

@@ -17,7 +17,6 @@ import {
   Trash2,
 } from "lucide-react"
 import type { SearxngDockerStatus } from "./types"
-import { DockerSetupHint } from "../DockerSetupHint"
 
 export function SearxngDockerSection({
   onUrlSet,
@@ -230,24 +229,11 @@ export function SearxngDockerSection({
 
   if (!status) return null
 
-  if (!status.dockerInstalled) {
+  if (!status.dockerInstalled || status.dockerNotRunning) {
     return (
-      <DockerSetupHint
-        status={{ installed: false, running: false, hostOs: status.hostOs }}
-        title={t("settings.webSearchDockerTitle")}
-        className="mt-1"
-      />
-    )
-  }
-
-  if (status.dockerNotRunning) {
-    return (
-      <DockerSetupHint
-        status={{ installed: true, running: false, hostOs: status.hostOs }}
-        onRefresh={refreshStatus}
-        title={t("settings.webSearchDockerTitle")}
-        className="mt-1"
-      />
+      <div className="rounded-md border border-border/50 p-3 mt-1 text-xs text-muted-foreground">
+        {t("settings.webSearchDockerTitle")}: Docker {status.dockerInstalled ? "未运行" : "未安装"}
+      </div>
     )
   }
 

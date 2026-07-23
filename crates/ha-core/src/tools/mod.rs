@@ -1,6 +1,5 @@
 use serde_json::{json, Value};
 
-pub(crate) mod acp_spawn;
 mod agents;
 mod app_update;
 mod apply_patch;
@@ -20,7 +19,6 @@ mod edit;
 mod enter_plan_mode;
 pub(crate) mod exec;
 mod execution;
-pub(crate) mod feishu;
 mod find;
 mod goal;
 mod grep;
@@ -189,7 +187,6 @@ pub const TOOL_PDF: &str = "pdf";
 pub const TOOL_CANVAS: &str = "canvas";
 pub const TOOL_ARTIFACT: &str = "artifact";
 pub const TOOL_DESIGN: &str = "design";
-pub const TOOL_ACP_SPAWN: &str = "acp_spawn";
 pub const TOOL_GET_WEATHER: &str = "get_weather";
 pub const TOOL_ASK_USER_QUESTION: &str = "ask_user_question";
 pub const TOOL_SUBMIT_PLAN: &str = "submit_plan";

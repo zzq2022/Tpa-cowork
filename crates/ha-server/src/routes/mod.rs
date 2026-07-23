@@ -1,7 +1,6 @@
 pub mod file_serve;
 pub mod helpers;
 
-pub mod acp;
 pub mod agents;
 pub mod artifacts;
 pub mod attachments;
@@ -9,7 +8,6 @@ pub mod auth;
 pub mod avatars;
 pub mod browser;
 pub mod canvas;
-pub mod channel;
 pub mod chat;
 pub mod coding_eval;
 pub mod coding_improvement;

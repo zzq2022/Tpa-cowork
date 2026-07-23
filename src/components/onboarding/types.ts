@@ -8,7 +8,6 @@ export type OnboardingStepKey =
   | "safety"
   | "skills"
   | "server"
-  | "channels"
   | "summary"
 
 /** Full ordered step list for the local-configuration flow. */
@@ -18,7 +17,6 @@ export const ONBOARDING_STEPS: OnboardingStepKey[] = [
   "search-provider",
   "profile",
   "safety",
-  "channels",
 ]
 
 /**

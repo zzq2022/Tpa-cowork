@@ -78,8 +78,8 @@ pub enum ToolFate {
 /// alone decides them.
 pub fn is_globally_configured(name: &str, app_config: &AppConfig) -> bool {
     use crate::tools::{
-        TOOL_ACP_SPAWN, TOOL_ARTIFACT, TOOL_AUDIO_GENERATE, TOOL_CANVAS, TOOL_DESIGN,
-        TOOL_IMAGE_GENERATE, TOOL_SEND_NOTIFICATION, TOOL_SUBAGENT, TOOL_WEB_SEARCH,
+        TOOL_ARTIFACT, TOOL_AUDIO_GENERATE, TOOL_CANVAS, TOOL_DESIGN, TOOL_IMAGE_GENERATE,
+        TOOL_SEND_NOTIFICATION, TOOL_SUBAGENT, TOOL_WEB_SEARCH,
     };
     match name {
         TOOL_WEB_SEARCH => crate::tools::web_search::has_enabled_provider(&app_config.web_search),
@@ -98,11 +98,7 @@ pub fn is_globally_configured(name: &str, app_config: &AppConfig) -> bool {
         TOOL_CANVAS | TOOL_ARTIFACT => app_config.canvas.enabled,
         TOOL_DESIGN => app_config.design.enabled,
         TOOL_SEND_NOTIFICATION => app_config.notification.enabled,
-        TOOL_SUBAGENT | TOOL_ACP_SPAWN => true,
-        // All `feishu_*` tools share the same provisioning gate — at least
-        // one Feishu channel account configured. Falls to HintOnly when the
-        // user enabled the agent capability but hasn't added an account.
-        n if n.starts_with("feishu_") => crate::tools::feishu::has_any_account_configured(),
+        TOOL_SUBAGENT => true,
         _ => true,
     }
 }
@@ -380,10 +376,10 @@ pub fn resolve_tool_fate(def: &ToolDefinition, ctx: &DispatchContext) -> ToolFat
 /// time. Every other consumer reads tier metadata only and doesn't care.
 static ALL_DISPATCHABLE_TOOLS: LazyLock<Vec<ToolDefinition>> = LazyLock::new(|| {
     use super::definitions::{
-        get_acp_spawn_tool, get_artifact_tool, get_audio_generate_tool_dynamic,
-        get_available_tools, get_canvas_tool, get_design_tool, get_enter_plan_mode_tool,
-        get_image_generate_tool_dynamic, get_notification_tool, get_subagent_tool,
-        get_submit_plan_tool, get_tool_search_tool, get_web_search_tool,
+        get_artifact_tool, get_audio_generate_tool_dynamic, get_available_tools, get_canvas_tool,
+        get_design_tool, get_enter_plan_mode_tool, get_image_generate_tool_dynamic,
+        get_notification_tool, get_subagent_tool, get_submit_plan_tool, get_tool_search_tool,
+        get_web_search_tool,
     };
     let mut tools = get_available_tools();
     tools.extend([
@@ -394,7 +390,6 @@ static ALL_DISPATCHABLE_TOOLS: LazyLock<Vec<ToolDefinition>> = LazyLock::new(|| 
         get_canvas_tool(),
         get_design_tool(),
         get_artifact_tool(),
-        get_acp_spawn_tool(),
         get_tool_search_tool(),
         get_web_search_tool(),
         get_enter_plan_mode_tool(),
@@ -402,7 +397,6 @@ static ALL_DISPATCHABLE_TOOLS: LazyLock<Vec<ToolDefinition>> = LazyLock::new(|| 
         super::job_status::get_job_status_tool(),
         super::schedule_wakeup::get_schedule_wakeup_tool(),
     ]);
-    tools.extend(super::feishu::get_feishu_tools());
     tools
 });
 

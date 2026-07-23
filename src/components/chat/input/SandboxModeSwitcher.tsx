@@ -1,13 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { FloatingMenu } from "@/components/ui/floating-menu"
 import { IconTip } from "@/components/ui/tooltip"
 import { useClickOutside } from "@/hooks/useClickOutside"
 import { cn } from "@/lib/utils"
-import { getTransport } from "@/lib/transport-provider"
-import { logger } from "@/lib/logger"
-import { DockerSetupHint } from "@/components/settings/DockerSetupHint"
-import type { DockerStatus } from "@/components/settings/dockerSetup"
 import { Box, Copy, Folder, Shield, ShieldCheck } from "lucide-react"
 import type { SandboxMode } from "@/types/chat"
 
@@ -70,31 +66,9 @@ export interface SandboxModeOptionsProps {
 export function SandboxModeOptions({
   sandboxMode,
   onSandboxModeChange,
-  active = true,
   onSelectionComplete,
 }: SandboxModeOptionsProps) {
   const { t } = useTranslation()
-  const [status, setStatus] = useState<DockerStatus | null>(null)
-  const [checking, setChecking] = useState(false)
-
-  const refreshStatus = useCallback(async () => {
-    setChecking(true)
-    try {
-      const s = await getTransport().call<DockerStatus>("check_sandbox_available")
-      setStatus(s)
-    } catch (e) {
-      logger.error("chat", "SandboxModeSwitcher", "Failed to check Docker status", e)
-    } finally {
-      setChecking(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!active || sandboxMode === "off") return
-    void refreshStatus()
-  }, [active, refreshStatus, sandboxMode])
-
-  const dockerReady = status?.installed && status?.running
 
   return (
     <div className="flex flex-col gap-0.5">
@@ -112,11 +86,7 @@ export function SandboxModeOptions({
             )}
             onClick={() => {
               onSandboxModeChange(mode)
-              if (mode === "off" || dockerReady) {
-                onSelectionComplete?.()
-              } else {
-                void refreshStatus()
-              }
+              onSelectionComplete?.()
             }}
           >
             <Icon className={cn("h-4 w-4 mt-0.5 shrink-0", theme.iconTone)} />
@@ -133,17 +103,6 @@ export function SandboxModeOptions({
           </button>
         )
       })}
-      {sandboxMode !== "off" && (!status || !dockerReady) && (
-        <DockerSetupHint
-          status={status}
-          checking={checking}
-          onRefresh={refreshStatus}
-          title={t("chat.sandboxMode.setupTitle", {
-            defaultValue: "配置 Docker 后启用沙箱",
-          })}
-          className="mt-1"
-        />
-      )}
     </div>
   )
 }

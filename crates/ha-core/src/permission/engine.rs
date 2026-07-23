@@ -93,12 +93,7 @@ impl<'a> ResolveContext<'a> {
 /// otherwise the protected-paths gate is the only line of defense and a
 /// model could quietly overwrite ordinary workspace / home files in Default
 /// mode without prompting.
-const EDIT_TOOLS: &[&str] = &[
-    "write",
-    "edit",
-    "apply_patch",
-    crate::tools::feishu::TOOL_DRIVE_DOWNLOAD_MEDIA,
-];
+const EDIT_TOOLS: &[&str] = &["write", "edit", "apply_patch"];
 
 fn is_edit_tool(name: &str) -> bool {
     EDIT_TOOLS.contains(&name)
@@ -107,42 +102,11 @@ fn is_edit_tool(name: &str) -> bool {
 /// Classify connector tools that mutate another system of record.
 ///
 /// This is deliberately conservative for MCP/plugin tools: it requires both a
-/// known connector-ish name and a mutating verb. Built-in Feishu tools are
-/// exact-match because their names and effects are stable in this crate.
+/// known connector-ish name and a mutating verb.
 pub fn classify_external_connector_action(
     tool_name: &str,
     args: &Value,
 ) -> Option<(String, String)> {
-    use crate::tools::feishu;
-
-    let exact = match tool_name {
-        feishu::TOOL_DOCX_CREATE => Some(("feishu_docx", "create document")),
-        feishu::TOOL_DOCX_APPEND_BLOCK => Some(("feishu_docx", "append document block")),
-        feishu::TOOL_DOCX_UPDATE_BLOCK_TEXT => Some(("feishu_docx", "update document block")),
-        feishu::TOOL_BITABLE_CREATE_RECORD => Some(("feishu_bitable", "create record")),
-        feishu::TOOL_BITABLE_BATCH_UPDATE_RECORDS => {
-            Some(("feishu_bitable", "batch update records"))
-        }
-        feishu::TOOL_DRIVE_UPLOAD_MEDIA => Some(("feishu_drive", "upload media")),
-        feishu::TOOL_APPROVAL_CREATE_INSTANCE => {
-            Some(("feishu_approval", "create approval instance"))
-        }
-        feishu::TOOL_APPROVAL_CANCEL_INSTANCE => {
-            Some(("feishu_approval", "cancel approval instance"))
-        }
-        feishu::TOOL_APPROVAL_SUBSCRIBE => Some(("feishu_approval", "subscribe approval events")),
-        feishu::TOOL_CALENDAR_CREATE_EVENT => Some(("feishu_calendar", "create calendar event")),
-        feishu::TOOL_CALENDAR_UPDATE_EVENT => Some(("feishu_calendar", "update calendar event")),
-        feishu::TOOL_CALENDAR_DELETE_EVENT => Some(("feishu_calendar", "delete calendar event")),
-        feishu::TOOL_CALENDAR_ATTENDEES_CREATE => {
-            Some(("feishu_calendar", "add calendar attendees"))
-        }
-        _ => None,
-    };
-    if let Some((connector, action)) = exact {
-        return Some((connector.to_string(), action.to_string()));
-    }
-
     classify_mcp_external_connector_action(tool_name, args)
 }
 

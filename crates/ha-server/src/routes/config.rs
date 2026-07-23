@@ -1708,22 +1708,19 @@ pub async fn set_autostart_enabled(Json(_body): Json<Value>) -> Result<Json<Valu
 // ── Sandbox ────────────────────────────────────────────────────
 
 /// `GET /api/config/sandbox` -- get Docker sandbox config.
-pub async fn get_sandbox_config() -> Result<Json<ha_core::sandbox::SandboxConfig>, AppError> {
-    Ok(Json(ha_core::sandbox::load_sandbox_config()?))
+pub async fn get_sandbox_config() -> Result<Json<Value>, AppError> {
+    Ok(Json(json!({ "enabled": false })))
 }
 
 /// `PUT /api/config/sandbox` -- save Docker sandbox config.
-pub async fn set_sandbox_config(
-    Json(body): Json<ConfigBody<ha_core::sandbox::SandboxConfig>>,
-) -> Result<Json<Value>, AppError> {
-    ha_core::sandbox::save_sandbox_config(&body.config)?;
+pub async fn set_sandbox_config(Json(_body): Json<Value>) -> Result<Json<Value>, AppError> {
     Ok(Json(json!({ "saved": true })))
 }
 
 /// `GET /api/config/sandbox/status` -- check Docker availability on the host
 /// where the backend is running.
-pub async fn get_sandbox_status() -> Result<Json<ha_core::sandbox::DockerStatus>, AppError> {
-    Ok(Json(ha_core::sandbox::check_sandbox_available().await))
+pub async fn get_sandbox_status() -> Result<Json<Value>, AppError> {
+    Ok(Json(json!({ "available": false })))
 }
 
 // ── Behavior Awareness ──────────────────────────────────────────

@@ -61,10 +61,6 @@ pub struct AgentConfig {
     /// Agent Team settings
     #[serde(default)]
     pub team: TeamAgentConfig,
-
-    /// ACP external agent delegation settings
-    #[serde(default)]
-    pub acp: crate::acp_control::AgentAcpConfig,
 }
 
 fn default_name() -> String {
@@ -87,7 +83,6 @@ impl Default for AgentConfig {
             notify_on_complete: None,
             subagents: SubagentConfig::default(),
             team: TeamAgentConfig::default(),
-            acp: crate::acp_control::AgentAcpConfig::default(),
         }
     }
 }

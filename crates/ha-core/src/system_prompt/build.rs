@@ -456,26 +456,7 @@ pub(crate) fn build_with_resolved_session(
             .capabilities
             .effective_default_sandbox_mode()
     });
-    if sandbox_mode.enabled() {
-        let sandbox_config = crate::sandbox::load_sandbox_config().unwrap_or_default();
-        sections.push(build_sandbox_mode_section(sandbox_mode, &sandbox_config));
-    }
-
-    // ⑬ ACP external agent delegation (conditionally injected)
-    if definition.config.acp.enabled
-        && tool_is_eager(
-            &definition.id,
-            &definition.config,
-            incognito,
-            crate::tools::TOOL_ACP_SPAWN,
-        )
-    {
-        let acp_section = build_acp_section();
-        if !acp_section.is_empty() {
-            sections.push(acp_section);
-        }
-    }
-
+    sections.push(build_sandbox_mode_section(sandbox_mode));
     // ⑭ Weather context (from cached weather data)
     if let Some(weather_text) = crate::weather::get_weather_for_prompt() {
         sections.push(weather_text);

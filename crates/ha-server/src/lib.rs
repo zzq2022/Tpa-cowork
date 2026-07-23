@@ -2650,57 +2650,6 @@ fn build_router_with_cors(
             "/skillhub/download",
             post(routes::skillhub::skillhub_download_skill),
         )
-        // Channel
-        .route("/channel/plugins", get(routes::channel::list_plugins))
-        .route("/channel/accounts", get(routes::channel::list_accounts))
-        .route("/channel/accounts", post(routes::channel::add_account))
-        .route(
-            "/channel/accounts/{id}",
-            put(routes::channel::update_account),
-        )
-        .route(
-            "/channel/accounts/{id}",
-            delete(routes::channel::remove_account),
-        )
-        .route(
-            "/channel/accounts/{id}/start",
-            post(routes::channel::start_account),
-        )
-        .route(
-            "/channel/accounts/{id}/stop",
-            post(routes::channel::stop_account),
-        )
-        .route(
-            "/channel/accounts/{id}/health",
-            get(routes::channel::health),
-        )
-        .route(
-            "/channel/accounts/{id}/test-message",
-            post(routes::channel::send_test_message),
-        )
-        .route(
-            "/channel/accounts/{id}/auto-transcribe",
-            put(routes::channel::set_auto_transcribe_voice),
-        )
-        .route("/channel/health", get(routes::channel::health_all))
-        .route(
-            "/channel/sync-commands",
-            post(routes::channel::sync_commands),
-        )
-        .route(
-            "/channel/validate",
-            post(routes::channel::validate_credentials),
-        )
-        .route("/channel/sessions", get(routes::channel::list_sessions))
-        .route(
-            "/channel/wechat/login/start",
-            post(routes::channel::wechat_start_login),
-        )
-        .route(
-            "/channel/wechat/login/wait",
-            post(routes::channel::wechat_wait_login),
-        )
-        .route("/channel/handover", post(routes::channel::handover))
         // Crash / Backup
         .route(
             "/crash/recovery-info",
@@ -2827,18 +2776,6 @@ fn build_router_with_cors(
             "/team-templates/{id}",
             axum::routing::delete(routes::team::delete_team_template),
         )
-        // ACP Control
-        .route("/acp/backends", get(routes::acp::list_backends))
-        .route("/acp/health-check", get(routes::acp::health_check))
-        .route("/acp/refresh", post(routes::acp::refresh_backends))
-        .route("/acp/runs", get(routes::acp::list_runs))
-        .route("/acp/runs/{run_id}/kill", post(routes::acp::kill_run))
-        .route(
-            "/acp/runs/{run_id}/result",
-            get(routes::acp::get_run_result),
-        )
-        .route("/acp/config", get(routes::acp::get_config))
-        .route("/acp/config", put(routes::acp::set_config))
         // Weather
         .route("/weather/geocode", get(routes::weather::geocode_search))
         .route("/weather/preview", post(routes::weather::preview_weather))

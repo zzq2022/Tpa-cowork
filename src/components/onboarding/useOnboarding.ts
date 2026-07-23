@@ -35,7 +35,6 @@ const ONBOARDING_V2_STEPS: OnboardingStepKey[] = [
   "safety",
   "skills",
   "server",
-  "channels",
   "summary",
 ]
 
@@ -46,7 +45,6 @@ const ONBOARDING_V3_STEPS: OnboardingStepKey[] = [
   "search-provider",
   "profile",
   "safety",
-  "channels",
 ]
 
 export function restoreOnboardingStep(

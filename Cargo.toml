@@ -5,6 +5,7 @@ members = [
     "crates/ha-server",
     "crates/ha-browser-host",
     "crates/ha-eval-spec",
+    "crates/ha-eval",
 ]
 resolver = "2"
 

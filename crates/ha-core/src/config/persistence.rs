@@ -696,20 +696,6 @@ fn save_config_with_change(
     if let Some(parent) = path.parent() {
         std::fs::create_dir_all(parent)?;
     }
-    // Debug: log channel account IDs on every save to detect accidental overwrite
-    let account_ids: Vec<&str> = config
-        .channels
-        .accounts
-        .iter()
-        .map(|a| a.id.as_str())
-        .collect();
-    app_debug!(
-        "config",
-        "save_config",
-        "Saving config with {} channel account(s): {:?}",
-        account_ids.len(),
-        account_ids
-    );
     // Autosave the pre-change file so every settings edit is rollback-able.
     // Failures are logged inside the helper and never block the write.
     crate::backup::snapshot_before_write(&path, "config");

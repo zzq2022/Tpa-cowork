@@ -21,7 +21,6 @@ import { NavigationFooter } from "./NavigationFooter"
 import { StepIndicator } from "./StepIndicator"
 import { type OnboardingDraft, type OnboardingStepKey } from "./types"
 import { useOnboarding } from "./useOnboarding"
-import { ChannelsStep } from "./steps/ChannelsStep"
 import { PersonalityStep } from "./steps/PersonalityStep"
 import { ProfileStep } from "./steps/ProfileStep"
 import { ProviderStep } from "./steps/ProviderStep"
@@ -35,31 +34,14 @@ import { WelcomeStep } from "./steps/WelcomeStep"
 interface OnboardingWizardProps {
   /** Called when the user finishes (or exits mid-flow saving draft). */
   onComplete: () => void
-  /**
-   * Footer "Configure in Settings" shortcut on the channels step. The
-   * wizard marks onboarding complete first (so the user doesn't bounce
-   * back on next launch), then routes into the full Channels panel.
-   * Channel cards themselves open the Add dialog inline and don't use
-   * this callback.
-   */
-  onJumpToChannelsSettings: () => void
   /** Shared Codex OAuth flow (same handler App.tsx passes to ProviderSetup). */
   onCodexAuth: () => Promise<void>
   /** Initial language so Step 1 shows the current selection. */
   initialLanguage: string
 }
 
-/**
- * Top-level wizard orchestrator.
- *
- * Wraps each step in a shared Card + StepIndicator + NavigationFooter.
- * Each step's "Next" dispatches a per-step apply command into ha-core —
- * kept here (not inside the step components) so skip-vs-next logic for
- * persistence is in one place and steps stay declarative.
- */
 export function OnboardingWizard({
   onComplete,
-  onJumpToChannelsSettings,
   onCodexAuth,
   initialLanguage,
 }: OnboardingWizardProps) {
@@ -174,10 +156,6 @@ export function OnboardingWizard({
           })
           return true
         }
-        case "channels":
-          // No-op: channels persist through the Settings UI when the user
-          // clicks a chip. The wizard just "passes through" this step.
-          return true
         case "summary":
           return true
       }
@@ -272,19 +250,6 @@ export function OnboardingWizard({
             apiKey={draft.server?.apiKey ?? ""}
             apiKeyEnabled={draft.server?.apiKeyEnabled ?? false}
             onChange={(next) => patchDraft({ server: next })}
-          />
-        )
-      case "channels":
-        return (
-          <ChannelsStep
-            onJumpToSettings={async () => {
-              try {
-                await getTransport().call("mark_onboarding_completed")
-              } catch (e) {
-                logger.warn("onboarding", "jumpToChannels", "mark_onboarding_completed failed", e)
-              }
-              onJumpToChannelsSettings()
-            }}
           />
         )
       case "summary":

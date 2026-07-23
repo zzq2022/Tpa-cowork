@@ -4497,12 +4497,9 @@ impl SessionDB {
         session_id: &str,
     ) -> crate::session::events::SessionCleanupContext {
         let descendant_session_ids = self.collect_descendant_session_ids(session_id);
-        let im_chat = crate::globals::get_channel_db()
-            .and_then(|cdb| cdb.get_conversation_by_session(session_id).ok().flatten())
-            .map(|c| (c.account_id, c.chat_id));
         crate::session::events::SessionCleanupContext {
             descendant_session_ids,
-            im_chat,
+            im_chat: None,
         }
     }
 

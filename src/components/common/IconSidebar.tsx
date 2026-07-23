@@ -27,6 +27,7 @@ import {
   Settings,
   Languages,
   Puzzle,
+  MessageCircle,
   CalendarDays,
   BarChart3,
   ClipboardList,
@@ -55,27 +56,27 @@ import {
 
 interface IconSidebarProps {
   view:
-    | "chat"
-    | "settings"
-    | "skills"
-    | "profile"
-    | "agents"
-    | "modelConfig"
-    | "memory"
-    | "channels"
-    | "calendar"
-    | "dashboard"
-    | "plans"
-    | "knowledge"
-    | "design"
-    | "artifacts"
-    | "skillhub"
-    | "mySkills"
+  | "chat"
+  | "settings"
+  | "skills"
+  | "profile"
+  | "agents"
+  | "modelConfig"
+  | "memory"
+  | "channels"
+  | "calendar"
+  | "dashboard"
+  | "plans"
+  | "knowledge"
+  | "design"
+  | "artifacts"
+  | "skillhub"
+  | "mySkills"
   onOpenSettings: (section?: SettingsSection) => void
   onOpenChat: () => void
   onOpenAgents: () => void
   onOpenModelConfig: () => void
-  onOpenChannels?: () => void
+  onOpenChannels: () => void
   onOpenSkills: () => void
   onOpenMemory: () => void
   onOpenProfile: () => void
@@ -98,6 +99,7 @@ export default function IconSidebar({
   onOpenChat,
   onOpenAgents,
   onOpenModelConfig,
+  onOpenChannels,
   onOpenSkills,
   onOpenMemory,
   onOpenProfile,
@@ -126,521 +128,538 @@ export default function IconSidebar({
   const conversationsAriaLabel =
     (totalUnreadCount ?? 0) > 0
       ? `${t("chat.conversations")}: ${t("chat.unreadConversationCount", {
-          count: totalUnreadCount,
-        })}`
+        count: totalUnreadCount,
+      })}`
       : t("chat.conversations")
 
   return (
     <div className="w-[76px] shrink-0 border-r border-border-soft bg-surface-sidebar flex flex-col items-center">
-        {/* Drag region for window movement — covers traffic light area */}
-        <div className="w-full pt-10 flex flex-col items-center gap-1.5" data-tauri-drag-region>
-          {/* User avatar (if set) */}
-          {userAvatar && (
-            <IconTip label={t("settings.profileSettings")} side="right">
-              <button
-                className="h-9 w-9 shrink-0 cursor-pointer overflow-hidden rounded-full bg-secondary/40 ring-1 ring-primary/20 transition-colors hover:bg-secondary/70"
-                onClick={onOpenProfile}
-              >
-                <img
-                  src={getTransport().resolveAssetUrl(userAvatar) ?? userAvatar}
-                  className="w-full h-full object-cover"
-                  alt={t("settings.profileAvatar")}
-                />
-              </button>
-            </IconTip>
-          )}
-          <ContextMenu>
-            <ContextMenuTrigger asChild>
-          <div className="relative">
-            <IconTip label={t("chat.conversations")} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(
-                  "rounded-xl h-8 w-8 transition-all duration-200",
-                  view === "chat"
-                    ? "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400"
-                    : "text-muted-foreground hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-500/10",
-                )}
-                onClick={onOpenChat}
-                aria-label={conversationsAriaLabel}
-              >
-                <MessageSquare className="h-4 w-4" />
-              </Button>
-            </IconTip>
-            {!!totalUnreadCount && totalUnreadCount > 0 && (
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-1.5 -top-1 z-10 inline-flex h-[15px] min-w-[15px] items-center justify-center rounded-full border border-background bg-destructive px-1 text-[9px] font-bold leading-none text-white tabular-nums animate-in zoom-in-0 duration-200"
-              >
-                {regularUnreadBadgeLabel}
-              </span>
-            )}
-          </div>
-            </ContextMenuTrigger>
-            <ContextMenuContent variant="floating">
-              <ContextMenuItem
-                onClick={async () => {
-                  try {
-                    await getTransport().call("mark_all_sessions_read_cmd")
-                    onMarkAllRead?.()
-                  } catch (err) {
-                    logger.error("ui", "IconSidebar::markAllRead", "Failed to mark all as read", err)
-                  }
-                }}
-                disabled={!totalUnreadCount || totalUnreadCount === 0}
-              >
-                <CheckCheck className="h-4 w-4 mr-2" />
-                {t("chat.markAllRead")}
-              </ContextMenuItem>
-            </ContextMenuContent>
-          </ContextMenu>
-          {/* Knowledge Space entry — grouped directly under Conversations */}
-          <div className="w-full flex justify-center">
-            <IconTip label={t("knowledge.title", "Knowledge Space")} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(
-                  "rounded-xl h-8 w-8 transition-all duration-200",
-                  view === "knowledge"
-                    ? "bg-blue-500/15 text-blue-600 dark:text-blue-400"
-                    : "text-muted-foreground hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-500/10",
-                )}
-                onClick={onOpenKnowledge}
-              >
-                <Library className="h-4 w-4" />
-              </Button>
-            </IconTip>
-          </div>
-          {/* Design Space entry — grouped directly under Knowledge Space */}
-          <div className="w-full flex justify-center">
-            <IconTip label={t("design.title", "Design Space")} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(
-                  "rounded-xl h-8 w-8 transition-all duration-200",
-                  view === "design"
-                    ? "bg-purple-500/15 text-purple-600 dark:text-purple-400"
-                    : "text-muted-foreground hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-500/10",
-                )}
-                onClick={onOpenDesign}
-              >
-                <Palette className="h-4 w-4" />
-              </Button>
-            </IconTip>
-          </div>
-          {/* Artifacts entry — grouped directly under Knowledge Space */}
-          <div className="w-full flex justify-center">
-            <IconTip label={t("artifacts.title", "Artifacts")} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(
-                  "rounded-xl h-8 w-8 transition-all duration-200",
-                  view === "artifacts"
-                    ? "bg-yellow-500/15 text-yellow-600 dark:text-yellow-400"
-                    : "text-muted-foreground hover:text-yellow-600 dark:hover:text-yellow-400 hover:bg-yellow-500/10",
-                )}
-                onClick={onOpenArtifacts}
-              >
-                <PackageOpen className="h-4 w-4" />
-              </Button>
-            </IconTip>
-          </div>
-          {/* Scheduled Tasks entry — grouped directly under Knowledge Space */}
-          <div className="w-full flex justify-center">
-            <ContextMenu>
-              <ContextMenuTrigger asChild>
-                <div className="relative">
-                  <IconTip label={t("cron.title")} side="right">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className={cn(
-                        "rounded-xl h-8 w-8 transition-all duration-200",
-                        view === "calendar"
-                          ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
-                          : "text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/10",
-                      )}
-                      onClick={onOpenCalendar}
-                    >
-                      <CalendarDays className="h-4 w-4" />
-                    </Button>
-                  </IconTip>
-                  {cronUnreadCount > 0 && (
-                    <span className="pointer-events-none absolute -right-1.5 -top-1 z-10 inline-flex h-[15px] min-w-[15px] items-center justify-center rounded-full border border-background bg-destructive px-1 text-[9px] font-bold leading-none text-white tabular-nums animate-in zoom-in-0 duration-200">
-                      {cronUnreadBadgeLabel}
-                    </span>
-                  )}
-                </div>
-              </ContextMenuTrigger>
-              <ContextMenuContent variant="floating">
-                <ContextMenuItem
-                  disabled={cronUnreadCount === 0}
-                  onSelect={() => void markAllCronRead()}
-                >
-                  <CheckCheck className="mr-2 h-4 w-4" />
-                  {t("cron.markAllRead")}
-                </ContextMenuItem>
-              </ContextMenuContent>
-            </ContextMenu>
-          </div>
-          {/* Dashboard / Analytics entry, grouped under Scheduled Tasks. */}
-          <div className="w-full flex justify-center">
-            <IconTip label={t("dashboard.title")} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(
-                  "rounded-xl h-8 w-8 transition-all duration-200",
-                  view === "dashboard"
-                    ? "bg-amber-500/15 text-amber-600 dark:text-amber-400"
-                    : "text-muted-foreground hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-500/10",
-                )}
-                onClick={onOpenDashboard}
-              >
-                <BarChart3 className="h-4 w-4" />
-              </Button>
-            </IconTip>
-          </div>
-        </div>
-
-        <div className="my-1 h-px w-6 bg-border-soft/80" />
-
-        <div className="icon-sidebar-settings-shortcuts flex w-full flex-col items-center">
-          {/* Agents entry */}
-          <div className="w-full flex justify-center mt-1">
-            <IconTip label={t("settings.agents")} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(
-                  "rounded-xl h-8 w-8 transition-all duration-200",
-                  view === "agents"
-                    ? "bg-violet-500/15 text-violet-600 dark:text-violet-400"
-                    : "text-muted-foreground hover:text-violet-600 dark:hover:text-violet-400 hover:bg-violet-500/10",
-                )}
-                onClick={onOpenAgents}
-              >
-                <Bot className="h-4 w-4" />
-              </Button>
-            </IconTip>
-          </div>
-
-          {/* Model configuration entry */}
-          <div className="w-full flex justify-center mt-1">
-            <IconTip label={t("settings.modelConfig")} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(
-                  "rounded-xl h-8 w-8 transition-all duration-200",
-                  view === "modelConfig"
-                    ? "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400"
-                    : "text-muted-foreground hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-500/10",
-                )}
-                onClick={onOpenModelConfig}
-              >
-                <Server className="h-4 w-4" />
-              </Button>
-            </IconTip>
-          </div>
-
-          {/* Skills entry */}
-          <div className="w-full flex justify-center mt-1">
+      {/* Drag region for window movement — covers traffic light area */}
+      <div className="w-full pt-10 flex flex-col items-center gap-1.5" data-tauri-drag-region>
+        {/* User avatar (if set) */}
+        {userAvatar && (
+          <IconTip label={t("settings.profileSettings")} side="right">
+            <button
+              className="h-9 w-9 shrink-0 cursor-pointer overflow-hidden rounded-full bg-secondary/40 ring-1 ring-primary/20 transition-colors hover:bg-secondary/70"
+              onClick={onOpenProfile}
+            >
+              <img
+                src={getTransport().resolveAssetUrl(userAvatar) ?? userAvatar}
+                className="w-full h-full object-cover"
+                alt={t("settings.profileAvatar")}
+              />
+            </button>
+          </IconTip>
+        )}
+        <ContextMenu>
+          <ContextMenuTrigger asChild>
             <div className="relative">
-              <IconTip label={t("settings.skills")} side="right">
+              <IconTip label={t("chat.conversations")} side="right">
                 <Button
                   variant="ghost"
                   size="icon"
                   className={cn(
                     "rounded-xl h-8 w-8 transition-all duration-200",
-                    view === "skills"
-                      ? "bg-amber-500/15 text-amber-600 dark:text-amber-400"
-                      : "text-muted-foreground hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-500/10",
+                    view === "chat"
+                      ? "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400"
+                      : "text-muted-foreground hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-500/10",
                   )}
-                  onClick={onOpenSkills}
+                  onClick={onOpenChat}
+                  aria-label={conversationsAriaLabel}
                 >
-                  <Puzzle className="h-4 w-4" />
+                  <MessageSquare className="h-4 w-4" />
                 </Button>
               </IconTip>
-              {skillDraftCount > 0 && (
-                <span className="pointer-events-none absolute -right-1.5 -top-1 z-10 inline-flex h-[15px] min-w-[15px] items-center justify-center rounded-full border border-background bg-amber-500 px-1 text-[9px] font-bold leading-none text-white tabular-nums animate-in zoom-in-0 duration-200">
-                  {skillDraftBadgeLabel}
+              {!!totalUnreadCount && totalUnreadCount > 0 && (
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-1.5 -top-1 z-10 inline-flex h-[15px] min-w-[15px] items-center justify-center rounded-full border border-background bg-destructive px-1 text-[9px] font-bold leading-none text-white tabular-nums animate-in zoom-in-0 duration-200"
+                >
+                  {regularUnreadBadgeLabel}
                 </span>
               )}
             </div>
-          </div>
-
-          {/* SkillHub entry */}
-          {onOpenSkillHub && (
-            <div className="w-full flex justify-center mt-1">
-              <IconTip label={t("skillhub.title", "SkillHub")} side="right">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className={cn(
-                    "rounded-xl h-8 w-8 transition-all duration-200",
-                    view === "skillhub"
-                      ? "bg-orange-500/15 text-orange-600 dark:text-orange-400"
-                      : "text-muted-foreground hover:text-orange-600 dark:hover:text-orange-400 hover:bg-orange-500/10",
-                  )}
-                  onClick={onOpenSkillHub}
-                >
-                  <Globe className="h-4 w-4" />
-                </Button>
-              </IconTip>
-            </div>
-          )}
-
-          {/* My Skills entry */}
-          {onOpenMySkills && (
-            <div className="w-full flex justify-center mt-1">
-              <IconTip label={t("mySkills.title", "My Skills")} side="right">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className={cn(
-                    "rounded-xl h-8 w-8 transition-all duration-200",
-                    view === "mySkills"
-                      ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
-                      : "text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/10",
-                  )}
-                  onClick={onOpenMySkills}
-                >
-                  <FolderDown className="h-4 w-4" />
-                </Button>
-              </IconTip>
-            </div>
-          )}
-
-          {/* Memory entry */}
-          <div className="w-full flex justify-center mt-1">
-            <IconTip label={t("settings.memory")} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(
-                  "rounded-xl h-8 w-8 transition-all duration-200",
-                  view === "memory"
-                    ? "bg-pink-500/15 text-pink-600 dark:text-pink-400"
-                    : "text-muted-foreground hover:text-pink-600 dark:hover:text-pink-400 hover:bg-pink-500/10",
-                )}
-                onClick={onOpenMemory}
-              >
-                <Brain className="h-4 w-4" />
-              </Button>
-            </IconTip>
-          </div>
-        </div>
-
-        <div className="icon-sidebar-settings-shortcuts-trailing-divider my-1 h-px w-6 bg-border-soft/60" />
-
-        {/* Browser backend — status indicator + entry to Settings → Browser.
-            Green dot when a backend is live; hover shows details. */}
-        <div className="w-full flex justify-center mt-1">
-          <BrowserStatusIndicator onOpen={() => onOpenSettings("browser")} />
-        </div>
-
-        {/* Plans (read-only history viewer) entry */}
-        <div className="w-full flex justify-center mt-1">
-          <IconTip label={t("plans.title")} side="right">
+          </ContextMenuTrigger>
+          <ContextMenuContent variant="floating">
+            <ContextMenuItem
+              onClick={async () => {
+                try {
+                  await getTransport().call("mark_all_sessions_read_cmd")
+                  onMarkAllRead?.()
+                } catch (err) {
+                  logger.error("ui", "IconSidebar::markAllRead", "Failed to mark all as read", err)
+                }
+              }}
+              disabled={!totalUnreadCount || totalUnreadCount === 0}
+            >
+              <CheckCheck className="h-4 w-4 mr-2" />
+              {t("chat.markAllRead")}
+            </ContextMenuItem>
+          </ContextMenuContent>
+        </ContextMenu>
+        {/* Knowledge Space entry — grouped directly under Conversations */}
+        <div className="w-full flex justify-center">
+          <IconTip label={t("knowledge.title", "Knowledge Space")} side="right">
             <Button
               variant="ghost"
               size="icon"
               className={cn(
                 "rounded-xl h-8 w-8 transition-all duration-200",
-                view === "plans"
-                  ? "bg-rose-500/15 text-rose-600 dark:text-rose-400"
-                  : "text-muted-foreground hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-500/10",
+                view === "knowledge"
+                  ? "bg-blue-500/15 text-blue-600 dark:text-blue-400"
+                  : "text-muted-foreground hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-500/10",
               )}
-              onClick={onOpenPlans}
+              onClick={onOpenKnowledge}
             >
-              <ClipboardList className="h-4 w-4" />
+              <Library className="h-4 w-4" />
             </Button>
           </IconTip>
         </div>
-
-        {/* Logs entry, quick jump to Settings -> Logs near runtime status. */}
-        <div className="w-full flex justify-center mt-1">
-          <IconTip label={t("settings.logs")} side="right">
+        {/* Design Space entry — grouped directly under Knowledge Space */}
+        <div className="w-full flex justify-center">
+          <IconTip label={t("design.title", "Design Space")} side="right">
             <Button
               variant="ghost"
               size="icon"
-              className="rounded-xl h-8 w-8 text-muted-foreground hover:text-slate-600 dark:hover:text-slate-400 hover:bg-slate-500/10 transition-all duration-200"
-              onClick={() => onOpenSettings("logs")}
+              className={cn(
+                "rounded-xl h-8 w-8 transition-all duration-200",
+                view === "design"
+                  ? "bg-purple-500/15 text-purple-600 dark:text-purple-400"
+                  : "text-muted-foreground hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-500/10",
+              )}
+              onClick={onOpenDesign}
             >
-              <ScrollText className="h-4 w-4" />
+              <Palette className="h-4 w-4" />
+            </Button>
+          </IconTip>
+        </div>
+        {/* Artifacts entry — grouped directly under Knowledge Space */}
+        <div className="w-full flex justify-center">
+          <IconTip label={t("artifacts.title", "Artifacts")} side="right">
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn(
+                "rounded-xl h-8 w-8 transition-all duration-200",
+                view === "artifacts"
+                  ? "bg-yellow-500/15 text-yellow-600 dark:text-yellow-400"
+                  : "text-muted-foreground hover:text-yellow-600 dark:hover:text-yellow-400 hover:bg-yellow-500/10",
+              )}
+              onClick={onOpenArtifacts}
+            >
+              <PackageOpen className="h-4 w-4" />
+            </Button>
+          </IconTip>
+        </div>
+        {/* Scheduled Tasks entry — grouped directly under Knowledge Space */}
+        <div className="w-full flex justify-center">
+          <ContextMenu>
+            <ContextMenuTrigger asChild>
+              <div className="relative">
+                <IconTip label={t("cron.title")} side="right">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className={cn(
+                      "rounded-xl h-8 w-8 transition-all duration-200",
+                      view === "calendar"
+                        ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
+                        : "text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/10",
+                    )}
+                    onClick={onOpenCalendar}
+                  >
+                    <CalendarDays className="h-4 w-4" />
+                  </Button>
+                </IconTip>
+                {cronUnreadCount > 0 && (
+                  <span className="pointer-events-none absolute -right-1.5 -top-1 z-10 inline-flex h-[15px] min-w-[15px] items-center justify-center rounded-full border border-background bg-destructive px-1 text-[9px] font-bold leading-none text-white tabular-nums animate-in zoom-in-0 duration-200">
+                    {cronUnreadBadgeLabel}
+                  </span>
+                )}
+              </div>
+            </ContextMenuTrigger>
+            <ContextMenuContent variant="floating">
+              <ContextMenuItem
+                disabled={cronUnreadCount === 0}
+                onSelect={() => void markAllCronRead()}
+              >
+                <CheckCheck className="mr-2 h-4 w-4" />
+                {t("cron.markAllRead")}
+              </ContextMenuItem>
+            </ContextMenuContent>
+          </ContextMenu>
+        </div>
+        {/* Dashboard / Analytics entry, grouped under Scheduled Tasks. */}
+        <div className="w-full flex justify-center">
+          <IconTip label={t("dashboard.title")} side="right">
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn(
+                "rounded-xl h-8 w-8 transition-all duration-200",
+                view === "dashboard"
+                  ? "bg-amber-500/15 text-amber-600 dark:text-amber-400"
+                  : "text-muted-foreground hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-500/10",
+              )}
+              onClick={onOpenDashboard}
+            >
+              <BarChart3 className="h-4 w-4" />
+            </Button>
+          </IconTip>
+        </div>
+      </div>
+
+      <div className="my-1 h-px w-6 bg-border-soft/80" />
+
+      <div className="icon-sidebar-settings-shortcuts flex w-full flex-col items-center">
+        {/* Agents entry */}
+        <div className="w-full flex justify-center mt-1">
+          <IconTip label={t("settings.agents")} side="right">
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn(
+                "rounded-xl h-8 w-8 transition-all duration-200",
+                view === "agents"
+                  ? "bg-violet-500/15 text-violet-600 dark:text-violet-400"
+                  : "text-muted-foreground hover:text-violet-600 dark:hover:text-violet-400 hover:bg-violet-500/10",
+              )}
+              onClick={onOpenAgents}
+            >
+              <Bot className="h-4 w-4" />
             </Button>
           </IconTip>
         </div>
 
-        <div className="flex-1" />
-
-        <div className="py-3 flex flex-col items-center gap-2">
-          {/* Server runtime health — always visible so users can catch port
-              conflicts, high WS load, etc. without opening Settings. */}
-          <ServerStatusIndicator onOpen={() => onOpenSettings("server")} />
-          <div className="icon-sidebar-preference-shortcuts flex flex-col items-center gap-2">
-            {/* Profile */}
-            <IconTip label={t("settings.profileSettings")} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(
-                  "rounded-xl h-8 w-8 transition-all duration-200",
-                  view === "profile"
-                    ? "bg-sky-500/15 text-sky-600 dark:text-sky-400"
-                    : "text-muted-foreground hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-500/10",
-                )}
-                onClick={onOpenProfile}
-              >
-                <User className="h-4 w-4" />
-              </Button>
-            </IconTip>
-
-            {/* Theme Toggle */}
-            <IconTip label={`${t("theme.title")}: ${t(`theme.${theme}`)}`} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="rounded-xl h-8 w-8 text-muted-foreground hover:text-amber-600 hover:bg-amber-500/10 transition-all duration-200"
-                onClick={cycleTheme}
-              >
-                {theme === "auto" ? (
-                  <SunMoon className="h-4 w-4" />
-                ) : theme === "light" ? (
-                  <Sun className="h-4 w-4" />
-                ) : (
-                  <Moon className="h-4 w-4" />
-                )}
-              </Button>
-            </IconTip>
-
-            {/* Language Selector */}
-            <div className="relative">
-              <IconTip label={t("language.title")} side="right">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-xl h-8 w-8 text-muted-foreground hover:text-purple-600 hover:bg-purple-500/10 transition-all duration-200"
-                  onClick={() => setShowLangMenu(!showLangMenu)}
-                >
-                  <Languages className="h-4 w-4" />
-                </Button>
-              </IconTip>
-              {showLangMenu && (
-                <div className="fixed inset-0 z-40" onClick={() => setShowLangMenu(false)} />
+        {/* Model configuration entry */}
+        <div className="w-full flex justify-center mt-1">
+          <IconTip label={t("settings.modelConfig")} side="right">
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn(
+                "rounded-xl h-8 w-8 transition-all duration-200",
+                view === "modelConfig"
+                  ? "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400"
+                  : "text-muted-foreground hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-500/10",
               )}
-              <FloatingMenu
-                open={showLangMenu}
-                positionClassName="bottom-0 left-14"
-                originClassName="origin-left"
-                className="ha-menu-from-left min-w-[160px] max-h-[400px] overflow-y-auto p-1.5"
-                onEscapeKeyDown={() => setShowLangMenu(false)}
-              >
-                    {/* Follow System option */}
-                    <button
-                      className={`flex items-center gap-2.5 w-full px-3 py-1.5 text-xs transition-colors hover:bg-secondary ${
-                        isFollowingSystem() ? "text-primary font-medium" : "text-foreground"
-                      }`}
-                      onClick={() => {
-                        setFollowSystemLanguage()
-                        setShowLangMenu(false)
-                      }}
-                    >
-                      <Monitor className="h-3.5 w-3.5 text-primary/70" />
-                      <span>{t("language.system")}</span>
-                      {isFollowingSystem() && <span className="ml-auto text-primary">●</span>}
-                    </button>
-                    <div className="border-t border-border/50 my-0.5" />
-                    {SUPPORTED_LANGUAGES.map((lang) => (
-                      <button
-                        key={lang.code}
-                        className={`flex items-center gap-2.5 w-full px-3 py-1.5 text-xs transition-colors hover:bg-secondary ${
-                          !isFollowingSystem() &&
-                          (i18n.language === lang.code ||
-                            (i18n.language.startsWith(lang.code + "-") && lang.code !== "zh"))
-                            ? "text-primary font-medium"
-                            : "text-foreground"
-                        }`}
-                        onClick={() => {
-                          setLanguage(lang.code)
-                          setShowLangMenu(false)
-                        }}
-                      >
-                        <span className="text-[10px] font-bold w-5 text-primary/70">
-                          {lang.shortLabel}
-                        </span>
-                        <span>{lang.label}</span>
-                        {!isFollowingSystem() &&
-                          (i18n.language === lang.code ||
-                            (i18n.language.startsWith(lang.code + "-") && lang.code !== "zh")) && (
-                            <span className="ml-auto text-primary">●</span>
-                          )}
-                      </button>
-                    ))}
-              </FloatingMenu>
-            </div>
-          </div>
-          {/* Help (built-in user manual — opens its own window) */}
-          <div className="relative flex justify-center mt-1">
-            <IconTip label={t("help.title")} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label={t("help.title")}
-                className="rounded-xl h-8 w-8 text-muted-foreground hover:text-cyan-600 hover:bg-cyan-500/10 transition-all duration-200"
-                onClick={() => void openHelpWindow()}
-              >
-                <BookOpenText className="h-4 w-4" />
-              </Button>
-            </IconTip>
-          </div>
-          {/* Settings */}
-          <div className="relative flex justify-center mt-1">
-            <IconTip label={t("chat.settings")} side="right">
+              onClick={onOpenModelConfig}
+            >
+              <Server className="h-4 w-4" />
+            </Button>
+          </IconTip>
+        </div>
+
+        {/* Channels entry */}
+        <div className="w-full flex justify-center mt-1">
+          <IconTip label={t("settings.channels")} side="right">
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn(
+                "rounded-xl h-8 w-8 transition-all duration-200",
+                view === "channels"
+                  ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
+                  : "text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/10",
+              )}
+              onClick={onOpenChannels}
+            >
+              <MessageCircle className="h-4 w-4" />
+            </Button>
+          </IconTip>
+        </div>
+
+        {/* Skills entry */}
+        <div className="w-full flex justify-center mt-1">
+          <div className="relative">
+            <IconTip label={t("settings.skills")} side="right">
               <Button
                 variant="ghost"
                 size="icon"
                 className={cn(
                   "rounded-xl h-8 w-8 transition-all duration-200",
-                  view === "settings"
-                    ? "bg-slate-500/15 text-slate-700 dark:text-slate-300"
-                    : "text-muted-foreground hover:text-slate-600 hover:bg-slate-500/10",
+                  view === "skills"
+                    ? "bg-amber-500/15 text-amber-600 dark:text-amber-400"
+                    : "text-muted-foreground hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-500/10",
                 )}
-                onClick={() => onOpenSettings()}
+                onClick={onOpenSkills}
               >
-                <Settings className="h-4 w-4" />
+                <Puzzle className="h-4 w-4" />
               </Button>
             </IconTip>
-          </div>
-
-          {/* About */}
-          <div className="relative flex justify-center pt-1">
-            <IconTip label={t("about.title")} side="right">
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label={t("about.title")}
-                className="h-11 w-11 rounded-full border border-border-soft bg-surface-floating/80 p-0 shadow-panel hover:bg-secondary/70"
-                onClick={() => onOpenSettings("about")}
-              >
-                <span className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-secondary">
-                  <img src={appLogoUrl} alt="" className="h-full w-full object-cover" />
-                </span>
-              </Button>
-            </IconTip>
-            {pendingUpdate && (
-              <span className="absolute -right-0.5 top-0 z-10 flex h-3 w-3">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-3 w-3 rounded-full border-2 border-background bg-emerald-500" />
+            {skillDraftCount > 0 && (
+              <span className="pointer-events-none absolute -right-1.5 -top-1 z-10 inline-flex h-[15px] min-w-[15px] items-center justify-center rounded-full border border-background bg-amber-500 px-1 text-[9px] font-bold leading-none text-white tabular-nums animate-in zoom-in-0 duration-200">
+                {skillDraftBadgeLabel}
               </span>
             )}
           </div>
         </div>
+
+        {/* SkillHub entry */}
+        {onOpenSkillHub && (
+          <div className="w-full flex justify-center mt-1">
+            <IconTip label={t("skillhub.title", "SkillHub")} side="right">
+              <Button
+                variant="ghost"
+                size="icon"
+                className={cn(
+                  "rounded-xl h-8 w-8 transition-all duration-200",
+                  view === "skillhub"
+                    ? "bg-orange-500/15 text-orange-600 dark:text-orange-400"
+                    : "text-muted-foreground hover:text-orange-600 dark:hover:text-orange-400 hover:bg-orange-500/10",
+                )}
+                onClick={onOpenSkillHub}
+              >
+                <Globe className="h-4 w-4" />
+              </Button>
+            </IconTip>
+          </div>
+        )}
+
+        {/* My Skills entry */}
+        {onOpenMySkills && (
+          <div className="w-full flex justify-center mt-1">
+            <IconTip label={t("mySkills.title", "My Skills")} side="right">
+              <Button
+                variant="ghost"
+                size="icon"
+                className={cn(
+                  "rounded-xl h-8 w-8 transition-all duration-200",
+                  view === "mySkills"
+                    ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
+                    : "text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/10",
+                )}
+                onClick={onOpenMySkills}
+              >
+                <FolderDown className="h-4 w-4" />
+              </Button>
+            </IconTip>
+          </div>
+        )}
+
+        {/* Memory entry */}
+        <div className="w-full flex justify-center mt-1">
+          <IconTip label={t("settings.memory")} side="right">
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn(
+                "rounded-xl h-8 w-8 transition-all duration-200",
+                view === "memory"
+                  ? "bg-pink-500/15 text-pink-600 dark:text-pink-400"
+                  : "text-muted-foreground hover:text-pink-600 dark:hover:text-pink-400 hover:bg-pink-500/10",
+              )}
+              onClick={onOpenMemory}
+            >
+              <Brain className="h-4 w-4" />
+            </Button>
+          </IconTip>
+        </div>
       </div>
+
+      <div className="icon-sidebar-settings-shortcuts-trailing-divider my-1 h-px w-6 bg-border-soft/60" />
+
+      {/* Browser backend — status indicator + entry to Settings → Browser.
+            Green dot when a backend is live; hover shows details. */}
+      <div className="w-full flex justify-center mt-1">
+        <BrowserStatusIndicator onOpen={() => onOpenSettings("browser")} />
+      </div>
+
+      {/* Plans (read-only history viewer) entry */}
+      <div className="w-full flex justify-center mt-1">
+        <IconTip label={t("plans.title")} side="right">
+          <Button
+            variant="ghost"
+            size="icon"
+            className={cn(
+              "rounded-xl h-8 w-8 transition-all duration-200",
+              view === "plans"
+                ? "bg-rose-500/15 text-rose-600 dark:text-rose-400"
+                : "text-muted-foreground hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-500/10",
+            )}
+            onClick={onOpenPlans}
+          >
+            <ClipboardList className="h-4 w-4" />
+          </Button>
+        </IconTip>
+      </div>
+
+      {/* Logs entry, quick jump to Settings -> Logs near runtime status. */}
+      <div className="w-full flex justify-center mt-1">
+        <IconTip label={t("settings.logs")} side="right">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-xl h-8 w-8 text-muted-foreground hover:text-slate-600 dark:hover:text-slate-400 hover:bg-slate-500/10 transition-all duration-200"
+            onClick={() => onOpenSettings("logs")}
+          >
+            <ScrollText className="h-4 w-4" />
+          </Button>
+        </IconTip>
+      </div>
+
+      <div className="flex-1" />
+
+      <div className="py-3 flex flex-col items-center gap-2">
+        {/* Server runtime health — always visible so users can catch port
+              conflicts, high WS load, etc. without opening Settings. */}
+        <ServerStatusIndicator onOpen={() => onOpenSettings("server")} />
+        <div className="icon-sidebar-preference-shortcuts flex flex-col items-center gap-2">
+          {/* Profile */}
+          <IconTip label={t("settings.profileSettings")} side="right">
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn(
+                "rounded-xl h-8 w-8 transition-all duration-200",
+                view === "profile"
+                  ? "bg-sky-500/15 text-sky-600 dark:text-sky-400"
+                  : "text-muted-foreground hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-500/10",
+              )}
+              onClick={onOpenProfile}
+            >
+              <User className="h-4 w-4" />
+            </Button>
+          </IconTip>
+
+          {/* Theme Toggle */}
+          <IconTip label={`${t("theme.title")}: ${t(`theme.${theme}`)}`} side="right">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-xl h-8 w-8 text-muted-foreground hover:text-amber-600 hover:bg-amber-500/10 transition-all duration-200"
+              onClick={cycleTheme}
+            >
+              {theme === "auto" ? (
+                <SunMoon className="h-4 w-4" />
+              ) : theme === "light" ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
+            </Button>
+          </IconTip>
+
+          {/* Language Selector */}
+          <div className="relative">
+            <IconTip label={t("language.title")} side="right">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-xl h-8 w-8 text-muted-foreground hover:text-purple-600 hover:bg-purple-500/10 transition-all duration-200"
+                onClick={() => setShowLangMenu(!showLangMenu)}
+              >
+                <Languages className="h-4 w-4" />
+              </Button>
+            </IconTip>
+            {showLangMenu && (
+              <div className="fixed inset-0 z-40" onClick={() => setShowLangMenu(false)} />
+            )}
+            <FloatingMenu
+              open={showLangMenu}
+              positionClassName="bottom-0 left-14"
+              originClassName="origin-left"
+              className="ha-menu-from-left min-w-[160px] max-h-[400px] overflow-y-auto p-1.5"
+              onEscapeKeyDown={() => setShowLangMenu(false)}
+            >
+              {/* Follow System option */}
+              <button
+                className={`flex items-center gap-2.5 w-full px-3 py-1.5 text-xs transition-colors hover:bg-secondary ${isFollowingSystem() ? "text-primary font-medium" : "text-foreground"
+                  }`}
+                onClick={() => {
+                  setFollowSystemLanguage()
+                  setShowLangMenu(false)
+                }}
+              >
+                <Monitor className="h-3.5 w-3.5 text-primary/70" />
+                <span>{t("language.system")}</span>
+                {isFollowingSystem() && <span className="ml-auto text-primary">●</span>}
+              </button>
+              <div className="border-t border-border/50 my-0.5" />
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <button
+                  key={lang.code}
+                  className={`flex items-center gap-2.5 w-full px-3 py-1.5 text-xs transition-colors hover:bg-secondary ${!isFollowingSystem() &&
+                      (i18n.language === lang.code ||
+                        (i18n.language.startsWith(lang.code + "-") && lang.code !== "zh"))
+                      ? "text-primary font-medium"
+                      : "text-foreground"
+                    }`}
+                  onClick={() => {
+                    setLanguage(lang.code)
+                    setShowLangMenu(false)
+                  }}
+                >
+                  <span className="text-[10px] font-bold w-5 text-primary/70">
+                    {lang.shortLabel}
+                  </span>
+                  <span>{lang.label}</span>
+                  {!isFollowingSystem() &&
+                    (i18n.language === lang.code ||
+                      (i18n.language.startsWith(lang.code + "-") && lang.code !== "zh")) && (
+                      <span className="ml-auto text-primary">●</span>
+                    )}
+                </button>
+              ))}
+            </FloatingMenu>
+          </div>
+        </div>
+        {/* Help (built-in user manual — opens its own window) */}
+        <div className="relative flex justify-center mt-1">
+          <IconTip label={t("help.title")} side="right">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={t("help.title")}
+              className="rounded-xl h-8 w-8 text-muted-foreground hover:text-cyan-600 hover:bg-cyan-500/10 transition-all duration-200"
+              onClick={() => void openHelpWindow()}
+            >
+              <BookOpenText className="h-4 w-4" />
+            </Button>
+          </IconTip>
+        </div>
+        {/* Settings */}
+        <div className="relative flex justify-center mt-1">
+          <IconTip label={t("chat.settings")} side="right">
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn(
+                "rounded-xl h-8 w-8 transition-all duration-200",
+                view === "settings"
+                  ? "bg-slate-500/15 text-slate-700 dark:text-slate-300"
+                  : "text-muted-foreground hover:text-slate-600 hover:bg-slate-500/10",
+              )}
+              onClick={() => onOpenSettings()}
+            >
+              <Settings className="h-4 w-4" />
+            </Button>
+          </IconTip>
+        </div>
+
+        {/* About */}
+        <div className="relative flex justify-center pt-1">
+          <IconTip label={t("about.title")} side="right">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={t("about.title")}
+              className="h-11 w-11 rounded-full border border-border-soft bg-surface-floating/80 p-0 shadow-panel hover:bg-secondary/70"
+              onClick={() => onOpenSettings("about")}
+            >
+              <span className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-secondary">
+                <img src={appLogoUrl} alt="" className="h-full w-full object-cover" />
+              </span>
+            </Button>
+          </IconTip>
+          {pendingUpdate && (
+            <span className="absolute -right-0.5 top-0 z-10 flex h-3 w-3">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-3 w-3 rounded-full border-2 border-background bg-emerald-500" />
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }

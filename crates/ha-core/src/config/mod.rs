@@ -1431,10 +1431,6 @@ pub struct AppConfig {
     #[serde(default)]
     pub skill_allow_bundled: Vec<String>,
 
-    /// ACP control plane configuration (external agent management)
-    #[serde(default)]
-    pub acp_control: crate::acp_control::AcpControlConfig,
-
     /// Global keyboard shortcut configuration
     #[serde(default)]
     pub shortcuts: ShortcutConfig,
@@ -1473,10 +1469,6 @@ pub struct AppConfig {
     /// Default duration: 0 (no timeout; wait forever).
     #[serde(default = "default_ask_user_question_timeout")]
     pub ask_user_question_timeout_secs: u64,
-
-    /// IM channel configuration (Telegram, Discord, Slack, etc.)
-    #[serde(default)]
-    pub channels: crate::channel::ChannelStoreConfig,
 
     /// Deferred tool loading configuration
     #[serde(default)]
@@ -1715,7 +1707,6 @@ impl Default for AppConfig {
             proxy: ProxyConfig::default(),
             skill_prompt_budget: crate::skills::SkillPromptBudget::default(),
             skill_allow_bundled: Vec::new(),
-            acp_control: crate::acp_control::AcpControlConfig::default(),
             shortcuts: ShortcutConfig::default(),
             quick_prompts: QuickPromptConfig::default(),
             plans_directory: None,
@@ -1724,7 +1715,6 @@ impl Default for AppConfig {
             plan_subagent: false,
             ask_user_question_timeout_enabled: false,
             ask_user_question_timeout_secs: default_ask_user_question_timeout(),
-            channels: crate::channel::ChannelStoreConfig::default(),
             deferred_tools: DeferredToolsConfig::default(),
             server: EmbeddedServerConfig::default(),
             recap: RecapConfig::default(),

@@ -679,7 +679,6 @@ export default function App() {
           <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
             <OnboardingWizard
               onComplete={() => setView("chat")}
-              onJumpToChannelsSettings={() => setView("channels")}
               onCodexAuth={runCodexAuth}
               initialLanguage={i18n.language || ""}
             />

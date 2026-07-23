@@ -80,22 +80,12 @@ impl KnowledgeAccessContext {
         project_id: Option<String>,
         source: KbAccessSource,
         origin_source: KbAccessSource,
-        channel_info: Option<ChannelKbContext>,
+        _channel_info: Option<ChannelKbContext>,
     ) -> Self {
         let is_incognito = crate::session::is_session_incognito(session_id.as_deref());
         // Only consult the channel config when the lineage actually has an IM hop
         // — a stray context shouldn't grant anything for non-IM turns.
-        let im_access_allowed = match &channel_info {
-            Some(ch) if source.is_im() || origin_source.is_im() => {
-                crate::channel::im_kb_access_allowed(
-                    &ch.channel_id,
-                    &ch.account_id,
-                    &ch.chat_id,
-                    ch.is_group,
-                )
-            }
-            _ => false,
-        };
+        let im_access_allowed = false;
         Self {
             session_id,
             project_id,

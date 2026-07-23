@@ -44,8 +44,27 @@ class ErrorBoundaryInner extends React.Component<
   }
 }
 
+function isChunkLoadError(error: Error | null): boolean {
+  if (!error?.message) return false
+  return (
+    /failed to fetch dynamically imported module/i.test(error.message) ||
+    /importing a module script failed/i.test(error.message) ||
+    /loading chunk/i.test(error.message)
+  )
+}
+
 function ErrorFallback({ error, onReset }: { error: Error | null; onReset: () => void }) {
   const { t } = useTranslation()
+  const isChunkError = isChunkLoadError(error)
+
+  const handleRetry = () => {
+    if (isChunkError) {
+      window.location.reload()
+    } else {
+      onReset()
+    }
+  }
+
   return (
     <div className="flex flex-col items-center justify-center h-screen gap-4 p-8 text-center">
       <div className="text-4xl">:(</div>
@@ -56,7 +75,7 @@ function ErrorFallback({ error, onReset }: { error: Error | null; onReset: () =>
         {error?.message || t("error.unknown", "An unexpected error occurred")}
       </p>
       <button
-        onClick={onReset}
+        onClick={handleRetry}
         className="px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm hover:opacity-90 transition-opacity"
       >
         {t("error.retry", "Try Again")}

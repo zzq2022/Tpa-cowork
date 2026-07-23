@@ -1,8 +1,8 @@
 use serde_json::json;
 
 use super::super::{
-    TOOL_ACP_SPAWN, TOOL_AUDIO_GENERATE, TOOL_IMAGE_GENERATE, TOOL_SUBAGENT, TOOL_TEAM,
-    TOOL_TOOL_SEARCH, TOOL_WORKFLOW,
+    TOOL_AUDIO_GENERATE, TOOL_IMAGE_GENERATE, TOOL_SUBAGENT, TOOL_TEAM, TOOL_TOOL_SEARCH,
+    TOOL_WORKFLOW,
 };
 use super::types::{CoreSubclass, ToolDefinition, ToolTier};
 
@@ -131,71 +131,6 @@ pub fn get_subagent_tool() -> ToolDefinition {
                 "foreground_timeout": {
                     "type": "integer",
                     "description": "For spawn_and_wait: seconds to wait before auto-backgrounding (default 30, max 120). If the sub-agent completes within this time, result is returned inline."
-                }
-            },
-            "required": ["action"],
-            "additionalProperties": false
-        }),
-    }
-}
-
-/// Get the ACP spawn tool definition (conditionally injected).
-pub fn get_acp_spawn_tool() -> ToolDefinition {
-    ToolDefinition {
-        name: TOOL_ACP_SPAWN.into(),
-        description: "Spawn and manage external ACP agents (Claude Code, Codex CLI, Gemini CLI, etc.). External agents run as separate processes with their own tools, context, and capabilities. Use for tasks that benefit from a specialized external coding agent.".into(),
-        tier: ToolTier::Configured {
-            default_for_main: true,
-            default_for_others: false,
-            default_deferred: true,
-            config_hint: "Settings → Agents → ACP",
-        },
-        internal: false,
-        concurrent_safe: false,
-        async_capable: false,
-        parameters: json!({
-            "type": "object",
-            "properties": {
-                "action": {
-                    "type": "string",
-                    "enum": ["spawn", "check", "list", "result", "kill", "kill_all", "steer", "backends"],
-                    "description": "Action: spawn (start external agent), check (poll/wait), list (all runs), result (full output), kill (terminate), kill_all (terminate all), steer (send follow-up), backends (list available)"
-                },
-                "backend": {
-                    "type": "string",
-                    "description": "ACP backend ID (e.g. 'claude-code', 'codex-cli', 'gemini-cli'). Required for spawn."
-                },
-                "task": {
-                    "type": "string",
-                    "description": "Task description for the external agent (required for spawn)"
-                },
-                "run_id": {
-                    "type": "string",
-                    "description": "Run ID (for check/result/kill/steer)"
-                },
-                "cwd": {
-                    "type": "string",
-                    "description": "Working directory for the external agent"
-                },
-                "model": {
-                    "type": "string",
-                    "description": "Model override for the external agent"
-                },
-                "timeout_secs": {
-                    "type": "integer",
-                    "description": "Optional ACP run timeout in seconds. Omit by default to use the ACP default (default 0/no timeout). 0 = no timeout. Use a positive value only when the user requested a deadline or this external run should be explicitly bounded; positive values are capped at 3600."
-                },
-                "message": {
-                    "type": "string",
-                    "description": "Follow-up message to send (for steer action)"
-                },
-                "wait": {
-                    "type": "boolean",
-                    "description": "For check: block until completion (default false)"
-                },
-                "label": {
-                    "type": "string",
-                    "description": "Optional label for tracking"
                 }
             },
             "required": ["action"],

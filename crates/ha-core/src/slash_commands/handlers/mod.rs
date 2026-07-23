@@ -14,35 +14,12 @@ pub mod team;
 pub mod utility;
 pub mod workflow;
 
-use crate::channel::db::ChannelConversation;
 use crate::get_memory_backend;
 use crate::require_session_db;
 use crate::slash_commands::types::CommandResult;
 
 fn session_db() -> Result<&'static std::sync::Arc<crate::session::SessionDB>, String> {
     require_session_db().map_err(|e| e.to_string())
-}
-
-/// Format the (sole, with 1:1 attach) IM-attach row as a markdown
-/// bullet line. Used by `/status` and `/session` (info form) so both
-/// surfaces stay consistent.
-pub(super) fn format_attached_channel_line(
-    a: &ChannelConversation,
-    include_attached_at: bool,
-) -> String {
-    let label = a.sender_name.as_deref().unwrap_or(&a.chat_id);
-    let attached = if include_attached_at {
-        a.attached_at
-            .as_deref()
-            .map(|t| format!(" · attached `{}`", t))
-            .unwrap_or_default()
-    } else {
-        String::new()
-    };
-    format!(
-        "- **{}** · {} ({}){}",
-        a.channel_id, label, a.chat_type, attached
-    )
 }
 
 /// Dispatch a parsed command to the appropriate handler.

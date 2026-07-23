@@ -272,7 +272,6 @@ pub async fn resolve_local_launch(
         model_id: binding.model.model_id.clone(),
     });
     isolated.fallback_models.clear();
-    isolated.channels = Default::default();
     isolated.cron = Default::default();
     isolated.memory = Default::default();
     isolated.memory_extract = Default::default();

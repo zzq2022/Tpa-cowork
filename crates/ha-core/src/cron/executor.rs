@@ -442,7 +442,7 @@ pub(crate) async fn execute_claimed_job(
     // on a transient read error fall back to the EXPECTED mode (per-job override,
     // else agent default) rather than `Off`, so a read blip can't silently skip the
     // guard for a job that is supposed to be sandboxed.
-    let effective_sandbox = match session_db.get_session_sandbox_mode(&session_id) {
+    let _effective_sandbox = match session_db.get_session_sandbox_mode(&session_id) {
         Ok(Some(mode)) => mode,
         Ok(None) | Err(_) => match job.sandbox_mode_override {
             Some(mode) => mode,
@@ -451,41 +451,6 @@ pub(crate) async fn execute_claimed_job(
                 .unwrap_or_default(),
         },
     };
-    if effective_sandbox.enabled() {
-        if let Err(e) = crate::sandbox::ensure_sandbox_available().await {
-            let err_text = format!("sandbox unavailable: {e}");
-            app_error!(
-                "cron",
-                "executor",
-                "Job '{}' ({}) requires sandbox '{}' but it is unavailable — failing run (not falling back to host): {}",
-                job.name,
-                job.id,
-                effective_sandbox.as_str(),
-                e
-            );
-            persist_failure_message_if_missing(session_db, &session_id, &err_text);
-            // Docker-unavailable is an infra failure: the turn never ran (no side
-            // effects), so reschedule with backoff but do NOT count toward
-            // auto-disable — matching the `no_session` path's `false`. Otherwise
-            // transient Docker downtime (laptop resume / daemon restart), or a job
-            // that wouldn't even have called `exec`, could permanently disable an
-            // otherwise-healthy recurring job.
-            record_failure(
-                cron_db,
-                &job,
-                &started_at,
-                start_time,
-                "error",
-                &err_text,
-                &session_id,
-                None,
-                run_log_id,
-                false,
-                immediate,
-            );
-            return;
-        }
-    }
 
     // Per-run timeout. `0` means no cron-level timeout; positive values are
     // clamped to [30, 7200]s. C19: a per-job override takes precedence over the

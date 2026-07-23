@@ -10,9 +10,7 @@ use crate::config::AppConfig;
 pub const DEFAULT_LOCALE: &str = "en";
 
 /// Locale order shared by backend translation tables.
-pub const SUPPORTED_LOCALES: [&str; 3] = [
-    "zh", "zh-TW", "en",
-];
+pub const SUPPORTED_LOCALES: [&str; 3] = ["zh", "zh-TW", "en"];
 
 /// Normalize a raw locale string to one of the backend-supported locale codes.
 ///

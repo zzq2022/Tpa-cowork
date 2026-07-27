@@ -124,5 +124,5 @@ Unlike memory, the Knowledge Space is not globally visible—different vaults ar
 
 ## Next steps
 
-- From idea to design artifact → [06 · Design Space](06-design-space.md)
+- Discover and manage skills → [06 · SkillHub & Skill Market](06-skillhub-and-skills.md)
 - Configure the Knowledge Space's vector search → [02 · Memory embedding model](02-models-and-providers.md#210-memory-embedding-model)

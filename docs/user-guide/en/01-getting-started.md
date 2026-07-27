@@ -1,6 +1,6 @@
 # 01 · Getting Started
 
-This chapter helps you install Hope Agent in a few minutes, complete the initial setup, start your first conversation, and understand the three run modes, how to update, and how to reach it remotely from other devices.
+This chapter helps you install TPA CoWork in a few minutes, complete the initial setup, start your first conversation, and understand the three run modes, how to update, and how to reach it remotely from other devices.
 
 > For details on configuring models and API keys, see [02 · Models & Providers](02-models-and-providers.md); to use a fully offline local model, see the "One-click local model install" section in that chapter.
 
@@ -8,18 +8,18 @@ This chapter helps you install Hope Agent in a few minutes, complete the initial
 
 ## 1.1 Installation
 
-Complete installers for every platform are on [GitHub Releases](https://github.com/shiwenwen/hope-agent/releases). Below is the recommended approach per platform.
+Complete installers for every platform are on [GitHub Releases](https://github.com/shiwenwen/tpa-cowork/releases). Below is the recommended approach per platform.
 
 ### macOS (most complete support)
 
 **Option 1: Homebrew (recommended)**
 
 ```bash
-brew tap shiwenwen/hope-agent
-brew install --cask hope-agent
+brew tap shiwenwen/tpa-cowork
+brew install --cask tpa-cowork
 ```
 
-> Already installed `Hope Agent.app` manually? Add `--adopt` after `brew install` (adopt the existing app of the same version without re-downloading) or `--force` (force a re-download and overwrite).
+> Already installed `TPA CoWork.app` manually? Add `--adopt` after `brew install` (adopt the existing app of the same version without re-downloading) or `--force` (force a re-download and overwrite).
 
 **Option 2: install the DMG manually**
 
@@ -39,8 +39,8 @@ Download `Hope.Agent_*.dmg` from Releases and drag it into "Applications". Both 
 **Option 1: Scoop (recommended)**
 
 ```powershell
-scoop bucket add hope-agent https://github.com/shiwenwen/scoop-hope-agent
-scoop install hope-agent
+scoop bucket add tpa-cowork https://github.com/shiwenwen/scoop-tpa-cowork
+scoop install tpa-cowork
 ```
 
 **Option 2: install manually**
@@ -55,29 +55,29 @@ Download `Hope.Agent_*-setup.exe` from Releases and double-click to install. Onl
 
 Native builds are provided for both amd64 (x86_64) and arm64 (aarch64), covering ordinary PCs, Raspberry Pi 4/5, Apple Silicon running Asahi Linux, and Graviton / Ampere cloud instances.
 
-- **Arch / Manjaro**: `yay -S hope-agent-bin` (or paru / any AUR helper)
+- **Arch / Manjaro**: `yay -S tpa-cowork-bin` (or paru / any AUR helper)
 - **Debian / Ubuntu (apt)**:
   ```bash
   curl -fsSL https://repo.hopeagent.ai/pubkey.gpg | \
-    sudo gpg --dearmor -o /usr/share/keyrings/hope-agent.gpg
-  echo "deb [signed-by=/usr/share/keyrings/hope-agent.gpg] https://repo.hopeagent.ai/apt stable main" | \
-    sudo tee /etc/apt/sources.list.d/hope-agent.list
-  sudo apt update && sudo apt install hope-agent
+    sudo gpg --dearmor -o /usr/share/keyrings/tpa-cowork.gpg
+  echo "deb [signed-by=/usr/share/keyrings/tpa-cowork.gpg] https://repo.hopeagent.ai/apt stable main" | \
+    sudo tee /etc/apt/sources.list.d/tpa-cowork.list
+  sudo apt update && sudo apt install tpa-cowork
   ```
 - **Fedora / RHEL / CentOS (dnf / yum)**:
   ```bash
-  sudo curl -fsSL https://repo.hopeagent.ai/rpm/hope-agent.repo \
-    -o /etc/yum.repos.d/hope-agent.repo
-  sudo dnf install hope-agent
+  sudo curl -fsSL https://repo.hopeagent.ai/rpm/tpa-cowork.repo \
+    -o /etc/yum.repos.d/tpa-cowork.repo
+  sudo dnf install tpa-cowork
   ```
-- **openSUSE**: `sudo zypper addrepo …/rpm/hope-agent.repo && sudo zypper install hope-agent`
+- **openSUSE**: `sudo zypper addrepo …/rpm/tpa-cowork.repo && sudo zypper install tpa-cowork`
 - **Manual**: download the `.AppImage` (`chmod +x`, then run), `.deb` (`sudo dpkg -i`), or `.rpm` (`sudo rpm -i`); the package name carries an architecture suffix, so pick `_amd64` / `_arm64` for your machine.
 
 ---
 
 ## 1.2 First launch & configuration
 
-The first time you open Hope Agent, a **setup wizard** appears. The main path is a single sentence — **pick a Provider template → enter an API key / sign in with Codex OAuth → start chatting**; every other step can be skipped or adjusted later in Settings.
+The first time you open TPA CoWork, a **setup wizard** appears. The main path is a single sentence — **pick a Provider template → enter an API key / sign in with Codex OAuth → start chatting**; every other step can be skipped or adjusted later in Settings.
 
 The desktop wizard is actually 6 steps (the X in the top-right of each step exits; drafts are saved automatically, and next time you resume from the last step):
 
@@ -89,48 +89,48 @@ The desktop wizard is actually 6 steps (the X in the top-right of each step exit
 6. **IM channels (optional)** — shows channel cards for Telegram / Feishu / Slack and others; you can add an account right here, or configure it later in Settings. Clicking "Finish" ends the wizard and takes you into the conversation.
 
 > - Don't want to use a cloud model? **One-click local model install** is right there in step 2 — no account, API key, or terminal required. See [02 · Models & Providers · Local models](02-models-and-providers.md).
-> - Want to run through the wizard again? Run `hope-agent server setup` on the command line (this replays the wizard by default; adding `--reset` first clears the existing "onboarding complete" state — Providers and user settings you have already configured are not deleted).
+> - Want to run through the wizard again? Run `tpa-cowork server setup` on the command line (this replays the wizard by default; adding `--reset` first clears the existing "onboarding complete" state — Providers and user settings you have already configured are not deleted).
 
-All data — configuration, sessions, memory, and so on — is stored in the `~/.hope-agent/` directory on your own machine (use the `HA_DATA_DIR` environment variable to change the location).
+All data — configuration, sessions, memory, and so on — is stored in the `~/.tpa-cowork/` directory on your own machine (use the `HA_DATA_DIR` environment variable to change the location).
 
 ---
 
 ## 1.3 Three run modes
 
-Hope Agent's three run modes **share the same core logic**; configuration, sessions, and memory all live in `~/.hope-agent/`, and you can switch between them at any time.
+TPA CoWork's three run modes **share the same core logic**; configuration, sessions, and memory all live in `~/.tpa-cowork/`, and you can switch between them at any time.
 
 | Mode | How to start | Best for |
 | --- | --- | --- |
-| **Desktop GUI** | Double-click the app icon, or run `hope-agent` / `open -a "Hope Agent"` in a terminal | The most complete entry point: full native GUI, with an embedded HTTP/WS service — while you use the desktop, it can also serve connections to others |
-| **Server + Web GUI** | `hope-agent server start`; `hope-agent server install` registers it as a system service that starts on boot | A windowless daemon, online 24/7 so IM channels / scheduled tasks never drop; the full web version is embedded in the service — open it in a browser and it just works, and phones / tablets / any computer can connect directly |
-| **ACP (IDE integration)** | `hope-agent acp` | Lets an ACP-compatible editor call Hope Agent as its AI backend |
+| **Desktop GUI** | Double-click the app icon, or run `tpa-cowork` / `open -a "TPA CoWork"` in a terminal | The most complete entry point: full native GUI, with an embedded HTTP/WS service — while you use the desktop, it can also serve connections to others |
+| **Server + Web GUI** | `tpa-cowork server start`; `tpa-cowork server install` registers it as a system service that starts on boot | A windowless daemon, online 24/7 so IM channels / scheduled tasks never drop; the full web version is embedded in the service — open it in a browser and it just works, and phones / tablets / any computer can connect directly |
+| **ACP (IDE integration)** | `tpa-cowork acp` | Lets an ACP-compatible editor call TPA CoWork as its AI backend |
 
 **Launch entry points per platform:**
 
-- **Desktop GUI**: click the icon in Launchpad / Start menu / applications menu, or run `hope-agent` in a terminal.
-- **Browser Web GUI**: with the desktop app open, visit <http://127.0.0.1:8420>; you can also run only `hope-agent server start` to start the service without opening the desktop window.
-- **ACP**: `hope-agent acp`.
+- **Desktop GUI**: click the icon in Launchpad / Start menu / applications menu, or run `tpa-cowork` in a terminal.
+- **Browser Web GUI**: with the desktop app open, visit <http://127.0.0.1:8420>; you can also run only `tpa-cowork server start` to start the service without opening the desktop window.
+- **ACP**: `tpa-cowork acp`.
 
 ### Common Server-mode subcommands
 
 ```bash
-hope-agent server start        # start the HTTP/WS service in the foreground
-hope-agent server install      # register a system service (macOS launchd / Linux systemd), auto-start on boot
-hope-agent server status       # check run status
-hope-agent server stop         # stop the service
-hope-agent server uninstall    # uninstall the system service
-hope-agent server setup        # re-run the setup wizard (replays by default; --reset clears the "onboarding complete" state first, keeps Providers)
+tpa-cowork server start        # start the HTTP/WS service in the foreground
+tpa-cowork server install      # register a system service (macOS launchd / Linux systemd), auto-start on boot
+tpa-cowork server status       # check run status
+tpa-cowork server stop         # stop the service
+tpa-cowork server uninstall    # uninstall the system service
+tpa-cowork server setup        # re-run the setup wizard (replays by default; --reset clears the "onboarding complete" state first, keeps Providers)
 ```
 
 ---
 
 ## 1.4 Access from your phone or another computer
 
-To reach a Hope Agent running on your main device from a phone, tablet, or another computer:
+To reach a TPA CoWork running on your main device from a phone, tablet, or another computer:
 
 1. Open "**Settings → Server**" and **set an API key** (used for authentication — be sure to set it).
 2. Change the listen address from `127.0.0.1:8420` to `0.0.0.0:8420` (allow LAN access).
-3. After restarting, open `http://<IP of the device running Hope Agent>:8420` in a browser on the other device and enter the API key.
+3. After restarting, open `http://<IP of the device running TPA CoWork>:8420` in a browser on the other device and enter the API key.
 
 > ⚠️ **Security reminder**: do not expose the port to your LAN or the public internet without authentication (no API key set). When you need public access, put an HTTPS reverse proxy in front of it — see the [Docker deployment guide](../../deployment/docker.md).
 
@@ -138,14 +138,14 @@ To reach a Hope Agent running on your main device from a phone, tablet, or anoth
 
 ## 1.5 Self-hosting (Docker)
 
-To run Hope Agent on a home NAS, a VPS, or a homelab and access the web version from a browser:
+To run TPA CoWork on a home NAS, a VPS, or a homelab and access the web version from a browser:
 
 ```bash
 docker run -d \
-  --name hope-agent \
+  --name tpa-cowork \
   -p 127.0.0.1:8420:8420 \
   -v hope-data:/data \
-  ghcr.io/shiwenwen/hope-agent:latest
+  ghcr.io/shiwenwen/tpa-cowork:latest
 ```
 
 Once the container is up, open <http://127.0.0.1:8420> in a browser and configure your Provider API key through the setup wizard. The image covers `linux/amd64` + `linux/arm64` (including Apple Silicon / Raspberry Pi) and is built automatically with every release.
@@ -153,7 +153,7 @@ Once the container is up, open <http://127.0.0.1:8420> in a browser and configur
 For docker compose, pairing with a local Ollama LLM, exposing to the LAN, reverse proxy and TLS, and the upgrade process, see the full [Docker deployment guide](../../deployment/docker.md). You can also bring up a local LLM sidecar in one command:
 
 ```bash
-docker compose --profile with-ollama up -d    # start hope-agent + a local Ollama model
+docker compose --profile with-ollama up -d    # start tpa-cowork + a local Ollama model
 ```
 
 ---

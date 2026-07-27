@@ -19,7 +19,7 @@ A project groups several related sessions into a single workspace that shares pr
 
 **Key features**:
 
-- **Working directory = a real folder**: a directory you explicitly choose, or the default `~/.hope-agent/projects/{project}/workspace/`. Uploaded files land directly in this directory, and the AI becomes aware of them through the working directory's top-level file listing and the `read` tool (there is no separate file table).
+- **Working directory = a real folder**: a directory you explicitly choose, or the default `~/.tpa-cowork/projects/{project}/workspace/`. Uploaded files land directly in this directory, and the AI becomes aware of them through the working directory's top-level file listing and the `read` tool (there is no separate file table).
 - **Project instructions**: the `AGENTS.md` at the root, which you can edit directly and which is assembled into the system prompt of every session under this project.
 - **Project memory**: the highest priority (Project > Agent > Global); see [04 · Three tiers of memory](04-memory.md#41-three-tiers-of-memory-global--agent--project).
 - **Lazy session creation**: opening "New chat" in a project doesn't pre-create an empty session — it stays a draft and is persisted only when you send the first message. Project sessions and Incognito are mutually exclusive.

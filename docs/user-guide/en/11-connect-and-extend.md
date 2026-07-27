@@ -1,11 +1,11 @@
 # 11 · Connect & Extend
 
-This chapter covers three ways to extend Hope Agent's capabilities: connect external tools with **MCP**, insert custom handling at key moments with **Hooks**, and equip the AI with reusable specialized methodology through **skills**.
+This chapter covers three ways to extend TPA CoWork's capabilities: connect external tools with **MCP**, insert custom handling at key moments with **Hooks**, and equip the AI with reusable specialized methodology through **skills**.
 
 **In this chapter**
 
 - [11.1 MCP: connecting external tools](#111-mcp-connecting-external-tools)
-- [11.2 Using Hope Agent as an MCP server](#112-using-hope-agent-as-an-mcp-server)
+- [11.2 Using TPA CoWork as an MCP server](#112-using-tpa-cowork-as-an-mcp-server)
 - [11.3 Hooks: lifecycle hooks](#113-hooks-lifecycle-hooks)
 - [11.4 The skill system](#114-the-skill-system)
 
@@ -13,7 +13,7 @@ This chapter covers three ways to extend Hope Agent's capabilities: connect exte
 
 ## 11.1 MCP: connecting external tools
 
-MCP (Model Context Protocol) is an open standard that lets AI assistants connect to all kinds of external "tool servers." Hope Agent ships with a full MCP client that can inject the tools, resources, and prompts offered by external servers directly into the conversation.
+MCP (Model Context Protocol) is an open standard that lets AI assistants connect to all kinds of external "tool servers." TPA CoWork ships with a full MCP client that can inject the tools, resources, and prompts offered by external servers directly into the conversation.
 
 - **Four connection methods**: stdio, Streamable HTTP, SSE, WebSocket.
 - **Full OAuth 2.1 support**: servers that require authorization can go through OAuth login automatically, with credentials stored securely on disk.
@@ -28,11 +28,11 @@ MCP (Model Context Protocol) is an open standard that lets AI assistants connect
 
 ---
 
-## 11.2 Using Hope Agent as an MCP server
+## 11.2 Using TPA CoWork as an MCP server
 
-Conversely, Hope Agent can also act as an **MCP server**, letting other AI tools on the machine (Claude Code, Cursor, etc.) tap into its capabilities.
+Conversely, TPA CoWork can also act as an **MCP server**, letting other AI tools on the machine (Claude Code, Cursor, etc.) tap into its capabilities.
 
-- **Entry point**: run `hope-agent mcp` on the command line.
+- **Entry point**: run `tpa-cowork mcp` on the command line.
 - **Read-only** by default; only with `--allow-writes` does it expose write tools.
 - For safety, it **never exposes** these capabilities: writing to your code repository, deploying, sharing, deleting, or exporting.
 
@@ -74,7 +74,7 @@ A skill equips the AI with **specialized methodology / an operating manual**—a
 
 ### Built-in skills
 
-Hope Agent includes a set of skills, organized by category:
+TPA CoWork includes a set of skills, organized by category:
 
 - **Platform self-management**: `ha-settings` (change settings by conversation), `ha-skill-creator` (create / edit skills), `ha-find-skills` (discover and install third-party skills), `ha-browser` (browser automation methods), `ha-mac-control` (macOS control methods, macOS only), `ha-knowledge` (Knowledge Space workflow), `ha-logs` / `ha-data-stores` (read-only inspection of local data), `ha-self-diagnosis` (self-diagnosis + filing a GitHub issue), `ha-self-update` (check for and install updates).
 - **Programming methodology**: eight of them—implementation, planning, debugging, test strategy, code review, multi-Agent collaboration, completion verification, workflow authoring, and more (recommended and combined automatically per task).

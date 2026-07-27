@@ -1,6 +1,6 @@
 # 13 · Settings & Security
 
-This chapter is the "map" to the settings plus a security overview: it tells you **which panel to go to when you want to change something**, which settings the AI can change for you through conversation, how to back up and roll back your configuration, and what Hope Agent does for data security and reliability.
+This chapter is the "map" to the settings plus a security overview: it tells you **which panel to go to when you want to change something**, which settings the AI can change for you through conversation, how to back up and roll back your configuration, and what TPA CoWork does for data security and reliability.
 
 **In this chapter**
 
@@ -25,13 +25,13 @@ The left side of the Settings page is a navigation column. The table below tells
 | **Model Configuration** | [Providers, API keys, primary / fallback models, media generation models](02-models-and-providers.md) |
 | **Agents** | [Creating / editing Agents](12-projects-and-insights.md#122-custom-agents) |
 | **Teams** | [Agent Team templates](09-multi-agent-and-scheduling.md#92-agent-teams) |
-| **IM Channels** | [IM Channel accounts](10-im-channels.md) |
+
 | **Skills** | [Skill enablement / draft review / installation](11-connect-and-extend.md#114-the-skill-system) |
 | **Tool Settings** | General, Web search, Web fetch, Media generation, Canvas, Async tools, Issue reporting (the weather widget is configured inside the "General" sub-page) |
 | **MCP Servers** | [MCP connections](11-connect-and-extend.md#111-mcp-connecting-external-tools) |
 | **Memory** | [Memory extraction / recall / budget, embedding, Dreaming](04-memory.md) |
 | **Knowledge** | [Knowledge bases, retrieval, passive recall, autonomous maintenance, Sprite](05-knowledge-space.md) |
-| **Design Space** | [Design Space toggles, auto-preview, export parameters](06-design-space.md#610-settings) |
+| **Skills** | [Skill enablement, draft review, and cloud market](06-skillhub-and-skills.md) |
 | **Chat & Context** | Basic chat behavior, behavior awareness, context compaction |
 | **Scheduled Tasks** | [Concurrency limit, timeout, catch-up window](09-multi-agent-and-scheduling.md#94-scheduled-tasks-cron) |
 | **Speech-to-Text** | [Speech-to-Text (STT)](02-models-and-providers.md#211-speech-to-text-stt) |
@@ -39,7 +39,7 @@ The left side of the Settings page is a navigation column. The table below tells
 | **Recap** | The model, language, and scope for [Recap reports](12-projects-and-insights.md#124-recap-reports) |
 | **Server** | [Run mode, listen address, API key, remote access](01-getting-started.md#14-access-from-your-phone-or-another-computer) |
 | **Files** | File size limits (attachment / upload / preview / edit / document) |
-| **Docker Sandbox** | [Docker Sandbox](07-tools-and-permissions.md#76-docker-sandbox) container configuration |
+
 | **Browser** | [Browser backend, extension, raw CDP toggle](07-tools-and-permissions.md#77-browser-control) |
 | **ACP Control Plane** | Delegation to external ACP Agents |
 | **Notifications** | Master notification switch, reply preview, background-task alerts, IM online alerts |
@@ -95,16 +95,16 @@ After a config change, the interface hot-reloads automatically (theme, language,
 
 ## 13.4 Data and security
 
-**Local-first**—all data (sessions, memory, skills, config, credentials) is stored in the `~/.hope-agent/` directory on your own machine and never uploaded to the cloud. API keys are used only to **call the Providers you configured directly**; Hope Agent does no relaying of any kind.
+**Local-first**—all data (sessions, memory, skills, config, credentials) is stored in the `~/.tpa-cowork/` directory on your own machine and never uploaded to the cloud. API keys are used only to **call the Providers you configured directly**; TPA CoWork does no relaying of any kind.
 
 | Topic | Details |
 | --- | --- |
-| **You own your data** | All data lives in `~/.hope-agent/`; [Incognito sessions](03-chat-and-sessions.md#36-incognito-sessions) are "burn on close" and never enter the sidebar / search / statistics |
+| **You own your data** | All data lives in `~/.tpa-cowork/`; [Incognito sessions](03-chat-and-sessions.md#36-incognito-sessions) are "burn on close" and never enter the sidebar / search / statistics |
 | **Direct API-key connection** | Keys are used only to connect directly to the model services you configured, never through a third party |
 | **Logs never contain keys** | All logs are forcibly redacted; API keys / OAuth tokens are forbidden from appearing in any log |
 | **Server-mode authentication** | The HTTP/WS service authenticates with a Bearer Token (`/api/health` is exempt); **be sure to set an API key** before binding `0.0.0.0` and exposing it externally |
 | **SSRF protection** | All outbound requests undergo mandatory safety checks and by default block access to intranet and cloud-metadata addresses; you can adjust the policy and add a trusted-host allowlist in Settings → Security Policy |
-| **Credential storage** | Credentials such as OAuth tokens are stored in `~/.hope-agent/credentials/`; they are cleared on sign-out |
+| **Credential storage** | Credentials such as OAuth tokens are stored in `~/.tpa-cowork/credentials/`; they are cleared on sign-out |
 
 **Dangerous mode (Global YOLO)** is a switch that skips all tool approvals in one click (Settings → Security Policy, or the command line `--dangerously-skip-all-approvals`); it is **extremely high risk—use it only in a fully trusted local environment**. It is orthogonal to Plan Mode—it only skips approvals and does not lift Plan Mode's restrictions. See [07 · Global YOLO](07-tools-and-permissions.md#75-full-auto-timeouts-and-unattended).
 
@@ -112,10 +112,10 @@ After a config change, the interface hot-reloads automatically (theme, language,
 
 ## 13.5 Reliability: keep-alive and crash recovery
 
-Hope Agent uses multiple layers of redundancy to keep itself running reliably over the long term without dropping offline:
+TPA CoWork uses multiple layers of redundancy to keep itself running reliably over the long term without dropping offline:
 
 - **Guardian parent/child processes** (desktop): a supervisor process guards the main program and automatically restarts it with backoff after a crash.
-- **System-service keep-alive**: after `hope-agent server install`, the operating system (launchd / systemd) brings it up.
+- **System-service keep-alive**: after `tpa-cowork server install`, the operating system (launchd / systemd) brings it up.
 - **Subsystem self-healing**: MCP reconnects automatically on disconnect, each IM account reconnects independently, and scheduled tasks recover idempotently.
 - **Crash self-diagnosis**: after a certain number of consecutive crashes, it automatically runs a diagnosis once—first a full backup, then an analysis of the cause using the cheapest available model, followed by a safe in-place fix. **The auto-fix only touches configuration and clearly corrupted databases; it never touches your sessions, memory, skills, or Provider list.**
 
@@ -125,7 +125,7 @@ Hope Agent uses multiple layers of redundancy to keep itself running reliably ov
 
 ## 13.6 Reporting problems and self-diagnosis
 
-You can ask the AI directly in conversation to organize a bug, feature request, or improvement into a GitHub issue draft and submit it, and you can also have it read the source code and logs to answer "how does Hope Agent implement X."
+You can ask the AI directly in conversation to organize a bug, feature request, or improvement into a GitHub issue draft and submit it, and you can also have it read the source code and logs to answer "how does TPA CoWork implement X."
 
 - **Entry point**: Settings → Tool Settings → Issue reporting (configure the target repository, GitHub token, etc.), or just say so in conversation.
 - **It always confirms before submitting**; the title, body, and evidence are all redacted; the GitHub token never appears in the conversation, logs, or issue.
@@ -150,10 +150,10 @@ You can ask the AI directly in conversation to organize a bug, feature request, 
 
 ## Closing
 
-By now you have learned all of Hope Agent's main features and settings. If you still have questions:
+By now you have learned all of TPA CoWork's main features and settings. If you still have questions:
 
 - Return to the [table of contents](README.md) to search by topic.
 - Ask the AI directly in the app—for example, "how do I set up a scheduled task"—it knows its own features.
-- Report problems on [GitHub Issues](https://github.com/shiwenwen/hope-agent/issues), or chat on [Discussions](https://github.com/shiwenwen/hope-agent/discussions).
+- Report problems on [GitHub Issues](https://github.com/shiwenwen/tpa-cowork/issues), or chat on [Discussions](https://github.com/shiwenwen/tpa-cowork/discussions).
 
 _This manual is continuously updated alongside the product; if anything differs from the actual interface, the in-app display takes precedence._

@@ -1,6 +1,6 @@
 # 08 · Autonomous Tasks
 
-Hope Agent doesn't just answer questions—it can **keep working until the job is done**. This chapter introduces six roles that work together: **Goal** defines the outcome, **Workflow** organizes execution, **Loop** decides when to keep going, **Task** surfaces progress, **Execution Mode** controls how autonomous the agent is, and **Plan Mode** lets you plan before acting.
+TPA CoWork doesn't just answer questions—it can **keep working until the job is done**. This chapter introduces six roles that work together: **Goal** defines the outcome, **Workflow** organizes execution, **Loop** decides when to keep going, **Task** surfaces progress, **Execution Mode** controls how autonomous the agent is, and **Plan Mode** lets you plan before acting.
 
 **In this chapter**
 

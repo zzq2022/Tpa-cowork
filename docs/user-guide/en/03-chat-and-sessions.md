@@ -29,7 +29,7 @@ This chapter covers everyday use: how to use the chat interface, how to send ima
 
 ## 3.2 Sending attachments and multimodal input
 
-Hope Agent supports three kinds of input—images, files, and voice—all handed to the model together with your message.
+TPA CoWork supports three kinds of input—images, files, and voice—all handed to the model together with your message.
 
 - **Images / files**: click the "+" button in the input toolbar to choose them, or simply **paste / drag and drop**.
 - **Pasting long text**: pasting a large block of text automatically turns it into a text attachment, so it doesn't overflow the input box.
@@ -95,7 +95,7 @@ Replies support full Markdown, syntax-highlighted code, math formulas (KaTeX), a
 ## 3.5 Managing and searching sessions
 
 - **New conversation**: "New" in the sidebar, or `/new`. When you start a new conversation inside a project, it stays as a draft first and is only saved once you send the first message.
-- **Session list**: the sidebar is sorted by most recently updated and can be pinned. It has two browsing tabs, "Sessions" and "Sub-Agents". Sessions for scheduled tasks, Incognito, the Knowledge Space, and the Design Space **do not appear in the main list**.
+- **Session list**: the sidebar is sorted by most recently updated and can be pinned. It has two browsing tabs, "Sessions" and "Sub-Agents". Sessions for scheduled tasks, Incognito, the Knowledge Space **do not appear in the main list**.
 - **Switch / rename / delete**: click to switch; you can rename manually (a manual name won't be overwritten by the auto title); deleting also cleans up the messages, attachments, and so on.
 - **Continue in a new session (Fork)**: copies the current session into a new, independent session (copying the conversation content and configuration, but not any running goal, ongoing progression, or background jobs).
 
@@ -138,13 +138,13 @@ Assign a default working directory to the current conversation. It will:
 
 **How to set it**: click the "Working directory" button in the input toolbar. The desktop app opens the system directory picker; the web / server version opens a directory browser (pointing at a path on the server machine).
 
-The priority is "session setting > project setting > default workspace". A session inside a project always has a working directory (by default `~/.hope-agent/projects/{project}/workspace/`).
+The priority is "session setting > project setting > default workspace". A session inside a project always has a working directory (by default `~/.tpa-cowork/projects/{project}/workspace/`).
 
 ---
 
 ## 3.8 Context compaction for long conversations
 
-The amount of conversation a model can remember is limited (the context window). As a conversation grows and approaches the limit, Hope Agent **compacts it automatically in layers**, so long conversations and long tasks can continue without suddenly "losing memory" or erroring out. Compaction happens automatically; you'll usually just see a compaction notice at the top.
+The amount of conversation a model can remember is limited (the context window). As a conversation grows and approaches the limit, TPA CoWork **compacts it automatically in layers**, so long conversations and long tasks can continue without suddenly "losing memory" or erroring out. Compaction happens automatically; you'll usually just see a compaction notice at the top.
 
 Compaction starts with "cleaning up stale tool results at zero cost" and works its way up to "summarizing old history"; after summarizing, it also automatically re-injects the current contents of recently edited files, so the AI doesn't forget the file it's working on.
 

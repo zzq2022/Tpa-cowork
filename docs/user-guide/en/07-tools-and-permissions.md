@@ -1,6 +1,6 @@
 # 07 · Tools & Permissions
 
-Hope Agent "gets work done" because the AI can call **tools** to actually operate: run commands, read and write files, search the web, and control the browser and computer. So that you can hand it these capabilities with confidence, every sensitive operation goes through **approval**. This chapter explains which tools exist, how to govern permissions, and how the sandbox, browser control, and computer control work.
+TPA CoWork "gets work done" because the AI can call **tools** to actually operate: run commands, read and write files, search the web, and control the browser and computer. So that you can hand it these capabilities with confidence, every sensitive operation goes through **approval**. This chapter explains which tools exist, how to govern permissions, and how the sandbox, browser control, and computer control work.
 
 **In this chapter**
 
@@ -183,7 +183,7 @@ The panel shows the current authorization status and missing permissions; clicki
 
 **What it can do**: read-only actions (view the foreground app / windows / element tree, screenshot for the model to view, find elements, list apps / windows / menus) are generally allowed directly; operation actions (click, type, paste, keyboard shortcuts, drag, switch app / window / desktop, click menus, read and write the clipboard) require approval; **high-risk actions** (quit an app, close a window, click dangerous buttons like "Delete / Empty / Reset") can't be "Allow Always" and must be confirmed every time.
 
-> The AI does not read the real contents of password fields, does not stuff screenshots into the context, and cannot control Hope Agent's own window in the background. Before the approval dialog it remembers the current foreground app and restores it after approval, to avoid stealing focus.
+> The AI does not read the real contents of password fields, does not stuff screenshots into the context, and cannot control TPA CoWork's own window in the background. Before the approval dialog it remembers the current foreground app and restores it after approval, to avoid stealing focus.
 
 ---
 

@@ -24,14 +24,14 @@ This chapter explains how to get the AI working with a model: connecting a model
 
 ## 2.1 Connecting a model service (Provider)
 
-Hope Agent connects to each vendor's large models through a "**provider + API key**" pairing. It ships with **40+ provider templates and 300+ preset models**, and also supports any custom OpenAI-compatible or Anthropic endpoint.
+TPA CoWork connects to each vendor's large models through a "**provider + API key**" pairing. It ships with **40+ provider templates and 300+ preset models**, and also supports any custom OpenAI-compatible or Anthropic endpoint.
 
 **Where**: Settings → **Model Configuration** → **Providers** tab → click "**Add Provider**" in the top right.
 
 The first page of the add wizard offers five paths:
 
 1. **Sign in with ChatGPT (Codex)** — the primary button at the top; sign in with an account instead of an API key. See [2.4](#24-sign-in-with-a-chatgpt--codex-account).
-2. **Connect to a remote server** — connect to a machine already running a Hope Agent service and reuse its configuration. See [01 · Access from your phone or another computer](01-getting-started.md#14-access-from-your-phone-or-another-computer).
+2. **Connect to a remote server** — connect to a machine already running a TPA CoWork service and reuse its configuration. See [01 · Access from your phone or another computer](01-getting-started.md#14-access-from-your-phone-or-another-computer).
 3. **Local model assistant** — appears when Ollama is not installed; installs a local model in one click. See [2.9](#29-one-click-local-model-install).
 4. **Choose a built-in template** — a searchable grid of providers; those already configured get a green "Configured" badge.
 5. **Custom provider** — connect to any compatible endpoint.
@@ -82,7 +82,7 @@ Each key configuration includes: a label (to tell them apart), the API key, an e
 
 ## 2.3 Four API types
 
-The API type tells Hope Agent which protocol to use when talking to the provider. **When using a built-in template it is already pre-filled, so you don't need to worry about it**; you only need to pick the right one according to the provider's documentation for custom endpoints.
+The API type tells TPA CoWork which protocol to use when talking to the provider. **When using a built-in template it is already pre-filled, so you don't need to worry about it**; you only need to pick the right one according to the provider's documentation for custom endpoints.
 
 | Type | Description | When to use |
 | --- | --- | --- |
@@ -104,16 +104,16 @@ Don't want to enter an API key by hand? You can sign in directly with a ChatGPT 
 You can also sign in from the command line (suitable for remote / headless machines):
 
 ```bash
-hope-agent auth codex login          # Sign in on this machine
-hope-agent auth codex login --no-open # Print the authorization link only (pair with SSH port forwarding)
-hope-agent auth codex status         # Check sign-in status
-hope-agent auth codex logout         # Sign out (deletes the Codex provider and local credentials)
+tpa-cowork auth codex login          # Sign in on this machine
+tpa-cowork auth codex login --no-open # Print the authorization link only (pair with SSH port forwarding)
+tpa-cowork auth codex status         # Check sign-in status
+tpa-cowork auth codex logout         # Sign out (deletes the Codex provider and local credentials)
 ```
 
 **Re-sign in**: the Codex provider card's "⋮" menu has "Re-sign in" (rather than "Delete", to avoid accidental removal); when the token expires the interface also guides you to sign in again.
 
 - The specific model used after signing in can be switched in Settings; the default is the tier available across all account levels.
-- Codex credentials are stored only on this machine (`~/.hope-agent/credentials/auth.json`) and are never written to logs.
+- Codex credentials are stored only on this machine (`~/.tpa-cowork/credentials/auth.json`) and are never written to logs.
 - Codex sign-in and the account sign-in for [11 · MCP: connecting external tools](11-connect-and-extend.md#111-mcp-connecting-external-tools) are two completely independent mechanisms that do not affect each other.
 
 ---
@@ -245,7 +245,7 @@ A "speech-to-text" engine independent of the main model, used for: desktop micro
 
 ## 2.12 AI image and audio generation
 
-Image and audio generation share one **provider → models → per-function default chain** configuration, serving the `image_generate` / `audio_generate` tools in conversations and the [Design Space](06-design-space.md).
+Image and audio generation share one **provider → models → per-function default chain** configuration, serving the `image_generate` / `audio_generate` tools in conversations.
 
 ### Step 1: Configure providers and models
 
@@ -275,11 +275,11 @@ Provider cards can be dragged to reorder — the order is the priority for autom
 
 The image and audio master switches live here too; turning one off removes the corresponding tool from the AI's tool list.
 
-### Using it in chat and Design Space
+### Using it in chat
 
 In a conversation, just say "draw me a …" to trigger `image_generate`, or "generate a narration / background music / sound effect" to trigger `audio_generate` (you can specify speech / music / SFX, a voice, and a duration). When a reference image is present, models whose capability data declares image editing automatically switch to the corresponding image-editing endpoint; a mask (inpainting) request is only routed to models that declare mask support, and any candidate that can't do it is skipped in favour of the next one.
 
-The image and audio artifacts of the [Design Space](06-design-space.md) run on the same configuration, and its generate dialog lets you pick aspect ratio, resolution, audio kind, voice and duration directly (shown according to model capabilities). **When no provider is configured yet**, those entry points show a guidance card that deep-links straight to the settings page in Step 1.
+
 
 > When adjusting settings through conversation, the AI can only change the default chains and the parameters in the table above; provider entries (including API keys) **can only be changed in the GUI**.
 

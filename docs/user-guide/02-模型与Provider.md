@@ -24,14 +24,14 @@
 
 ## 2.1 接入模型服务商(Provider)
 
-Hope Agent 通过「**服务商 + API Key**」接入各家大模型。内置 **40+ 个服务商模板、300+ 个预设模型**,也支持自定义任意 OpenAI 兼容或 Anthropic 端点。
+TPA CoWork 通过「**服务商 + API Key**」接入各家大模型。内置 **40+ 个服务商模板、300+ 个预设模型**,也支持自定义任意 OpenAI 兼容或 Anthropic 端点。
 
 **入口**:设置 → **模型配置** → **服务商** 标签页 → 点右上角「**添加服务商**」。
 
 添加向导首页提供五条路径:
 
 1. **用 ChatGPT 登录(Codex)**——顶部主按钮,用账号登录而非 API Key,详见 [2.4](#24-用-chatgpt--codex-账号登录)。
-2. **连接远程服务器**——连到一台已经跑着 Hope Agent 服务的机器,复用它的配置,见 [01 · 从手机或另一台电脑访问](01-快速上手.md#14-从手机或另一台电脑访问)。
+2. **连接远程服务器**——连到一台已经跑着 TPA CoWork 服务的机器,复用它的配置,见 [01 · 从手机或另一台电脑访问](01-快速上手.md#14-从手机或另一台电脑访问)。
 3. **本地模型助手**——未装 Ollama 时出现,一键安装本地模型,详见 [2.9](#29-本地模型一键安装)。
 4. **选择内置模板**——可搜索的服务商网格,已配置的会打绿色「已配置」角标。
 5. **自定义服务商**——接入任意兼容端点。
@@ -82,7 +82,7 @@ Hope Agent 通过「**服务商 + API Key**」接入各家大模型。内置 **4
 
 ## 2.3 四种 API 类型
 
-API 类型告诉 Hope Agent 用哪套协议和服务商通信。**用内置模板时它已经预填好,你不用关心**;只有自定义端点时才需要按服务商文档选对。
+API 类型告诉 TPA CoWork 用哪套协议和服务商通信。**用内置模板时它已经预填好,你不用关心**;只有自定义端点时才需要按服务商文档选对。
 
 | 类型 | 说明 | 什么时候用 |
 | --- | --- | --- |
@@ -104,16 +104,16 @@ API 类型告诉 Hope Agent 用哪套协议和服务商通信。**用内置模�
 也可以用命令行登录(适合远程 / 无图形界面的机器):
 
 ```bash
-hope-agent auth codex login          # 本机登录
-hope-agent auth codex login --no-open # 只打印授权链接(配合 SSH 端口转发)
-hope-agent auth codex status         # 查看登录状态
-hope-agent auth codex logout         # 登出(会删除 Codex 服务商与本地凭据)
+tpa-cowork auth codex login          # 本机登录
+tpa-cowork auth codex login --no-open # 只打印授权链接(配合 SSH 端口转发)
+tpa-cowork auth codex status         # 查看登录状态
+tpa-cowork auth codex logout         # 登出(会删除 Codex 服务商与本地凭据)
 ```
 
 **重新登录**:Codex 服务商卡片的「⋮」菜单里有「重新登录」(而不是「删除」,避免误删);token 过期时界面也会引导你重新登录。
 
 - 登录后使用的具体模型可在设置里切换,默认选择所有账号档位都可用的那一档。
-- Codex 凭据只存在本机(`~/.hope-agent/credentials/auth.json`),绝不写入日志。
+- Codex 凭据只存在本机(`~/.tpa-cowork/credentials/auth.json`),绝不写入日志。
 - Codex 登录与 [11 · MCP 接入外部工具](11-连接与扩展.md#111-mcp接入外部工具) 的账号登录是两套完全独立的机制,互不影响。
 
 ---

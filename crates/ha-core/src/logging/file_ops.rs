@@ -78,8 +78,11 @@ pub fn cleanup_old_log_files(max_age_days: u32) -> Result<u64> {
     for entry in std::fs::read_dir(&logs_dir)? {
         let entry = entry?;
         let name = entry.file_name().to_string_lossy().to_string();
-        // Parse date from filename: hope-agent-YYYY-MM-DD.log or hope-agent-YYYY-MM-DD.N.log
-        if let Some(date_part) = name.strip_prefix("hope-agent-") {
+        // Parse date from filename: tpa-cowork-YYYY-MM-DD.log or hope-agent-YYYY-MM-DD.log
+        let date_part_opt = name
+            .strip_prefix("tpa-cowork-")
+            .or_else(|| name.strip_prefix("hope-agent-"));
+        if let Some(date_part) = date_part_opt {
             let date = crate::truncate_utf8(date_part, 10);
             if date < cutoff_date.as_str() {
                 let _ = std::fs::remove_file(entry.path());
@@ -94,7 +97,7 @@ pub fn cleanup_old_log_files(max_age_days: u32) -> Result<u64> {
 pub fn current_log_file_path() -> Result<String> {
     let logs_dir = crate::paths::logs_dir()?;
     let today = chrono::Utc::now().format("%Y-%m-%d").to_string();
-    let path = logs_dir.join(format!("hope-agent-{}.log", today));
+    let path = logs_dir.join(format!("tpa-cowork-{}.log", today));
     Ok(path.to_string_lossy().to_string())
 }
 

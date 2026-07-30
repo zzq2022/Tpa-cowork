@@ -81,7 +81,7 @@ impl LogFileWriter {
         self.current_date = date.to_string();
 
         // Find a non-full file for this date
-        let base_name = format!("hope-agent-{}.log", date);
+        let base_name = format!("tpa-cowork-{}.log", date);
         let path = self.logs_dir.join(&base_name);
 
         // If base file exists and is over max size, use numbered suffix
@@ -91,7 +91,7 @@ impl LogFileWriter {
                 // Find next available numbered file
                 let mut n = 1u32;
                 loop {
-                    let numbered = self.logs_dir.join(format!("hope-agent-{}.{}.log", date, n));
+                    let numbered = self.logs_dir.join(format!("tpa-cowork-{}.{}.log", date, n));
                     if !numbered.exists() {
                         break (numbered, 0);
                     }

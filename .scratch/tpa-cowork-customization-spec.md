@@ -129,6 +129,14 @@
 - **Windows 免管理员权限安装（currentUser）**：`src-tauri/tauri.conf.json` 中的 NSIS 安装模式强制配置为 `"installMode": "currentUser"`，默认安装至 `%LOCALAPPDATA%\Programs\TPA CoWork` 目录，确保在无系统管理员权限的普通电脑用户环境下即可直接安装运行，无需 UAC 提权。
 - **验收**：在普通用户账号下双击打出的 Windows 安装包不触发管理员提权弹窗并能顺利安装完成；在对应编译环境下通过 `pnpm pack:local:bundle -- --target <triple>` 能准确打出完整可安装的软件包。
 
+### PACKAGE-002：NSIS 卸载数据清理与弹窗交互规范
+
+- 在 `src-tauri/tauri.conf.json` 中挂载 `"installerHooks": "./windows/installer-hooks.nsh"`。
+- 在 `NSIS_HOOK_PREUNINSTALL` 中挂钩 `$DeleteAppData` 变量：
+  - 勾选卸载界面的 `☑ 删除应用程序数据` 时，直接自动物理删除 `%USERPROFILE%\.tpa-cowork`。
+  - 未勾选时，弹出 MessageBox 二次确认框。
+- **验收**：执行卸载流程时，选“是”或勾选界面复选框均能干净清空 `%USERPROFILE%\.tpa-cowork` 数据与配置目录；选“否”保留用户数据库。
+
 ### DEV-001：Dev 开发模式无锁就绪配置
 
 - `src-tauri/tauri.conf.json` 的 `beforeDevCommand` 配置保持为 `"pnpm dev"`。

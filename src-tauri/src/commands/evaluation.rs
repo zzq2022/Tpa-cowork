@@ -153,6 +153,7 @@ impl DesktopEvalRuntime {
             .as_ref()
             .ok_or_else(|| anyhow!("packaged evals/live assets are missing"))?;
         let mut command = Command::new(sidecar);
+        ha_core::platform::hide_console_tokio(&mut command);
         command
             .arg("--root")
             .arg(asset_root)
@@ -858,10 +859,13 @@ fn local_build_identity(product: &Path) -> (String, bool) {
     let Some(root) = find_upward(start, |candidate| candidate.join(".git")) else {
         return fallback;
     };
-    let head = std::process::Command::new("git")
+    let mut head_cmd = std::process::Command::new("git");
+    head_cmd
         .arg("-C")
         .arg(&root)
-        .args(["rev-parse", "HEAD"])
+        .args(["rev-parse", "HEAD"]);
+    ha_core::platform::hide_console(&mut head_cmd);
+    let head = head_cmd
         .output()
         .ok()
         .filter(|output| output.status.success())
@@ -870,7 +874,8 @@ fn local_build_identity(product: &Path) -> (String, bool) {
         .filter(|value| {
             matches!(value.len(), 40 | 64) && value.bytes().all(|byte| byte.is_ascii_hexdigit())
         });
-    let dirty = std::process::Command::new("git")
+    let mut dirty_cmd = std::process::Command::new("git");
+    dirty_cmd
         .arg("-C")
         .arg(&root)
         .args([
@@ -880,7 +885,9 @@ fn local_build_identity(product: &Path) -> (String, bool) {
             "--",
             ".",
             ":(exclude)src-tauri/binaries/hope-agent-eval-*",
-        ])
+        ]);
+    ha_core::platform::hide_console(&mut dirty_cmd);
+    let dirty = dirty_cmd
         .output()
         .ok()
         .filter(|output| output.status.success())

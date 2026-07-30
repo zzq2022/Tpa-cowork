@@ -167,6 +167,7 @@ pub fn run_guardian(child_args: Vec<String>, config: GuardianConfig) -> ! {
         // Build the child command
         let mut cmd = Command::new(&exe);
         cmd.args(&child_args);
+        crate::platform::hide_console(&mut cmd);
 
         // Pass recovery info to child if this is a crash recovery
         if crash_count > 0 {

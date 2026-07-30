@@ -2,7 +2,7 @@
 
 > 返回 [文档索引](../README.md)
 
-> Hope Agent 多渠道即时通讯接入 — Rust 原生实现
+> TPA CoWork Agent 多渠道即时通讯接入 — Rust 原生实现
 
 ## 目录
 
@@ -50,7 +50,7 @@
 
 ## 概述
 
-IM Channel 系统是 Hope Agent 的多渠道即时通讯接入层，允许用户通过 Telegram、Discord、Slack 等 IM 平台与 AI Agent 对话。系统基于 Rust 原生实现，充分利用 tokio 异步运行时获得优秀的性能和较低的资源开销。
+IM Channel 系统是 TPA CoWork Agent 的多渠道即时通讯接入层，允许用户通过 Telegram、Discord、Slack 等 IM 平台与 AI Agent 对话。系统基于 Rust 原生实现，充分利用 tokio 异步运行时获得优秀的性能和较低的资源开销。
 
 ### 核心特性
 
@@ -149,7 +149,7 @@ graph TB
         CONFIG["ChannelStoreConfig<br/>config.rs"]
     end
 
-    subgraph "Hope Agent Core"
+    subgraph "TPA CoWork Agent Core"
         AGENT["AssistantAgent<br/>agent/mod.rs"]
         TOOLS["30 内置工具<br/>tools/"]
         PROVIDERS["4 种 LLM Provider<br/>agent/providers/"]
@@ -727,7 +727,7 @@ watchdog 自己修不好，只有用户能重新提供凭据或解封。命中�
 
 ### channel_conversations 表
 
-新增 SQLite 表，将 IM 对话映射到 Hope Agent 会话：
+新增 SQLite 表，将 IM 对话映射到 TPA CoWork Agent 会话：
 
 ```sql
 CREATE TABLE channel_conversations (
@@ -822,7 +822,7 @@ CREATE TABLE channel_conversations (
 - **账号 readiness 等待**:每个 send task 进入 JoinSet 后先 poll [`registry.health(account_id).is_running`](../../crates/ha-core/src/channel/registry.rs),最多等 `ACCOUNT_READY_WAIT_SECS=30`(2s 间隔)。覆盖 OAuth-y 慢握手(Lark / Slack)+ watchdog 首轮失败稍后恢复的场景。超时则当作发送失败(不写 `mark_notified`,下次重启可补发)。
 - **去重**:per-chat sentinel [`startup_state.json`](../../crates/ha-core/src/channel/worker/startup_state.rs) 在 `~/.hope-agent/` 下记录 `last_notified[<ch>:<acc>:<chat>:<thread>] -> RFC3339`;30 min cooldown 内同一 chat 不重复(`cooldown_secs`)。复用 [`platform::write_secure_file`](../../crates/ha-core/src/platform/mod.rs)(tmp + fsync + 0600 + rename),prune 7 天前 entry 防文件膨胀。
 - **per-account 静音**:`ChannelAccountConfig.notify_startup`(默认 `true`),与 `notify_session_eviction` 同款。GUI 在「Channels → 编辑账号」对话框。
-- **文案**:硬编码英文带 emoji,与 `eviction_watcher` 一致(IM 服务器不带收件人 locale,backend 翻译会选错语言)。文本「📡 Hope Agent is back online. If you were waiting on a reply, send your last message again.」
+- **文案**:硬编码英文带 emoji,与 `eviction_watcher` 一致(IM 服务器不带收件人 locale,backend 翻译会选错语言)。文本「📡 TPA CoWork Agent is back online. If you were waiting on a reply, send your last message again.」
 
 ### GUI ↔ IM live 流式镜像
 
@@ -1860,7 +1860,7 @@ flowchart TD
     IN["入站消息"]
     L1["Layer 1: 群组消息过滤<br/>仅处理 @mention / /command / reply-to-bot"]
     L2["Layer 2: check_access() 策略引擎<br/>DM: dmPolicy（open / allowlist / pairing）<br/>Group: group_allowlist + user_allowlist<br/>Admin: admin_ids 始终通过"]
-    L3["Layer 3: Agent 工具权限<br/>复用 Hope Agent 的工具审批机制"]
+    L3["Layer 3: Agent 工具权限<br/>复用 TPA CoWork Agent 的工具审批机制"]
     IN --> L1 --> L2 --> L3
 ```
 

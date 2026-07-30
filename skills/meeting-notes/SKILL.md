@@ -2,7 +2,7 @@
 name: meeting-notes
 description: Use when the user asks to capture, structure, or summarize meeting notes / call notes / 1:1 discussion / standup notes. Produces a standard template with attendees, agenda, decisions, action items (owner + deadline), and open questions.
 version: 1.0.0
-author: Hope Agent
+author: TPA CoWork Agent
 license: MIT
 metadata:
   hermes:

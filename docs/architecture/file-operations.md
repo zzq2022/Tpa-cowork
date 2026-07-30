@@ -1,6 +1,6 @@
 # 统一文件能力（File Operations）
 
-本文是 Hope Agent 文件展示、预览、打开、下载、编辑与上传生命周期的单一架构真相源。项目文件浏览器、聊天输入框草稿、消息附件、Markdown 文件链接、工具媒体、Workspace 产物、项目 Memory 文件和知识空间文件都必须从本契约派生；业务组件不得自行判断 Tauri/HTTP、拼接文件 URL 或直接调用 `window.open`。
+本文是 TPA CoWork Agent 文件展示、预览、打开、下载、编辑与上传生命周期的单一架构真相源。项目文件浏览器、聊天输入框草稿、消息附件、Markdown 文件链接、工具媒体、Workspace 产物、项目 Memory 文件和知识空间文件都必须从本契约派生；业务组件不得自行判断 Tauri/HTTP、拼接文件 URL 或直接调用 `window.open`。
 
 ## 1. 两个正交维度
 

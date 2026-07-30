@@ -36,7 +36,7 @@
 
 ### 进程树 kill（Unix 进程组）
 
-`terminate_process_tree` 给的是 `-(pid as i32)`，`kill(2)` 看到负数 pid 时把信号发到对应进程组（PGID）。要让这条路径有效，**spawn 子进程时必须在 `pre_exec` 里调 `setpgid(0, 0)`**——否则子进程默认共享父进程的 PGID，杀负数 pid 等于杀自己。Hope Agent 里 `tools::exec` / `subagent::spawn` / `cron::scheduler` / `acp_control::runtime_stdio` 等所有创建长跑子进程的入口都已就位，新加路径必须沿用同一约定。
+`terminate_process_tree` 给的是 `-(pid as i32)`，`kill(2)` 看到负数 pid 时把信号发到对应进程组（PGID）。要让这条路径有效，**spawn 子进程时必须在 `pre_exec` 里调 `setpgid(0, 0)`**——否则子进程默认共享父进程的 PGID，杀负数 pid 等于杀自己。TPA CoWork Agent 里 `tools::exec` / `subagent::spawn` / `cron::scheduler` / `acp_control::runtime_stdio` 等所有创建长跑子进程的入口都已就位，新加路径必须沿用同一约定。
 
 `send_graceful_stop` 是单 pid，不带组，专门给"我自己 supervise 的 child，组级停由我额外控制"的场景。
 
@@ -75,7 +75,7 @@ Windows 上用 `std::process::Command` / `tokio::process::Command` spawn 一个*
 
 `detect_system_proxy` 两端都用 `OnceLock<Option<String>>` 进程级缓存。理由：`provider/proxy.rs` / `docker/proxy.rs` 等 caller 每次构建 reqwest client 都会调一次，winreg / `scutil` / `gsettings` / `kreadconfig` 都不应该在 hot path 上重复探测。
 
-如果用户在运行时改了系统代理，需要重启 Hope Agent 才能生效——这个 trade-off 有意为之，因为系统代理变更属于罕见配置事件，相比每次重读系统配置更划算。
+如果用户在运行时改了系统代理，需要重启 TPA CoWork Agent 才能生效——这个 trade-off 有意为之，因为系统代理变更属于罕见配置事件，相比每次重读系统配置更划算。
 
 ### `os_version_string` 的 macOS 兜底
 

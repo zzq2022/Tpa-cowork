@@ -2,7 +2,7 @@
 
 > 返回 [文档索引](../README.md) | 关联文档：[前后端分离架构](backend-separation.md) · [API 参考](api-reference.md) · [Chat Engine](chat-engine.md)
 
-本文是前端 `Transport` 运行模式的中心化说明，解释 Hope Agent 在桌面、HTTP/Web、ACP 三种入口下如何通信、如何传递流式聊天事件，以及 EventBus 事件应该从哪里进入 UI。完整的 Tauri 命令、HTTP 路由、`COMMAND_MAP` 对照表仍以 [API 参考](api-reference.md) 为准。
+本文是前端 `Transport` 运行模式的中心化说明，解释 TPA CoWork Agent 在桌面、HTTP/Web、ACP 三种入口下如何通信、如何传递流式聊天事件，以及 EventBus 事件应该从哪里进入 UI。完整的 Tauri 命令、HTTP 路由、`COMMAND_MAP` 对照表仍以 [API 参考](api-reference.md) 为准。
 
 ## 运行模式
 
@@ -180,7 +180,7 @@ Tauri 桌面没有 `/ws/events`，但同一个 EventBus 会在 `src-tauri/src/se
 | Notifications | `agent:send_notification` | Agent 触发系统通知。 |
 | Browser | `browser:frame` | BrowserPanel 实时帧；payload 可带 `sessionId`，ExtensionBackend 优先当前会话真实 claimed tab，CDP fallback 保持旧路径。 |
 | Browser | `browser:extension_required` | 某次真实 Chrome 状态相关动作需要扩展但扩展不可用，UI 显示安装引导。 |
-| Browser | `browser:control_stopped` | 用户 Stop、lease 被 steal、tab 关闭或 session cleanup 导致 Hope Agent 停止控制某个 tab。 |
+| Browser | `browser:control_stopped` | 用户 Stop、lease 被 steal、tab 关闭或 session cleanup 导致 TPA CoWork Agent 停止控制某个 tab。 |
 | Browser | `browser:chromium_download_progress` | CDP fallback Chromium runtime 下载进度。 |
 | ACP | `acp_control_event` | ACP 运行生命周期。 |
 | Skills | `skills:auto_review_complete` / `skills:curator_proposals_ready` | Skill draft 自动审核完成；auto-curator 周期扫描产出草稿合并建议。 |

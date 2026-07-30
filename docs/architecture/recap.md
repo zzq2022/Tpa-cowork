@@ -214,7 +214,7 @@ flowchart TD
 | 5 | `agent_tool_optimization` | Agent/工具配置建议（2–4 条） | 1500 |
 | 6 | `memory_skill_recommendations` | 记忆条目 + 技能推荐 | 1500 |
 | 7 | `cost_optimization` | 成本优化策略 | 1500 |
-| 8 | `suggestions` | 推荐尝试的 Hope Agent 功能 | 1500 |
+| 8 | `suggestions` | 推荐尝试的 TPA CoWork Agent 功能 | 1500 |
 | 9 | `on_the_horizon` | 未来可探索的高阶工作流 | 1500 |
 | 10 | `fun_ending` | 回忆亮点（含 1 个 emoji） | 1500 |
 | 11 | `at_a_glance` | 总结概览（依赖前 10 章输出） | 1200 |

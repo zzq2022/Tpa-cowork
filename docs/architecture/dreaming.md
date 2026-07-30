@@ -2,7 +2,7 @@
 
 ## 概述
 
-Dreaming 是 Hope Agent 的**离线记忆固化**子系统：在应用空闲、定时或手动触发时，于聊天热路径之外把对话痕迹整理成可审计、可追溯、可纠正的**长期心智**。它分两代能力共存：
+Dreaming 是 TPA CoWork Agent 的**离线记忆固化**子系统：在应用空闲、定时或手动触发时，于聊天热路径之外把对话痕迹整理成可审计、可追溯、可纠正的**长期心智**。它分两代能力共存：
 
 - **Light（一代，固化）**：扫描近期 `memories`，用一次 LLM `side_query` 评分提名，把高价值条目 pin 起来并写一篇「Dream Diary」叙事。
 - **结构化 claim 层（下一代）**：把记忆从平铺的 `memories` 列表升级为结构化 `memory_claims`（主谓宾三元组 + 证据 + 作用域 + 生命周期），叠加确定性过期 / 冲突 resolver、Memory Profile 合成、Context Pack 注入、以及面向用户的 **Lucid Review** 纠错闭环。

@@ -2,7 +2,7 @@
 
 > [简体中文](docker.md) · English
 
-Hope Agent ships official multi-arch container images covering `linux/amd64` and `linux/arm64`, built and pushed automatically to GitHub Container Registry on every release tag.
+TPA CoWork Agent ships official multi-arch container images covering `linux/amd64` and `linux/arm64`, built and pushed automatically to GitHub Container Registry on every release tag.
 
 What's containerized is the `hope-agent server` mode — an HTTP/WebSocket server that embeds the full Web GUI. Visit the exposed port in a browser and you get the same interface as the desktop app: onboarding wizard, Provider / MCP / IM Channel configuration, full chat. The Tauri desktop GUI and the ACP stdio mode are not container-suitable.
 
@@ -58,12 +58,12 @@ The image `EXPOSE`s `8420`. `docker-compose.yml` binds host `127.0.0.1:8420` to 
 
 #### LAN / public exposure
 
-To make Hope Agent reachable on the LAN or public internet, **set `HA_API_KEY`**, change the port mapping to `8420:8420` (drop the `127.0.0.1:` prefix), and strongly consider a TLS-terminating reverse proxy.
+To make TPA CoWork Agent reachable on the LAN or public internet, **set `HA_API_KEY`**, change the port mapping to `8420:8420` (drop the `127.0.0.1:` prefix), and strongly consider a TLS-terminating reverse proxy.
 
 Three typical patterns:
 
 1. **Direct exposure with in-browser token entry**: `HA_API_KEY=...` + `0.0.0.0:8420`. First visit pops a "Server authentication required" dialog — paste the token and it gets cached in localStorage for subsequent loads. You can also share a one-shot link `https://host:8420/?token=XXX`; the frontend captures the token and rewrites the URL so it never reaches browser history / `Referer` / bookmarks. **Risk**: the token lives in `localStorage` and is reachable from any XSS on the page; best for trusted networks / small teams.
-2. **Reverse proxy injects `Authorization` (recommended for production)**: Caddy / Nginx / Traefik terminates TLS and adds `Authorization: Bearer ${HA_API_KEY}` to upstream requests. Hope Agent enforces `HA_API_KEY`; the browser never sees the token. Do user-facing access control at the proxy layer (mTLS / OIDC / basic auth).
+2. **Reverse proxy injects `Authorization` (recommended for production)**: Caddy / Nginx / Traefik terminates TLS and adds `Authorization: Bearer ${HA_API_KEY}` to upstream requests. TPA CoWork Agent enforces `HA_API_KEY`; the browser never sees the token. Do user-facing access control at the proxy layer (mTLS / OIDC / basic auth).
 3. **VPN / tailnet only**: Tailscale / WireGuard / Zerotier brings the container onto a private network — no `HA_API_KEY` needed, network-layer isolation does the work.
 
 ### Persistent data
@@ -110,12 +110,12 @@ What the `ollama` service in `docker-compose.yml` does:
 
 - Pulls `ollama/ollama:latest`
 - Persists models in the named volume `ollama-models` (maps to `/root/.ollama` inside)
-- By default only reachable from inside the compose network — Hope Agent talks to it over `http://ollama:11434/v1`
+- By default only reachable from inside the compose network — TPA CoWork Agent talks to it over `http://ollama:11434/v1`
 - GPU passthrough and host port exposure are commented out by default; uncomment as needed
 
-Wire Hope Agent to Ollama:
+Wire TPA CoWork Agent to Ollama:
 
-1. In the browser, open Hope Agent's onboarding / settings panel
+1. In the browser, open TPA CoWork Agent's onboarding / settings panel
 2. Add a new Provider, type **OpenAI Chat** (Ollama exposes an OpenAI-compatible API)
 3. Set Base URL to `http://ollama:11434/v1`
 4. API Key can be anything (Ollama doesn't validate it)
@@ -157,7 +157,7 @@ For production, pin to a concrete tag like `ghcr.io/shiwenwen/hope-agent:v0.2.1`
 
 ## Reverse proxy
 
-For production deployments, put Nginx / Caddy / Traefik in front for TLS termination. Hope Agent serves both HTTP and WebSocket (`/api/ws/...`), so the proxy must handle WS upgrade correctly.
+For production deployments, put Nginx / Caddy / Traefik in front for TLS termination. TPA CoWork Agent serves both HTTP and WebSocket (`/api/ws/...`), so the proxy must handle WS upgrade correctly.
 
 Caddy example:
 

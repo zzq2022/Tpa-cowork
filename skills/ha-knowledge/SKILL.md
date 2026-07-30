@@ -1,6 +1,6 @@
 ---
 name: ha-knowledge
-description: "Working method for the Hope Agent knowledge space — how to capture, organize, link, retrieve, and maintain Markdown notes well with the `note_*` tools. Load whenever you are reading or writing notes in an attached knowledge base. Trigger on: user asks to take / save / organize / restructure notes, build or grow a knowledge base / vault / second brain, link related notes, find related or similar notes, distill a long note into atomic notes, build a map-of-content (MOC) / index, clean up broken links or orphans, or turn a conversation into a note. Chinese triggers: 记笔记, 整理笔记, 知识库, 知识空间, 笔记网络, 关联笔记, 拆成原子笔记, 建索引/MOC, 清理断链, 把对话存成笔记."
+description: "Working method for the TPA CoWork Agent knowledge space — how to capture, organize, link, retrieve, and maintain Markdown notes well with the `note_*` tools. Load whenever you are reading or writing notes in an attached knowledge base. Trigger on: user asks to take / save / organize / restructure notes, build or grow a knowledge base / vault / second brain, link related notes, find related or similar notes, distill a long note into atomic notes, build a map-of-content (MOC) / index, clean up broken links or orphans, or turn a conversation into a note. Chinese triggers: 记笔记, 整理笔记, 知识库, 知识空间, 笔记网络, 关联笔记, 拆成原子笔记, 建索引/MOC, 清理断链, 把对话存成笔记."
 license: MIT
 status: active
 aliases:
@@ -11,7 +11,7 @@ aliases:
 
 # Knowledge Space — operating method
 
-Notes in a Hope Agent knowledge base are **real `.md` files** on disk — the
+Notes in a TPA CoWork Agent knowledge base are **real `.md` files** on disk — the
 file is the single source of truth; the search index, link graph, and tags are a
 rebuildable cache derived from it. Your job is to keep that corpus coherent: the
 value of a knowledge base is in its **links**, not its file count.

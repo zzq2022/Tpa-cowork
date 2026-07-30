@@ -258,7 +258,7 @@ V3 strict proof audit：
 - 模板文件是 `v3-strict-proof-evidence.template.json`，用于记录真实验收后如何填写；模板或 pending 条目不会让审计通过。采集辅助入口是 `node scripts/v3-strict-proof-record.mjs --requirement <name>`：它默认只创建 pending 条目和 artifact 骨架，标记 `passed` 必须显式 `--confirm-reviewed`，artifact 必须已存在，且 artifact 内 `Required Coverage` / `Reviewer Decision` checklist 必须全部勾选；最终是否关闭仍由 audit 脚本决定。
 - 快速状态入口是 `node scripts/v3-strict-proof-record.mjs --list`，下一项入口是 `--next`，机器可读入口是 `--list --json`，退出码门禁是 `--check-ready`（ready 返回 `0`，仍有 open blocker 返回 `2`）。`summary.remaining == 0` / `--check-ready` 只表示五个 strict proof artifact 已按 record 脚本口径准备完毕，最终关闭仍必须以 audit 脚本退出码 `0` 为准。
 - 五个 strict proof requirement 的顺序、coverage、允许证据类型和 reviewer decision 文案以 `scripts/v3-strict-proof-requirements.mjs` 为单一来源；`record` 和 `audit` 都必须引用它，避免“状态列表已 ready 但最终 audit 失败”的定义漂移。
-- `--write <path>` 可把最新报告写入外部 Plans，例如 `v3-strict-proof-audit-latest.md`。当前 required strict proof 包括真实 restart/resume matrix、真实 wall-clock soak、真实或沙箱 connector read-back、Tauri desktop manual GUI smoke，以及 Hope Agent 与同类工具的对比评测证据。
+- `--write <path>` 可把最新报告写入外部 Plans，例如 `v3-strict-proof-audit-latest.md`。当前 required strict proof 包括真实 restart/resume matrix、真实 wall-clock soak、真实或沙箱 connector read-back、Tauri desktop manual GUI smoke，以及 TPA CoWork Agent 与同类工具的对比评测证据。
 - 2026-07-09 V3 关闭证据已归档到外部 Plans 的 V3 closure 目录：5 个 required strict proof 全部 `passed`，最终 audit `14/14 passed`、`blockers=0`。其中 connector read-back 采用 GitHub sandbox branch create/read/delete/reset 路线；Google Drive OAuth scope 失败作为 recovery evidence 保留，不算通过证据。
 
 ## 8. 后续

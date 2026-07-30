@@ -89,7 +89,7 @@
 
 不能完全对齐官方的字段都登记于此，**不隐藏差异**。
 
-| 字段 / 语义 | 官方 | Hope Agent | 影响 |
+| 字段 / 语义 | 官方 | TPA CoWork Agent | 影响 |
 |------------|------|-----------|------|
 | `tool_name`（payload） | `Bash` / `Write` / `Edit` / `Read` / `WebFetch` … | 内部名 `exec` / `write` / `edit` / `read` / `web_fetch`。**matcher 归一化别名**（写 `matcher:"Bash"` 能命中），但 **payload 的 `.tool_name` 是内部名** | 脚本若 `jq` 判 `.tool_name=="Bash"` 不命中——改判 `.tool_input.*`（已对齐）|
 | `permission_mode` | `default\|plan\|acceptEdits\|auto\|dontAsk\|bypassPermissions` | 仅 `default\|plan\|bypassPermissions` | 硬 switch 5 值的脚本需兜底 `other` |

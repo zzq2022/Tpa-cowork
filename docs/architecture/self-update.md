@@ -4,7 +4,7 @@
 
 ## 目的
 
-Hope Agent 是单 binary 多形态产品（桌面 GUI / `hope-agent server` 守护进程 / `hope-agent acp`），首装渠道多（DMG / MSI / NSIS / AppImage / Homebrew cask / Scoop / AUR / 自建 apt+dnf repo）。自升级子系统让模型在任意形态下，按对话指令完成「检查 → 确认 → 下载 → 校验 → 替换 → 重启」全流程；不可恢复时通过 `ask_user_question` 让用户在对话里选路径。
+TPA CoWork Agent 是单 binary 多形态产品（桌面 GUI / `hope-agent server` 守护进程 / `hope-agent acp`），首装渠道多（DMG / MSI / NSIS / AppImage / Homebrew cask / Scoop / AUR / 自建 apt+dnf repo）。自升级子系统让模型在任意形态下，按对话指令完成「检查 → 确认 → 下载 → 校验 → 替换 → 重启」全流程；不可恢复时通过 `ask_user_question` 让用户在对话里选路径。
 
 ## 三档升级路径
 
@@ -137,7 +137,7 @@ binary 换好后 [`service_control::restart_service`](../../crates/ha-core/src/u
 
 - macOS：`launchctl kickstart -k gui/$UID/ai.hopeagent.server`
 - Linux：`systemctl --user restart hope-agent.service`
-- Windows：`schtasks /End /TN "Hope Agent" && schtasks /Run /TN "Hope Agent"`
+- Windows：`schtasks /End /TN "TPA CoWork Agent" && schtasks /Run /TN "TPA CoWork Agent"`
 
 成功 ≈ 1-2s 不可用窗口。已注册 service 时由 OS 重启；未注册时返回 best-effort 提示让用户手动重启。
 

@@ -1,6 +1,6 @@
 # Windows 开发指南
 
-这份文档针对想要在 Windows 上开发、打包或运行 Hope Agent 的人。如果你只想用预编译的 `.msi` / `.exe`，跳到[安装预编译版本](#安装预编译版本)即可。
+这份文档针对想要在 Windows 上开发、打包或运行 TPA CoWork Agent 的人。如果你只想用预编译的 `.msi` / `.exe`，跳到[安装预编译版本](#安装预编译版本)即可。
 
 ## 平台支持矩阵
 
@@ -93,7 +93,7 @@ hope-agent server uninstall
 设计说明：Windows 上 `install` 注册的是一个 **Task Scheduler 任务**（不是真正的 Windows Service），和 macOS `launchd` + Linux `systemctl --user` 保持行为一致——都是"用户登录后台自启"，不走 SCM dispatcher，不需要管理员权限。如果你需要真正的 Windows Service（开机即启、无需登录），手动用 [nssm](https://nssm.cc/) 包装：
 
 ```powershell
-nssm install Hope Agent "C:\Program Files\Hope Agent\hope-agent.exe" "server" "--bind" "127.0.0.1:8420"
+nssm install TPA CoWork Agent "C:\Program Files\TPA CoWork Agent\hope-agent.exe" "server" "--bind" "127.0.0.1:8420"
 ```
 
 ## CI 验证

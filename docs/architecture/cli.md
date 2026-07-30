@@ -2,7 +2,7 @@
 
 > 返回 [文档索引](../README.md) | 关联文档：[Transport 运行模式](transport-modes.md) · [前后端分离架构](backend-separation.md) · [进程与并发模型](process-model.md) · [可靠性与崩溃自愈](reliability.md) · [ACP 协议](acp.md) | 关联源码：[`src-tauri/src/main.rs`](../../src-tauri/src/main.rs) · [`crates/ha-core/src/service_install.rs`](../../crates/ha-core/src/service_install.rs) · [`crates/ha-core/src/onboarding/`](../../crates/ha-core/src/onboarding/)
 
-Hope Agent 的所有运行模式共享同一个二进制 `hope-agent`。CLI 是分流入口：根据第一个非全局参数决定走桌面 GUI、HTTP/WS 守护进程、Knowledge MCP stdio、平台 MCP stdio、ACP stdio 协议，还是一次性的 OAuth 登录流程。本文是 CLI 子命令、参数与环境变量的完整参考——参数解析逻辑全部在 [`src-tauri/src/main.rs`](../../src-tauri/src/main.rs)，手写 `std::env::args()` 不依赖 clap，行为以源码为准。
+TPA CoWork Agent 的所有运行模式共享同一个二进制 `hope-agent`。CLI 是分流入口：根据第一个非全局参数决定走桌面 GUI、HTTP/WS 守护进程、Knowledge MCP stdio、平台 MCP stdio、ACP stdio 协议，还是一次性的 OAuth 登录流程。本文是 CLI 子命令、参数与环境变量的完整参考——参数解析逻辑全部在 [`src-tauri/src/main.rs`](../../src-tauri/src/main.rs)，手写 `std::env::args()` 不依赖 clap，行为以源码为准。
 
 ## 子命令总览
 
@@ -56,7 +56,7 @@ hope-agent knowledge-mcp [OPTIONS]
 hope-agent mcp [--allow-writes]
 ```
 
-由 `run_mcp` 处理，是**平台级** MCP server——共享 host（`ha-core/src/mcp_server/`）+ `ToolProvider` 注册表，**设计空间是首个 provider**（`design/mcp_provider.rs`）。与 `knowledge-mcp`（独立子命令、保持原样）互补：`mcp` 是「Hope Agent as MCP server」的统一入口，后续 memory 等子系统挂同一 host。协议同为 NDJSON JSON-RPC over stdio、本机信任无 token。
+由 `run_mcp` 处理，是**平台级** MCP server——共享 host（`ha-core/src/mcp_server/`）+ `ToolProvider` 注册表，**设计空间是首个 provider**（`design/mcp_provider.rs`）。与 `knowledge-mcp`（独立子命令、保持原样）互补：`mcp` 是「TPA CoWork Agent as MCP server」的统一入口，后续 memory 等子系统挂同一 host。协议同为 NDJSON JSON-RPC over stdio、本机信任无 token。
 
 | 参数 | 类型 | 默认 | 说明 |
 | --- | --- | --- | --- |

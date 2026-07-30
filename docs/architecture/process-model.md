@@ -2,7 +2,7 @@
 
 > 返回 [文档索引](../README.md) | 更新时间：2026-04-25 | 关联源码：[`src-tauri/src/main.rs`](../../src-tauri/src/main.rs)、[`guardian.rs`](../../crates/ha-core/src/guardian.rs)、[`app_init.rs`](../../crates/ha-core/src/app_init.rs)、[`logging/app_logger.rs`](../../crates/ha-core/src/logging/app_logger.rs)、[`cron/scheduler.rs`](../../crates/ha-core/src/cron/scheduler.rs)
 
-Hope Agent 的后台工作单元分四层。工程排查常见问题（"为什么重启才生效"、"哪个任务挂了但日志看不出来"）多半落在某一层。
+TPA CoWork Agent 的后台工作单元分四层。工程排查常见问题（"为什么重启才生效"、"哪个任务挂了但日志看不出来"）多半落在某一层。
 
 | 层级 | 载体 | 谁创建 | 典型代表 |
 |------|------|--------|----------|
@@ -215,7 +215,7 @@ Layer A–D 之外的一条横切约定，专治「同步阻塞把 async runtime
 |------|------|----------|
 | **ACP 运行时**（Codex CLI / Claude Code 等） | [`acp_control/runtime_stdio.rs`](../../crates/ha-core/src/acp_control/runtime_stdio.rs) | 会话存活期间，配 [`acp_control/health.rs`](../../crates/ha-core/src/acp_control/health.rs) 健康检查 |
 | **IM Channel 子进程**（部分协议实现） | [`channel/process_manager.rs`](../../crates/ha-core/src/channel/process_manager.rs) | 账户启用期间 |
-| **Docker 容器**（SearXNG / 部署目标） | [`docker/lifecycle.rs`](../../crates/ha-core/src/docker/lifecycle.rs), [`docker/deploy.rs`](../../crates/ha-core/src/docker/deploy.rs) | 容器自身生命周期；Hope Agent 退出不一定 kill |
+| **Docker 容器**（SearXNG / 部署目标） | [`docker/lifecycle.rs`](../../crates/ha-core/src/docker/lifecycle.rs), [`docker/deploy.rs`](../../crates/ha-core/src/docker/deploy.rs) | 容器自身生命周期；TPA CoWork Agent 退出不一定 kill |
 
 ### D2 · 单次调用型（短命，完成即回收）
 

@@ -28,7 +28,7 @@
 
 ## 概述
 
-Project 是 Hope Agent 的**可选会话容器**，把多个会话聚成一个工作空间共享四样东西：
+Project 是 TPA CoWork Agent 的**可选会话容器**，把多个会话聚成一个工作空间共享四样东西：
 
 1. **项目范围长期记忆**（`MemoryScope::Project { id }`）—— SQLite 中可检索、可召回的长期事实，项目内可见、跨项目隔离
 2. **项目自动记忆**（`projects/{id}/memory/`）—— `MEMORY.md` 有界索引稳定注入、主题 Markdown 按需读取的本机项目经验

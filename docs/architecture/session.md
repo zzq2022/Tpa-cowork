@@ -35,7 +35,7 @@
 
 ## 概述
 
-Session 模块是 Hope Agent 的会话与消息持久化系统，基于 SQLite WAL 模式实现高并发读写。所有对话数据（会话元信息、消息内容、工具调用记录、Agent 上下文快照、子 Agent 运行记录、ACP 运行记录）统一存储在 `~/.hope-agent/sessions.db`。
+Session 模块是 TPA CoWork Agent 的会话与消息持久化系统，基于 SQLite WAL 模式实现高并发读写。所有对话数据（会话元信息、消息内容、工具调用记录、Agent 上下文快照、子 Agent 运行记录、ACP 运行记录）统一存储在 `~/.hope-agent/sessions.db`。
 
 核心职责：
 

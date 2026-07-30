@@ -1,4 +1,4 @@
-# Hope Agent 技能系统架构文档
+# TPA CoWork Agent 技能系统架构文档
 
 > 返回 [文档索引](../README.md)
 >
@@ -32,7 +32,7 @@
 
 ## 概述
 
-技能系统（Skills System）是 Hope Agent 的可扩展能力框架。每个技能是一个目录，包含一个 `SKILL.md` 文件，用 YAML frontmatter 声明元数据，用 Markdown body 提供详细指令。
+技能系统（Skills System）是 TPA CoWork Agent 的可扩展能力框架。每个技能是一个目录，包含一个 `SKILL.md` 文件，用 YAML frontmatter 声明元数据，用 Markdown body 提供详细指令。
 
 **核心设计原则：**
 
@@ -44,7 +44,7 @@
 
 **当前语义勘误（2026-04-26）：**
 
-- `always: true` 是 Hope Agent 的扩展字段，语义是**跳过 requirements / 依赖检查**，不是“不可关闭”、不是“始终注入 prompt”、也不是 Skill 标准元字段。全局 Settings、首次引导页和 Agent 级 deny 都允许关闭这类 skill。
+- `always: true` 是 TPA CoWork Agent 的扩展字段，语义是**跳过 requirements / 依赖检查**，不是“不可关闭”、不是“始终注入 prompt”、也不是 Skill 标准元字段。全局 Settings、首次引导页和 Agent 级 deny 都允许关闭这类 skill。
 - Requirements 分两级：**硬不兼容**（当前实现为 OS 不匹配）不进入模型 catalog；**可修复缺依赖/配置**（bins / anyBins / env / config）继续进入 catalog，但 `skill({ name })` 与 `/skill-name` 激活前会返回“缺什么 + 怎么安装/配置”的诊断，不加载 SKILL.md。
 - `paths:` skill 在 `conditionalSkillsEnabled=false` 时不会被激活，因此仍保持隐藏；该开关是紧急停用条件激活机制，不是“让 paths skill 常驻显示”。
 
@@ -222,17 +222,17 @@ When the user asks about GitHub operations, use the `gh` CLI.
 
 ### 字段来源与标准兼容
 
-本节按 2026-04-26 核对过的上游文档划分字段来源，避免把 Hope Agent 的便利扩展误写成跨生态标准。
+本节按 2026-04-26 核对过的上游文档划分字段来源，避免把 TPA CoWork Agent 的便利扩展误写成跨生态标准。
 
-| 层级 | 上游来源 | 标准/约定字段 | Hope Agent 处理 |
+| 层级 | 上游来源 | 标准/约定字段 | TPA CoWork Agent 处理 |
 |------|----------|----------------|-----------------|
 | AgentSkills 开放标准 | [AgentSkills Specification](https://agentskills.io/specification) | `name`、`description` 必需；`license`、`compatibility`、`metadata`、实验性的 `allowed-tools` 可选 | `name` / `description` 是核心发现字段；`license` 用于展示；`metadata` 只解析已知 vendor 子集；`compatibility` 当前不参与运行时逻辑 |
-| OpenAI Codex | [Codex Skills](https://developers.openai.com/codex/skills)、[openai/skills](https://github.com/openai/skills) | Codex 基于 AgentSkills；`SKILL.md` 里主要读取 `name` + `description` 做触发；`agents/openai.yaml` 承载 UI / policy / dependencies | 为最大可移植性，新 skill 应把触发信息优先写进 `description`。Hope Agent 当前不解析 `agents/openai.yaml` |
-| Claude Code | [Claude Code Skills](https://code.claude.com/docs/en/skills) | 在 AgentSkills 上扩展 `when_to_use`、`argument-hint`、`arguments`、`disable-model-invocation`、`user-invocable`、`allowed-tools`、`model`、`effort`、`context`、`agent`、`hooks`、`paths`、`shell` | Hope Agent 实现其中一部分，并保留旧别名：`whenToUse` / `when-to-use` / `when_to_use`，`argumentHint` / `argument-hint` / `argument_hint`。新文档推荐上游 canonical 拼写 |
-| OpenClaw | [OpenClaw Skills](https://docs.openclaw.ai/tools/skills) | `metadata.openclaw.requires`、`metadata.openclaw.primaryEnv`、`metadata.openclaw.always`、`metadata.openclaw.os`、`metadata.openclaw.install`、`homepage` 等 | 当前兼容子集：在顶层未声明时提升 `metadata.openclaw.requires` / `install`，读取 `always` / `primaryEnv` / `os` / `emoji`；根级 `always` / `primaryEnv` 是 Hope Agent 历史 shorthand，不是 OpenClaw 标准位置 |
+| OpenAI Codex | [Codex Skills](https://developers.openai.com/codex/skills)、[openai/skills](https://github.com/openai/skills) | Codex 基于 AgentSkills；`SKILL.md` 里主要读取 `name` + `description` 做触发；`agents/openai.yaml` 承载 UI / policy / dependencies | 为最大可移植性，新 skill 应把触发信息优先写进 `description`。TPA CoWork Agent 当前不解析 `agents/openai.yaml` |
+| Claude Code | [Claude Code Skills](https://code.claude.com/docs/en/skills) | 在 AgentSkills 上扩展 `when_to_use`、`argument-hint`、`arguments`、`disable-model-invocation`、`user-invocable`、`allowed-tools`、`model`、`effort`、`context`、`agent`、`hooks`、`paths`、`shell` | TPA CoWork Agent 实现其中一部分，并保留旧别名：`whenToUse` / `when-to-use` / `when_to_use`，`argumentHint` / `argument-hint` / `argument_hint`。新文档推荐上游 canonical 拼写 |
+| OpenClaw | [OpenClaw Skills](https://docs.openclaw.ai/tools/skills) | `metadata.openclaw.requires`、`metadata.openclaw.primaryEnv`、`metadata.openclaw.always`、`metadata.openclaw.os`、`metadata.openclaw.install`、`homepage` 等 | 当前兼容子集：在顶层未声明时提升 `metadata.openclaw.requires` / `install`，读取 `always` / `primaryEnv` / `os` / `emoji`；根级 `always` / `primaryEnv` 是 TPA CoWork Agent 历史 shorthand，不是 OpenClaw 标准位置 |
 | Hermes Agent | [Hermes Skills System](https://hermes-agent.nousresearch.com/docs/user-guide/features/skills)、[Creating Skills](https://hermes-agent.nousresearch.com/docs/developer-guide/creating-skills) | 顶层 `version` / `author` / `license` / `platforms`，`metadata.hermes.tags` / `related_skills` / toolset 条件 / config，`required_environment_variables` | 当前兼容子集：展示 `version` / `author` / `license`，把 `platforms` 映射到 OS requirements，读取 `metadata.hermes.tags` / `related_skills` / `emoji`，可提升 `requires` / `install`；toolset 条件和 secure setup 尚未实现 |
 
-写新的一方 skill 时，默认遵循 **AgentSkills / OpenAI Codex 最小可移植集**：`name`、`description`、Markdown body，必要时加 `license` / `metadata`。只有确实依赖 Hope Agent 行为时，才使用 `requires`、`install`、`always`、`status` 等 Hope 扩展；只有为了导入兼容时，才依赖 `metadata.openclaw.*` / `metadata.hermes.*`。
+写新的一方 skill 时，默认遵循 **AgentSkills / OpenAI Codex 最小可移植集**：`name`、`description`、Markdown body，必要时加 `license` / `metadata`。只有确实依赖 TPA CoWork Agent 行为时，才使用 `requires`、`install`、`always`、`status` 等 Hope 扩展；只有为了导入兼容时，才依赖 `metadata.openclaw.*` / `metadata.hermes.*`。
 
 ### 完整 Frontmatter 字段
 
@@ -243,7 +243,7 @@ When the user asks about GitHub operations, use the `gh` CLI.
 | `when_to_use` | string | 否 | — | Claude Code 扩展字段；Hope 也接受旧别名 `whenToUse` / `when-to-use`。写了之后 catalog 渲染为 `- name: <desc> — when: <when_to_use>`；不是 AgentSkills / OpenAI Codex 标准，跨生态时优先把触发语义放进 `description` |
 | `aliases` | string[] | 否 | `[]` | 附加斜杠命令名（如 `[pr-review, reviewpr]`）。每个 alias 都注册到斜杠 catalog，与其他命令冲突时静默跳过，不覆盖 canonical name 或内置命令 |
 | `skillKey` | string | 否 | 等于 `name` | 自定义配置查找键 |
-| `always` | bool | 否 | `false` | **Hope Agent 扩展字段**。为 `true` 时跳过所有 requirements 检查；不代表不可关闭、不代表总是注入 prompt。UI 徽标显示为“跳过依赖检查” |
+| `always` | bool | 否 | `false` | **TPA CoWork Agent 扩展字段**。为 `true` 时跳过所有 requirements 检查；不代表不可关闭、不代表总是注入 prompt。UI 徽标显示为“跳过依赖检查” |
 | `primaryEnv` | string | 否 | — | 主环境变量名，可被 skill apiKey 配置满足 |
 | `user-invocable` | bool | 否 | `true` | 是否注册为斜杠命令 |
 | `disable-model-invocation` | bool | 否 | `false` | 为 `true` 时不注入 prompt（仅用户可调用） |
@@ -470,7 +470,7 @@ if req.always {
 
 老设计让模型通过 `read SKILL.md` 来激活技能，内容作为 tool_result 堆积在主对话历史。多轮 exec 密集的技能（如 stlc-delivery）会反复 read references + 触发大量 exec tool_result，累加几十 KB 进主 context，`context: fork` 也只在 `/skill-name` 斜杠命令路径生效。
 
-对齐 Claude Code 的 `SkillTool`，Hope Agent 引入**专用 `skill` 工具**作为模型自主激活 skill 的主入口：
+对齐 Claude Code 的 `SkillTool`，TPA CoWork Agent 引入**专用 `skill` 工具**作为模型自主激活 skill 的主入口：
 
 - 工具名：`skill`，内置在 [`crates/ha-core/src/tools/skill/`](../../crates/ha-core/src/tools/skill/)
 - 入参：`{ name: string, args?: string }`
@@ -589,7 +589,7 @@ pub async fn extract_fork_result(
 - DB `messages.content` 持久化 `displayText`（重载保持原命令显示）
 - Agent `save_agent_context` 的 conversation_history JSON 保留 `expandedMessage`（LLM 上下文连贯）
 
-**设计出发点**：老版本发 `"Read the skill file at /path/SKILL.md"`——deferred tools 场景下 `read` 不在初始 schema，LLM 会先调 `tool_search` 找 `read`，多一轮浪费。参照 Claude Code 的 `SkillTool` 直接返回 SKILL.md 内容 + Hermes Agent 的 `[SYSTEM: skill loaded]` 头部标记，Hope Agent 采用同源做法，同时与模型主动调 `skill` 工具路径字节级等价。
+**设计出发点**：老版本发 `"Read the skill file at /path/SKILL.md"`——deferred tools 场景下 `read` 不在初始 schema，LLM 会先调 `tool_search` 找 `read`，多一轮浪费。参照 Claude Code 的 `SkillTool` 直接返回 SKILL.md 内容 + Hermes Agent 的 `[SYSTEM: skill loaded]` 头部标记，TPA CoWork Agent 采用同源做法，同时与模型主动调 `skill` 工具路径字节级等价。
 
 **Fallback**：读 SKILL.md 失败时（权限 / 路径错 / IO 故障）降级回老的路径指针 prompt，不阻断聊天。
 
@@ -1694,16 +1694,16 @@ sequenceDiagram
 
 | 技能 | 类别 | 可见性 | 说明 |
 |------|------|--------|------|
-| `ha-settings` | meta | `always: true`（跳过依赖检查） | 通过自然语言查看 / 修改 Hope Agent 设置，指导模型使用 `get_settings` / `update_settings` / settings backup 工具，不直接编辑配置文件 |
-| `ha-skill-creator` | meta | `always: true`（跳过依赖检查） | 创建、编辑、改进、审核 Hope Agent skill；包含格式规范、评估思路和 frontmatter 指南 |
+| `ha-settings` | meta | `always: true`（跳过依赖检查） | 通过自然语言查看 / 修改 TPA CoWork Agent 设置，指导模型使用 `get_settings` / `update_settings` / settings backup 工具，不直接编辑配置文件 |
+| `ha-skill-creator` | meta | `always: true`（跳过依赖检查） | 创建、编辑、改进、审核 TPA CoWork Agent skill；包含格式规范、评估思路和 frontmatter 指南 |
 | `ha-find-skills` | meta | `always: true`（跳过依赖检查） | 当当前 catalog 没有合适能力时，指导模型发现并安装第三方 skill；安装第三方代码必须先显式确认 |
 | `ha-browser` | meta | 全局可见 | `browser` 工具自动化方法论：`status → tabs → snapshot → act` 循环、stale-ref 恢复、登录 / 2FA / 验证码阻塞处理（`@skill` allowlist 成员） |
 | `ha-mac-control` | meta | 全局可见（macOS-only） | `mac_control` 原生 macOS 桌面控制方法论：apps / dock / spaces / 视觉定位 / 菜单 / 窗口 / 对话框循环（`@skill` allowlist 成员） |
 | `ha-knowledge` | meta | 全局可见 | 知识空间笔记工作方法：用 `note_*` 工具捕获 / 组织 / 关联 / 检索 / 维护 Markdown 笔记 |
 | `ha-logs` | meta | `requires.anyBins: [sqlite3, python3]` | 自助诊断：经 `exec` 直查本地 `logs / sessions / background_jobs` SQLite（只读 SELECT）排查问题、分析用量 |
-| `ha-data-stores` | meta | 全局可见 | Hope Agent 本地数据存储地图 + 安全只读查询流程（sessions.db / memory.db / logs.db / knowledge index 等） |
-| `ha-self-diagnosis` | meta | 全局可见 | Hope Agent 自我理解与问题上报：解释内部运作、诊断日志、创建 / 提交 GitHub issue |
-| `ha-self-update` | meta | `always: false` | 通过对话检查并安装 Hope Agent 更新；覆盖桌面 bundle / server 包管理 / headless 单 binary 三形态，始终经 `ask_user_question` 用户确认 |
+| `ha-data-stores` | meta | 全局可见 | TPA CoWork Agent 本地数据存储地图 + 安全只读查询流程（sessions.db / memory.db / logs.db / knowledge index 等） |
+| `ha-self-diagnosis` | meta | 全局可见 | TPA CoWork Agent 自我理解与问题上报：解释内部运作、诊断日志、创建 / 提交 GitHub issue |
+| `ha-self-update` | meta | `always: false` | 通过对话检查并安装 TPA CoWork Agent 更新；覆盖桌面 bundle / server 包管理 / headless 单 binary 三形态，始终经 `ask_user_question` 用户确认 |
 | `feishu` | 办公集成 | `paths:` 飞书 / feishu / lark 文件触发；`allowed-tools:` 白名单 `feishu_*` + `read` / `web_search` | 飞书 / Lark workspace 操作：云文档 / 多维表格 / 云盘 / 知识库 / 审批 / 日历 / 联系人 / 招聘 |
 | `ha-coding-common` | 原生编程方法论 | `paths:` 代码文件触发；Coding Profile 可按名推荐 | 仓库优先、保护用户改动、任务分级、范围控制和交付基线 |
 | `ha-coding-plan` | 原生编程方法论 | `paths:` 代码文件触发；复杂 Feature 推荐 | 基于现有代码设计依赖、关键文件、风险、验证和完成信号；普通执行模式计划后继续推进 |
@@ -1835,7 +1835,7 @@ primary-runtime Office skills。`office-skill-smoke-test.py` 是端到端 smoke�
 
 字段级来源以 [字段来源与标准兼容](#字段来源与标准兼容) 为准；下表只比较运行时行为和管理能力。
 
-| 维度 | Hope Agent | Claude Code | OpenClaw |
+| 维度 | TPA CoWork Agent | Claude Code | OpenClaw |
 |------|-------------|-------------|----------|
 | **激活入口** | 专用 `skill` 工具（`{name, args?}`）| 专用 `SkillTool`（`{skill, args?}`）| 模型 `read SKILL.md`（无专用工具）|
 | **Inline / Fork 统一分发** | ✓（工具执行层）| ✓（SkillTool.call）| ✗（无 fork 概念）|
@@ -1849,8 +1849,8 @@ primary-runtime Office skills。`office-skill-smoke-test.py` 是端到端 smoke�
 | **`paths:` 条件激活** | ✓（`ignore::GitignoreBuilder` + SQLite 持久化）| ✓（`paths:` frontmatter）| — |
 | **Prompt 注入** | 懒加载：名称+描述，`skill` 工具激活 | 懒加载：名称+描述，SkillTool 激活 | 懒加载：名称+路径，`read` 加载 |
 | **预算管理** | 三层降级 Full → Compact → 二分截断 | 1% context window 硬限 | 三层降级 Full → Compact → 二分截断 |
-| **Requirements** | bins/anyBins/env/os/config/primaryEnv；`always` 为 HA 扩展（跳过检查） | 无通用 requirements 标准 | 同 Hope Agent（兼容导入） |
-| **调用策略** | user-invocable + disable-model-invocation | user-invocable + disable-model-invocation | 同 Hope Agent |
+| **Requirements** | bins/anyBins/env/os/config/primaryEnv；`always` 为 HA 扩展（跳过检查） | 无通用 requirements 标准 | 同 TPA CoWork Agent（兼容导入） |
+| **调用策略** | user-invocable + disable-model-invocation | user-invocable + disable-model-invocation | 同 TPA CoWork Agent |
 | **安装引导** | brew/node/go/uv + **GUI 一键安装**（`download` 保留但不可执行） | 无内置 | brew/node/go/uv/download + CLI |
 | **健康检查** | `get_skills_status` + **GUI 状态徽章** | 无系统性检查 | `openclaw skills check` CLI |
 | **缓存** | AtomicU64 版本 + 30s TTL + per-session activation | Skill search（实验特性）| chokidar 文件 watcher |
@@ -1861,7 +1861,7 @@ primary-runtime Office skills。`office-skill-smoke-test.py` 是端到端 smoke�
 | **Draft 审核** | ✓（`status: draft` + auto_review 管线）| — | — |
 | **Skill Marketplace / Import** | Quick Import 探测本机 Claude Code / Anthropic marketplace / OpenClaw / Hermes 目录；`ha-find-skills` 可指导外部查找 | Skill Search（实验特性）| ClawHub 集成 |
 
-**Hope Agent 独有或优于 Claude Code 的点：**
+**TPA CoWork Agent 独有或优于 Claude Code 的点：**
 
 1. **GUI 安装引导**（设置面板一键安装 + 实时日志）
 2. **可视化健康检查**（GUI 状态徽章 + hover 详情）
@@ -1874,8 +1874,8 @@ primary-runtime Office skills。`office-skill-smoke-test.py` 是端到端 smoke�
 **Claude Code 领先的点（未来可借鉴）：**
 
 1. **Skill search**（ant 内部实验）—— 基于语义相似度的 skill 推荐，进一步降低 catalog 常驻占用
-2. **Fork 子 Agent UI 内嵌**—— 在 skill 块展开区直接渲染子 Agent 的 tool call 流，Hope Agent 的 `SkillProgressBlock` 当前只显示最终摘要
-3. **`${CLAUDE_SKILL_DIR}` / `${CLAUDE_SESSION_ID}` / 反引号 shell 替换**—— 更强的 SKILL.md 模板能力（涉及注入安全评估，Hope Agent 下一迭代评估）
+2. **Fork 子 Agent UI 内嵌**—— 在 skill 块展开区直接渲染子 Agent 的 tool call 流，TPA CoWork Agent 的 `SkillProgressBlock` 当前只显示最终摘要
+3. **`${CLAUDE_SKILL_DIR}` / `${CLAUDE_SESSION_ID}` / 反引号 shell 替换**—— 更强的 SKILL.md 模板能力（涉及注入安全评估，TPA CoWork Agent 下一迭代评估）
 
 ---
 

@@ -4,11 +4,11 @@
 >
 > 状态：桌面 bridge、权限 readiness、diagnostics、snapshot/elements/wait、apps/dock/spaces/windows/act/menu/clipboard/dialog、display/window 截图镜像、视觉定位 V1 与审批分类已接入
 
-本文是 Hope Agent 原生 macOS 桌面控制能力的技术契约。它描述当前系统的运行边界、模块职责、工具接口、权限审批、事件与前端集成方式。
+本文是 TPA CoWork Agent 原生 macOS 桌面控制能力的技术契约。它描述当前系统的运行边界、模块职责、工具接口、权限审批、事件与前端集成方式。
 
 ## 能力边界
 
-macOS 控制能力只在桌面 Tauri 运行模式下真实可用。授权主体必须是 Hope Agent `.app` 进程，所有读取屏幕、读取 Accessibility 树、合成输入和 App/窗口操作都通过该进程执行。
+macOS 控制能力只在桌面 Tauri 运行模式下真实可用。授权主体必须是 TPA CoWork Agent `.app` 进程，所有读取屏幕、读取 Accessibility 树、合成输入和 App/窗口操作都通过该进程执行。
 
 当前支持：
 
@@ -36,7 +36,7 @@ macOS 控制能力只在桌面 Tauri 运行模式下真实可用。授权主体�
 - 在没有 Accessibility 权限时读取或控制 AX 树
 - 在没有 Screen Recording 权限时返回截图帧
 - 读取密码字段真实值、在非 `clipboard.get` 结果中记录剪贴板原文或把截图 base64 写入上下文
-- 用 AX 后台接口控制 Hope Agent 自己的窗口；自身窗口如需控制，必须走专用 main-thread AppKit bridge
+- 用 AX 后台接口控制 TPA CoWork Agent 自己的窗口；自身窗口如需控制，必须走专用 main-thread AppKit bridge
 - 模板匹配、自动框选或绕过审批的一站式视觉点击
 - 依赖公开 API 稳定移动窗口到指定 Space；`spaces.move_window` 使用 SkyLight/CGS 私有 API，CGS 不可用时会返回错误
 
@@ -109,7 +109,7 @@ graph TD
 
 ## 权限模型
 
-macOS TCC 权限按进程和 bundle 身份绑定。Hope Agent 的桌面控制能力要求真正调用系统 API 的进程就是已授权的 Hope Agent `.app`。
+macOS TCC 权限按进程和 bundle 身份绑定。TPA CoWork Agent 的桌面控制能力要求真正调用系统 API 的进程就是已授权的 TPA CoWork Agent `.app`。
 
 | 权限 | 用途 | 是否核心 |
 | --- | --- | --- |
@@ -570,7 +570,7 @@ OCR 规则：
 - `windows.list` 默认只列前台 App；需要发现后台窗口时传 `windowScope=all`，可再结合 `target.appName` / `target.bundleId` / `target.windowTitle` 过滤。
 - `windowScope=all` 返回的 `win_<pid>_<index>` 可直接用于 `windows.focus/move/resize/minimize/close`。
 - `windows.move/resize/minimize/close` 只作用于外部 App 窗口。
-- 命中 Hope Agent 自己的窗口时拒绝，避免在非主线程触发 AppKit 崩溃。
+- 命中 TPA CoWork Agent 自己的窗口时拒绝，避免在非主线程触发 AppKit 崩溃。
 - `windows.close` 属于高风险动作，审批中禁用 AllowAlways。
 
 菜单和 dialog 规则：
@@ -611,7 +611,7 @@ OCR 规则：
 
 审批弹窗应展示 action/op、目标 App、窗口、元素 label、菜单 path、hotkey 或输入摘要。文本输入需要截断和脱敏，不能展示密码字段值。
 
-`mac_control` 进入审批前，执行层会记录当前 frontmost App 和 focused window 作为焦点锚点；用户 AllowOnce / AllowAlways 或审批超时按 `proceed` 继续时，工具真正执行前会按 `pid -> bundleId -> appName` 顺序 best-effort 激活原 App，再按 pid-scoped window id 和窗口标题兜底恢复原 focused window，避免审批弹窗让 Hope Agent 抢前台后导致后续 `frontmost` / 键盘 / 菜单动作落到错误窗口。原 App 已退出或恢复失败时只写 warning，不阻断工具执行。
+`mac_control` 进入审批前，执行层会记录当前 frontmost App 和 focused window 作为焦点锚点；用户 AllowOnce / AllowAlways 或审批超时按 `proceed` 继续时，工具真正执行前会按 `pid -> bundleId -> appName` 顺序 best-effort 激活原 App，再按 pid-scoped window id 和窗口标题兜底恢复原 focused window，避免审批弹窗让 TPA CoWork Agent 抢前台后导致后续 `frontmost` / 键盘 / 菜单动作落到错误窗口。原 App 已退出或恢复失败时只写 warning，不阻断工具执行。
 
 ## EventBus 与前端面板
 

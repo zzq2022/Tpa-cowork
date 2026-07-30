@@ -1,4 +1,4 @@
-# Hope Agent Plan Mode 架构文档
+# TPA CoWork Agent Plan Mode 架构文档
 
 > 返回 [文档索引](../README.md)
 >
@@ -31,7 +31,7 @@
 
 ## 概述
 
-Plan Mode 是 Hope Agent 的「先想清楚再做」工作模式：模型在动手前把 Context / Approach / Files / Reuse / Verification 写成 markdown 设计文档，用户审批后才进入实施阶段。设计文档（**plan**）是稳定契约，实施进度（**task**）走另一套独立工具——两份各司其职、零同步成本。
+Plan Mode 是 TPA CoWork Agent 的「先想清楚再做」工作模式：模型在动手前把 Context / Approach / Files / Reuse / Verification 写成 markdown 设计文档，用户审批后才进入实施阶段。设计文档（**plan**）是稳定契约，实施进度（**task**）走另一套独立工具——两份各司其职、零同步成本。
 
 适用场景覆盖编程（架构选型、多文件重构、新功能）+ 通用任务（写文章、做调研、整理资料、决策支持）。
 

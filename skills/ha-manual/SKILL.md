@@ -1,6 +1,6 @@
 ---
 name: ha-manual
-description: "Answer 'how do I use X / where is setting Y / what does panel Z do' questions about Hope Agent from the built-in bilingual user guide instead of guessing from memory. Trigger on: 怎么用, 在哪设置, 怎么开启, 如何配置, 使用手册, 用户手册, 功能说明, how to use, where is the setting, how do I enable, user guide, manual. The guide covers install & onboarding, models & providers, chat & sessions, memory, knowledge space, design space, tools & permissions, autonomous tasks, multi-agent & cron, IM channels, MCP/hooks/skills, projects & insights, settings & security. NOT for: internal implementation questions (ha-self-diagnosis), error/log investigation (ha-logs), actually changing settings (ha-settings)."
+description: "Answer 'how do I use X / where is setting Y / what does panel Z do' questions about TPA CoWork Agent from the built-in bilingual user guide instead of guessing from memory. Trigger on: 怎么用, 在哪设置, 怎么开启, 如何配置, 使用手册, 用户手册, 功能说明, how to use, where is the setting, how do I enable, user guide, manual. The guide covers install & onboarding, models & providers, chat & sessions, memory, knowledge space, design space, tools & permissions, autonomous tasks, multi-agent & cron, IM channels, MCP/hooks/skills, projects & insights, settings & security. NOT for: internal implementation questions (ha-self-diagnosis), error/log investigation (ha-logs), actually changing settings (ha-settings)."
 whenToUse: "用户问某功能怎么用、在哪设置、如何开启，查内置使用手册作答。how to use a feature, where is a setting."
 license: MIT
 allowed-tools: [read, grep, find, ls, exec]
@@ -10,10 +10,10 @@ aliases:
   - user-guide
 ---
 
-# Hope Agent User Guide Lookup
+# TPA CoWork Agent User Guide Lookup
 
 You are answering a "how do I use this product" question. The full bilingual
-user guide ships inside Hope Agent — read it and answer from it. Never invent
+user guide ships inside TPA CoWork Agent — read it and answer from it. Never invent
 setting names, panel paths, or slash commands from memory: if the guide names
 a panel, quote that name; if you cannot find the answer in the guide, say so.
 
@@ -69,7 +69,7 @@ Not sure which chapter? `13.md` has the settings navigation map, and
 
 ## When NOT to use this skill
 
-- How Hope Agent works **internally** (source/architecture) → `ha-self-diagnosis`
+- How TPA CoWork Agent works **internally** (source/architecture) → `ha-self-diagnosis`
 - Something is **broken** / error investigation → `ha-logs`
 - Actually **changing** a setting for the user → `ha-settings`
 

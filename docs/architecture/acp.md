@@ -2,7 +2,7 @@
 
 > 返回 [文档索引](../README.md)
 
-> Hope Agent 原生 ACP 实现 — 零桥接、高性能的 IDE 直连方案
+> TPA CoWork Agent 原生 ACP 实现 — 零桥接、高性能的 IDE 直连方案
 
 ## 目录
 
@@ -24,12 +24,12 @@
 
 ## 概述
 
-ACP（Agent Client Protocol）是一个标准化的 IDE-Agent 通信协议，允许代码编辑器（如 Zed、VS Code）直接与 AI Agent 通信。Hope Agent 实现了原生的 Rust ACP 服务器，具有以下核心优势：
+ACP（Agent Client Protocol）是一个标准化的 IDE-Agent 通信协议，允许代码编辑器（如 Zed、VS Code）直接与 AI Agent 通信。TPA CoWork Agent 实现了原生的 Rust ACP 服务器，具有以下核心优势：
 
 - **零桥接**：纯 Rust 实现，不经过 Node.js 中间层，直接驱动 `AssistantAgent`
 - **会话互通**：共享 `SessionDB`（SQLite），IDE 创建的会话在桌面端可见，反之亦然
 - **完整 Failover**：复用桌面端的模型链降级策略（RateLimit 重试 + 多模型降级）
-- **~50 个内置工具**：IDE 端可使用 Hope Agent 全部工具能力（exec、read、write、browser 等；具体数字以代码为准，详见 [tool-system.md](tool-system.md)）
+- **~50 个内置工具**：IDE 端可使用 TPA CoWork Agent 全部工具能力（exec、read、write、browser 等；具体数字以代码为准，详见 [tool-system.md](tool-system.md)）
 
 ---
 
@@ -51,7 +51,7 @@ graph TB
         TYPES["ACP Types<br/>types.rs"]
     end
 
-    subgraph "Hope Agent Core"
+    subgraph "TPA CoWork Agent Core"
         ASSISTANT["AssistantAgent<br/>agent/mod.rs"]
         TOOLS["~50 内置工具<br/>tools/"]
         PROVIDERS["4 种 LLM Provider<br/>agent/providers/"]
@@ -404,7 +404,7 @@ fetch, http         → "fetch"
 
 ## Failover 降级策略
 
-ACP 完整复用 Hope Agent 桌面端的 failover 模块 (`failover.rs`)：
+ACP 完整复用 TPA CoWork Agent 桌面端的 failover 模块 (`failover.rs`)：
 
 ```mermaid
 flowchart TB
@@ -642,7 +642,7 @@ hope-agent acp --help
 
 ## 与 OpenClaw 的对比
 
-| 维度 | OpenClaw | Hope Agent |
+| 维度 | OpenClaw | TPA CoWork Agent |
 |------|----------|-------------|
 | 实现语言 | TypeScript (Node.js) | **Rust (原生)** |
 | 架构 | Agent → Bridge → Node.js → SSE | **Agent → stdio 直连** |
@@ -662,7 +662,7 @@ hope-agent acp --help
 1. **桌面端 ↔ IDE 会话无缝切换**：在 macOS 桌面端创建的会话可在 Zed 中继续，反之亦然
 2. **零部署成本**：同一个二进制，无需额外安装 Node.js 或配置 bridge
 3. **工具能力更强**：~50 个内置工具 vs OpenClaw 的 ~15 个，包括 browser、canvas、image_generate 等独特工具
-4. **Agent 系统集成**：ACP Modes 直接映射到 Hope Agent 的多 Agent 系统，每个 Agent 有独立的人设、技能和行为配置
+4. **Agent 系统集成**：ACP Modes 直接映射到 TPA CoWork Agent 的多 Agent 系统，每个 Agent 有独立的人设、技能和行为配置
 
 ---
 

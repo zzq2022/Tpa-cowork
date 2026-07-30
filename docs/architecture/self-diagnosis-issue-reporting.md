@@ -1,6 +1,6 @@
 # Self-Diagnosis & Issue Reporting
 
-Hope Agent exposes a conversational self-understanding path through the bundled
+TPA CoWork Agent exposes a conversational self-understanding path through the bundled
 `ha-self-diagnosis` skill and a core `issue_report` tool. The v1 scope is
 user/conversation triggered: it does not run background health scans.
 
@@ -9,7 +9,7 @@ user/conversation triggered: it does not run background health scans.
 - `skills/ha-self-diagnosis/` is the workflow entrypoint. It runs in
   `context: fork` so source reads, log queries, and diagnostic snippets do not
   bloat the parent conversation.
-- Self-study mode answers questions about Hope Agent's implementation by
+- Self-study mode answers questions about TPA CoWork Agent's implementation by
   reading `docs/architecture/`, live source files, settings, and read-only
   runtime databases.
 - In a packaged install with no source tree, self-study bootstraps the matching
@@ -45,7 +45,7 @@ commands for both Tauri and HTTP transports.
 
 When no token is configured, `issue_report` falls back to the user's
 authenticated GitHub CLI (`gh`). This uses the identity from `gh auth login`;
-Hope Agent does not read or persist that credential.
+TPA CoWork Agent does not read or persist that credential.
 
 ## Tool Contract
 
@@ -67,7 +67,7 @@ the shared sensitive-data redactor. Bodies are capped by
 - Creation always requires a user confirmation inside the tool, even if the
   caller already showed a draft.
 - Outbound GitHub requests must pass `security::ssrf::check_url`.
-- The `gh` fallback is used only when no Hope Agent issue-reporting token is
+- The `gh` fallback is used only when no TPA CoWork Agent issue-reporting token is
   configured.
 - `ha-self-diagnosis` must query SQLite databases read-only.
 - Background monitoring or auto-filing is out of scope for v1.

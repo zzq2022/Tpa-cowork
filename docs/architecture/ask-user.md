@@ -1,4 +1,4 @@
-# Hope Agent Ask-User Question 架构文档
+# TPA CoWork Agent Ask-User Question 架构文档
 
 > 返回 [文档索引](../README.md)
 >
@@ -42,7 +42,7 @@
 
 ## 概述
 
-`ask_user_question` 是 Hope Agent 的**通用结构化问答工具**，允许模型在任意对话中（非仅 Plan Mode）向用户发起 1–4 个带选项的问题，用于澄清需求、对比方案或在关键决策前等待确认。
+`ask_user_question` 是 TPA CoWork Agent 的**通用结构化问答工具**，允许模型在任意对话中（非仅 Plan Mode）向用户发起 1–4 个带选项的问题，用于澄清需求、对比方案或在关键决策前等待确认。
 
 **核心能力**：
 
@@ -209,7 +209,7 @@ TOOL_ASK_USER_QUESTION => {
    - **Do NOT ask when**：可通过 read/grep/ls 自查的、AGENTS.md / CLAUDE.md 已规定的、低成本可撤销操作（创建测试文件、加日志）、纯风格/命名/格式
    - **How to ask**（节流）：相关问题合并成一次调用（最多 4 题）、每任务 ≤2 次、优先前置（执行前）而非中途打断、若想问第二次先考虑能否自己查
 
-**为什么硬编码而非走 agent.md 模板**：`HUMAN_IN_THE_LOOP_GUIDANCE` 以编译时常量形式嵌入二进制，由 `build.rs` 用 `sections.push(HUMAN_IN_THE_LOOP_GUIDANCE.to_string())` 注入，用户无法通过自定义 `~/.hope-agent/agents/{id}/agent.md` 覆盖。参考已有的 Sandbox Mode、Memory Guidelines 也是同样硬编码范式。这是和 Claude Code 的关键差异 —— Claude Code 在 system prompt 里只有 2 处嵌入式提及（"失败 ≥2 次后升级" + "工具被拒时澄清"），边界模糊靠模型自行理解；Hope Agent 用独立段落 + 触发器 + 反触发器 + 节流三件套，让模型在真正值得问的时候更有信心开口，同时避免滥用。详见 [prompt-system.md](prompt-system.md#human-in-the-loop人机协作硬约束)。
+**为什么硬编码而非走 agent.md 模板**：`HUMAN_IN_THE_LOOP_GUIDANCE` 以编译时常量形式嵌入二进制，由 `build.rs` 用 `sections.push(HUMAN_IN_THE_LOOP_GUIDANCE.to_string())` 注入，用户无法通过自定义 `~/.hope-agent/agents/{id}/agent.md` 覆盖。参考已有的 Sandbox Mode、Memory Guidelines 也是同样硬编码范式。这是和 Claude Code 的关键差异 —— Claude Code 在 system prompt 里只有 2 处嵌入式提及（"失败 ≥2 次后升级" + "工具被拒时澄清"），边界模糊靠模型自行理解；TPA CoWork Agent 用独立段落 + 触发器 + 反触发器 + 节流三件套，让模型在真正值得问的时候更有信心开口，同时避免滥用。详见 [prompt-system.md](prompt-system.md#human-in-the-loop人机协作硬约束)。
 
 **并发安全标记**：`tools/definitions/registry.rs` 将 `TOOL_ASK_USER_QUESTION` 加入 `CONCURRENT_SAFE_TOOL_NAMES`。虽然工具本身会阻塞等待用户回答，但从 tool loop 的角度看它无写入副作用，允许与其他 read-only 工具并发调度。
 

@@ -7,7 +7,7 @@ macOS 把系统权限（**录屏、辅助功能、输入监控**等 TCC 权限�
 发布流水线（`tauri-action`）此前**不配任何签名**，产出的是 **ad-hoc 签名**包：
 
 ```
-$ codesign -dvvv "/Applications/Hope Agent.app"
+$ codesign -dvvv "/Applications/TPA CoWork Agent.app"
 Signature=adhoc
 designated => cdhash H"f91da6..."      ← 授权被钉死在「这个二进制的精确哈希」上
 ```
@@ -26,7 +26,7 @@ designated => identifier "ai.hopeagent.desktop" and certificate leaf = H"<证书
 
 无需 Apple Developer ID —— 用一个**固定自签名证书**即可达成「授权持久化」。
 
-> ⚠️ 自签名**消不掉 Gatekeeper 警告**。首次打开仍会提示「未验证的开发者 / 已损坏」，需右键 → 打开，或 `xattr -dr com.apple.quarantine "/Applications/Hope Agent.app"`。要彻底消除得 Developer ID 证书 + 公证（notarization），那是另一回事。
+> ⚠️ 自签名**消不掉 Gatekeeper 警告**。首次打开仍会提示「未验证的开发者 / 已损坏」，需右键 → 打开，或 `xattr -dr com.apple.quarantine "/Applications/TPA CoWork Agent.app"`。要彻底消除得 Developer ID 证书 + 公证（notarization），那是另一回事。
 
 ## 一次性配置
 
@@ -44,7 +44,7 @@ designated => identifier "ai.hopeagent.desktop" and certificate leaf = H"<证书
    | --- | --- |
    | `APPLE_CERTIFICATE` | 脚本输出的 base64（`.p12`） |
    | `APPLE_CERTIFICATE_PASSWORD` | 脚本输出的 p12 口令 |
-   | `APPLE_SIGNING_IDENTITY` | `Hope Agent Self-Signed` |
+   | `APPLE_SIGNING_IDENTITY` | `TPA CoWork Agent Self-Signed` |
    | `KEYCHAIN_PASSWORD` | 脚本输出的临时 keychain 口令 |
 
    `release.yml` 的 **Set up macOS code signing** 步骤用这 4 个 Secrets 自建专用 keychain、导入证书、`set-key-partition-list` 放行私钥、`sudo security add-trusted-cert` 把它加为可信 code-signing 根，再让 tauri-action 用 `APPLE_SIGNING_IDENTITY` 签。
@@ -62,6 +62,6 @@ designated => identifier "ai.hopeagent.desktop" and certificate leaf = H"<证书
 - 验证签名是否生效：
 
   ```bash
-  codesign -dvvv "/Applications/Hope Agent.app" 2>&1 | grep -E "Authority|Signature|designated"
-  # 期望看到 Authority=Hope Agent Self-Signed、designated => ... certificate leaf ...
+  codesign -dvvv "/Applications/TPA CoWork Agent.app" 2>&1 | grep -E "Authority|Signature|designated"
+  # 期望看到 Authority=TPA CoWork Agent Self-Signed、designated => ... certificate leaf ...
   ```

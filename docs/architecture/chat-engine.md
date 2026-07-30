@@ -28,7 +28,7 @@
 
 ## 概述
 
-Chat Engine 是 Hope Agent 的对话编排入口，统一处理各类会话型请求：
+Chat Engine 是 TPA CoWork Agent 的对话编排入口，统一处理各类会话型请求：
 
 | 来源 | EventSink 实现 | 说明 |
 |---|---|---|

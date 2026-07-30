@@ -1,16 +1,16 @@
 ---
 name: ha-mac-control
-description: "Hope Agent native macOS desktop control — the standard `mac_control` status / diagnostics / apps / dock / spaces / snapshot / visual / windows / menu / clipboard / dialog loop, target-first action rules, no-blind-coordinate policy, and recovery for stale AX/window/menu/dialog state. Load whenever using `mac_control`, or when the user asks to control local Mac apps, Dock, Spaces, click/type/menu/window/dialog/clipboard, automate Finder/TextEdit/System Settings, visually locate UI, or says 控制 Mac, macOS 自动化, 点按钮, 打开应用, Dock, Space, 关闭窗口, 菜单点击, 视觉定位."
+description: "TPA CoWork Agent native macOS desktop control — the standard `mac_control` status / diagnostics / apps / dock / spaces / snapshot / visual / windows / menu / clipboard / dialog loop, target-first action rules, no-blind-coordinate policy, and recovery for stale AX/window/menu/dialog state. Load whenever using `mac_control`, or when the user asks to control local Mac apps, Dock, Spaces, click/type/menu/window/dialog/clipboard, automate Finder/TextEdit/System Settings, visually locate UI, or says 控制 Mac, macOS 自动化, 点按钮, 打开应用, Dock, Space, 关闭窗口, 菜单点击, 视觉定位."
 version: 1.0.0
-author: Hope Agent
+author: TPA CoWork Agent
 license: MIT
 allowed-tools: [mac_control, ask_user_question]
 status: active
 ---
 
-# Hope Agent Mac Control
+# TPA CoWork Agent Mac Control
 
-`mac_control` operates the user's macOS desktop from the authorized Hope Agent app process. macOS UI state is volatile: apps steal focus, AX IDs expire, sheets attach to windows, and multiple windows often share similar titles. Use a fresh observation before every meaningful action.
+`mac_control` operates the user's macOS desktop from the authorized TPA CoWork Agent app process. macOS UI state is volatile: apps steal focus, AX IDs expire, sheets attach to windows, and multiple windows often share similar titles. Use a fresh observation before every meaningful action.
 
 ## Standard Loop
 
@@ -69,7 +69,7 @@ wait or snapshot                       # verify the expected change
 - `windowScope` defaults to `frontmost`. Use `windows.list windowScope="all"` to discover background app windows before activating or focusing them.
 - Prefer all-scope ids like `win_<pid>_<index>` for cross-app window mutations; they are safer than generic titles.
 - For `windows.close`, avoid generic titles like `Untitled` / `未命名` when multiple similar windows exist. Use `windowId`.
-- Hope Agent's own window cannot be mutated through the Accessibility worker; if the target is Hope Agent itself, explain the limitation.
+- TPA CoWork Agent's own window cannot be mutated through the Accessibility worker; if the target is TPA CoWork Agent itself, explain the limitation.
 
 ### Screenshots
 

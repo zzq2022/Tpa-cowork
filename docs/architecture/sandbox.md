@@ -3,7 +3,7 @@
 
 ## 概述
 
-Hope Agent 的 Sandbox 子系统有两条相互独立但共享 Docker 状态引导的能力：
+TPA CoWork Agent 的 Sandbox 子系统有两条相互独立但共享 Docker 状态引导的能力：
 
 1. **工具执行沙箱**：会话级 `SandboxMode` 控制 `exec` 是否在 Docker 容器内执行，并作为权限引擎输入减少一部分软审批。
 2. **SearXNG Docker 管理**：Web Search 设置页托管本地 SearXNG 容器，负责镜像拉取、配置注入、代理转发和生命周期管理。

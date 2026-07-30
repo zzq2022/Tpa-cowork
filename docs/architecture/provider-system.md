@@ -373,7 +373,7 @@ Provider 通过 `on_delta` 回调实时推送 JSON 事件：
 
 **Reasoning item 不回传（`store: false` 红线）**
 
-Hope Agent 始终用 `store: false` 调 Responses API。在这一模式下，服务端**不持久化** reasoning item，`rs_*` id 是一次性引用——下一轮请求只要带上历史 reasoning item，无论是否携带 `encrypted_content`，服务端都会按 id 查持久化记录并 404（`Item with id 'rs_xxx' not found. Items are not persisted when store is set to false.`）。
+TPA CoWork Agent 始终用 `store: false` 调 Responses API。在这一模式下，服务端**不持久化** reasoning item，`rs_*` id 是一次性引用——下一轮请求只要带上历史 reasoning item，无论是否携带 `encrypted_content`，服务端都会按 id 查持久化记录并 404（`Item with id 'rs_xxx' not found. Items are not persisted when store is set to false.`）。
 
 因此契约是：**reasoning item 从不进入 `conversation_history`，从不参与下一轮 replay**。
 

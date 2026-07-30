@@ -2,7 +2,7 @@
 
 > 返回 [文档索引](../README.md) | 更新时间：2026-07-12
 
-Session Git 控制平面负责 Hope Agent 工作台中的仓库状态、Diff 审阅、索引操作、分支、提交、推送、GitHub Pull Request，以及 Local 与 Managed Worktree 之间的安全交接。桌面端和 HTTP/server 端都只适配 `ha-core::git_control`，不各自实现 Git 业务逻辑。
+Session Git 控制平面负责 TPA CoWork Agent 工作台中的仓库状态、Diff 审阅、索引操作、分支、提交、推送、GitHub Pull Request，以及 Local 与 Managed Worktree 之间的安全交接。桌面端和 HTTP/server 端都只适配 `ha-core::git_control`，不各自实现 Git 业务逻辑。
 
 本文描述已经落地的运行时契约。Managed Worktree 的创建、归档、恢复、项目首轮 Bootstrap、Workflow 和 Subagent 集成见 [Managed Worktree 控制平面](worktree.md)。项目草稿的项目归属与首发状态见 [项目系统](project.md)。
 

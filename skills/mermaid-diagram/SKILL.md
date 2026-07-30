@@ -1,8 +1,8 @@
 ---
 name: mermaid-diagram
-description: Use when the user asks for a flowchart, architecture diagram, sequence diagram, ER diagram, state machine, gantt chart, or any visual that fits Mermaid syntax. Hope Agent's chat renders Mermaid blocks natively, so the diagram appears inline.
+description: Use when the user asks for a flowchart, architecture diagram, sequence diagram, ER diagram, state machine, gantt chart, or any visual that fits Mermaid syntax. TPA CoWork Agent's chat renders Mermaid blocks natively, so the diagram appears inline.
 version: 1.0.0
-author: Hope Agent
+author: TPA CoWork Agent
 license: MIT
 metadata:
   hermes:
@@ -16,7 +16,7 @@ metadata:
 
 Trigger phrases: "draw a diagram", "flowchart for …", "sequence diagram", "architecture diagram", "ER diagram", "state machine", "gantt chart", "画一个流程图", "画个架构图".
 
-**Mermaid is rendered natively** in Hope Agent chat (via Streamdown). Just emit a fenced ```mermaid block — the user sees the rendered SVG, no setup.
+**Mermaid is rendered natively** in TPA CoWork Agent chat (via Streamdown). Just emit a fenced ```mermaid block — the user sees the rendered SVG, no setup.
 
 For diagrams Mermaid can't express (organic shapes, custom illustrations, hand-drawn style) consider drawing-tool skills (e.g. `excalidraw` from Hermes Agent or `drawio` from Anthropic marketplace) — those need to be installed via Quick Import.
 

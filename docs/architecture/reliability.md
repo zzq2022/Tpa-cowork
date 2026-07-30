@@ -4,7 +4,7 @@
 
 ## 概述
 
-Hope Agent 把"7×24 不掉线"拆成**三层保活 + 一套崩溃自诊断**，互相之间是**冗余而非串联**：任何一层挂了下一层都接得住。设计动机是普通用户场景（NAS、家用服务器、IM bot 长跑），不是只盯 happy path 就走人——所以崩溃次数到阈值会自动跑配置备份 + LLM 诊断 + 安全 auto-fix，而不是单纯指数退避无限重启。
+TPA CoWork Agent 把"7×24 不掉线"拆成**三层保活 + 一套崩溃自诊断**，互相之间是**冗余而非串联**：任何一层挂了下一层都接得住。设计动机是普通用户场景（NAS、家用服务器、IM bot 长跑），不是只盯 happy path 就走人——所以崩溃次数到阈值会自动跑配置备份 + LLM 诊断 + 安全 auto-fix，而不是单纯指数退避无限重启。
 
 本文聚焦**这条主线**——Guardian 父子进程协议、退出码语义、Crash Journal 数据结构、Self-Diagnosis prompt 与 fallback、Auto-Fix 覆盖范围、系统服务 KeepAlive、子系统级 watchdog。所有并发模型、Primary/Secondary 选举、跨模式后台任务差异在 [process-model.md](process-model.md) 和 [backend-separation.md](backend-separation.md) 已有完整描述，本文只在交叉引用，不复述。
 
@@ -181,7 +181,7 @@ fn run_child() {
 | `MAX_CHILD_PANICS` | `3` | [`main.rs:9`](../../src-tauri/src/main.rs#L9) |
 | 重启间隔 | 1 秒固定（不退避） | 假设 panic 恢复期短，无需指数退避 |
 
-**触达条件相当窄**——`catch_unwind` 只能捕 unwinding panic，碰到 abort（`panic = "abort"` 或 `[profile.*.panic = "abort"]`）会直接被 OS 收尾，跳过 L2 直奔 L1。Hope Agent 当前用默认 `panic = "unwind"`，所以 L2 在大多数场景生效。
+**触达条件相当窄**——`catch_unwind` 只能捕 unwinding panic，碰到 abort（`panic = "abort"` 或 `[profile.*.panic = "abort"]`）会直接被 OS 收尾，跳过 L2 直奔 L1。TPA CoWork Agent 当前用默认 `panic = "unwind"`，所以 L2 在大多数场景生效。
 
 **与 Layer 1 的关系**：L2 的 `MAX_CHILD_PANICS` 失败后 child `exit(1)`——就到了 Guardian 的"非 0 非 42 退出"分支，crash_count 累积。L1 和 L2 是串联兜底，不是平行：L2 先吃 panic，吃饱了才升级到 L1。
 
@@ -211,7 +211,7 @@ fn run_child() {
 
 ```ini
 [Unit]
-Description=Hope Agent Server
+Description=TPA CoWork Agent Server
 After=network.target
 
 [Service]
@@ -237,7 +237,7 @@ WantedBy=default.target
 
 ### 4.3 Windows · Task Scheduler
 
-不是真正的 Windows Service。Windows Service 需要在二进制里实现 SCM 协议（`StartServiceCtrlDispatcher`），Hope Agent 当前没做这部分。`server install` 在 Windows 上走 `schtasks /create /sc onlogon`：用户登录时拉起进程，崩溃后**不会**自动重启（Task Scheduler 本身没有等价 `KeepAlive` 的开关）。
+不是真正的 Windows Service。Windows Service 需要在二进制里实现 SCM 协议（`StartServiceCtrlDispatcher`），TPA CoWork Agent 当前没做这部分。`server install` 在 Windows 上走 `schtasks /create /sc onlogon`：用户登录时拉起进程，崩溃后**不会**自动重启（Task Scheduler 本身没有等价 `KeepAlive` 的开关）。
 
 完整 Windows 部署细节见 [`docs/platform/windows-development.md`](../platform/windows-development.md)。
 
@@ -355,7 +355,7 @@ flowchart TD
 LLM 拿到的输入 ([`self_diagnosis.rs:405-432`](../../crates/ha-core/src/self_diagnosis.rs#L405-L432))：
 
 ````
-You are diagnosing why the Hope Agent desktop app (Tauri 2 + Rust + React) keeps crashing.
+You are diagnosing why the TPA CoWork Agent desktop app (Tauri 2 + Rust + React) keeps crashing.
 
 ## Recent Crash History
 Total crashes recorded: 7

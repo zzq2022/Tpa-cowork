@@ -26,7 +26,7 @@
 
 ## 概述
 
-Canvas 是 Hope Agent 的**交互式可视化沙盒和 Artifact runtime**：模型可通过兼容 `canvas` 工具创建/更新独立项目，新 `artifact` 工具则把文件注册成受管 Artifact；两者最终都在右侧面板通过 `<iframe sandbox="allow-scripts">` 预览。子系统围绕「**项目 + 版本快照 + 沙盒 iframe + EventBus/postMessage 通道**」展开，兼容 7 种 Canvas 内容类型（HTML / Markdown / Code / SVG / Mermaid / Chart / Slides）。
+Canvas 是 TPA CoWork Agent 的**交互式可视化沙盒和 Artifact runtime**：模型可通过兼容 `canvas` 工具创建/更新独立项目，新 `artifact` 工具则把文件注册成受管 Artifact；两者最终都在右侧面板通过 `<iframe sandbox="allow-scripts">` 预览。子系统围绕「**项目 + 版本快照 + 沙盒 iframe + EventBus/postMessage 通道**」展开，兼容 7 种 Canvas 内容类型（HTML / Markdown / Code / SVG / Mermaid / Chart / Slides）。
 
 设计原则：
 

@@ -11,7 +11,7 @@ Use these shapes when building the `body` for `issue_report`.
 
 ## Environment
 
-- Hope Agent version:
+- TPA CoWork Agent version:
 - Run mode:
 - Platform:
 - Relevant provider/channel/tool:

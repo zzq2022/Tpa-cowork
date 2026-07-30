@@ -2,7 +2,7 @@
 
 > 返回 [文档索引](../README.md) | 更新时间：2026-07-12
 
-Managed Worktree 是 Hope Agent 的 durable 隔离执行环境。它不是普通 `git worktree` 命令的薄包装，而是一个带持久状态、owner API、GUI 控制、项目首轮 Bootstrap、Workflow 绑定、Subagent 隔离和 Hook 扩展点的控制平面。Session 内的 Diff、分支、commit、push、Pull Request 和 Local/Worktree 双向安全迁移由独立的 [Session Git 控制平面](git-control.md) 负责。
+Managed Worktree 是 TPA CoWork Agent 的 durable 隔离执行环境。它不是普通 `git worktree` 命令的薄包装，而是一个带持久状态、owner API、GUI 控制、项目首轮 Bootstrap、Workflow 绑定、Subagent 隔离和 Hook 扩展点的控制平面。Session 内的 Diff、分支、commit、push、Pull Request 和 Local/Worktree 双向安全迁移由独立的 [Session Git 控制平面](git-control.md) 负责。
 
 ## 定位
 
@@ -69,7 +69,7 @@ session working dir
 
 ### 统一磁盘布局
 
-内建 Managed Worktree 固定放在 Hope Agent 数据目录，不创建在项目相邻目录：
+内建 Managed Worktree 固定放在 TPA CoWork Agent 数据目录，不创建在项目相邻目录：
 
 ```text
 ~/.hope-agent/worktrees/<repo-slug>/<wt-id>/
@@ -77,7 +77,7 @@ session working dir
 
 - `repo-slug` 由 canonical repo root 派生，只用于目录分组，不作为仓库身份。
 - `wt-id` 使用 `wt_<uuid>`，路径不包含分支名，避免 rename 和特殊字符影响生命周期。
-- `path_source=builtin` 才允许 Hope Agent 在失败清理中对统一目录执行受控删除。
+- `path_source=builtin` 才允许 TPA CoWork Agent 在失败清理中对统一目录执行受控删除。
 - Hook 返回的自定义路径记录为 `path_source=hook`；清理只执行 Git-aware remove，禁止对任意路径递归删除。
 
 项目首轮未提交改动的临时快照固定放在：

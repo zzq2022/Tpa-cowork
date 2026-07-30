@@ -1,6 +1,6 @@
 ---
 name: ha-skill-creator
-description: "Create, edit, improve, or audit Hope Agent skills. Use when the user wants to: (1) create a new skill from scratch, (2) edit or improve an existing skill, (3) review or clean up a SKILL.md file, (4) run evaluations to test skill effectiveness, (5) optimize skill descriptions for better trigger accuracy. Trigger phrases: 'create a skill', 'make a skill', 'improve this skill', 'review skill', 'audit skill'."
+description: "Create, edit, improve, or audit TPA CoWork Agent skills. Use when the user wants to: (1) create a new skill from scratch, (2) edit or improve an existing skill, (3) review or clean up a SKILL.md file, (4) run evaluations to test skill effectiveness, (5) optimize skill descriptions for better trigger accuracy. Trigger phrases: 'create a skill', 'make a skill', 'improve this skill', 'review skill', 'audit skill'."
 always: true
 ---
 
@@ -10,7 +10,7 @@ Tool for creating new skills and iteratively improving existing ones.
 
 ## Skill System Overview
 
-Hope Agent skills are modular, self-contained packages that extend the AI assistant's capabilities with domain knowledge, workflows, and tools. Skills turn a general-purpose AI into a domain-specific expert.
+TPA CoWork Agent skills are modular, self-contained packages that extend the AI assistant's capabilities with domain knowledge, workflows, and tools. Skills turn a general-purpose AI into a domain-specific expert.
 
 ### Skill Loading (Three-Tier Progressive Disclosure)
 
@@ -71,7 +71,7 @@ skill-name/
 
 ### Skill Sources (lowest → highest precedence)
 
-1. **Bundled** — shipped with Hope Agent, `skills/` directory
+1. **Bundled** — shipped with TPA CoWork Agent, `skills/` directory
 2. **Extra directories** — user-imported, `config.json` `extraSkillsDirs`
 3. **Managed** — `~/.hope-agent/skills/`
 4. **Project** — `.hope-agent/skills/` (relative to cwd, highest precedence)

@@ -1,16 +1,16 @@
 ---
 name: ha-logs
-description: "Self-service diagnostics — query Hope Agent's local SQLite databases (logs / sessions / background jobs) directly via the `exec` tool to investigate problems, analyze usage, and locate root causes. Trigger on: user reports something broken / failing / slow / stuck / not responding ('X 不工作', 'X 报错', 'X 卡住', '为什么 X 失败', 'why did X fail', 'show me the logs', 'check what happened'); ad-hoc data analysis ('this week's token usage', '最近调用最多的工具', 'how many subagent runs failed', 'tool error rate', 'find sessions where X happened'); verifying a fix ('did the error stop after I changed Y'). Use BEFORE asking the user to paste log snippets — the data is on disk, query it directly. Read-only — SELECT only, never UPDATE/DELETE/INSERT/DROP."
+description: "Self-service diagnostics — query TPA CoWork Agent's local SQLite databases (logs / sessions / background jobs) directly via the `exec` tool to investigate problems, analyze usage, and locate root causes. Trigger on: user reports something broken / failing / slow / stuck / not responding ('X 不工作', 'X 报错', 'X 卡住', '为什么 X 失败', 'why did X fail', 'show me the logs', 'check what happened'); ad-hoc data analysis ('this week's token usage', '最近调用最多的工具', 'how many subagent runs failed', 'tool error rate', 'find sessions where X happened'); verifying a fix ('did the error stop after I changed Y'). Use BEFORE asking the user to paste log snippets — the data is on disk, query it directly. Read-only — SELECT only, never UPDATE/DELETE/INSERT/DROP."
 version: 1.0.0
-author: Hope Agent
+author: TPA CoWork Agent
 license: MIT
 requires:
   anyBins: [sqlite3, python3]
 ---
 
-# Hope Agent Logs — Self-Service Diagnostics
+# TPA CoWork Agent Logs — Self-Service Diagnostics
 
-Hope Agent persists every log line, every session message, and background job state into local SQLite databases under `~/.hope-agent/`. You can query these directly via `exec` to investigate problems before asking the user. Treat this as your primary evidence source.
+TPA CoWork Agent persists every log line, every session message, and background job state into local SQLite databases under `~/.hope-agent/`. You can query these directly via `exec` to investigate problems before asking the user. Treat this as your primary evidence source.
 
 ## Iron rule: read-only
 

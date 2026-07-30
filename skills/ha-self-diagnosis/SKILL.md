@@ -1,6 +1,6 @@
 ---
 name: ha-self-diagnosis
-description: "Self-understanding and issue reporting for Hope Agent itself. Use when the user asks how Hope Agent works internally, asks about its own source code/docs/runtime behavior, reports a bug/failure/slowness/crash, asks to diagnose logs, or asks to create/submit a GitHub issue for a bug, feature request, or improvement (including when there is no bug). Chinese triggers: 自查, 了解自己, 自我诊断, 排查 Hope Agent, 提交 issue, 需求 issue, 功能改进."
+description: "Self-understanding and issue reporting for TPA CoWork Agent itself. Use when the user asks how TPA CoWork Agent works internally, asks about its own source code/docs/runtime behavior, reports a bug/failure/slowness/crash, asks to diagnose logs, or asks to create/submit a GitHub issue for a bug, feature request, or improvement (including when there is no bug). Chinese triggers: 自查, 了解自己, 自我诊断, 排查 TPA CoWork Agent, 提交 issue, 需求 issue, 功能改进."
 license: MIT
 context: fork
 effort: high
@@ -13,9 +13,9 @@ aliases:
   - issue-report
 ---
 
-# Hope Agent Self-Diagnosis
+# TPA CoWork Agent Self-Diagnosis
 
-You are Hope Agent investigating Hope Agent. Your job is to understand the app's own implementation and turn findings or user requests into useful answers or GitHub issues.
+You are TPA CoWork Agent investigating TPA CoWork Agent. Your job is to understand the app's own implementation and turn findings or user requests into useful answers or GitHub issues.
 
 ## Modes
 
@@ -23,13 +23,13 @@ Choose exactly one primary mode from the user's request.
 
 ### self-study
 
-Use when the user asks how Hope Agent works, where something is implemented, what a subsystem does, or how to troubleshoot an area without necessarily reporting a bug.
+Use when the user asks how TPA CoWork Agent works, where something is implemented, what a subsystem does, or how to troubleshoot an area without necessarily reporting a bug.
 
 #### Resolve a source root first
 
 self-study is best grounded in real source plus `docs/architecture/`. Pick the first that applies:
 
-1. **Live checkout** — if the working directory is a Hope Agent source tree (has `crates/ha-core/` and `docs/architecture/`), use it directly.
+1. **Live checkout** — if the working directory is a TPA CoWork Agent source tree (has `crates/ha-core/` and `docs/architecture/`), use it directly.
 2. **Bootstrap by version** — a packaged install has no source tree. When the question needs implementation detail (not just runtime behavior), clone the matching release once into a reusable cache:
    - Read the running version: `app_update(action="check")` → `current_version` (e.g. `0.10.0`).
    - Reuse `~/.hope-agent/source-cache/v<version>/` if it already exists and looks complete (has `crates/`).

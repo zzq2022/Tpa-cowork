@@ -2,9 +2,9 @@
 
 > 返回 [文档索引](../README.md)
 
-> Hope Agent 的 Model Context Protocol 客户端 — 接入任意 MCP Server，把工具 / 资源 / 提示词注入主对话循环
+> TPA CoWork Agent 的 Model Context Protocol 客户端 — 接入任意 MCP Server，把工具 / 资源 / 提示词注入主对话循环
 >
-> 反向（Hope Agent **当** MCP server，把自身子系统暴露给外部 agent）见 [`mcp-server.md`](mcp-server.md)。
+> 反向（TPA CoWork Agent **当** MCP server，把自身子系统暴露给外部 agent）见 [`mcp-server.md`](mcp-server.md)。
 
 ## 目录
 

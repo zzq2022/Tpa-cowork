@@ -29,7 +29,7 @@ flowchart TB
     EXT["ExtensionBackend<br/>Chrome 扩展 + Native Messaging Host"]
     CDP["CdpBackend<br/>chromiumoxide · managed / user_attach"]
     REAL["用户真实 Chrome 标签页"]
-    HOPE["Hope Agent CDP Chrome"]
+    HOPE["TPA CoWork Agent CDP Chrome"]
 
     MOD --> ACQ --> SEL
     SEL --> EXT --> REAL
@@ -76,7 +76,7 @@ Native host 是很薄的本机桥：只做 Chrome Native Messaging stdio frame �
 - **Chrome Extension 安装**：主路径是 Chrome Web Store；alpha/dev/self-host/enterprise 继续支持本地 unpacked 扩展。Settings 向导会优先显示本地扩展目录（release resource 或 dev `extensions/chrome`），推荐在 `chrome://extensions` 开启 Developer mode 后直接拖入该目录；也可复制路径后用 `Load unpacked` 手动选择。App 不能静默安装扩展，只能在 Settings 打开 Web Store 或 `chrome://extensions` 向导，最终确认必须发生在 Chrome UI。
 - **扩展运行时文件编译嵌入二进制（本地安装前提）**：运行时文件白名单（同 Web Store zip 清单，**保留 `manifest.key`**——区别于 `package-webstore.mjs` strip key）经 `rust-embed` 编译进 ha-core（`browser/extension/embedded.rs`），随二进制到达所有发行形态（桌面 / bare binary / headless server），不再依赖 Tauri resource / prepare 脚本拷贝（均已退役）。`ensure_local_unpacked_extension` 把 dev repo checkout（存在时优先，扩展编辑即时生效）或嵌入文件集镜像到稳定目录 `~/.hope-agent/extension/browser/`（字节 diff 幂等 + prune 多余文件 + 完成 marker 防半拷贝），二进制升级后镜像自动刷新；`unpacked_extension_path()` 优先稳定副本，headless 无桌面启动钩子时经每进程一次的懒 ensure 自举。**保留 key 使 unpacked id 恒为固定 dev id**，native host `allowed_origins` 据此推导——这是「商店上架前用户先 Load unpacked 本地装扩展、且无需 Web Store id 即可连上 broker」可行的前提。注意 Chrome 不自动重载 unpacked 扩展：镜像更新后需用户在 `chrome://extensions` 手动 reload 生效（上架 Web Store 后由商店自动更新接管）。
 - **Native host 安装**：Settings 调 owner 平面命令写 user-level native host manifest。正式桌面包通过 Tauri resource 携带 `ha-browser-host`，启动时把资源路径写入 `HOPE_AGENT_BROWSER_HOST_PATH`；dev/self-host 可显式传 path 或设置同名 env。manifest 的 `allowed_origins` 只写入用户选择/检测到的 extension id，扩展 id 必须是 Chrome 的 32 位 `a-p` 字符串。Windows 额外写 HKCU `Software\Google\Chrome\NativeMessagingHosts\<host>` 指向 manifest。
-- **Broker 连接**：Core broker 启动时生成本机 token；`ha-browser-host` 首帧必须是带 token 的 `host.hello`。Unix/macOS socket 校验 peer uid，Windows named pipe 校验当前用户 SID。扩展不接触 Hope Agent HTTP API key。
+- **Broker 连接**：Core broker 启动时生成本机 token；`ha-browser-host` 首帧必须是带 token 的 `host.hello`。Unix/macOS socket 校验 peer uid，Windows named pipe 校验当前用户 SID。扩展不接触 TPA CoWork Agent HTTP API key。
 - **Extension id**：生产 id 由 Web Store 首次上传后产生，进入 `browser.extension.extensionIds`；unpacked dev id 由 `manifest.key` 推导并自动加入状态输出，方便 alpha fallback。
 - **Stop 控制**：用户可从页面 overlay、extension popup、Settings Stop 结束控制。Core 会 emit `browser:control_stopped`，并清理 session scoped lease/ref 状态。
 
@@ -141,7 +141,7 @@ flowchart LR
 | `frames.tree` | `{ tabId }` | `{ tabId, available, frames[{frameId,parentFrameId,url,documentId,…}], error? }`（`webNavigation.getAllFrames`） | SW `:416-417,1108-1141` |
 | `frames.snapshot` | `{ tabId, maxElements?(默认 160，clamp[1,300]) }` | `Array<FrameSnapshot>`（每可访问帧一项，含 `elements[{ref,depth,role,text,selector,attrs}]`、`truncated`）。`MAX_TEXT_LEN=100` | SW `:418-419,525-688` / Core `backend.rs:646` |
 | `frames.act` | `{ tabId, frameId(≥0), selector(非空), kind(非空), params? }` | 成功 `{ ok:true, message, …kind 专属 }`（`clip` 返回 `url,title,clip{…}`）；失败抛 `Error`。先滚动元素居中 | SW `:420-427,695-777` / Core `backend.rs:718` |
-| `overlay.show` | `{ tabId, label?(默认 "Hope Agent is controlling this tab") }` | `{ shown:true }`；注入 closed shadow-DOM 横幅 + Stop 按钮，tab 重载后重注 | SW `:428-430,888-991` / Core `backend.rs:449` |
+| `overlay.show` | `{ tabId, label?(默认 "TPA CoWork Agent is controlling this tab") }` | `{ shown:true }`；注入 closed shadow-DOM 横幅 + Stop 按钮，tab 重载后重注 | SW `:428-430,888-991` / Core `backend.rs:449` |
 | `overlay.hide` | `{ tabId }` | `{ hidden:true }`（Core 侧失败仅 `app_debug` 记录，非致命） | SW `:431-433,993-996` / Core `backend.rs:2274` |
 | `observe.read` | `{ kind, since?(ms，严格 `>` 过滤，`at<=since` 丢弃), tabId? }` | `ObserveEntry[]`：`{ at, level, text, url?, tabId? }`。读内存 ring buffer。downloads 条目无 tabId，故 tabId 过滤会排除它 | SW `:434-435,1219-1246` / Core `backend.rs:2046` |
 | `downloads.cancel` | `{ downloadId(≥0) }` | `{ cancelled:true, downloadId }`。**所有权门控**：不在 `managedDownloads` 抛错；推一条 `cancelled` observe 条目 | SW `:436-437,1337-1357` / Core `backend.rs:1940` |
@@ -374,7 +374,7 @@ raw CDP 不得被用来绕过高层 URL 策略，故在进入后端前按 method
 
 - **Chrome Extension**：安装/修复 native host、打开 Chrome Web Store 或 unpacked extension 向导、显示 connected/version/backend 状态、Stop browser control。真实用户 Chrome tab 控制走这条路径。
 - **独立浏览器**（`AppConfig.browser.defaultMode = "managed"`，默认）：hope-agent 用 [`browser-profiles/{name}/`](../../crates/ha-core/src/paths.rs) 维护的隔离 Chrome 实例做自动化。Launch / Profiles section 控制这条路径。
-- **Hope Agent 持久 profile**（`defaultMode = "user_attach"`）：hope-agent 在 [`browser_user_attach_dir()`](../../crates/ha-core/src/paths.rs)（`~/.hope-agent/browser/user-attach/`）下 spawn 一个**独立 user-data-dir 的 Chrome**，让用户在 Hope Agent 专用浏览器里登录并长期复用 cookies，但**不动**用户真正的 Chrome 用户数据。Connect section 的 "doctor" banner + 一键启动按钮驱动这条路径。
+- **TPA CoWork Agent 持久 profile**（`defaultMode = "user_attach"`）：hope-agent 在 [`browser_user_attach_dir()`](../../crates/ha-core/src/paths.rs)（`~/.hope-agent/browser/user-attach/`）下 spawn 一个**独立 user-data-dir 的 Chrome**，让用户在 TPA CoWork Agent 专用浏览器里登录并长期复用 cookies，但**不动**用户真正的 Chrome 用户数据。Connect section 的 "doctor" banner + 一键启动按钮驱动这条路径。
 
 两个 Tauri 命令支撑 doctor UX：
 
@@ -393,7 +393,7 @@ raw CDP 不得被用来绕过高层 URL 策略，故在进入后端前按 method
 | `user_attach`（内置） | `~/.hope-agent/browser/user-attach/` | ✓ cookies / 登录态长存 | agent 长期复用的"日常"浏览器；独立于用户真实 Chrome 数据 |
 | 用户定义 `<name>` | `~/.hope-agent/browser-profiles/<name>/` | ✓ | 分账号 / 分域名 / 分项目 |
 
-> 注：早期的 `target=managed|user_attach|system` 三档 enum 已删除。`target=system`（用 CDP 接管用户日常 Chrome）从未稳定 —— Chrome 148+ 架构性禁止 `--remote-debugging-port` 落在默认 user-data-dir 上。真实 daily Chrome / 已登录 tab 走 ExtensionBackend claim；`profile=user_attach` 只是 CDP fallback 的 Hope Agent 持久 profile。
+> 注：早期的 `target=managed|user_attach|system` 三档 enum 已删除。`target=system`（用 CDP 接管用户日常 Chrome）从未稳定 —— Chrome 148+ 架构性禁止 `--remote-debugging-port` 落在默认 user-data-dir 上。真实 daily Chrome / 已登录 tab 走 ExtensionBackend claim；`profile=user_attach` 只是 CDP fallback 的 TPA CoWork Agent 持久 profile。
 
 ## Chromium 运行时自动安装
 
@@ -470,4 +470,4 @@ raw CDP 不得被用来绕过高层 URL 策略，故在进入后端前按 method
 - **JS-patch / stealth 指纹军备竞赛**：靠真实 profile 已有结构性优势；伪装指纹是移动靶、负 ROI
 - **CAPTCHA 自动破解**：保持遇 captcha / 2FA 一律 `ask_user_question` 人工接管——这是「真实浏览器 + 人在环」的信任优势，不为 benchmark 分数破坏
 - **hosted 云浏览器 / 大规模并发抓取基础设施**：框架公司的商业模式，与本地 daemon 定位正交，做了也打不过且稀释焦点
-- **把扩展做成独立 BYO-API-key 产品**：价值在「扩展是 Hope Agent daemon 的一只手」，与 memory / plan / cron 同生态，不复制独立扩展的天花板
+- **把扩展做成独立 BYO-API-key 产品**：价值在「扩展是 TPA CoWork Agent daemon 的一只手」，与 memory / plan / cron 同生态，不复制独立扩展的天花板

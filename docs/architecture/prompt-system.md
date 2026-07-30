@@ -1,4 +1,4 @@
-# Hope Agent 提示词系统技术文档
+# TPA CoWork Agent 提示词系统技术文档
 
 > 返回 [文档索引](../README.md) | 更新时间：2026-04-25
 
@@ -39,7 +39,7 @@
 
 ## 概述
 
-Hope Agent 的提示词系统采用**模块化组装**架构，由 `system_prompt::build()` 统一编排。System Prompt 由若干独立段落（section）按固定顺序拼接，每段可独立启用/禁用/过滤，支持 Agent 级别的差异化配置。其中工具描述（⑥）、Deferred Tools（⑥b）、Human-in-the-loop（⑥c）、Memory Guidelines（8d）、Sandbox Mode（⑪）等关键行为指引以编译时常量形式硬编码进二进制，用户无法通过自定义 agent.md 覆盖。Tool-Call Narration（⑥c）同样是编译常量，但由 `AppConfig.tool_call_narration_enabled` 旗标门控（默认 `true`，可关）。Runtime Info 只展示 Agent 自己的 home/scratch 目录；用户为当前会话选择的工作目录会作为独立的 `# Working Directory` 条件段注入。当前会话的权限审批模式会注入为 `# Current Permission Mode`，让模型知道 `default` / `smart` / `yolo` 的自主执行边界；当前会话的 Execution Mode 会在 `guarded` / `deep` / `autonomous` 时注入独立动态段，告诉模型长任务推进、验证、修复和停止策略；绑定 IM chat 的会话还会注入 `# IM Channel Attachment`，提醒桌面 / HTTP 发起的回复也可能镜像到 IM。支持两种互斥的组装模式：**结构化模式**（默认 GUI 配置）、**OpenClaw 兼容模式**（4 文件配置）。
+TPA CoWork Agent 的提示词系统采用**模块化组装**架构，由 `system_prompt::build()` 统一编排。System Prompt 由若干独立段落（section）按固定顺序拼接，每段可独立启用/禁用/过滤，支持 Agent 级别的差异化配置。其中工具描述（⑥）、Deferred Tools（⑥b）、Human-in-the-loop（⑥c）、Memory Guidelines（8d）、Sandbox Mode（⑪）等关键行为指引以编译时常量形式硬编码进二进制，用户无法通过自定义 agent.md 覆盖。Tool-Call Narration（⑥c）同样是编译常量，但由 `AppConfig.tool_call_narration_enabled` 旗标门控（默认 `true`，可关）。Runtime Info 只展示 Agent 自己的 home/scratch 目录；用户为当前会话选择的工作目录会作为独立的 `# Working Directory` 条件段注入。当前会话的权限审批模式会注入为 `# Current Permission Mode`，让模型知道 `default` / `smart` / `yolo` 的自主执行边界；当前会话的 Execution Mode 会在 `guarded` / `deep` / `autonomous` 时注入独立动态段，告诉模型长任务推进、验证、修复和停止策略；绑定 IM chat 的会话还会注入 `# IM Channel Attachment`，提醒桌面 / HTTP 发起的回复也可能镜像到 IM。支持两种互斥的组装模式：**结构化模式**（默认 GUI 配置）、**OpenClaw 兼容模式**（4 文件配置）。
 
 ```mermaid
 graph TD
@@ -525,7 +525,7 @@ Phase 5: Review & Refinement   → 用户审核，inline comment 修订
 
 **与工具描述层的协同**：`TOOL_DESC_ASK_USER_QUESTION`（⑥ Tool Descriptions）也包含同样的 WHEN / WHEN NOT / HOW 三段，但聚焦于**工具调用的具体规则**（参数语法、Plan Mode 禁令、tool approval 边界）。⑥c Human-in-the-loop 段则提供**全局思维框架**，告诉模型把 ask_user_question 视作"主动协作的常规通道"而非"卡住时的兜底升级"。两层重复但措辞不同 —— 工具描述说"怎么问"，全局指引说"何时切换到问的模式"。
 
-**与 Claude Code 的差异**：Claude Code 在 system prompt 中只是 2 处嵌入式提及（"失败 ≥ 2 次后升级" + "工具被拒时澄清"），把 AskUserQuestion 定位为模糊的"卡住时的升级路径"。Hope Agent 用独立段落给出**触发器 + 反触发器 + 节流**三件套，让边界可执行而非靠模型自由发挥。详细对比见 [ask-user.md](ask-user.md)。
+**与 Claude Code 的差异**：Claude Code 在 system prompt 中只是 2 处嵌入式提及（"失败 ≥ 2 次后升级" + "工具被拒时澄清"），把 AskUserQuestion 定位为模糊的"卡住时的升级路径"。TPA CoWork Agent 用独立段落给出**触发器 + 反触发器 + 节流**三件套，让边界可执行而非靠模型自由发挥。详细对比见 [ask-user.md](ask-user.md)。
 
 **代码位置**：
 - 常量：`crates/ha-core/src/system_prompt/constants.rs` — `HUMAN_IN_THE_LOOP_GUIDANCE`

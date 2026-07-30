@@ -208,7 +208,7 @@ V2 的 `MemoryRecallPlanner` 是自动动态召回的唯一产品编排入口。
 
 ## 最终设计定位：Memory OS
 
-下一代记忆系统不是单一“向量库”或“聊天摘要”功能，而是一套本地优先的 **Memory OS**：它把用户能看懂的记忆体验、可审计的结构化事实、跨源召回、离线固化、外部 provider 同步和高可用治理放在同一套边界内。调研 OpenClaw、Hermes Agent、Mem0、Zep / Graphiti、Letta / LangMem、Supermemory 与 ChatGPT Memory 后，本系统保留 Hope Agent 的本地 SQLite / claim / evidence 作为默认真相源，吸收竞品的 Active recall、Dreaming consolidation、temporal graph、provider adapter、profile / RAG 统一心智和普通用户管理体验，但不把用户最终纠错权交给自动化或外部服务。
+下一代记忆系统不是单一“向量库”或“聊天摘要”功能，而是一套本地优先的 **Memory OS**：它把用户能看懂的记忆体验、可审计的结构化事实、跨源召回、离线固化、外部 provider 同步和高可用治理放在同一套边界内。调研 OpenClaw、Hermes Agent、Mem0、Zep / Graphiti、Letta / LangMem、Supermemory 与 ChatGPT Memory 后，本系统保留 TPA CoWork Agent 的本地 SQLite / claim / evidence 作为默认真相源，吸收竞品的 Active recall、Dreaming consolidation、temporal graph、provider adapter、profile / RAG 统一心智和普通用户管理体验，但不把用户最终纠错权交给自动化或外部服务。
 
 六层职责如下：
 
@@ -455,7 +455,7 @@ flowchart TD
 支持三类批量导入入口：
 
 - **JSON 格式**：`NewMemory` 数组、`{ memories/items/entries: [...] }` 包装对象，或单条 content-like 对象；`content/text/memory/fact` 均可作为正文来源。
-- **Markdown 格式**：Hope Agent 自有 section 导出格式；兼容常见 `MEMORY.md` / `USER.md` 风格的 bullet、编号列表、blockquote、段落和内联 `Preference:` / `Project:` / `Reference:` 分类前缀。
+- **Markdown 格式**：TPA CoWork Agent 自有 section 导出格式；兼容常见 `MEMORY.md` / `USER.md` 风格的 bullet、编号列表、blockquote、段落和内联 `Preference:` / `Project:` / `Reference:` 分类前缀。
 - **Auto 格式**：先识别 JSON（含代码块围栏），失败且可解析出 Markdown 条目时回退 Markdown；用于“从其他 AI 导入”的粘贴入口。
 
 导入时可选启用去重（`dedup` 参数），返回 `ImportResult { created, skipped_duplicate, failed, errors }`；dedup 的中等相似命中会更新已有 row，当前仍计入 `created`，因此 preview 的“预计导入”= 新建 + 可能合并。

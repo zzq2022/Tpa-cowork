@@ -1,4 +1,4 @@
-# Hope Agent 发版流程
+# TPA CoWork Agent 发版流程
 
 > 分支模型与跨分支红线（`main` / `release/X.Y`、只 cherry-pick 不 merge）见 [AGENTS.md "## 分支与发布"](../AGENTS.md#分支与发布)。本文档是配套实操手册，覆盖在 branch protection 启用下的完整命令流程、避坑要点与速查表。
 
@@ -122,7 +122,7 @@ git push origin v0.1.2
 
 ### 1.4 审阅 draft Release 并 publish
 
-GitHub Releases 页找到 `Hope Agent v0.1.2` draft，确认：
+GitHub Releases 页找到 `TPA CoWork Agent v0.1.2` draft，确认：
 
 - macOS x64 / arm64 DMG 齐全
 - Windows NSIS installer 齐全
@@ -343,7 +343,7 @@ git cherry-pick -x <sha>     # 加 (cherry picked from commit <sha>)
 
 [`.github/workflows/lint.yml`](../.github/workflows/lint.yml) 跑 `node scripts/check-release-paths.mjs`，验证：
 
-- 每个 platform matrix 的 `target_dir=...` 不带 `src-tauri/` 前缀（Hope Agent 是 Cargo workspace，binary 在仓库根 `./target/`）
+- 每个 platform matrix 的 `target_dir=...` 不带 `src-tauri/` 前缀（TPA CoWork Agent 是 Cargo workspace，binary 在仓库根 `./target/`）
 - Swatinem/rust-cache `workspaces:` 不指向 src-tauri 子目录
 - `update-homebrew-tap.yml` / `update-aur.yml` / `update-scoop-bucket.yml` / `update-linux-repo.yml` 引用的 release artifact 文件名模式与 [release.yml](../.github/workflows/release.yml) 实际产出对得上（缺哪个 platform 就 fail / warn）
 - matrix 包含 4 个必备 platform（`macos-arm64` / `linux-x64` / `linux-arm64` / `windows-x64`）

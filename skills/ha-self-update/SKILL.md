@@ -1,15 +1,15 @@
 ---
 name: ha-self-update
-description: "Check for and install Hope Agent updates through conversation. Use whenever the user asks about upgrades, new versions, release notes, or reports a bug that might already be fixed upstream — phrases like 'upgrade Hope Agent', 'update hope agent', 'check for new version', '升级一下', '有新版本吗', '帮我升级', 'is there a newer build', 'check release notes', 'install the latest'. Also use proactively when an `app_update(action=\"check\")` result shows `has_update: true` and the user hasn't been told yet. Covers all three formfactors: desktop GUI bundle (DMG/MSI/AppImage), `hope-agent server` daemon installed via Homebrew/Scoop/AUR/apt/dnf, and headless single-binary deployments. The upgrade is always user-confirmed via `ask_user_question` — never silent."
+description: "Check for and install TPA CoWork Agent updates through conversation. Use whenever the user asks about upgrades, new versions, release notes, or reports a bug that might already be fixed upstream — phrases like 'upgrade TPA CoWork Agent', 'update hope agent', 'check for new version', '升级一下', '有新版本吗', '帮我升级', 'is there a newer build', 'check release notes', 'install the latest'. Also use proactively when an `app_update(action=\"check\")` result shows `has_update: true` and the user hasn't been told yet. Covers all three formfactors: desktop GUI bundle (DMG/MSI/AppImage), `hope-agent server` daemon installed via Homebrew/Scoop/AUR/apt/dnf, and headless single-binary deployments. The upgrade is always user-confirmed via `ask_user_question` — never silent."
 always: false
 aliases:
   - self-update
   - upgrade
 ---
 
-# Hope Agent Self-Update
+# TPA CoWork Agent Self-Update
 
-Hope Agent ships a single binary (`hope-agent`) that dispatches into three modes by subcommand: desktop GUI, `hope-agent server`, and `hope-agent acp`. All three share the same release artifacts under [github.com/shiwenwen/hope-agent/releases](https://github.com/shiwenwen/hope-agent/releases) and the same Minisign-signed update manifest. The `app_update` tool is the single entry point for self-upgrade; this skill is the methodology for using it well.
+TPA CoWork Agent ships a single binary (`hope-agent`) that dispatches into three modes by subcommand: desktop GUI, `hope-agent server`, and `hope-agent acp`. All three share the same release artifacts under [github.com/shiwenwen/hope-agent/releases](https://github.com/shiwenwen/hope-agent/releases) and the same Minisign-signed update manifest. The `app_update` tool is the single entry point for self-upgrade; this skill is the methodology for using it well.
 
 ## When to suggest an upgrade
 
@@ -53,7 +53,7 @@ Quick checks before calling `app_update(action="install")` — these aren't bloc
 
 - Use `exec` to peek at active workload: `launchctl list | grep hopeagent` / `systemctl --user is-active hope-agent.service`, plus `sessions_list({ limit: 5 })` to see if any session is mid-turn.
 - If a cron job is scheduled in the next few minutes, suggest waiting.
-- On macOS: warn if `Hope Agent.app` is open and the user is mid-task — restart will kill in-flight turns.
+- On macOS: warn if `TPA CoWork Agent.app` is open and the user is mid-task — restart will kill in-flight turns.
 
 ### 3. Install — pass `run_in_background: true`
 

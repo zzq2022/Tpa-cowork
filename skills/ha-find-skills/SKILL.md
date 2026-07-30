@@ -6,7 +6,7 @@ always: true
 
 # Find Skills
 
-Hope Agent can load skills from multiple sources. When the user needs a capability the active catalog doesn't cover, this workflow finds a candidate on a public registry, confirms with the user, and installs it into `~/.hope-agent/skills/` so it's picked up on next prompt rebuild.
+TPA CoWork Agent can load skills from multiple sources. When the user needs a capability the active catalog doesn't cover, this workflow finds a candidate on a public registry, confirms with the user, and installs it into `~/.hope-agent/skills/` so it's picked up on next prompt rebuild.
 
 ## Before searching — check what's already there
 
@@ -39,7 +39,7 @@ skillhub search "<query>"
 skillhub install <slug>      # installs to current workspace ./skills by default
 ```
 
-After `skillhub install`, if the slug landed under `./skills/<name>/`, move it to `~/.hope-agent/skills/<name>/` so Hope Agent's extra_skills_dir picks it up.
+After `skillhub install`, if the slug landed under `./skills/<name>/`, move it to `~/.hope-agent/skills/<name>/` so TPA CoWork Agent's extra_skills_dir picks it up.
 
 ### 3. GitHub code search (fallback, no CLI required)
 
@@ -71,7 +71,7 @@ This is a **HIGH-risk** operation (arbitrary third-party code joins the agent's 
 2. **Ask explicitly**: "Install `<slug>` from `<source>`? This adds it to `~/.hope-agent/skills/<name>/` and runs on future turns."
 3. Only after explicit "yes" / "go ahead":
    - Run the registry CLI install, or `git clone` the repo into `~/.hope-agent/skills/<slug>/`.
-   - If the skill's frontmatter declares `metadata.openclaw.install` or `metadata.hope-agent.install` with `bins:`, those dependencies need separate install (via brew/npm/go/uv) — Hope Agent's Skills panel has an "Install dependency" button, or use `ha-settings` to toggle `allow_remote_install` for HTTP-mode users.
+   - If the skill's frontmatter declares `metadata.openclaw.install` or `metadata.hope-agent.install` with `bins:`, those dependencies need separate install (via brew/npm/go/uv) — TPA CoWork Agent's Skills panel has an "Install dependency" button, or use `ha-settings` to toggle `allow_remote_install` for HTTP-mode users.
 4. Verify install: `ls ~/.hope-agent/skills/<slug>/SKILL.md` — confirm the file exists.
 
 ## Post-install

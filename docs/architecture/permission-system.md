@@ -25,7 +25,7 @@
 
 ## 概述
 
-Hope Agent 的权限/审批系统决定**每一次工具调用是否需要弹审批对话框**。设计目标是把以前散落在 8 套机制（`ToolPermissionMode` / `dangerous_skip_all_approvals` / `internal` flag / `auto_approve_tools` / `require_approval` / `exec` allowlist / Plan Mode allowlist / `approval_timeout`）里的判定逻辑收敛到**单一规则引擎 + 不同 preset**，参考 Claude Code 的 "unified rule engine + presets" 思路落地。
+TPA CoWork Agent 的权限/审批系统决定**每一次工具调用是否需要弹审批对话框**。设计目标是把以前散落在 8 套机制（`ToolPermissionMode` / `dangerous_skip_all_approvals` / `internal` flag / `auto_approve_tools` / `require_approval` / `exec` allowlist / Plan Mode allowlist / `approval_timeout`）里的判定逻辑收敛到**单一规则引擎 + 不同 preset**，参考 Claude Code 的 "unified rule engine + presets" 思路落地。
 
 设计原则：
 

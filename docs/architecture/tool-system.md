@@ -2,7 +2,7 @@
 
 > 返回 [文档索引](../README.md)
 
-本文档完整涵盖 Hope Agent 工具系统的定义、分层模型、执行流程、结果持久化和权限控制。
+本文档完整涵盖 TPA CoWork Agent 工具系统的定义、分层模型、执行流程、结果持久化和权限控制。
 
 ---
 
@@ -171,7 +171,7 @@ impl ToolDefinition {
 
 ## 内置工具清单
 
-本节枚举 Hope Agent 当前内置的全部工具（源码：`crates/ha-core/src/tools/definitions/`）。
+本节枚举 TPA CoWork Agent 当前内置的全部工具（源码：`crates/ha-core/src/tools/definitions/`）。
 
 标记含义：
 
@@ -261,7 +261,7 @@ Path-aware 工具统一使用 `ToolExecContext` 解析默认路径：显式绝�
 - 只读 op：`status`、`permissions`、`diagnostics.summary/export`、`snapshot`、`elements.find`、`wait`、`apps.list/frontmost/installed/search`、`dock.list`、`spaces.list`、`windows.list`、`act.dry_run`、`menu.list/popover`、`dialog.inspect/list`。
 - 普通突变 op 进入审批：`apps.activate/launch`、`dock.launch/hide/show/menu`、安全 `dock.select_menu menuItem`、`spaces.switch/move_window`、`windows.focus/move/resize/minimize`、除 `dry_run` 外的 `act.*`、普通 `menu.click`、普通 `dialog.click/input/file/dismiss`。
 - 高风险突变 op 进入严格审批且禁用 Allow Always：`apps.quit`、`windows.close`、`dialog.accept`、`act.perform_action axAction=AXConfirm`、危险菜单路径或 dialog 按钮（delete / trash / reset / discard 等中英文关键词）、危险或 index-only `dock.select_menu`。
-- 审批前会捕获当前 frontmost App 和 focused window；审批通过或超时继续时，执行层会在真正执行 `mac_control` 前 best-effort 恢复该 App，并按 pid-scoped window id / 窗口标题恢复原窗口，避免审批 UI 抢焦点后把 frontmost 依赖动作送到 Hope Agent。
+- 审批前会捕获当前 frontmost App 和 focused window；审批通过或超时继续时，执行层会在真正执行 `mac_control` 前 best-effort 恢复该 App，并按 pid-scoped window id / 窗口标题恢复原窗口，避免审批 UI 抢焦点后把 frontmost 依赖动作送到 TPA CoWork Agent。
 
 ### 7. 多模态（输入/生成）
 
@@ -925,11 +925,11 @@ __IMAGE_FILE__{"mime":"image/png","path":"/Users/.../.hope-agent/attachments/<se
 Screenshot captured (...)
 ```
 
-它解决“图片原始文件要保存，但 Provider 不能直接读取本地路径”的问题：工具先把图片 bytes 保存为受管文件，再把路径 marker 写入 tool_result；Provider 发送前由 Hope Agent 读取该路径、校验、编码为 base64，再转换成标准图片输入。
+它解决“图片原始文件要保存，但 Provider 不能直接读取本地路径”的问题：工具先把图片 bytes 保存为受管文件，再把路径 marker 写入 tool_result；Provider 发送前由 TPA CoWork Agent 读取该路径、校验、编码为 base64，再转换成标准图片输入。
 
 安全边界：
 
-- 只允许 Hope Agent 受管媒体目录下的路径，例如 `~/.hope-agent/attachments/`、`~/.hope-agent/tool_results/` 和 `~/.hope-agent/mac-control/snapshots/`
+- 只允许 TPA CoWork Agent 受管媒体目录下的路径，例如 `~/.hope-agent/attachments/`、`~/.hope-agent/tool_results/` 和 `~/.hope-agent/mac-control/snapshots/`
 - 路径必须 canonicalize 后仍在允许目录内，防止 `../` 或 symlink 逃逸
 - 文件 MIME 必须由魔数校验为图片，且与 marker 声明 MIME 一致
 - 文件大小必须受上限保护，避免把超大本地文件读入 Provider 请求

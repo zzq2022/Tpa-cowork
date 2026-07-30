@@ -2,7 +2,7 @@
 
 > 返回 [文档索引](../README.md)
 >
-> 设计空间是 Hope Agent 的 **agent 原生设计工作空间**：用户与模型协作，从一句话或参考图产出**自包含、可交付的设计产物**（网页 / 移动原型 / 演示文稿 / 仪表盘 / 海报 / 文档 / 邮件 / 图像 / 动效 / 音频 / 交互组件），以可复用的**品牌设计系统**为底座，在沙盒面板实时预览、可视化直接微调、版本管理、一键导出，并可经**工程轴**把设计系统一路交付到代码（多平台 Token 导出 / Figma 导入 / 代码交付包 / 绑定代码工程同步），与[知识空间](knowledge-base.md)、[项目](project.md)深度联动。侧边栏入口紧贴「知识空间」下方。
+> 设计空间是 TPA CoWork Agent 的 **agent 原生设计工作空间**：用户与模型协作，从一句话或参考图产出**自包含、可交付的设计产物**（网页 / 移动原型 / 演示文稿 / 仪表盘 / 海报 / 文档 / 邮件 / 图像 / 动效 / 音频 / 交互组件），以可复用的**品牌设计系统**为底座，在沙盒面板实时预览、可视化直接微调、版本管理、一键导出，并可经**工程轴**把设计系统一路交付到代码（多平台 Token 导出 / Figma 导入 / 代码交付包 / 绑定代码工程同步），与[知识空间](knowledge-base.md)、[项目](project.md)深度联动。侧边栏入口紧贴「知识空间」下方。
 >
 > 产品名 **设计空间**；代码标识 `design`（模块 `crates/ha-core/src/design/`、agent 工具 `design`、数据库 `design.db`、前端视图 `DesignView`、右侧面板与 i18n 命名空间 `design`）。产品名与代码标识**均不引用任何外部参考实现的名称**（品牌产品名仅作设计数据出现在品牌参考系统里，见 §6.3）。
 >
@@ -48,7 +48,7 @@
 6. **Transport 双实现**：每个新 invoke 同时实现 Tauri + HTTP（见 [transport-modes.md](transport-modes.md)）。
 7. **设置三件套**：新增用户可调字段必须同 PR 具备 GUI 控件 + `ha-settings` 分支 + SKILL.md 登记（见 [AGENTS.md 设置约定](../../AGENTS.md)）。
 8. **安全等价于 Canvas**：iframe `sandbox="allow-scripts"`（无 same-origin）、静态托管三道闸、`eval`/脚本只在沙盒内、写盘走 `write_atomic` + 作用域闭合、出站走 `security::ssrf`。
-9. **原创原型语言 + 品牌风格参考（附免责声明）**：内置设计系统两类——6 套**原创原型化**设计语言（极简现代 / 编辑杂志 / 科技暗色 …）+ 一批**品牌风格参考**（对各品牌公开视觉语言的独立再诠释；`build_system_md` 对 `brand_ref` 渲染时**必附免责声明**、非官方、无隶属 / 授权，详见 §6.3）。**红线**：代码 / 注释 / commit / 文档 / UI / i18n 不出现任何**外部参考实现**（Hope Agent 对标的开源设计项目）的名字；品牌产品名仅作**设计数据**出现在品牌参考系统里。（注：早期「不克隆真实品牌」的立场已调整为「独立再诠释 + 免责声明」，理由与落地见 §6.3。）
+9. **原创原型语言 + 品牌风格参考（附免责声明）**：内置设计系统两类——6 套**原创原型化**设计语言（极简现代 / 编辑杂志 / 科技暗色 …）+ 一批**品牌风格参考**（对各品牌公开视觉语言的独立再诠释；`build_system_md` 对 `brand_ref` 渲染时**必附免责声明**、非官方、无隶属 / 授权，详见 §6.3）。**红线**：代码 / 注释 / commit / 文档 / UI / i18n 不出现任何**外部参考实现**（TPA CoWork Agent 对标的开源设计项目）的名字；品牌产品名仅作**设计数据**出现在品牌参考系统里。（注：早期「不克隆真实品牌」的立场已调整为「独立再诠释 + 免责声明」，理由与落地见 §6.3。）
 
 ### 1.3 与旧版设计工坊、与 Canvas 的关系
 
@@ -67,7 +67,7 @@
 
 ### D2 · 更强的品牌设计系统（本地护城河）
 
-一键从**截图 / 图片 / URL / 现有本地代码工程**反向提取品牌设计契约（`DESIGN.md` 9 段 + `tokens.json`），并可视化管理、跨产物套用、跨会话/项目全局引用。因 Hope Agent 是本地桌面 Agent（有文件系统 / exec / 多模态），"读本地工程提取设计系统"是外部云端产品做不到的护城河。详见 [§6](#6-设计系统层品牌契约--token-编译)。
+一键从**截图 / 图片 / URL / 现有本地代码工程**反向提取品牌设计契约（`DESIGN.md` 9 段 + `tokens.json`），并可视化管理、跨产物套用、跨会话/项目全局引用。因 TPA CoWork Agent 是本地桌面 Agent（有文件系统 / exec / 多模态），"读本地工程提取设计系统"是外部云端产品做不到的护城河。详见 [§6](#6-设计系统层品牌契约--token-编译)。
 
 ### D3 · 一键导出与产物库
 
@@ -75,7 +75,7 @@
 
 ### D4 · 与知识空间 / 项目联动
 
-设计产物可**沉淀进知识空间**（生成一条 KB 笔记内嵌预览与元数据，进入第二大脑可检索）；设计系统可被 agent **全局引用**（作为可复用上下文注入 system prompt，像记忆/知识那样约束生成）；设计项目可**绑定 Hope Agent 项目**（共享工作目录）。详见 [§12](#12-与现有子系统的契约)。
+设计产物可**沉淀进知识空间**（生成一条 KB 笔记内嵌预览与元数据，进入第二大脑可检索）；设计系统可被 agent **全局引用**（作为可复用上下文注入 system prompt，像记忆/知识那样约束生成）；设计项目可**绑定 TPA CoWork Agent 项目**（共享工作目录）。详见 [§12](#12-与现有子系统的契约)。
 
 ---
 
@@ -135,7 +135,7 @@ graph TD
 
 | 概念 | 定义 | 生命周期 |
 | --- | --- | --- |
-| **设计项目（Project）** | 顶层容器，聚合一组产物，可选绑定一个默认设计系统与一个 Hope Agent 项目 | 用户/模型创建 → 增删产物 → 删除级联清目录 |
+| **设计项目（Project）** | 顶层容器，聚合一组产物，可选绑定一个默认设计系统与一个 TPA CoWork Agent 项目 | 用户/模型创建 → 增删产物 → 删除级联清目录 |
 | **产物（Artifact）** | 单个可交付设计，有 `kind`（web/mobile/deck/dashboard/poster/document/email/image），对应磁盘一个目录 + 一份自包含 `index.html` | `create` → `update`（累加版本）→ `delete` |
 | **产物版本（Version）** | 一次 update / restore / 可视化编辑产生的源码快照，带 `origin`（`ai` 生成/精修 / `manual` 可视化微调·换系统 / `restore` 回滚） | 递增；超 `maxVersionsPerArtifact` 时**里程碑感知淘汰**：优先删最旧的 `manual`（微调自动保存），保留 `ai`/`restore` 里程碑与当前（最新）版本——防重度微调把 AI 里程碑挤掉（`cleanup_old_versions`，manual 淘尽仍超限才动最旧 ai/restore） |
 | **设计系统（DesignSystem）** | 可复用品牌契约：`DESIGN.md`（9 段，真相源）+ `tokens.json`（解析缓存） | 内置只读 / 用户创建 / 反向提取；owner 平面可**改名（内置拒改）/ 删除**；套用到产物即注入 `:root` token |
@@ -237,7 +237,7 @@ CREATE INDEX idx_design_projects_session  ON design_projects(session_id, updated
 **设计要点：**
 
 - 表是**元数据注册表**，产物正文（`index.html` / `source/`）与设计系统正文（`DESIGN.md`）在磁盘。`reindex` 可从磁盘全量重建 DB（对齐知识空间"索引可重建"红线）。
-- `session_id` / `agent_id` / `ha_project_id` 均弱引用无 FK：删会话不级联删设计（跨会话复用价值）；删 Hope Agent 项目由 owner 侧显式处理。
+- `session_id` / `agent_id` / `ha_project_id` 均弱引用无 FK：删会话不级联删设计（跨会话复用价值）；删 TPA CoWork Agent 项目由 owner 侧显式处理。
 - 版本快照式（非 diff）：换存储简单与 restore 可靠；`current_version` 是逻辑游标，prune 旧版本不影响它。
 
 ---
@@ -424,7 +424,7 @@ owner/GUI 生成走**真 token 流式**——边生成边成形预览，而非�
 
 **双源绑定（互斥二选一）**：
 - **本机目录源** `design_projects.code_dir`：canonical 绝对路径（`set_project_code_binding` 绑定期 canonicalize + 存在性校验）。
-- **HA 项目源** `design_projects.ha_project_id`：目录从该 Hope Agent 项目的 working_dir **实时派生**（显式 `working_dir` > lazy 默认 workspace，与会话工作目录合并同款语义）——用户改 HA 项目工作目录自动跟随。
+- **HA 项目源** `design_projects.ha_project_id`：目录从该 TPA CoWork Agent 项目的 working_dir **实时派生**（显式 `working_dir` > lazy 默认 workspace，与会话工作目录合并同款语义）——用户改 HA 项目工作目录自动跟随。
 - **解析单一入口 `service::resolve_code_dir(project)`**（code_dir > ha_project_id > None）；任一源失效（目录被删 / HA 项目被删 / **HA 项目显式 working_dir 指向不存在路径**）一律 **fail-safe 返 None、按未绑定处理**（HA 源绝不静默回落 lazy workspace 掩盖 stale），不自动清列，GUI 经 `get_project_code_binding` 的 `stale` 标记标红（对齐 cron delivery target stale 先例）。
 - **互斥单一写入口（红线）**：`code_dir` / `ha_project_id` 两列的**唯一**写入口是 `service::set_project_code_binding`（双源同传 bail、canonicalize、HA 存在校验、db 层 verbatim 覆写非 COALESCE）；`create_project` / `update_project` **不碰这两列**（否则 owner update/create API 可绕过互斥同时写两源、破坏不变量）。
 
@@ -740,7 +740,7 @@ brief 缺设计系统时，`design(action="propose_directions", brief)` 返回 N
 
 外部编码 agent / 脚本要复用本设计引擎（生成产物、反查设计系统、导出交付包、部署），**远程分发面是上表这套已完整的 `/api/design/*` HTTP 表面**——在 server 模式（`hope-agent server`）下经 Bearer Token 鉴权全量可用。典型集成链：`extract_system` → `create/generate_artifact` → `critique` → `export`/`handoff` → `deploy` → `share`。
 
-**平台级 MCP 已落第一块砖**：本机外部 agent（Claude Code / Cursor）经标准 MCP 驱动走 `hope-agent mcp` stdio server——共享 host 在 `ha-core/src/mcp_server/`（`ToolProvider` 注册表 + JSON-RPC 循环 + 写门），design 经 `design/mcp_provider.rs` 挂入为**首个 provider**。**红线不变——依然不做 design 专属 MCP server**（把 Hope Agent 暴露成 MCP server 是平台议题，design 只是 provider、不自起 server）；`knowledge-mcp` 已发布子命令保持原样（内部归并共享循环记 P+1）。写门：默认只读，`--allow-writes` 才暴露写工具集；**恒不暴露** `implement_to_code` / 代码绑定写 / `deploy` / `share` / `delete_project` / `delete_artifact` / `save_to_knowledge` / `extract_system`（无会话无法安全界定读根）/ `export_*`——外部 agent 不得经 MCP 写用户代码仓库、对外发布或删除容器。协议 / 工具表 / active-context 机制见 [`mcp-server.md`](mcp-server.md)。
+**平台级 MCP 已落第一块砖**：本机外部 agent（Claude Code / Cursor）经标准 MCP 驱动走 `hope-agent mcp` stdio server——共享 host 在 `ha-core/src/mcp_server/`（`ToolProvider` 注册表 + JSON-RPC 循环 + 写门），design 经 `design/mcp_provider.rs` 挂入为**首个 provider**。**红线不变——依然不做 design 专属 MCP server**（把 TPA CoWork Agent 暴露成 MCP server 是平台议题，design 只是 provider、不自起 server）；`knowledge-mcp` 已发布子命令保持原样（内部归并共享循环记 P+1）。写门：默认只读，`--allow-writes` 才暴露写工具集；**恒不暴露** `implement_to_code` / 代码绑定写 / `deploy` / `share` / `delete_project` / `delete_artifact` / `save_to_knowledge` / `extract_system`（无会话无法安全界定读根）/ `export_*`——外部 agent 不得经 MCP 写用户代码仓库、对外发布或删除容器。协议 / 工具表 / active-context 机制见 [`mcp-server.md`](mcp-server.md)。
 
 **Backlog**：设计系统包从 GitHub / 本地目录导入（安全安装路径）不依赖 MCP，独立推进。
 

@@ -2,7 +2,7 @@
 
 > 简体中文 · [English](docker.en.md)
 
-Hope Agent 提供官方多架构容器镜像，覆盖 `linux/amd64` 与 `linux/arm64`，跟随每次 Release Tag 自动构建并发布到 GitHub Container Registry。
+TPA CoWork Agent 提供官方多架构容器镜像，覆盖 `linux/amd64` 与 `linux/arm64`，跟随每次 Release Tag 自动构建并发布到 GitHub Container Registry。
 
 容器化的是 `hope-agent server` 模式 —— 一个内嵌完整 Web GUI 的 HTTP/WebSocket 服务器。浏览器访问容器暴露的端口即可看到与桌面端一致的界面，包含 Onboarding 向导、Provider / MCP / IM Channel 配置面板与全部对话功能。桌面 Tauri GUI 与 ACP stdio 两种模式不适用于容器部署。
 
@@ -158,7 +158,7 @@ docker run -d --name hope-agent ... ghcr.io/shiwenwen/hope-agent:latest
 
 ## 反向代理
 
-生产部署强烈建议前置 Nginx / Caddy / Traefik 做 TLS 终止。Hope Agent 既走 HTTP 又走 WebSocket（`/api/ws/...`），反代必须正确处理 WS upgrade。
+生产部署强烈建议前置 Nginx / Caddy / Traefik 做 TLS 终止。TPA CoWork Agent 既走 HTTP 又走 WebSocket（`/api/ws/...`），反代必须正确处理 WS upgrade。
 
 Caddy 示例：
 

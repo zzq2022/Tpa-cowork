@@ -2,7 +2,7 @@
 name: status-report
 description: Use when the user asks for a weekly / monthly status report, project update, individual or team progress summary. Produces a tight, scannable update with what shipped, what's in flight, what's blocked, and metrics.
 version: 1.0.0
-author: Hope Agent
+author: TPA CoWork Agent
 license: MIT
 metadata:
   hermes:

@@ -2,7 +2,7 @@
 name: email-draft
 description: Use when the user asks to draft, polish, translate, or reply to an email. Produces a clean draft with subject line, greeting, body, and sign-off, plus a pre-send self-check.
 version: 1.0.0
-author: Hope Agent
+author: TPA CoWork Agent
 license: MIT
 metadata:
   hermes:

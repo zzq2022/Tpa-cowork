@@ -1,8 +1,8 @@
 ---
 name: ha-data-stores
-description: "Map of Hope Agent's local data stores and safe read-only query workflow. Use when the user asks where Hope Agent stores data, wants to inspect sessions/messages/memory/logs/background jobs/knowledge indexes/settings, asks the model to query local app data, or debugging requires checking persisted state. Trigger phrases: data stores, database path, sessions.db, memory.db, logs.db, background_jobs.db, knowledge index, where is data stored, query app data, 查数据库, 数据存储, 会话记录在哪, 记忆库在哪."
+description: "Map of TPA CoWork Agent's local data stores and safe read-only query workflow. Use when the user asks where TPA CoWork Agent stores data, wants to inspect sessions/messages/memory/logs/background jobs/knowledge indexes/settings, asks the model to query local app data, or debugging requires checking persisted state. Trigger phrases: data stores, database path, sessions.db, memory.db, logs.db, background_jobs.db, knowledge index, where is data stored, query app data, 查数据库, 数据存储, 会话记录在哪, 记忆库在哪."
 version: 1.0.0
-author: Hope Agent
+author: TPA CoWork Agent
 license: MIT
 status: active
 aliases:
@@ -11,9 +11,9 @@ aliases:
   - app-data
 ---
 
-# Hope Agent Data Stores
+# TPA CoWork Agent Data Stores
 
-Use this skill when you need to locate or inspect Hope Agent's persisted local
+Use this skill when you need to locate or inspect TPA CoWork Agent's persisted local
 data. Prefer product tools first; use direct SQLite only for diagnostics or
 ad-hoc analysis that existing tools do not cover.
 
@@ -35,7 +35,7 @@ ad-hoc analysis that existing tools do not cover.
 
 ## Data root
 
-All app-managed data lives under the Hope Agent data root:
+All app-managed data lives under the TPA CoWork Agent data root:
 
 - If `HA_DATA_DIR` is set: use it exactly.
 - Otherwise: `~/.hope-agent`.

@@ -4,7 +4,7 @@
 
 ## 概述
 
-OpenClaw 导入是一个**一次性迁移子系统**，把 OpenClaw（前身 clawdbot）桌面应用的 **providers / agents / memory** 搬进 Hope Agent。它**不是持续同步**——扫一次、导一次，导完两边各走各的，不监听源目录变化、不做增量回写。
+OpenClaw 导入是一个**一次性迁移子系统**，把 OpenClaw（前身 clawdbot）桌面应用的 **providers / agents / memory** 搬进 TPA CoWork Agent。它**不是持续同步**——扫一次、导一次，导完两边各走各的，不监听源目录变化、不做增量回写。
 
 数据流分三段：
 
@@ -72,9 +72,9 @@ v1 的迁移范围有意收窄：记忆只导 **markdown 条目 + SQLite chunk �
 
 `build_providers` 是核心：吃 raw `OpenClawConfigRoot` + 收集到的凭据，吐出 `(ProviderPreview, ResolvedProvider)` 列表。
 
-**API 类型映射** 走 `map_api_type`（`pub`，单测覆盖），把 OpenClaw 的 `ModelApi` 翻成 Hope Agent 的 [`ApiType`](provider-system.md)，无法精确对应时 push 警告。**关键红线**：`openai-codex-responses` 必须映射成 `ApiType::OpenaiResponses` 而**不是** `ApiType::Codex`——后者是 OAuth-only，会让外部 API key 不可用。
+**API 类型映射** 走 `map_api_type`（`pub`，单测覆盖），把 OpenClaw 的 `ModelApi` 翻成 TPA CoWork Agent 的 [`ApiType`](provider-system.md)，无法精确对应时 push 警告。**关键红线**：`openai-codex-responses` 必须映射成 `ApiType::OpenaiResponses` 而**不是** `ApiType::Codex`——后者是 OAuth-only，会让外部 API key 不可用。
 
-**成本归一化**：成本值疑似 per-token 时（`< 0.01`）× 1e6 归一化为 per-million，对齐 Hope Agent 的成本口径。
+**成本归一化**：成本值疑似 per-token 时（`< 0.01`）× 1e6 归一化为 per-million，对齐 TPA CoWork Agent 的成本口径。
 
 **私网放行**：`base_url` 落在私网（`localhost` / `127.0.0.1` / `0.0.0.0`）时自动置 `allow_private_network=true`（Ollama 等本地后端能打通）。
 
@@ -88,7 +88,7 @@ v1 的迁移范围有意收窄：记忆只导 **markdown 条目 + SQLite chunk �
 |---|---|---|
 | `api_key` / `token`（明文） | 直接导入 | ✓ |
 | `env` keyRef | 经 `std::env::var` 解析；解析到则导入 | 视解析结果 |
-| `OAuth` | **永不导入**，强制用户在 Hope Agent 重新登录 | ✗ |
+| `OAuth` | **永不导入**，强制用户在 TPA CoWork Agent 重新登录 | ✗ |
 | `exec` keyRef | **出于安全拒绝**（不执行命令取密钥） | ✗ |
 | `file` keyRef | **不支持** | ✗ |
 
@@ -108,7 +108,7 @@ OAuth / exec / file 三类都给出 `note` 提示，要求用户导入后手动�
 
 **模型查找表** 先由 `build_model_lookup` 从同批导入的 provider 构建，再经 `extend_model_lookup_from_provider_configs` 用已配 provider 兜底——这是为了**防部分导入重复**：用户若早前已配过同一 provider，agent 模型接线优先复用现有 provider，而非又新建一份。
 
-**工具开关不导入**：OpenClaw 的 tools allow/deny 设置**不迁移**，仅 push 警告让用户手动核对 Hope Agent 的工具开关。
+**工具开关不导入**：OpenClaw 的 tools allow/deny 设置**不迁移**，仅 push 警告让用户手动核对 TPA CoWork Agent 的工具开关。
 
 ## Memory 导入
 
@@ -116,7 +116,7 @@ OAuth / exec / file 三类都给出 `note` 提示，要求用户导入后手动�
 
 **MEMORY.md**：导入路径把 markdown **原文**经 `CoreMemoryRepository` 合并进 canonical `MEMORY.md`（经合并段 + 备份，见下），并非逐条插入记忆库；`parse_openclaw_memory_md`（bullet 项 / 段落各成一条、跳过 heading、`source="import"`）仅经 `estimate_entries` 用于预览 / 计数。
 
-**SQLite 向量库**（`parse_openclaw_sqlite_memory_db`）：以 `SQLITE_OPEN_READ_ONLY` 打开 `~/.openclaw/memory/{agentId}.sqlite`，**只读 `chunks` 表的 `text` 列**（按 `updated_at ASC, id ASC` 排序、跳过空白），**丢弃 embedding**（model / dimension / signature 契约与 Hope Agent 不同，无法复用）。这些 chunk 行作 `NewMemory`（`source="openclaw-db-import"`）经 backend `import_entries` 落库。
+**SQLite 向量库**（`parse_openclaw_sqlite_memory_db`）：以 `SQLITE_OPEN_READ_ONLY` 打开 `~/.openclaw/memory/{agentId}.sqlite`，**只读 `chunks` 表的 `text` 列**（按 `updated_at ASC, id ASC` 排序、跳过空白），**丢弃 embedding**（model / dimension / signature 契约与 TPA CoWork Agent 不同，无法复用）。这些 chunk 行作 `NewMemory`（`source="openclaw-db-import"`）经 backend `import_entries` 落库。
 
 **写入路径**：
 
@@ -171,7 +171,7 @@ OAuth / exec / file 三类都给出 `note` 提示，要求用户导入后手动�
 | `~/.openclaw/memory/{agentId}.sqlite` | 向量库，仅读 `chunks` 表 `text` 列，`SQLITE_OPEN_READ_ONLY` |
 | agent workspace 下 `AGENTS.md` / `SOUL.md` / `TOOLS.md` / `IDENTITY.md` | agent markdown，大写 → 小写映射拷贝 |
 
-### 写入目标（Hope Agent）
+### 写入目标（TPA CoWork Agent）
 
 | 目标 | 经手 |
 |---|---|
@@ -204,7 +204,7 @@ OAuth / exec / file 三类都给出 `note` 提示，要求用户导入后手动�
 
 ## 安全 / 红线
 
-- **OAuth 永不导入**（`will_import=false`），强制用户在 Hope Agent 重新登录；`map_api_type` 把 `openai-codex-responses` 映射成 `OpenaiResponses` 而非 `ApiType::Codex`（后者 OAuth-only），否则外部 API key 不可用
+- **OAuth 永不导入**（`will_import=false`），强制用户在 TPA CoWork Agent 重新登录；`map_api_type` 把 `openai-codex-responses` 映射成 `OpenaiResponses` 而非 `ApiType::Codex`（后者 OAuth-only），否则外部 API key 不可用
 - **exec keyRef 拒绝**（不执行命令取密钥）；**file keyRef 不支持**——二者都要求用户导入后手动粘贴 key
 - **导入顺序硬约束** providers → agents → memory：agent primary 模型接线依赖同批 provider UUID，`extend_model_lookup_from_provider_configs` 用已配 provider 兜底防部分导入重复
 - **MEMORY.md 写入必须经** `merge_openclaw_memory_section`（BEGIN/END 幂等替换段）+ `CoreMemoryRepository` + 写前 `backup_existing_core_memory_md`，**绝不裸覆盖**用户现有 `MEMORY.md`；空内容不写
@@ -213,12 +213,12 @@ OAuth / exec / file 三类都给出 `note` 提示，要求用户导入后手动�
 - **provider 名冲突** 加 `" (Imported)"` / `" (Imported N)"` 后缀，`name_conflicts_existing=true`；agent `already_exists` 不阻止但默认过滤
 - **记忆 dedup 交给 backend** `import_entries(dedup=true)`，`skipped_duplicate` / `failed` / `errors` 转 warnings；backend 未初始化则跳过记忆导入并 warn
 - **私网 base_url** 自动置 `allow_private_network=true`；成本疑似 per-token（`< 0.01`）× 1e6 归一化 per-million
-- **工具 allow/deny 不导入**，仅 push 警告让用户手动核对 Hope Agent 工具开关
+- **工具 allow/deny 不导入**，仅 push 警告让用户手动核对 TPA CoWork Agent 工具开关
 
 ## 已知限制
 
 - **legacy agents-only 入口**（`scan_openclaw_agents` / `import_openclaw_agents`）只迁 agent，不含 providers / memory，为旧入口兼容保留
-- **OAuth 重登**：OAuth provider 导入后需用户在 Hope Agent 重新登录
+- **OAuth 重登**：OAuth provider 导入后需用户在 TPA CoWork Agent 重新登录
 - **file / exec keyRef 手填**：这两类 keyRef 不自动解析，需用户导入后手动粘贴 key
 
 ## 跨子系统

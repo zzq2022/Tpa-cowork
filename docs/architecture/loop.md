@@ -39,7 +39,7 @@ GUI 创建器在 active Goal 有拆分标准时提供「推进标准」选择器
 
 Loop V3.1 开始，Slash 固定间隔创建支持更自然的 Claude Code 风格写法：`/loop 5m <prompt>` 与 `/loop <prompt> every 5m` 会创建 interval Loop，并在创建后立即通过核心 `spawn_loop_schedule_run_now` 路径触发第一轮；旧的 `/loop every 5m: <prompt>` 继续保留且同样立即触发第一轮。
 
-Loop V3.2 开始，Slash prompt-only 写法 `/loop <prompt>` 会创建 dynamic self-paced Loop，并立即触发第一轮。裸 `/loop` 不再等同于 status，而是创建一个 dynamic maintenance Loop：优先读取当前会话工作目录中的 `loop.md`、`.hope/loop.md`、`.hope-agent/loop.md`、`.claude/loop.md` 作为默认持续推进指令，其次读取 Hope Agent 用户 home 下的同名文件，均不存在时使用内置通用维护 prompt。`loop.md` 读取上限为 25KB，避免超大项目说明撑爆循环 prompt。maintenance Loop 会把 prompt 来源写入 `triggerSpec.maintenancePrompt`，并在每次 Cron trigger admission 前重新解析同一来源顺序；如果文件内容或来源变化，会更新 `loop_schedules.prompt` / `trigger_spec_json` 并把 metadata 写入当前 `loop_runs.trace_json.maintenancePrompt`。这不是常驻 watcher，不新增后台线程或外部事件面，只在既有 Cron 触发路径上刷新。查看状态必须显式使用 `/loop status`。
+Loop V3.2 开始，Slash prompt-only 写法 `/loop <prompt>` 会创建 dynamic self-paced Loop，并立即触发第一轮。裸 `/loop` 不再等同于 status，而是创建一个 dynamic maintenance Loop：优先读取当前会话工作目录中的 `loop.md`、`.hope/loop.md`、`.hope-agent/loop.md`、`.claude/loop.md` 作为默认持续推进指令，其次读取 TPA CoWork Agent 用户 home 下的同名文件，均不存在时使用内置通用维护 prompt。`loop.md` 读取上限为 25KB，避免超大项目说明撑爆循环 prompt。maintenance Loop 会把 prompt 来源写入 `triggerSpec.maintenancePrompt`，并在每次 Cron trigger admission 前重新解析同一来源顺序；如果文件内容或来源变化，会更新 `loop_schedules.prompt` / `trigger_spec_json` 并把 metadata 写入当前 `loop_runs.trace_json.maintenancePrompt`。这不是常驻 watcher，不新增后台线程或外部事件面，只在既有 Cron 触发路径上刷新。查看状态必须显式使用 `/loop status`。
 
 dynamic Loop 仍复用 Cron durable job 和 Loop run history。每轮结束前，模型应优先通过内部工具 `loop_reschedule` / `loop_stop` 明确选择下一次 wakeup、完成或阻塞；文本 marker `LOOP_RESCHEDULE_AFTER: <duration> - <reason>`、`LOOP_STOP: <reason>`、`LOOP_BLOCKED: <reason>` 仍作为兼容兜底。finish 阶段会先读取当前 `loop_runs.trace_json.dynamicDecision` 中的工具决策，只有没有工具决策时才解析最终 assistant summary。若两者都缺失，系统只安排一次 fallback wakeup；fallback 回合仍无决策时，Loop 进入 `blocked` 并暂停 Cron，避免无限空转。模型可选间隔被钳在 1 分钟到 1 小时之间，默认 fallback 为 20 分钟；dynamic Loop 若未显式设置 runtime，会有 7 天的默认生命周期上限。
 
@@ -129,7 +129,7 @@ Cron job 的 `CronPayload::SessionLoop` 保存 `loop_id`、原会话 `session_id
 Dynamic trigger：
 
 - `trigger_kind=dynamic` 支持 Claude Code 风格的 prompt-only `/loop <prompt>`，以及裸 `/loop` 的默认 maintenance loop。
-- 裸 `/loop` 的默认 prompt 来源顺序：session working dir `loop.md` / `.hope/loop.md` / `.hope-agent/loop.md` / `.claude/loop.md` → Hope Agent home 同名文件 → 内置通用维护 prompt；文件内容最多 25KB。
+- 裸 `/loop` 的默认 prompt 来源顺序：session working dir `loop.md` / `.hope/loop.md` / `.hope-agent/loop.md` / `.claude/loop.md` → TPA CoWork Agent home 同名文件 → 内置通用维护 prompt；文件内容最多 25KB。
 - `trigger_spec_json` 规范形态为 `{ fallbackSecs, fallbackUsed, maintenancePrompt? }`；`fallbackSecs` 默认 1200 秒，读入时钳在 60 到 3600 秒之间，`fallbackUsed` 表示上一轮是否已经因为模型未决策排过一次兜底 wakeup。`maintenancePrompt` 仅由裸 `/loop` 写入，形如 `{ enabled, source, path?, contentHash? }`；显式 `/loop <prompt>` 和 GUI dynamic prompt 不带该字段，因此不会被 `loop.md` 热更新覆盖。
 - 每次 `prepare_loop_cron_run` admit dynamic maintenance Loop 前，会通过 `resolve_default_loop_prompt_for_session` 重新读取 `loop.md` / built-in prompt；如果 hash 或 source 变化，先更新 schedule 再插入 run。run trace 保存 `maintenancePrompt` metadata，便于审计这一轮实际用了哪个 prompt 来源。
 - Cron job 仍是 `CronPayload::SessionLoop`，schedule 采用 `Every(fallbackSecs)` 作为基础兜底；真实下一次触发时间由 run finish 后的 `LoopAfterRunAction.backoff_secs` 通过 `CronDB::delay_next_run` 覆盖，不改写原始 schedule。

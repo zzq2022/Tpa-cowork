@@ -1,16 +1,16 @@
 ---
 name: ha-browser
-description: "Hope Agent browser automation — the standard `status → tabs → snapshot → act` loop, stale-ref recovery rules, and what to do when login / 2FA / captcha / camera-prompt / dialog blocks progress. Load this skill whenever you reach for the `browser` tool. Trigger on: user asks the agent to open / control / click / scrape / log into / verify something in a web app ('open X and click Y', '打开 X 然后点击 Y', 'log into my Gmail', 'scrape this page', 'fill out the form on X'); user reports a flow that requires real browser context (cookies, JS-rendered content, OAuth)."
+description: "TPA CoWork Agent browser automation — the standard `status → tabs → snapshot → act` loop, stale-ref recovery rules, and what to do when login / 2FA / captcha / camera-prompt / dialog blocks progress. Load this skill whenever you reach for the `browser` tool. Trigger on: user asks the agent to open / control / click / scrape / log into / verify something in a web app ('open X and click Y', '打开 X 然后点击 Y', 'log into my Gmail', 'scrape this page', 'fill out the form on X'); user reports a flow that requires real browser context (cookies, JS-rendered content, OAuth)."
 version: 1.0.0
-author: Hope Agent
+author: TPA CoWork Agent
 license: MIT
 allowed-tools: [browser, ask_user_question, read, job_status]
 status: active
 ---
 
-# Hope Agent Browser — operating loop
+# TPA CoWork Agent Browser — operating loop
 
-The `browser` tool exposes 8 high-level actions. Default backend is Hope Agent's Chrome Extension + Native Messaging Host, which can control the user's real Chrome tabs after they install the extension and native host. If the extension is unavailable, generic browsing can fall back to the managed/user_attach CDP backend, but real Chrome tab/session tasks must fail closed and ask the user to install or enable the extension.
+The `browser` tool exposes 8 high-level actions. Default backend is TPA CoWork Agent's Chrome Extension + Native Messaging Host, which can control the user's real Chrome tabs after they install the extension and native host. If the extension is unavailable, generic browsing can fall back to the managed/user_attach CDP backend, but real Chrome tab/session tasks must fail closed and ask the user to install or enable the extension.
 
 ## The standard loop
 
@@ -27,7 +27,7 @@ Run these in order; never skip a step. Browsers are stateful — assumptions get
 
 When the user explicitly asks for their current Chrome, an already-open tab, their logged-in session, or browser extensions/cookies from their daily Chrome, use `tabs.open_user_tabs` and `tabs.claim` first. Do not launch a managed CDP profile and pretend it is the user's Chrome.
 
-Real Chrome access uses the normal Hope Agent tool approval flow. `tabs.open_user_tabs`, `tabs.claim`, extension numeric-id `tabs.select`, `observe.kind=downloads`, `control.download_cancel`, and `control.raw_cdp` may ask unless the session policy, AllowAlways, Smart mode, or YOLO allows them.
+Real Chrome access uses the normal TPA CoWork Agent tool approval flow. `tabs.open_user_tabs`, `tabs.claim`, extension numeric-id `tabs.select`, `observe.kind=downloads`, `control.download_cancel`, and `control.raw_cdp` may ask unless the session policy, AllowAlways, Smart mode, or YOLO allows them.
 
 A typical "fill the login form" flow is:
 
@@ -108,10 +108,10 @@ Rules:
 
 - `tabs.claim` takes temporary control of a real user tab. Release it with `tabs.release` or `tabs.finalize` when the task ends.
 - `tabs.select` with a numeric extension tab id also activates and controls that real Chrome tab. Prefer `tabs.claim` when your intent is explicit takeover; use `tabs.select` for tab switching after you know the target id.
-- `tabs.finalize` for a claimed user tab must not close the tab by default; it releases Hope Agent control.
+- `tabs.finalize` for a claimed user tab must not close the tab by default; it releases TPA CoWork Agent control.
 - `tabs.new` creates a Hope-controlled automation tab. `tabs.finalize` closes agent-created tabs unless their target id is listed in `keep`.
 - If a tab is already claimed by another Hope session, do not steal it unless the user explicitly asked to take over; then pass `steal:true`.
-- If the extension is missing or disabled, real Chrome tasks are blocked. Tell the user to open Settings -> Browser and install/enable the Chrome Extension + Native Host. Generic browsing may continue with CDP fallback, but that is an isolated Hope Agent browser, not the user's current Chrome.
+- If the extension is missing or disabled, real Chrome tasks are blocked. Tell the user to open Settings -> Browser and install/enable the Chrome Extension + Native Host. Generic browsing may continue with CDP fallback, but that is an isolated TPA CoWork Agent browser, not the user's current Chrome.
 
 ## When NOT to use `browser`
 
@@ -142,9 +142,9 @@ profile=managed       → automation, scrapers, anything that should NOT inherit
                         debug port. This is the default — omit `profile=`
                         to get it.
 
-profile=user_attach   → routine work where you DO want a persistent Hope Agent
+profile=user_attach   → routine work where you DO want a persistent TPA CoWork Agent
                         CDP profile (sign in once, keep the cookies, reuse
-                        extensions inside that Hope Agent browser).
+                        extensions inside that TPA CoWork Agent browser).
                         Lives at ~/.hope-agent/browser/user-attach/, pinned
                         to port 9222. This is the recommended way to maintain
                         "the user's hope-agent browser" — populate the logins

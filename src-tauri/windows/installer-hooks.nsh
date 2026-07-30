@@ -95,5 +95,17 @@
   RMDir /r "$INSTDIR\.agent-venv-backup"
   Delete "$INSTDIR\agent-venv.zip"
   Delete "$INSTDIR\resources\agent-venv.zip"
+
+  ${If} $DeleteAppData == "1"
+    DetailPrint "Removing user data directory ($PROFILE\.tpa-cowork)..."
+    RMDir /r "$PROFILE\.tpa-cowork"
+    RMDir /r "$PROFILE\.hope-agent"
+  ${Else}
+    MessageBox MB_YESNO|MB_ICONQUESTION "是否同时清除所有用户数据与历史配置？$\r$\n$\r$\n删除路径: $PROFILE\.tpa-cowork$\r$\n（包含对话历史、记忆库及 API 密钥等。注意：此操作不可恢复！）" IDNO skip_user_data_cleanup
+      DetailPrint "Removing user data directory ($PROFILE\.tpa-cowork)..."
+      RMDir /r "$PROFILE\.tpa-cowork"
+      RMDir /r "$PROFILE\.hope-agent"
+    skip_user_data_cleanup:
+  ${EndIf}
 !macroend
 

@@ -296,9 +296,23 @@ if (bundle) {
   // Write config to a file so Windows shell:true spawn does not mangle JSON quotes.
   const tauriConfigPath = join(repoRoot, ".scratch", "pack-local-tauri-config.json")
   mkdirSync(dirname(tauriConfigPath), { recursive: true })
-  const tauriConfig = { build: { beforeBuildCommand: "" } }
+  const tauriConfig = {
+    build: { beforeBuildCommand: "" },
+    bundle: {
+      windows: {
+        nsis: {
+          installerHooks: "./windows/installer-hooks.nsh",
+        },
+      },
+      resources: {
+        "resources/browser-host": "browser-host",
+        "resources/vc_redist.x64.exe": "resources/vc_redist.x64.exe",
+        "../agent-venv.zip": "resources/agent-venv.zip",
+      },
+    },
+  }
   if (!process.env.TAURI_SIGNING_PRIVATE_KEY) {
-    tauriConfig.bundle = { createUpdaterArtifacts: false }
+    tauriConfig.bundle.createUpdaterArtifacts = false
   }
   writeFileSync(
     tauriConfigPath,

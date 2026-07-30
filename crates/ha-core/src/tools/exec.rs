@@ -1162,6 +1162,27 @@ async fn exec_via_pty(
             cmd.env(key, val);
         }
 
+        // Prepend bundled agent-venv bin dir to PATH so PTY commands also
+        // find the bundled Python — same logic as the non-PTY exec path.
+        if let Some(venv_bin) = crate::paths::agent_venv_bin_dir() {
+            // Prefer the already-injected login-shell PATH over the process
+            // PATH; fall back to the process PATH (which app_init already
+            // prepended with the venv at startup, so venv won't be lost).
+            let base_path = shell_env
+                .iter()
+                .find(|(k, _)| k == "PATH")
+                .map(|(_, v)| v.as_str())
+                .or_else(|| login_path.as_deref())
+                .unwrap_or("");
+            let separator = if cfg!(windows) { ";" } else { ":" };
+            let mut venv_path = venv_bin.into_os_string();
+            if !base_path.is_empty() {
+                venv_path.push(separator);
+                venv_path.push(base_path);
+            }
+            cmd.env("PATH", venv_path);
+        }
+
         // Spawn the child process
         let mut child = pair
             .slave

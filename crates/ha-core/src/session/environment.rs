@@ -11,7 +11,7 @@ use std::collections::HashSet;
 use std::path::{Component, Path, PathBuf};
 use std::process::Command;
 
-use crate::filesystem::{git_info, WorkspaceScope, WorktreeInfo};
+use crate::filesystem::{git_info, WorktreeInfo};
 use crate::session::{effective_working_dir_for_meta, SessionDB, SessionMeta};
 use crate::tools::diff_util::{
     compute_line_delta, detect_language, truncate_for_metadata, MAX_METADATA_CONTENT_BYTES,
@@ -135,9 +135,7 @@ pub fn load_session_environment(
         .get_session(session_id)?
         .ok_or_else(|| anyhow!("session not found: {session_id}"))?;
     let working_dir = resolve_working_dir_snapshot(&meta);
-    let git = WorkspaceScope::for_session(session_id)
-        .ok()
-        .and_then(|scope| build_git_snapshot(scope.root()));
+    let git = None;
 
     Ok(WorkspaceEnvironmentSnapshot { working_dir, git })
 }

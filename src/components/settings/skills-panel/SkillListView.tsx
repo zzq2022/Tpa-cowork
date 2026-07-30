@@ -61,8 +61,7 @@ export default function SkillListView({
       lines.push(t("settings.skillHardBlocked"))
       if (status.current_os || status.supported_os?.length) {
         lines.push(
-          `${t("settings.skillCurrentOs")}: ${status.current_os || "?"}; ${t("settings.skillSupportedOs")}: ${
-            status.supported_os?.join(", ") || "?"
+          `${t("settings.skillCurrentOs")}: ${status.current_os || "?"}; ${t("settings.skillSupportedOs")}: ${status.supported_os?.join(", ") || "?"
           }`,
         )
       }

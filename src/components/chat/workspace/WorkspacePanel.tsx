@@ -1503,7 +1503,7 @@ function EnvironmentSection({
     turnActive,
   })
   const managedWorktrees = managedWorktreesState.worktrees
-  const gitControl = useSessionGitControl(sessionId, turnActive)
+  const gitControl = useSessionGitControl(null, turnActive)
   const activeManagedWorktree =
     managedWorktrees.find((wt) => wt.state !== "archived" && wt.path === workingDir) ?? null
   const [worktreeActionKey, setWorktreeActionKey] = useState<string | null>(null)

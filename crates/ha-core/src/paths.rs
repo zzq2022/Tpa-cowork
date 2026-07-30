@@ -1005,16 +1005,11 @@ pub fn agent_venv_bin_dir() -> Option<PathBuf> {
         return Some(bin);
     }
 
-    #[cfg(windows)]
-    {
-        if let Err(error) = ensure_agent_venv_extracted() {
-            eprintln!("[agent-venv] recovery extract failed: {error}");
-        }
-        find_agent_venv_bin_dir()
+    // If not found, try to extract from bundled zip as fallback on all platforms
+    if let Err(error) = ensure_agent_venv_extracted() {
+        eprintln!("[agent-venv] recovery extract failed: {error}");
     }
-
-    #[cfg(not(windows))]
-    None
+    find_agent_venv_bin_dir()
 }
 
 fn find_agent_venv_bin_dir() -> Option<PathBuf> {
@@ -1085,7 +1080,6 @@ fn agent_venv_scripts_dir(root: &Path) -> PathBuf {
     }
 }
 
-#[cfg(windows)]
 pub fn ensure_agent_venv_extracted() -> Result<()> {
     use std::sync::Mutex;
 
@@ -1115,7 +1109,6 @@ pub fn ensure_agent_venv_extracted() -> Result<()> {
     Ok(())
 }
 
-#[cfg(windows)]
 fn extract_agent_venv_zip(archive: &Path, target_dir: &Path) -> Result<()> {
     use std::io::Write;
 
@@ -1152,9 +1145,14 @@ fn extract_agent_venv_zip(archive: &Path, target_dir: &Path) -> Result<()> {
     }
 
     let staged_root = staging.path().join("agent-venv");
-    let staged_python = agent_venv_scripts_dir(&staged_root).join("python.exe");
-    if !staged_python.is_file() {
-        anyhow::bail!("agent-venv archive is missing Scripts/python.exe");
+    let staged_python = agent_venv_scripts_dir(&staged_root);
+    let python_exists = if cfg!(windows) {
+        staged_python.join("python.exe").is_file()
+    } else {
+        staged_python.join("python").is_file() || staged_python.join("python3").is_file()
+    };
+    if !python_exists {
+        anyhow::bail!("agent-venv archive is missing python executable");
     }
     fs::write(staged_root.join(AGENT_VENV_SENTINEL), b"complete\n")?;
 

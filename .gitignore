@@ -54,3 +54,7 @@ docs/plan/*
 .scratch/pack-local-tauri-config.json
 pack.md
 
+# PPT outline and assets
+docs/ppt/
+
+

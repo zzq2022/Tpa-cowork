@@ -89,10 +89,10 @@ fn initialize_result() -> Value {
             "prompts": {}
         },
         "serverInfo": {
-            "name": "hope-agent-knowledge",
+            "name": "tpa-cowork-knowledge",
             "version": crate::app_version()
         },
-        "instructions": "Use the knowledge_* tools to read Hope Agent Knowledge Space notes. Raw sources are returned only when explicitly requested."
+        "instructions": "Use the knowledge_* tools to read TPA CoWork Knowledge Space notes. Raw sources are returned only when explicitly requested."
     })
 }
 
@@ -294,7 +294,7 @@ mod tests {
         .expect("response");
         assert_eq!(
             response["result"]["serverInfo"]["name"],
-            "hope-agent-knowledge"
+            "tpa-cowork-knowledge"
         );
         assert_eq!(
             response["result"]["capabilities"]["tools"]["listChanged"],

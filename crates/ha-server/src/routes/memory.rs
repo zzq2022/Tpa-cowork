@@ -1270,7 +1270,7 @@ pub async fn export_memory_backup_archive() -> Result<Response, AppError> {
     );
     response.headers_mut().insert(
         CONTENT_DISPOSITION,
-        HeaderValue::from_static("attachment; filename=\"hope-agent-memory-backup.zip\""),
+        HeaderValue::from_static("attachment; filename=\"tpa-cowork-memory-backup.zip\""),
     );
     Ok(response)
 }

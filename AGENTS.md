@@ -1,6 +1,6 @@
-# Hope Agent
+# TPA CoWork
 
-基于 Tauri 2 + React 19 + Rust 的本地 AI 助手桌面应用，内置 Provider 模板与预设模型，GUI 傻瓜式配置。三种运行模式：桌面 GUI（Tauri）、HTTP/WS 守护进程（`hope-agent server`）、ACP stdio（`hope-agent acp`）。技术栈见 `package.json` / `Cargo.toml`。
+基于 Tauri 2 + React 19 + Rust 的本地 AI 助手桌面应用，内置 Provider 模板与预设模型，GUI 傻瓜式配置。三种运行模式：桌面 GUI（Tauri）、HTTP/WS 守护进程（`tpa-cowork server`）、ACP stdio（`tpa-cowork acp`）。技术栈见 `package.json` / `Cargo.toml`。
 
 **本文只放跨 PR 必守的红线、同步契约与唯一入口**——实现细节、数据结构、迁移逻辑、边角行为一律在 [docs/architecture/](docs/architecture/)（索引 [docs/README.md](docs/README.md)）。加内容前先问：删掉它会让 agent 犯错吗？不会就别加。前端 / UI 风格规范见 [src/AGENTS.md](src/AGENTS.md)（`src/` 嵌套 AGENTS.md，改前端时自动生效）。
 
@@ -8,16 +8,16 @@
 
 - **API Key / OAuth Token 禁止出现在任何日志中**
 - `tauri.conf.json` CSP 不要放行外部域名
-- OAuth token 在 `~/.hope-agent/credentials/auth.json`，登出时必须 `clear_token()`
+- OAuth token 在 `~/.tpa-cowork/credentials/auth.json`，登出时必须 `clear_token()`
 
 ## 提交前检查（强制）
 
 [`.husky/pre-push`](.husky/pre-push) push 时自动跑全套门禁，与 CI required check 一一对应、改一边同步另一边；Agent 勿重跑。clippy / cargo test 只覆盖 `ha-core` + `ha-server`，`src-tauri` 不在门禁内、须 `--workspace` 自查。
 
 - **开发中只单点验证**（`cargo check -p <crate>` / `pnpm typecheck`）；跑 clippy / cargo test / pnpm {test,lint} 须先问用户等回复，例外限跨 crate / 多文件收尾，跑前说明
-- **应急跳过**：`HA_SKIP_PREPUSH=1`（限纯 `.md` / 弱网）/ `HA_SKIP_PREPUSH_TEST=1`（只跳 cargo test）。禁止 `--no-verify`（会绕过 GPG 等钩子）
-- **i18n 无 CI 兜底**：当次改动涉及的 key 提交时须全语言齐全（存量缺失不强制），`node scripts/sync-i18n.mjs --check` 自查
-- **评测不进 CI / PR / pre-push**：完整专项评测只本地显式跑（`hope-agent-eval`），默认 `cargo test` 只留快速契约测试；GitHub CI 不构建 ha-eval、不跑评测 smoke。详见 [capability-eval](docs/architecture/capability-eval.md)
+- **应急跳过**：`TPA_COWORK_SKIP_PREPUSH=1`（限纯 `.md` / 弱网）/ `TPA_COWORK_SKIP_PREPUSH_TEST=1`（只跳 cargo test）。禁止 `--no-verify`（会绕过 GPG 等钩子）
+- **i18n 无 CI 兜底**：项目仅维护支持的语言（`zh`、`zh-TW`、`en`），`scripts/i18n-translations.json` 仅保留活跃语言种子（`zh`/`zh-TW`）；当次改动涉及的 key 提交时须全语言齐全（存量缺失不强制），`node scripts/sync-i18n.mjs --check` 自查
+- **评测不进 CI / PR / pre-push**：完整专项评测只本地显式跑（`tpa-cowork-eval`），默认 `cargo test` 只留快速契约测试；GitHub CI 不构建 ha-eval、不跑评测 smoke。详见 [capability-eval](docs/architecture/capability-eval.md)
 
 ## 分支与发布
 
@@ -102,7 +102,7 @@ Tauri 命令 → `invoke_handler!`；HTTP 端点 → `build_router_with_cors`；
 - **纠错唯一入口 `claims::review`**：**无 agent 工具面**，只对用户开放、模型不能自改；**改 content 必 `reembed_claim`**，否则下轮召回仍命中旧文本
 - **注入即 untrusted**：召回文本套 `<untrusted_external_data>`，项目索引注入前 XML escape，claim / 图谱文本进 prompt 前 sanitize
 - **fail closed**：全局 / agent memory off、incognito、非项目会话在 schema 与执行层双归零。`sessions.incognito` 是无痕单一真相源（不注入 Memory / Awareness、跳过自动提取、关闭即焚，**与 Project / IM Channel 互斥**，四旁路守卫见 [session](docs/architecture/session.md#四旁路守卫epic-e)）。项目记忆读写拒 symlink 与 canonical escape、变更持项目级 OS 独占锁、更新 / 删除须带上次 `read` 的 BLAKE3 `expectedFileHash`（陈旧写 fail closed）
-- **确定性评测刻意不进默认 Cargo test**：`memory/dreaming/eval.rs` + `evals/suites/memory-dreaming/fixtures/` **无 LLM**，只由 `hope-agent-eval` 跑（进 cargo test 或加 LLM 判分即破坏确定性）
+- **确定性评测刻意不进默认 Cargo test**：`memory/dreaming/eval.rs` + `evals/suites/memory-dreaming/fixtures/` **无 LLM**，只由 `tpa-cowork-eval` 跑（进 cargo test 或加 LLM 判分即破坏确定性）
 - **改这些须同步**：claim 读路径 / effective-status / hidden-set / scope 过滤 / evidence 授权 → 加 fixture + 提 suite version + 追加 `evals/version-lock.json` key（已有 `id@version` 不可覆写，CI 强制 append-only）；Deep Resolver 分组 / 基数 / 决策映射 → `auto_resolver_graph_planning` fixture；检索 SQL / RRF / trigram → 跑 `pnpm memory:benchmark`
 - **Retrieval Planner**：`role=injected/selected` 是既成 prompt 事实，跨源只能 canonical-dedup / 裁剪 `candidate/considered`，**不得重排或丢弃已注入 ref**
 - **新增 Goal / Workflow / Async / Agent 执行边界**须传播 `EvalRunContext` 身份并在终态关闭 guard；`evals/live/version-lock.json` 同样 append-only，manifest 禁 shell
@@ -194,7 +194,7 @@ Tauri 命令 → `invoke_handler!`；HTTP 端点 → `build_router_with_cors`；
 
 **配置读写**：读 `cached_config().mcp_servers`，写 `mutate_config(("mcp.<op>", source), …)`；网络 transport 与 OAuth 全路径出站过 SSRF 门，凭据 0600 落 `credentials/mcp/`。详见 [mcp](docs/architecture/mcp.md)。
 
-### 平台 MCP 服务器（`hope-agent mcp`）
+### 平台 MCP 服务器（`tpa-cowork mcp`）
 
 **红线**：共享 host `ha-core/src/mcp_server/`（`ToolProvider` 注册表），不做子系统专属 server；默认只读、`--allow-writes` 才注册写集且 host 层双保险再拦；**恒不暴露**写代码仓库 / deploy / share / delete / export 类工具；stdio interop 经 `acquire_or_secondary_for` 恒**被动 Secondary**，永不争 Primary。详见 [mcp-server](docs/architecture/mcp-server.md)。
 
@@ -212,7 +212,7 @@ Tauri 命令 → `invoke_handler!`；HTTP 端点 → `build_router_with_cors`；
 
 详见 [`docs/architecture/`](docs/architecture/)：session / ask-user / prompt-system / behavior-awareness / help-center
 
-- 数据在 `~/.hope-agent/`，新路径走 `paths.rs`；日志走 `logging/mod.rs`，请求体必经 `redact_sensitive`
+- 数据在 `~/.tpa-cowork/`，新路径走 `paths.rs`；日志走 `logging/mod.rs`，请求体必经 `redact_sensitive`
 - 唯一结构化问答入口 `ask_user_question`：富输入 / 风格卡只能扩展它（答案仍走 `selected[]`），绝不 fork
 - `sessions.working_dir` 三用：`# Working Directory` 段 + `exec` cwd + `read` 相对根，非纯 prompt 提示
 - 手册单一来源 `docs/user-guide/`（rust-embed）：禁复制正文 / 拷进产物；中英同 PR 对齐（CI `check-docs-parity`）。例外：Dockerfile rust 阶段 `COPY docs/user-guide` 是编译期 embed 依赖，须保留
@@ -282,4 +282,4 @@ cargo run -p ha-eval --locked -- validate   # 评测资产校验
 
 **CHANGELOG 单行**：用户视角一句 + `(#PR)`，不写实现；契约/红线可加一行用户影响。
 
-**规划归档**：调研/roadmap 归外部 iCloud `HopeAI/Hope Agent/Plans/`，**仓库内任何路径不留已完成 roadmap**；落地后须把设计决策同步回架构文档。
+**规划归档**：调研/roadmap 归外部 iCloud `HopeAI/TPA CoWork/Plans/`，**仓库内任何路径不留已完成 roadmap**；落地后须把设计决策同步回架构文档。

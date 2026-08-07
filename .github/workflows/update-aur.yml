@@ -1,7 +1,7 @@
 name: Update AUR
 
-# Sync the PKGBUILD + .SRCINFO templates in `aur/hope-agent-bin/` into
-# the AUR git repo (ssh://aur@aur.archlinux.org/hope-agent-bin.git)
+# Sync the PKGBUILD + .SRCINFO templates in `aur/tpa-cowork-bin/` into
+# the AUR git repo (ssh://aur@aur.archlinux.org/tpa-cowork-bin.git)
 # whenever a release is published.
 #
 # Triggers:
@@ -37,7 +37,7 @@ jobs:
   update-aur:
     runs-on: ubuntu-latest
     env:
-      AUR_PKG: hope-agent-bin
+      AUR_PKG: tpa-cowork-bin
       TAG: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.event.release.tag_name }}
 
     steps:
@@ -54,8 +54,8 @@ jobs:
             exit 1
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
-          echo "deb_amd64=Hope.Agent_${version}_amd64.deb" >> "$GITHUB_OUTPUT"
-          echo "deb_arm64=Hope.Agent_${version}_arm64.deb" >> "$GITHUB_OUTPUT"
+          echo "deb_amd64=TPA.CoWork_${version}_amd64.deb" >> "$GITHUB_OUTPUT"
+          echo "deb_arm64=TPA.CoWork_${version}_arm64.deb" >> "$GITHUB_OUTPUT"
 
       - name: Download both .deb from release
         env:
@@ -95,11 +95,11 @@ jobs:
           sed -e "s/__PKGVER__/${{ steps.ver.outputs.version }}/g" \
               -e "s/__SHA256_X86_64__/${{ steps.sha.outputs.sha256_x86_64 }}/g" \
               -e "s/__SHA256_AARCH64__/${{ steps.sha.outputs.sha256_aarch64 }}/g" \
-              aur/hope-agent-bin/PKGBUILD.tmpl > rendered/PKGBUILD
+              aur/tpa-cowork-bin/PKGBUILD.tmpl > rendered/PKGBUILD
           sed -e "s/__PKGVER__/${{ steps.ver.outputs.version }}/g" \
               -e "s/__SHA256_X86_64__/${{ steps.sha.outputs.sha256_x86_64 }}/g" \
               -e "s/__SHA256_AARCH64__/${{ steps.sha.outputs.sha256_aarch64 }}/g" \
-              aur/hope-agent-bin/.SRCINFO.tmpl > rendered/.SRCINFO
+              aur/tpa-cowork-bin/.SRCINFO.tmpl > rendered/.SRCINFO
 
           # Refuse to push if any placeholder leaked through.
           for f in rendered/PKGBUILD rendered/.SRCINFO; do
@@ -165,8 +165,8 @@ jobs:
         working-directory: aur-repo
         run: |
           set -euo pipefail
-          git config user.name  "hope-agent-bot"
-          git config user.email "hope-agent-bot@users.noreply.github.com"
+          git config user.name  "tpa-cowork-bot"
+          git config user.email "tpa-cowork-bot@users.noreply.github.com"
 
           cp ../rendered/PKGBUILD .
           cp ../rendered/.SRCINFO .
@@ -177,7 +177,7 @@ jobs:
             exit 0
           fi
 
-          git commit -m "hope-agent-bin ${{ steps.ver.outputs.version }}
+          git commit -m "tpa-cowork-bin ${{ steps.ver.outputs.version }}
 
           x86_64 deb sha256: ${{ steps.sha.outputs.sha256_x86_64 }}
           aarch64 deb sha256: ${{ steps.sha.outputs.sha256_aarch64 }}

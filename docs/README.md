@@ -76,7 +76,7 @@
 | [Hooks 系统](architecture/hooks.md)          | 事件 → 可拔插处理器，字段级对齐 Claude Code 协议；28 事件（24 触发 + 4 保留）+ 5 种 handler（command/http/mcp_tool/prompt/agent）+ user/managed/project/local 四 scope UNION + 配置热重载 + JSONL transcript 镜像 | `hooks/`, `agent/preflight.rs` |
 | [Ask User](architecture/ask-user.md)        | 通用结构化问答工具、preview 并排对比、超时回退、IM 渠道集成    | `tools/ask_user_question.rs`, `plan/questions.rs`, `channel/worker/ask_user.rs` |
 | [技能系统](architecture/skill-system.md)        | SKILL.md 发现、懒加载、工具隔离、Fork 模式      | `skills/`             |
-| [内置用户手册（帮助中心）](architecture/help-center.md) | `docs/user-guide/` rust-embed 单一来源；GUI 独立窗口（bundle/search 命令）+ agent 镜像路径（`ha-manual` skill）；slug 三方一致契约、指纹 marker 镜像、双语 parity 守卫 | `manual/`, `src/components/help/`, `skills/ha-manual/` |
+| [内置用户手册（帮助中心）](architecture/help-center.md) | `docs/user-guide/` rust-embed 单一来源；GUI 独立窗口（bundle/search 命令）+ agent 镜像路径（`tpa-manual` skill）；slug 三方一致契约、指纹 marker 镜像、双语 parity 守卫 | `manual/`, `src/components/help/`, `skills/tpa-manual/` |
 | [子 Agent 系统](architecture/subagent.md)      | spawn + 结果注入、Mailbox 实时引导、深度/并发控制 | `subagent/`           |
 | [后台任务（Background Jobs）](architecture/background-jobs.md) | 统一后台任务模型（Tool/Subagent/Group）：`JobManager` 门面、两层并发硬配额 + 公平调度、重试、后台 exec 审批 park、output_tail、完成合并注入、owner 面板与端点、`AsyncToolsConfig` | `async_jobs/`, `runtime_tasks.rs` |
 | [Agent Team](architecture/agent-team.md)     | 多 Agent 协作团队、双向通信、Kanban 任务看板、用户自定义模板（内置模板已移除） | `team/`               |
@@ -112,7 +112,7 @@
 | [Recap 深度复盘](architecture/recap.md)      | 逐会话 LLM facet 提取、量化+语义融合报告、HTML 导出 | `recap/`                |
 | [日志系统](architecture/logging.md)           | 非阻塞双写、敏感数据脱敏、文件轮转                  | `logging/`              |
 | [可靠性与崩溃自愈](architecture/reliability.md) | Guardian 父子三层保活、退出码协议、Crash Journal、Self-Diagnosis prompt + Auto-Fix 覆盖范围、子系统 watchdog | `guardian.rs`, `crash_journal.rs`, `self_diagnosis.rs`, `service_install.rs` |
-| [自诊断与问题上报](architecture/self-diagnosis-issue-reporting.md) | 对话式自我理解：`ha-self-diagnosis` 技能（fork 隔离的自学习 / 排障流程）+ `issue_report` 工具，用户/会话触发、不跑后台健康扫描 | `tools/issue_report.rs`, `skills/ha-self-diagnosis/` |
+| [自诊断与问题上报](architecture/self-diagnosis-issue-reporting.md) | 对话式自我理解：`tpa-self-diagnosis` 技能（fork 隔离的自学习 / 排障流程）+ `issue_report` 工具，用户/会话触发、不跑后台健康扫描 | `tools/issue_report.rs`, `skills/tpa-self-diagnosis/` |
 | [配置系统](architecture/config-system.md)     | `cached_config` / `mutate_config`、ArcSwap 快照、写锁串行化、`config:changed` 事件 | `config/`               |
 | [备份 / 自动快照](architecture/backup-autosave.md) | 配置安全网：写盘前单文件 autosave（保留 50）+ 崩溃阈值全量备份（保留 5）、reason 标签、回滚自快照、与 updater 备份隔离 | `backup.rs`             |
 | [首次启动向导](architecture/onboarding.md) | 首启引导状态机、预设 Provider/模型、apply 落地经 provider CRUD + config contract、owner 命令面 | `onboarding/`           |
@@ -120,7 +120,7 @@
 | [安全子系统](architecture/security.md)         | SSRF 三档 policy、`trusted_hosts`、Metadata IP 硬拒、Dangerous Mode (YOLO)、HTTP 响应封顶 | `security/`             |
 | [跨平台抽象层](architecture/platform.md)       | OS 适配入口集合（进程组 kill、安全文件写、shell 命令、系统代理探测、Chrome 定位、advisory lock、GPU 探测、原子 binary swap 等）、Unix/Windows 双实现 | `platform/`             |
 | [系统权限（macOS TCC）](architecture/macos-permissions.md) | TCC 权限探测/请求（辅助功能/录屏/自动化/麦克风/相机/文件夹）、catalog 元数据、按 id 派发原生 prompt 或设置跳转、跨平台 cfg 桩 | `permissions.rs`        |
-| [自升级](architecture/self-update.md)        | 三档路径（Tauri bundle / 包管理器 / 自包含 binary swap）、Minisign 单一 pubkey、`app_update` 工具 + `ha-self-update` skill、bare-binary 发布产物 | `updater/`, `tools/app_update.rs`, `src-tauri/src/commands/update_bridge.rs` |
+| [自升级](architecture/self-update.md)        | 三档路径（Tauri bundle / 包管理器 / 自包含 binary swap）、Minisign 单一 pubkey、`app_update` 工具 + `tpa-self-update` skill、bare-binary 发布产物 | `updater/`, `tools/app_update.rs`, `src-tauri/src/commands/update_bridge.rs` |
 
 
 ## 平台支持

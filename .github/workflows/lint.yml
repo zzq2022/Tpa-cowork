@@ -34,6 +34,9 @@ jobs:
       - name: TypeScript typecheck
         run: pnpm typecheck
 
+      - name: Product identity
+        run: pnpm product:check
+
       - name: Vitest
         run: pnpm test
 

@@ -855,9 +855,9 @@ fn chrome_extension_id_char(nibble: u8) -> char {
 
 fn native_host_binary_hint() -> Option<PathBuf> {
     let exe_name = if cfg!(target_os = "windows") {
-        "ha-browser-host.exe"
+        "tpa-browser-host.exe"
     } else {
-        "ha-browser-host"
+        "tpa-browser-host"
     };
     native_host_binary_candidates(exe_name)
         .into_iter()
@@ -872,7 +872,7 @@ fn resolve_host_path(input: Option<String>) -> Result<PathBuf> {
         return Ok(path);
     }
     bail!(
-        "Native host path is required. Bundle ha-browser-host with TPA CoWork, pass its absolute path, or set HOPE_AGENT_BROWSER_HOST_PATH."
+        "Native host path is required. Bundle tpa-browser-host with TPA CoWork, pass its absolute path, or set HOPE_AGENT_BROWSER_HOST_PATH."
     );
 }
 
@@ -885,7 +885,7 @@ fn native_host_binary_candidates(exe_name: &str) -> Vec<PathBuf> {
         if current
             .file_stem()
             .and_then(|s| s.to_str())
-            .is_some_and(|stem| stem == "ha-browser-host")
+            .is_some_and(|stem| stem == "tpa-browser-host")
         {
             candidates.push(current.clone());
         }

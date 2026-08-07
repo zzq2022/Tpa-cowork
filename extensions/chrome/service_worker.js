@@ -49,7 +49,7 @@ function ensureKeepaliveAlarm() {
   try {
     chrome.alarms?.create(KEEPALIVE_ALARM, { periodInMinutes: 0.5 })
   } catch (error) {
-    console.debug("Hope Agent keepalive alarm create failed", error)
+    console.debug("TPA CoWork keepalive alarm create failed", error)
   }
 }
 
@@ -63,7 +63,7 @@ chrome.alarms?.onAlarm.addListener((alarm) => {
   try {
     ensureNativePort()
   } catch (error) {
-    console.debug("Hope Agent keepalive reconnect failed", error)
+    console.debug("TPA CoWork keepalive reconnect failed", error)
   }
 })
 /** @type {Set<number>} */
@@ -123,7 +123,7 @@ chrome.debugger.onDetach.addListener((source) => {
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   if (changeInfo.status !== "complete" || !overlayTabs.has(tabId)) return
   showOverlay(tabId, overlayTabs.get(tabId)).catch((error) => {
-    console.debug("Hope Agent overlay reinject failed", error)
+    console.debug("TPA CoWork overlay reinject failed", error)
   })
 })
 
@@ -139,7 +139,7 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 
 if (chrome.downloads) {
   chrome.downloads.onCreated.addListener((item) => {
-    if (isHopeControlledDownload(item)) {
+    if (isTpaCoworkControlledDownload(item)) {
       managedDownloads.add(item.id)
     }
     pushObserve("downloads", {
@@ -223,7 +223,7 @@ function ensureNativePort() {
       method: "extension.hello",
       protocolVersion: PROTOCOL_VERSION,
       payload: {
-        extension: "hope-agent-browser-control",
+        extension: "tpa-cowork-browser-control",
         extensionVersion: chrome.runtime.getManifest().version,
       },
     })
@@ -256,16 +256,16 @@ function sendNative(method, payload = {}, timeoutMs = 5000) {
 async function handleExtensionMessage(message, sender) {
   const method = message?.method || message?.type
   const params = message?.params || message?.payload || {}
-  if (method === "hope.overlay.stop") {
+  if (method === "tpa-cowork.overlay.stop") {
     return handleOverlayStop(sender)
   }
-  if (method === "hope.popup.status") {
+  if (method === "tpa-cowork.popup.status") {
     return popupStatus()
   }
-  if (method === "hope.popup.stopTab") {
+  if (method === "tpa-cowork.popup.stopTab") {
     return stopTabControl(requiredTabId(params), "toolbar")
   }
-  if (method === "hope.popup.stopAll") {
+  if (method === "tpa-cowork.popup.stopAll") {
     return stopAllControl("toolbar")
   }
   return handleCommand(method, params)
@@ -382,7 +382,7 @@ async function handleCommand(method, params) {
   switch (method) {
     case "hello":
       return {
-        extension: "hope-agent-browser-control",
+        extension: "tpa-cowork-browser-control",
         extensionVersion: chrome.runtime.getManifest().version,
         protocolVersion: PROTOCOL_VERSION,
         nativeConnected,
@@ -497,7 +497,7 @@ async function snapshotFrames(tabId, maxElements) {
   const cappedMaxElements = normalizeMaxElements(maxElements, 160)
   const results = await chrome.scripting.executeScript({
     target: { tabId, allFrames: true },
-    func: collectHopeFrameSnapshot,
+    func: collectTpaCoworkFrameSnapshot,
     args: [cappedMaxElements],
   })
   return results
@@ -515,7 +515,7 @@ async function actInFrame(tabId, frameId, selector, kind, params) {
   }
   const results = await chrome.scripting.executeScript({
     target: { tabId, frameIds: [frameId] },
-    func: performHopeFrameAction,
+    func: performTpaCoworkFrameAction,
     args: [kind, selector, params || {}],
   })
   const result = results && results[0] && results[0].result
@@ -526,7 +526,7 @@ async function actInFrame(tabId, frameId, selector, kind, params) {
 }
 
 /** @param {unknown} maxElements */
-function collectHopeFrameSnapshot(maxElements) {
+function collectTpaCoworkFrameSnapshot(maxElements) {
   const MAX_TEXT_LEN = 100
   /** @type {any[]} */
   const refs = []
@@ -696,7 +696,7 @@ function collectHopeFrameSnapshot(maxElements) {
  * @param {unknown} selector
  * @param {any} params
  */
-function performHopeFrameAction(kind, selector, params) {
+function performTpaCoworkFrameAction(kind, selector, params) {
   try {
     const el = /** @type {any} */ (document.querySelector(String(selector)))
     if (!el) throw new Error("Element not found for frame selector")
@@ -852,9 +852,9 @@ async function stopTabControl(tabId, source) {
   try {
     await sendNative("extension.user_stop", { tabId, source })
   } catch (error) {
-    // The browser-side stop still succeeded. If Hope Agent is offline, the
+    // The browser-side stop still succeeded. If TPA CoWork is offline, the
     // next Core action will fail because the debugger was detached.
-    console.warn("Hope Agent user_stop notification failed", error)
+    console.warn("TPA CoWork user_stop notification failed", error)
   }
   return { stopped: true, tabId }
 }
@@ -878,7 +878,7 @@ function popupStatus() {
   try {
     ensureNativePort()
   } catch (error) {
-    console.debug("Hope Agent popup status connect attempt failed", error)
+    console.debug("TPA CoWork popup status connect attempt failed", error)
   }
   return {
     nativeConnected,
@@ -896,12 +896,12 @@ async function showOverlay(tabId, label) {
   const normalizedLabel =
     typeof label === "string" && label
       ? label
-      : chrome.i18n.getMessage("overlay_controlling") || "Hope Agent is controlling this tab"
+      : chrome.i18n.getMessage("overlay_controlling") || "TPA CoWork is controlling this tab"
   const stopLabel = chrome.i18n.getMessage("overlay_stop") || "Stop"
   overlayTabs.set(tabId, normalizedLabel)
   await chrome.scripting.executeScript({
     target: { tabId },
-    func: installHopeAgentOverlay,
+    func: installTPACoWorkOverlay,
     args: [normalizedLabel, stopLabel],
   })
 }
@@ -910,13 +910,13 @@ async function hideOverlay(tabId) {
   overlayTabs.delete(tabId)
   await chrome.scripting.executeScript({
     target: { tabId },
-    func: removeHopeAgentOverlay,
+    func: removeTPACoWorkOverlay,
   })
 }
 
-function installHopeAgentOverlay(label, stopLabel) {
+function installTPACoWorkOverlay(label, stopLabel) {
   const doc = /** @type {any} */ (globalThis).document
-  const overlayId = "__hope_agent_control_overlay"
+  const overlayId = "__tpa_cowork_control_overlay"
   doc.getElementById(overlayId)?.remove()
 
   const host = doc.createElement("div")
@@ -989,7 +989,7 @@ function installHopeAgentOverlay(label, stopLabel) {
   button.addEventListener("click", () => {
     doc.getElementById(overlayId)?.remove()
     try {
-      chrome.runtime.sendMessage({ type: "hope.overlay.stop" })
+      chrome.runtime.sendMessage({ type: "tpa-cowork.overlay.stop" })
     } catch {
       // If the extension context is gone, local removal is still the best we can do.
     }
@@ -1000,9 +1000,9 @@ function installHopeAgentOverlay(label, stopLabel) {
   doc.documentElement.append(host)
 }
 
-function removeHopeAgentOverlay() {
+function removeTPACoWorkOverlay() {
   const doc = /** @type {any} */ (globalThis).document
-  doc.getElementById("__hope_agent_control_overlay")?.remove()
+  doc.getElementById("__tpa_cowork_control_overlay")?.remove()
 }
 
 async function ensureDebuggerAttached(tabId, version) {
@@ -1036,7 +1036,7 @@ async function enableFlatSessions(tabId) {
     // Older Chrome builds or restricted pages may not expose flat sessions
     // through chrome.debugger. The scripting frame bridge still covers basic
     // cross-origin frame read/click, so keep the main attach usable.
-    console.debug("Hope Agent flat-session setup unavailable", error)
+    console.debug("TPA CoWork flat-session setup unavailable", error)
   }
 }
 
@@ -1280,7 +1280,7 @@ async function handleDownloadCompleted(downloadId) {
   const items = await chrome.downloads.search({ id: downloadId })
   const item = items[0]
   if (!item) return
-  if (!managedDownloads.has(downloadId) && !isHopeControlledDownload(item)) return
+  if (!managedDownloads.has(downloadId) && !isTpaCoworkControlledDownload(item)) return
   managedDownloads.add(downloadId)
   try {
     const response = await sendNative("extension.download_completed", plainDownloadItem(item), 10_000)
@@ -1302,7 +1302,7 @@ async function handleDownloadCompleted(downloadId) {
   }
 }
 
-function isHopeControlledDownload(item) {
+function isTpaCoworkControlledDownload(item) {
   const tabId = Number(item?.tabId)
   return Number.isInteger(tabId) && (overlayTabs.has(tabId) || attachedDebugTabs.has(tabId))
 }
@@ -1349,12 +1349,12 @@ async function cancelDownload(params) {
     throw new Error("chrome.downloads.cancel is unavailable")
   }
   const downloadId = requiredDownloadId(params)
-  // Ownership check: only cancel downloads Hope is managing (started from a
-  // Hope-controlled tab — tracked in managedDownloads). Cancelling an arbitrary
+  // Ownership check: only cancel downloads TPA CoWork is managing (started from a
+  // TPA CoWork-controlled tab — tracked in managedDownloads). Cancelling an arbitrary
   // id would let the agent abort the user's unrelated downloads.
   if (!managedDownloads.has(downloadId)) {
     throw new Error(
-      `download ${downloadId} is not managed by Hope Agent and cannot be cancelled`
+      `download ${downloadId} is not managed by TPA CoWork and cannot be cancelled`
     )
   }
   await chrome.downloads.cancel(downloadId)
@@ -1374,7 +1374,7 @@ async function extensionStatus() {
     tabs = []
   }
   return {
-    extension: "hope-agent-browser-control",
+    extension: "tpa-cowork-browser-control",
     extensionVersion: chrome.runtime.getManifest().version,
     protocolVersion: PROTOCOL_VERSION,
     nativeHostName: HOST_NAME,

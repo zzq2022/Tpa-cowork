@@ -422,14 +422,14 @@ pub fn rollback(job_id: &str) -> Result<InstallOutcome> {
 }
 
 /// Emitted from `rollback` right after the main-binary swap so the skew is on
-/// the record: siblings (ha-browser-host) are never backed up and `install`
+/// the record: siblings (tpa-browser-host) are never backed up and `install`
 /// refuses non-newer targets, so the only way back to matched versions is the
 /// next upgrade.
 fn warn_sibling_skew_after_rollback() {
     app_warn!(
         "self_update",
         "rollback",
-        "main binary restored from backup, but sibling binaries (ha-browser-host) keep their \
+        "main binary restored from backup, but sibling binaries (tpa-browser-host) keep their \
          newer version until the next upgrade — the extension native host may be version-skewed"
     );
 }

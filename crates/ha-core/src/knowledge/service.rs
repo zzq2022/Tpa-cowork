@@ -887,7 +887,7 @@ pub fn set_chunk_config(
     Ok(cfg)
 }
 
-// ── Search ranking config (owner plane GUI + ha-settings) ───────────────
+// ── Search ranking config (owner plane GUI + tpa-settings) ───────────────
 
 /// Current (clamped) hybrid-search ranking parameters.
 pub fn get_search_config() -> super::KnowledgeSearchConfig {
@@ -1059,7 +1059,7 @@ pub fn set_media_retention_config(
     Ok(clamped)
 }
 
-// ── Source import limits (owner plane GUI + ha-settings, MEDIUM) ────────
+// ── Source import limits (owner plane GUI + tpa-settings, MEDIUM) ────────
 
 pub fn get_source_limits_config() -> super::KnowledgeSourceLimitsConfig {
     crate::config::cached_config()

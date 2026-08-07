@@ -277,14 +277,14 @@ mod tests {
                         "signature": "RUR...",
                         "archive": "tar_gz",
                         "binary_path": "hope-agent",
-                        "extra_binaries": ["ha-browser-host"]
+                        "extra_binaries": ["tpa-browser-host"]
                     }
                 }
             }
         }"#;
         let m: Manifest = serde_json::from_str(body).unwrap();
         let entry = select_bare_binary(&m, "linux-x86_64").unwrap();
-        assert_eq!(entry.extra_binaries, vec!["ha-browser-host".to_string()]);
+        assert_eq!(entry.extra_binaries, vec!["tpa-browser-host".to_string()]);
     }
 
     #[test]

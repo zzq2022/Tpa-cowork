@@ -86,7 +86,7 @@ export function useTheme() {
     setThemePreference(mode)
   }, [])
 
-  // Listen for config changes from backend (e.g. ha-settings skill updates theme)
+  // Listen for config changes from backend (e.g. tpa-settings skill updates theme)
   useEffect(() => {
     return listenThemeConfigChange(setThemeState)
   }, [])

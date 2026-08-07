@@ -11,8 +11,8 @@ from pathlib import Path
 
 def scrub_xml(xml: str) -> str:
     replacements = {
-        "dc:creator": "Hope Agent",
-        "cp:lastModifiedBy": "Hope Agent",
+        "dc:creator": "TPA CoWork",
+        "cp:lastModifiedBy": "TPA CoWork",
         "cp:revision": "1",
         "Company": "",
         "Manager": "",

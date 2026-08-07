@@ -1,0 +1,97 @@
+[
+  {
+    "path": "THIRD_PARTY_NOTICES.md",
+    "pattern": "Hope Agent",
+    "reason": "Historical upstream attribution in the third-party notice"
+  },
+  {
+    "path": "evals/version-lock.json",
+    "pattern": "hope-agent",
+    "reason": "Append-only evaluation policy identities preserve historical released IDs"
+  },
+  {
+    "path": "crates/ha-core/src/platform/service.rs",
+    "pattern": "Hope Agent",
+    "reason": "One-time cleanup target for the retired Windows scheduled task"
+  },
+  {
+    "path": "crates/ha-core/src/platform/service.rs",
+    "pattern": "hope-agent",
+    "reason": "One-time cleanup targets for retired macOS and Linux service registrations"
+  },
+  {
+    "path": "crates/ha-core/src/platform/service.rs",
+    "pattern": "hopeagent",
+    "reason": "One-time cleanup targets for retired macOS launchd registrations"
+  },
+  {
+    "path": "crates/ha-core/src/memory/backup.rs",
+    "pattern": "hopeagent",
+    "reason": "Retained as a rejected weak password derived from the retired brand"
+  },
+  {
+    "path": "src/components/settings/memory-panel/types.ts",
+    "pattern": "hopeagent",
+    "reason": "Retained as a rejected weak password derived from the retired brand"
+  },
+  {
+    "path": "docs/superpowers/specs/2026-08-03-tpa-cowork-hard-rebrand-design.md",
+    "pattern": "Hope Agent",
+    "reason": "Approved design record describing the removed upstream identity"
+  },
+  {
+    "path": "docs/superpowers/specs/2026-08-03-tpa-cowork-hard-rebrand-design.md",
+    "pattern": "Hope-Agent",
+    "reason": "Approved design record listing a legacy spelling to reject"
+  },
+  {
+    "path": "docs/superpowers/specs/2026-08-03-tpa-cowork-hard-rebrand-design.md",
+    "pattern": "HopeAgent",
+    "reason": "Approved design record listing a legacy spelling to reject"
+  },
+  {
+    "path": "docs/superpowers/specs/2026-08-03-tpa-cowork-hard-rebrand-design.md",
+    "pattern": "hope-agent",
+    "reason": "Approved design record listing legacy machine identifiers to reject"
+  },
+  {
+    "path": "docs/superpowers/specs/2026-08-03-tpa-cowork-hard-rebrand-design.md",
+    "pattern": ".hope-agent",
+    "reason": "Approved design record describing the removed data root"
+  },
+  {
+    "path": "docs/superpowers/specs/2026-08-03-tpa-cowork-hard-rebrand-design.md",
+    "pattern": "HA_",
+    "reason": "Approved design record listing the removed legacy environment prefix"
+  },
+  {
+    "path": "docs/superpowers/specs/2026-08-03-tpa-cowork-hard-rebrand-design.md",
+    "pattern": "HOPE_",
+    "reason": "Approved design record listing the removed legacy environment prefix"
+  },
+  {
+    "path": "docs/superpowers/plans/2026-08-03-tpa-cowork-hard-rebrand.md",
+    "pattern": "Hope Agent",
+    "reason": "Approved implementation plan describing the removed upstream identity"
+  },
+  {
+    "path": "docs/superpowers/plans/2026-08-03-tpa-cowork-hard-rebrand.md",
+    "pattern": "hope-agent",
+    "reason": "Approved implementation plan describing legacy machine identifiers"
+  },
+  {
+    "path": "docs/superpowers/plans/2026-08-03-tpa-cowork-hard-rebrand.md",
+    "pattern": ".hope-agent",
+    "reason": "Approved implementation plan describing the removed data root"
+  },
+  {
+    "path": "docs/superpowers/plans/2026-08-03-tpa-cowork-hard-rebrand.md",
+    "pattern": "HA_",
+    "reason": "Approved implementation plan listing the removed legacy environment prefix"
+  },
+  {
+    "path": "docs/superpowers/plans/2026-08-03-tpa-cowork-hard-rebrand.md",
+    "pattern": "HOPE_",
+    "reason": "Approved implementation plan listing the removed legacy environment prefix"
+  }
+]

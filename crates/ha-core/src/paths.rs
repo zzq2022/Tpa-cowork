@@ -416,7 +416,7 @@ pub fn bundled_skills_cache_dir() -> Result<PathBuf> {
 // ── Manual (built-in user guide) ─────────────────────────────────
 
 /// Stable mirror of the embedded bilingual user manual:
-/// ~/.hope-agent/manual/{zh,en}/NN.md — read/grepped by the `ha-manual`
+/// ~/.hope-agent/manual/{zh,en}/NN.md — read/grepped by the `tpa-manual`
 /// skill. Safe to delete — rebuilt from the binary on next use.
 pub fn manual_dir() -> Result<PathBuf> {
     Ok(root_dir()?.join("manual"))

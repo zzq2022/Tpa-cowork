@@ -23,10 +23,10 @@ afterEach(cleanup)
 
 describe("PlainTextRenderer skill mentions", () => {
   it("renders Data Analytics as a chip instead of its markdown token", () => {
-    const token = "[@数据分析](#skill:ha-data-analytics)"
+    const token = "[@数据分析](#skill:tpa-data-analytics)"
     const { container } = render(<PlainTextRenderer content={`请使用 ${token} 分析数据`} />)
 
-    expect(container.querySelector('[data-skill-mention="ha-data-analytics"]')).not.toBeNull()
+    expect(container.querySelector('[data-skill-mention="tpa-data-analytics"]')).not.toBeNull()
     expect(screen.getByText("数据分析")).toBeTruthy()
     expect(container.textContent).not.toContain(token)
   })

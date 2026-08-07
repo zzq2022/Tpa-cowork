@@ -108,7 +108,7 @@ function AppBackgroundInner() {
       applyWeather(payload as WeatherData)
     })
 
-    // Listen for config:changed from backend (e.g. ha-settings skill updates ui_effects)
+    // Listen for config:changed from backend (e.g. tpa-settings skill updates ui_effects)
     const unlistenConfig = getTransport().listen("config:changed", (raw) => {
       try {
         const payload = parsePayload<{ category?: string }>(raw)

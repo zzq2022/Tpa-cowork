@@ -1,7 +1,7 @@
 {
   "schemaVersion": "eval-suite.v1",
   "id": "coding-control-plane",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "capability": "coding",
   "adapter": "coding_fixture_patch",
   "tiers": ["weekly", "release"],

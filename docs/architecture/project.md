@@ -192,7 +192,7 @@ CREATE INDEX IF NOT EXISTS idx_projects_archived
 |---|---|
 | Tauri `get_default_agent_id` / `set_default_agent_id` | 读 / 写 `AppConfig.default_agent_id` |
 | HTTP `GET / PUT /api/config/default-agent` | 同上 |
-| `ha-settings` 工具 `category="default_agent"` | 模型可改（LOW 风险，SKILL.md 已登记） |
+| `tpa-settings` 工具 `category="default_agent"` | 模型可改（LOW 风险，SKILL.md 已登记） |
 | `/status` 斜杠命令 | 项目会话里追加项目摘要段，标注 Agent Source 命中级别 |
 
 ## 工作目录解析链（session > project > 默认 workspace）

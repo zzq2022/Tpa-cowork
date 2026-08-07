@@ -1,6 +1,6 @@
 {
   "schemaVersion": "eval-policy.v1",
-  "id": "hope-agent-weekly-deterministic",
+  "id": "tpa-cowork-weekly-deterministic",
   "version": "1.0.0",
   "tier": "weekly",
   "mode": "advisory",

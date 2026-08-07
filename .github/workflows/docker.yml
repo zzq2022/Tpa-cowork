@@ -20,7 +20,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/hope-agent
+  IMAGE_NAME: ${{ github.repository_owner }}/tpa-cowork
   RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref_name }}
 
 jobs:
@@ -60,9 +60,9 @@ jobs:
           set -eu
           EXPECTED="${RELEASE_TAG#v}"
           PKG=$(grep -m1 '"version"' package.json | sed -E 's/.*"version" *: *"([^"]+)".*/\1/')
-          HA_SERVER=$(grep -m1 '^version' crates/ha-server/Cargo.toml | sed -E 's/version = "(.*)"/\1/')
-          if [ "$PKG" != "$EXPECTED" ] || [ "$HA_SERVER" != "$EXPECTED" ]; then
-              echo "::error::tag ${RELEASE_TAG} expects version ${EXPECTED}, but found package.json=${PKG}, ha-server=${HA_SERVER}" >&2
+          TPA_COWORK_SERVER=$(grep -m1 '^version' crates/ha-server/Cargo.toml | sed -E 's/version = "(.*)"/\1/')
+          if [ "$PKG" != "$EXPECTED" ] || [ "$TPA_COWORK_SERVER" != "$EXPECTED" ]; then
+              echo "::error::tag ${RELEASE_TAG} expects version ${EXPECTED}, but found package.json=${PKG}, ha-server=${TPA_COWORK_SERVER}" >&2
               exit 1
           fi
 

@@ -1,7 +1,7 @@
 # apt / yum repo templates
 
-Single source of truth for the Hope Agent Debian + RPM repository, hosted on
-**Cloudflare R2** and served at **`https://repo.hopeagent.ai/`**.
+Single source of truth for the TPA CoWork Debian + RPM repository, hosted on
+**Cloudflare R2** and served at **`https://repo.tpacowork.ai/`**.
 
 > **Why R2, not GitHub Pages.** apt/dnf indexes reference the package files by
 > URL under one base, so the `.deb`/`.rpm` must live at that base. GitHub's
@@ -14,7 +14,7 @@ Single source of truth for the Hope Agent Debian + RPM repository, hosted on
 
 ## Files
 
-- [`rpm/hope-agent.repo`](rpm/hope-agent.repo) — the `.repo` file dropped into `/etc/yum.repos.d/`. CI also uploads this file to the bucket at `rpm/hope-agent.repo` so `curl …/rpm/hope-agent.repo` serves it.
+- [`rpm/tpa-cowork.repo`](rpm/tpa-cowork.repo) — the `.repo` file dropped into `/etc/yum.repos.d/`. CI also uploads this file to the bucket at `rpm/tpa-cowork.repo` so `curl …/rpm/tpa-cowork.repo` serves it.
 - The apt `conf/distributions` reprepro config is **generated on the fly inside CI** (the `SignWith:` line embeds the GPG fingerprint imported from the `GPG_SIGNING_KEY` secret), not committed here — that way rotating the signing key never needs a code change.
 - `pubkey.gpg` is **no longer a committed file**: CI exports the signing key's public half from `GPG_SIGNING_KEY` and uploads it to the bucket root every run, so it always matches the active key.
 
@@ -29,7 +29,7 @@ See [`../docs/release-process.md`](../docs/release-process.md) §1.9 for the ful
 5. `createrepo_c --update rpm/stable/<arch>/` + `gpg --detach-sign --armor` on each `repodata/repomd.xml`. Per-arch subdirs (`x86_64` + `aarch64`); dnf picks via `$basearch`.
 6. Export `pubkey.gpg` from the imported key.
 7. **`rclone copy ./bucket → r2:$R2_BUCKET`** — non-destructive upload (`copy`, never `sync`): regenerated indexes overwrite, historical packages are skipped by checksum, nothing is deleted.
-8. **Verify** — fetch `InRelease`, `repomd.xml` and `pubkey.gpg` back over `https://repo.hopeagent.ai/…` and assert they are live and well-formed. A broken publish (or an unwired custom domain) fails the job here instead of silently leaving users on a stale source.
+8. **Verify** — fetch `InRelease`, `repomd.xml` and `pubkey.gpg` back over `https://repo.tpacowork.ai/…` and assert they are live and well-formed. A broken publish (or an unwired custom domain) fails the job here instead of silently leaving users on a stale source.
 
 `rpm --addsign` is **not** used — reprepro/createrepo only require *repo metadata* signatures; the rpm is trusted via repo-level `repo_gpgcheck=1`.
 
@@ -37,24 +37,24 @@ See [`../docs/release-process.md`](../docs/release-process.md) §1.9 for the ful
 
 All of this is done in the Cloudflare dashboard + `gh` CLI; none of it is in code.
 
-1. **Create the bucket.** R2 → Create bucket, name it `hope-agent-linux-repo` (any name; it becomes the `R2_BUCKET` secret). Location: Automatic.
-2. **Connect the custom domain.** Bucket → Settings → Public access → **Custom Domains** → Connect `repo.hopeagent.ai`. This requires `hopeagent.ai`'s DNS to be on Cloudflare; Cloudflare auto-creates the CNAME. (Do **not** enable the `r2.dev` public URL for production — it is rate-limited.) Wait until `https://repo.hopeagent.ai/` resolves before running the seed.
+1. **Create the bucket.** R2 → Create bucket, name it `tpa-cowork-linux-repo` (any name; it becomes the `R2_BUCKET` secret). Location: Automatic.
+2. **Connect the custom domain.** Bucket → Settings → Public access → **Custom Domains** → Connect `repo.tpacowork.ai`. This requires `tpacowork.ai`'s DNS to be on Cloudflare; Cloudflare auto-creates the CNAME. (Do **not** enable the `r2.dev` public URL for production — it is rate-limited.) Wait until `https://repo.tpacowork.ai/` resolves before running the seed.
 3. **Create an R2 API token.** R2 → Manage R2 API Tokens → Create → **Object Read & Write**, scoped to this one bucket. Note the **Access Key ID**, **Secret Access Key**, and your **Account ID** (shown on the R2 overview page / in the S3 endpoint `https://<account_id>.r2.cloudflarestorage.com`).
-4. **Add the four GitHub secrets** on `shiwenwen/hope-agent`:
+4. **Add the four GitHub secrets** on `zzq2022/Tpa-cowork`:
    ```bash
-   gh secret set R2_ACCOUNT_ID        --repo shiwenwen/hope-agent   # Cloudflare account id
-   gh secret set R2_ACCESS_KEY_ID     --repo shiwenwen/hope-agent   # from the API token
-   gh secret set R2_SECRET_ACCESS_KEY --repo shiwenwen/hope-agent   # from the API token
-   gh secret set R2_BUCKET            --repo shiwenwen/hope-agent   # e.g. hope-agent-linux-repo
+   gh secret set R2_ACCOUNT_ID        --repo zzq2022/Tpa-cowork   # Cloudflare account id
+   gh secret set R2_ACCESS_KEY_ID     --repo zzq2022/Tpa-cowork   # from the API token
+   gh secret set R2_SECRET_ACCESS_KEY --repo zzq2022/Tpa-cowork   # from the API token
+   gh secret set R2_BUCKET            --repo zzq2022/Tpa-cowork   # e.g. tpa-cowork-linux-repo
    ```
    `GPG_SIGNING_KEY` is unchanged and stays. `LINUX_REPO_TOKEN` and the old
-   `shiwenwen/hope-agent-linux-repo` Pages repo are **retired** — you may leave
+   `zzq2022/Tpa-cowork-linux-repo` Pages repo are **retired** — you may leave
    the old repo up (its stale packages don't hurt) or archive it.
 5. **Seed the repo.** With the domain live, run the workflow once against the current release:
    ```bash
-   gh workflow run update-linux-repo.yml --repo shiwenwen/hope-agent -f tag=v0.21.0
+   gh workflow run update-linux-repo.yml --repo zzq2022/Tpa-cowork -f tag=v0.21.0
    ```
-   The verify step confirms `https://repo.hopeagent.ai/apt/dists/stable/InRelease` etc. are live. From then on it auto-fires on every `release.published`.
+   The verify step confirms `https://repo.tpacowork.ai/apt/dists/stable/InRelease` etc. are live. From then on it auto-fires on every `release.published`.
 
 > **New-account gotcha — `tls: handshake failure` on the first seed.** Cloudflare
 > provisions the **per-account TLS certificate for the S3 API endpoint**
@@ -87,13 +87,13 @@ All of this is done in the Cloudflare dashboard + `gh` CLI; none of it is in cod
 ## Key rotation (every 12 months)
 
 1. Generate a new ed25519 keypair (one-shot `gpg --batch --gen-key` in a docker container).
-2. `gh secret set GPG_SIGNING_KEY --repo shiwenwen/hope-agent < new-privkey.asc` (replaces the old secret).
+2. `gh secret set GPG_SIGNING_KEY --repo zzq2022/Tpa-cowork < new-privkey.asc` (replaces the old secret).
 3. Re-run `gh workflow run update-linux-repo.yml -f tag=v<latest>` — CI re-exports `pubkey.gpg` from the new key and re-signs the index automatically (no manual `pubkey.gpg` PUT needed anymore).
 4. Update the fingerprint above.
 5. Users will see "key changed" warnings on `apt update` / `dnf update` after rotation and must re-import the public key:
    ```bash
-   curl -fsSL https://repo.hopeagent.ai/pubkey.gpg | \
-     sudo gpg --dearmor -o /usr/share/keyrings/hope-agent.gpg --yes
+   curl -fsSL https://repo.tpacowork.ai/pubkey.gpg | \
+     sudo gpg --dearmor -o /usr/share/keyrings/tpa-cowork.gpg --yes
    ```
 
 ## Manual re-sync

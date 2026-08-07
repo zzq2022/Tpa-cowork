@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>BlockFrame 封面 - Agent 里的 Skills 是怎么工作的</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #0c0d0e;
+      color: #111111;
+      font-family: 'Inter Tight', -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      gap: 40px;
+    }
+    h1.page-title {
+      color: #ffffff;
+      font-size: 20px;
+      letter-spacing: 2px;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+    }
+    .cover-card {
+      background: #fbfbfb;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 5%;
+    }
+    /* 12 Column Swiss Grid Background */
+    .swiss-grid {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+      padding: 0 5%;
+      pointer-events: none;
+      opacity: 0.15;
+    }
+    .swiss-grid div {
+      border-left: 1px solid #111111;
+      border-right: 1px solid #111111;
+      height: 100%;
+    }
+
+    /* Ratio Configurations */
+    .ratio-16-9  { width: 960px; height: 540px; }
+    .ratio-16-10 { width: 960px; height: 600px; }
+    .ratio-4-3   { width: 800px; height: 600px; }
+    .ratio-3-4   { width: 600px; height: 800px; }
+    .ratio-9-16  { width: 540px; height: 960px; }
+
+    /* Content Layout */
+    .meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-bottom: 2px solid #111111;
+      padding-bottom: 12px;
+      z-index: 2;
+    }
+    .tag-red {
+      background: #E53935;
+      color: #ffffff;
+      padding: 4px 10px;
+    }
+    .main-body {
+      z-index: 2;
+      margin: auto 0;
+    }
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      color: #E53935;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .kicker::before {
+      content: '';
+      display: inline-block;
+      width: 12px; height: 12px;
+      background: #E53935;
+    }
+    .title {
+      font-size: 54px;
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      color: #111111;
+      margin-bottom: 20px;
+    }
+    .title span.highlight {
+      color: #E53935;
+    }
+    .subtitle {
+      font-size: 20px;
+      font-weight: 700;
+      color: #444444;
+      line-height: 1.4;
+      border-left: 4px solid #111111;
+      padding-left: 14px;
+    }
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 2px solid #111111;
+      padding-top: 14px;
+      z-index: 2;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+    .ghost-bg-text {
+      position: absolute;
+      right: -20px;
+      bottom: -40px;
+      font-size: 180px;
+      font-weight: 900;
+      color: rgba(17, 17, 17, 0.04);
+      user-select: none;
+      pointer-events: none;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="page-title">SWISS MINIMALISM 5-RATIO COVERS</h1>
+
+  <!-- 16:9 -->
+  <div class="cover-card ratio-16-9">
+    <div class="swiss-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="ghost-bg-text">SKILLS</div>
+    <div class="meta-bar">
+      <div>VERYSMALLWOODS VIDEO // EP.01</div>
+      <div class="tag-red">AGENT ARCHITECTURE</div>
+    </div>
+    <div class="main-body">
+      <div class="kicker">CONTEXT ENGINEERING // 01</div>
+      <h2 class="title">Agent 里的 <span class="highlight">Skills</span><br>是怎么工作的？</h2>
+      <p class="subtitle">说明书 + 脚本 · 按需加载机制 · 架构三大优势拆解</p>
+    </div>
+    <div class="footer-bar">
+      <div>DESIGN: SWISS MINIMALISM</div>
+      <div>60 FPS // 4K MASTER</div>
+    </div>
+  </div>
+
+  <!-- 9:16 (Shorts/TikTok/Reels) -->
+  <div class="cover-card ratio-9-16">
+    <div class="swiss-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="ghost-bg-text">SKILLS</div>
+    <div class="meta-bar">
+      <div>EP.01</div>
+      <div class="tag-red">AGENT ARCHITECTURE</div>
+    </div>
+    <div class="main-body">
+      <div class="kicker">CONTEXT ENGINEERING</div>
+      <h2 class="title" style="font-size:46px;">Agent 里的<br><span class="highlight">Skills</span><br>是怎么工作的？</h2>
+      <p class="subtitle" style="font-size:17px; margin-top:20px;">① 说明书 + 脚本<br>② 按需加载机制<br>③ 为什么这样设计？</p>
+    </div>
+    <div class="footer-bar">
+      <div>VERYSMALLWOODS</div>
+      <div>9:16 SHORTS</div>
+    </div>
+  </div>
+
+</body>
+</html>

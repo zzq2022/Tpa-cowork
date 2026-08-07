@@ -1,6 +1,6 @@
 //! Stable on-disk mirror of the embedded manual for the agent path.
 //!
-//! The `ha-manual` skill reads/greps real files, so the embedded manual is
+//! The `tpa-manual` skill reads/greps real files, so the embedded manual is
 //! mirrored to `<data-dir>/manual/{zh,en}/NN.md` (modeled on the browser
 //! extension's stable-copy machinery: byte-diff mirror + prune + a sibling
 //! marker storing the source-set fingerprint, so a binary upgrade with

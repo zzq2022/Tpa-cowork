@@ -47,7 +47,7 @@ By default all data is stored on your own computer (`~/.tpa-cowork/`), and model
 | [09 · Multi-Agent & Scheduled Tasks](09-multi-agent-and-scheduling.md) | Sub-Agents, Agent Teams, natural-language scheduled tasks, background jobs, and self-wakeup | Parallel collaboration and periodic tasks |
 | [11 · Connect & Extend](11-connect-and-extend.md) | The MCP client and platform server, Hooks lifecycle hooks, and the skill system | Connecting external tools and customizing behavior |
 | [12 · Projects & Insights](12-projects-and-insights.md) | Project containers, Agent configuration, Dashboard cost and health, and Recap reports | Organizing work, reviewing, and managing cost |
-| [13 · Settings & Security](13-settings-and-security.md) | The settings navigation map, changing settings by conversation (ha-settings), config backup and rollback, and security and reliability | Finding settings and understanding the security boundaries |
+| [13 · Settings & Security](13-settings-and-security.md) | The settings navigation map, changing settings by conversation (tpa-settings), config backup and rollback, and security and reliability | Finding settings and understanding the security boundaries |
 
 ---
 

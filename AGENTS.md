@@ -33,7 +33,7 @@
 
 ## 设置约定
 
-用户可调配置须同时有 GUI 入口与 `ha-settings` 能力；新增/改 `AppConfig`/`UserConfig` 可调字段**同一 PR 三处缺一不可**：① `src/components/settings/` 面板；② `crates/ha-core/src/tools/settings.rs` 读写分支 + `SETTINGS_CATEGORY_RISKS` 风险级 + `core_tools.rs` `category` enum，**携密只读项还须加 `BLOCKED_UPDATE_CATEGORIES` + `read_category` redact（只加读＝凭据可写）**；③ `skills/ha-settings/SKILL.md` 风险表。
+用户可调配置须同时有 GUI 入口与 `tpa-settings` 能力；新增/改 `AppConfig`/`UserConfig` 可调字段**同一 PR 三处缺一不可**：① `src/components/settings/` 面板；② `crates/ha-core/src/tools/settings.rs` 读写分支 + `SETTINGS_CATEGORY_RISKS` 风险级 + `core_tools.rs` `category` enum，**携密只读项还须加 `BLOCKED_UPDATE_CATEGORIES` + `read_category` redact（只加读＝凭据可写）**；③ `skills/tpa-settings/SKILL.md` 风险表。
 
 - **漏登记风险级不报错**：`risk_level()` 静默回落 `medium`，HIGH（安全/凭据/权限，全表见 SKILL.md）失去**写前二次确认**。
 - **只读例外双理由（红线）**：凭据安全**或**运行时稳定性——`active_model`/`fallback_models` 不携密、无重副作用仍恒 GUI-only（须与 provider 状态/agent 重建协同），**别当误挡解封**；Provider 列表与 API Key 更严：无 category、禁新增入口。
@@ -153,7 +153,7 @@ Tauri 命令 → `invoke_handler!`；HTTP 端点 → `build_router_with_cors`；
 - **访问默认 deny**：唯一裁决 `effective_kb_access`（incognito / IM 未 opt-in 归零；subagent 按 origin 血缘不洗权限）；owner 平面不经 attach，agent 平面（`note_*`）必过
 - **agent 侧唯一解析链**：`Agent::resolve_kb_access()`，prompt 段 / 被动召回 / 工具门控共用，**不得重写**；**只服务 schema/prompt/召回，绝不 gate 执行**（执行走 live `access_map`）。`is_kb_scoped_tool` / `ToolScope::Knowledge` 仅收窄 schema 可见性，**非安全边界**
 - **写入三闸**：`WorkspaceScope::for_knowledge`（外部 root 只读、**桌面也拒**（刻意反「桌面不受限」通例），须 `allow_external_writes`；HTTP 再叠 `allow_remote_writes`；**后台维护永不写外部**）→ `platform::write_atomic`（**禁回退 `fs::write`**）→ `expected_file_hash` 比磁盘 raw BLAKE3（**非索引 `content_hash`**）
-- **检索独立**：笔记 store **绝不折进 `recall_memory`**（`knowledge_recall` 两段不混排）；`knowledge_embedding` 与 `memory_embedding` 物理隔离、**不寄生不回退**；embedding / chunk 重 reindex 故 **GUI-only 不进 `ha-settings`**（设置三件套例外）
+- **检索独立**：笔记 store **绝不折进 `recall_memory`**（`knowledge_recall` 两段不混排）；`knowledge_embedding` 与 `memory_embedding` 物理隔离、**不寄生不回退**；embedding / chunk 重 reindex 故 **GUI-only 不进 `tpa-settings`**（设置三件套例外）
 - **读取即 untrusted**：`[[note]]` 与 `knowledge_passive_recall` 套 `<untrusted_external_data>` 信封，**永不升为 system 指令**；incognito 零召回 / 零精灵
 - **接线**：会话独立 `SessionKind::Knowledge`（主列表 / `/sessions` / 全局 FTS 隐藏）；**新增 KB 工具须同步 `tools/note.rs` + `core_tools.rs`（schema）+ `execution.rs`（dispatch）**
 
@@ -172,7 +172,7 @@ Tauri 命令 → `invoke_handler!`；HTTP 端点 → `build_router_with_cors`；
 
 - **唯一入口 `HookDispatcher::dispatch` / `hooks::fire_*`**；调用方只读 `HookOutcome`，严禁 match handler 类型
 - **新 user message 入口须过 `agent::preflight::user_prompt_preflight`**（`UserPromptSubmit` 阻断点）；新 hook 事件须埋点 + 测试 + 同步 `types.rs` 三处 match（`common`/`matcher_target`/`is_observation_only`）——**漏登记 `is_observation_only` 则新观察事件意外可阻断**
-- **project/local scope 默认关**（`hooks_allow_project_scope`，供应链防护：开启即信任所有未来 cwd）；`ha-settings` 对 hooks 只读，可写 = 模型自装命令执行
+- **project/local scope 默认关**（`hooks_allow_project_scope`，供应链防护：开启即信任所有未来 cwd）；`tpa-settings` 对 hooks 只读，可写 = 模型自装命令执行
 
 ### Plan Mode
 
@@ -262,12 +262,12 @@ Tauri 命令 → `invoke_handler!`；HTTP 端点 → `build_router_with_cors`；
 
 ## 项目结构
 
-六 crate workspace：`ha-core`（核心业务，**零 Tauri 依赖**）/ `ha-server`（axum HTTP·WS）/ `ha-browser-host`（浏览器辅助进程）/ `ha-eval-spec`（评测协议，**不依赖 ha-core**）/ `ha-eval`（评测 CLI）＋ `src-tauri/`（桌面薄壳），`src/` 前端，`skills/` 内置技能，`evals/` 评测资产。
+六 crate workspace：`ha-core`（核心业务，**零 Tauri 依赖**）/ `ha-server`（axum HTTP·WS）/ `tpa-browser-host`（浏览器辅助进程）/ `ha-eval-spec`（评测协议，**不依赖 ha-core**）/ `ha-eval`（评测 CLI）＋ `src-tauri/`（桌面薄壳），`src/` 前端，`skills/` 内置技能，`evals/` 评测资产。
 
 ## 开发命令
 
 ```bash
-pnpm tauri dev                        # 开发（改 ha-browser-host 后先 pnpm dev:browser-host）
+pnpm tauri dev                        # 开发（改 tpa-browser-host 后先 pnpm dev:browser-host）
 node scripts/sync-i18n.mjs --check    # 翻译缺失（--apply 补齐）
 cargo run -p ha-eval --locked -- validate   # 评测资产校验
 ```
@@ -278,7 +278,7 @@ cargo run -p ha-eval --locked -- validate   # 评测资产校验
 
 索引 [`docs/README.md`](docs/README.md)。**AGENTS.md 只放跨 PR 红线与入口**，细节下沉 `docs/architecture/`。
 
-同 PR 同步：功能/命令/模块增删 → `CHANGELOG.md` + `AGENTS.md`；技术栈/架构/规范/契约 → AGENTS.md；子系统边界/数据流/持久化/跨模块 contract → architecture 文档，新增架构级能力新建文档 + 登记索引；Tauri 命令/HTTP 路由/`COMMAND_MAP` 增删 → `docs/architecture/api-reference.md`；子系统/架构文档/运行时 DB/稳定 log `category` 增删 → `skills/ha-self-diagnosis/references/diagnostic-playbook.md`；README/release notes 任一语言 → 同步 .en.md。
+同 PR 同步：功能/命令/模块增删 → `CHANGELOG.md` + `AGENTS.md`；技术栈/架构/规范/契约 → AGENTS.md；子系统边界/数据流/持久化/跨模块 contract → architecture 文档，新增架构级能力新建文档 + 登记索引；Tauri 命令/HTTP 路由/`COMMAND_MAP` 增删 → `docs/architecture/api-reference.md`；子系统/架构文档/运行时 DB/稳定 log `category` 增删 → `skills/tpa-self-diagnosis/references/diagnostic-playbook.md`；README/release notes 任一语言 → 同步 .en.md。
 
 **CHANGELOG 单行**：用户视角一句 + `(#PR)`，不写实现；契约/红线可加一行用户影响。
 

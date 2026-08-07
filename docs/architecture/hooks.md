@@ -171,7 +171,7 @@ flowchart TD
 
 - **读** `cached_config().hooks`（`Arc` 快照），详见 [`config-system.md`](config-system.md)。
 - **写** user scope 走 `mutate_config(("hooks", source), |c| {…})`；project/local/managed 是独立 scope 文件（§5）。
-- **`ha-settings` 技能只读 hooks**：`get_settings` 含 `hooks`（http header 脱敏），写被 `BLOCKED_UPDATE_CATEGORIES` 拦截——hooks 能跑任意命令，可写 = 模型给自己装命令执行（特权升级）。
+- **`tpa-settings` 技能只读 hooks**：`get_settings` 含 `hooks`（http header 脱敏），写被 `BLOCKED_UPDATE_CATEGORIES` 拦截——hooks 能跑任意命令，可写 = 模型给自己装命令执行（特权升级）。
 
 ---
 

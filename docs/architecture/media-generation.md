@@ -195,7 +195,7 @@ Provider CRUD 即时保存；工具面板只写链 + defaults——**分段接�
   能力编辑 + 测试连接 + voices 拉取）；工具设置页「媒体生成」Tab `mediaGenerate`
   （`MediaGeneratePanel`：启用开关 + 四条链 ModelChainEditor + 默认参数 + 超时；合并取代旧
   imageGenerate / audioGenerate 两 Tab——单一 `MediaGenConfig` 文档被两面板各持快照保存会互踩）。
-- **`ha-settings`**：category `media_generation`（LOW）。读：providers 逐个 `masked()` +
+- **`tpa-settings`**：category `media_generation`（LOW）。读：providers 逐个 `masked()` +
   chains/defaults 原样。**写只放行 `chains` / `imageDefaults` / `audioDefaults` 三段**，
   payload 含 `providers` 一律报错指向 owner UI——凭据可写 = 模型可植入自己的 key / 外泄端点。
   链写入经 `check_serves_function` 校验。

@@ -1,19 +1,19 @@
 # syntax=docker/dockerfile:1.7
 #
-# Hope Agent — multi-arch container image for `hope-agent server`.
+# TPA CoWork — multi-arch container image for `tpa-cowork server`.
 #
 # Stage 1 (web)     — node:20-bookworm-slim builds the Vite frontend to `/work/dist/`.
 #                     Pinned to $BUILDPLATFORM so we run pnpm exactly once even
 #                     for multi-arch builds (frontend output is arch-agnostic).
 #                     Node stage doesn't have the glibc constraint below.
-# Stage 2 (rust)    — rust:1.95.0-trixie builds the `hope-agent` binary.
+# Stage 2 (rust)    — rust:1.95.0-trixie builds the `tpa-cowork` binary.
 #                     The web `dist/` is copied in BEFORE `cargo build` so
 #                     `crates/ha-server/build.rs` sees the real assets and
 #                     `rust-embed` bakes them into the binary.
 # Stage 3 (runtime) — debian:trixie-slim — ca-certs + tzdata + wget + a few
 #                     desktop-tool shared libs (see runtime stage comment).
-#                     Runs as non-root user `hope` (uid 1000) with /data
-#                     persisted as the configurable HA_DATA_DIR.
+#                     Runs as non-root user `tpa-cowork` (uid 1000) with /data
+#                     persisted as the configurable TPA_COWORK_DATA_DIR.
 #
 # Glibc note: trixie (Debian 13, glibc 2.41) on both build and runtime is
 # required because `ort-sys` (pulled in by fastembed for embeddings) ships
@@ -61,7 +61,7 @@ RUN pnpm build && \
     test -s dist/index.html
 
 # -------------------------------------------------------------------
-# Stage 2: build the Rust `hope-agent` binary
+# Stage 2: build the Rust `tpa-cowork` binary
 # -------------------------------------------------------------------
 FROM rust:1.95.0-trixie AS rust
 
@@ -115,17 +115,17 @@ COPY src/assets ./src/assets
 # permanently.
 COPY --from=web /work/dist ./dist
 
-# Build only the headless `hope-agent-server` binary shipped from the
-# `ha-server` crate. The Tauri-built `hope-agent` binary in `src-tauri`
+# Build only the headless `tpa-cowork-server` binary shipped from the
+# `ha-server` crate. The Tauri-built `tpa-cowork` binary in `src-tauri`
 # is intentionally skipped — it would pull in WebKit / Cocoa / WinRT.
-# The bin is named `hope-agent-server` upstream to avoid colliding with
-# src-tauri's `hope-agent` in `target/release/`; we rename it back to
-# `hope-agent` on the copy so the in-container command stays unchanged.
+# The bin is named `tpa-cowork-server` upstream to avoid colliding with
+# src-tauri's `tpa-cowork` in `target/release/`; we rename it back to
+# `tpa-cowork` on the copy so the in-container command stays unchanged.
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/work/target \
     RUSTFLAGS="-C link-arg=-fuse-ld=mold" \
-    cargo build --release --locked -p ha-server --bin hope-agent-server && \
-    cp /work/target/release/hope-agent-server /usr/local/bin/hope-agent
+    cargo build --release --locked -p ha-server --bin tpa-cowork-server && \
+    cp /work/target/release/tpa-cowork-server /usr/local/bin/tpa-cowork
 
 # -------------------------------------------------------------------
 # Stage 3: minimal runtime
@@ -136,16 +136,16 @@ FROM debian:trixie-slim AS runtime
 # tzdata: required for cron schedules / `TZ` env var to take effect.
 # wget: used by HEALTHCHECK below.
 # tini: PID 1 with proper signal forwarding so `docker stop` shuts the
-#       hope-agent server down cleanly.
+#       tpa-cowork server down cleanly.
 # chromium + shared libs: makes `profile.op=launch headless=true` work
-#       out of the box. hope-agent's `find_chrome_executable()` probes
+#       out of the box. tpa-cowork's `find_chrome_executable()` probes
 #       `chromium` first in PATH; without it the agent would have to
 #       fall back to runtime download (~150 MB) on first browser call.
 #       Users who don't need the browser tool can rebuild without this
 #       block to shave ~250 MB off the image.
 #
 # No wayland / pipewire / gtk-3 / egl libs here — the desktop-tools
-# Cargo feature is disabled when ha-server builds `hope-agent`, so xcap /
+# Cargo feature is disabled when ha-server builds `tpa-cowork`, so xcap /
 # arboard never get linked in and their runtime dependencies aren't
 # needed. See `crates/ha-core/Cargo.toml` `[features]` for the gate.
 RUN apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=60 update && \
@@ -161,20 +161,20 @@ RUN apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=60 update && \
         libxss1 \
     && rm -rf /var/lib/apt/lists/*
 
-# Non-root user. /data is the persisted HA_DATA_DIR (mount this as a volume).
-RUN groupadd --system --gid 1000 hope && \
-    useradd  --system --uid 1000 --gid hope --shell /bin/sh --home-dir /data --create-home hope
+# Non-root user. /data is the persisted TPA_COWORK_DATA_DIR (mount this as a volume).
+RUN groupadd --system --gid 1000 tpa-cowork && \
+    useradd  --system --uid 1000 --gid tpa-cowork --shell /bin/sh --home-dir /data --create-home tpa-cowork
 
-COPY --from=rust /usr/local/bin/hope-agent /usr/local/bin/hope-agent
+COPY --from=rust /usr/local/bin/tpa-cowork /usr/local/bin/tpa-cowork
 COPY docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-ENV HA_DATA_DIR=/data \
-    HA_DEPLOYMENT=docker \
-    HA_BIND=0.0.0.0:8420 \
+ENV TPA_COWORK_DATA_DIR=/data \
+    TPA_COWORK_DEPLOYMENT=docker \
+    TPA_COWORK_BIND=0.0.0.0:8420 \
     TZ=UTC
 
-USER hope
+USER tpa-cowork
 WORKDIR /data
 EXPOSE 8420
 

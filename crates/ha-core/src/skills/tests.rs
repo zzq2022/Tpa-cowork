@@ -241,7 +241,7 @@ Body
 
     #[test]
     fn test_bundled_core_skills_skip_requirement_checks() {
-        for name in ["ha-settings", "ha-skill-creator", "ha-find-skills"] {
+        for name in ["tpa-settings", "tpa-skill-creator", "tpa-find-skills"] {
             let parsed = parse_bundled_skill_frontmatter(name);
             assert!(
                 parsed.requires.always,
@@ -549,7 +549,7 @@ Body."#;
     #[test]
     fn test_parse_block_list_paths_inline_still_works() {
         // Sanity-check that the refactor didn't break the legacy inline
-        // form; existing bundled skills (ha-settings etc.) might use it.
+        // form; existing bundled skills (tpa-settings etc.) might use it.
         let content = r#"---
 name: x
 description: y
@@ -697,14 +697,14 @@ Body."#;
         let mut description_bytes = 0;
 
         for name in [
-            "ha-coding-common",
-            "ha-coding-plan",
-            "ha-debug",
-            "ha-test-strategy",
-            "ha-code-review",
-            "ha-multi-agent-coding",
-            "ha-verify",
-            "ha-workflow-script",
+            "tpa-coding-common",
+            "tpa-coding-plan",
+            "tpa-debug",
+            "tpa-test-strategy",
+            "tpa-code-review",
+            "tpa-multi-agent-coding",
+            "tpa-verify",
+            "tpa-workflow-script",
         ] {
             let parsed = parse_bundled_skill_frontmatter(name);
             assert_eq!(parsed.name, name);
@@ -749,22 +749,22 @@ Body."#;
 
     #[test]
     fn test_hope_native_coding_skill_behavior_contracts() {
-        let common = parse_bundled_skill_frontmatter("ha-coding-common").body;
+        let common = parse_bundled_skill_frontmatter("tpa-coding-common").body;
         assert!(common.contains("### Small and clear"));
         assert!(common.contains("Do not create a formal plan"));
         assert!(common.contains("Never revert, overwrite, or"));
 
-        let plan = parse_bundled_skill_frontmatter("ha-coding-plan").body;
+        let plan = parse_bundled_skill_frontmatter("tpa-coding-plan").body;
         assert!(plan.contains("Skip a formal plan for a small"));
         assert!(plan.contains("In Plan Mode, remain read-only"));
         assert!(plan.contains("continue. Do not ask \"shall I proceed?\""));
 
-        let debug = parse_bundled_skill_frontmatter("ha-debug").body;
+        let debug = parse_bundled_skill_frontmatter("tpa-debug").body;
         assert!(debug.contains("Rank Falsifiable Hypotheses"));
         assert!(debug.contains("After two failed fix attempts"));
         assert!(debug.contains("would have failed before the fix"));
 
-        let testing = parse_bundled_skill_frontmatter("ha-test-strategy").body;
+        let testing = parse_bundled_skill_frontmatter("tpa-test-strategy").body;
         for strategy in [
             "### Test-first",
             "### Regression-first",
@@ -775,13 +775,13 @@ Body."#;
             assert!(testing.contains(strategy), "missing strategy {strategy}");
         }
 
-        let review = parse_bundled_skill_frontmatter("ha-code-review").body;
+        let review = parse_bundled_skill_frontmatter("tpa-code-review").body;
         assert!(review.contains("default action is to inspect and report, not to edit"));
         assert!(review.contains("### Discovery"));
         assert!(review.contains("### Verification"));
         assert!(review.contains("Prefer no finding over a speculative"));
 
-        let multi = parse_bundled_skill_frontmatter("ha-multi-agent-coding").body;
+        let multi = parse_bundled_skill_frontmatter("tpa-multi-agent-coding").body;
         for contract in [
             "shared_read_only",
             "waitAny",
@@ -796,12 +796,12 @@ Body."#;
             );
         }
 
-        let verify = parse_bundled_skill_frontmatter("ha-verify").body;
+        let verify = parse_bundled_skill_frontmatter("tpa-verify").body;
         assert!(verify.contains("Build An Evidence Matrix"));
         assert!(verify.contains("cannot prove the parent outcome"));
         assert!(verify.contains("cannot bypass acceptance or close a"));
 
-        let workflow = parse_bundled_skill_frontmatter("ha-workflow-script").body;
+        let workflow = parse_bundled_skill_frontmatter("tpa-workflow-script").body;
         for contract in [
             "outputSchema",
             "workflow.parallel",

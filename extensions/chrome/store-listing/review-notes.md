@@ -4,7 +4,7 @@
 
 This extension is a local bridge between Chrome and TPA CoWork, a desktop AI assistant. It uses:
 
-- `nativeMessaging` to connect to the local host named `com.hope_agent.chrome`.
+- `nativeMessaging` to connect to the local host named `com.tpacowork.chrome`.
 - `debugger` to control only tabs that TPA CoWork creates or the user explicitly claims inside TPA CoWork.
 - `scripting` to inject a visible stop overlay and to operate elements inside frames.
 - `downloads` to observe Chrome download activity and cancel downloads by id after TPA CoWork approval.

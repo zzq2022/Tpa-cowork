@@ -254,7 +254,7 @@ export default function DreamingPanel() {
   // Last expression we either hydrated from or saved to. Distinguishes
   // "user just edited visual fields" (save) from "config arrived externally"
   // (re-hydrate visual). Without it the visual→raw→save loop double-saves
-  // on initial mount and ignores `config:changed` from the ha-settings skill.
+  // on initial mount and ignores `config:changed` from the tpa-settings skill.
   const lastSyncedExpr = useRef<string | null>(null)
 
   // Hydrate visual fields whenever cron_expr changes externally

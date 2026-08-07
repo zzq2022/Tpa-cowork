@@ -42,7 +42,7 @@ export interface SkillMentionMeta {
  * The fixed, ordered catalog. Order is the menu display order. Membership here
  * is the frontend allowlist — a `@skill:<name>` only renders as a chip when
  * `name` is a key below (defense in depth alongside the backend allowlist).
- * `ha-mac-control` is macOS-only; the backend omits it from the menu off macOS,
+ * `tpa-mac-control` is macOS-only; the backend omits it from the menu off macOS,
  * so it simply never appears in the fetched rows on other platforms.
  */
 export const SKILL_MENTION_CATALOG: Record<string, SkillMentionMeta> = {
@@ -64,7 +64,7 @@ export const SKILL_MENTION_CATALOG: Record<string, SkillMentionMeta> = {
     group: "office",
     keywords: ["xlsx", "excel", "spreadsheet", "sheet", "csv", "表格"],
   },
-  "ha-data-analytics": {
+  "tpa-data-analytics": {
     labelKey: "chat.skillMention.labels.dataAnalytics",
     iconKind: "analytics",
     group: "analysis",
@@ -83,13 +83,13 @@ export const SKILL_MENTION_CATALOG: Record<string, SkillMentionMeta> = {
       "仪表盘",
     ],
   },
-  "ha-browser": {
+  "tpa-browser": {
     labelKey: "chat.skillMention.labels.browser",
     iconKind: "browser",
     group: "control",
     keywords: ["browser", "web", "chrome", "浏览器"],
   },
-  "ha-mac-control": {
+  "tpa-mac-control": {
     labelKey: "chat.skillMention.labels.mac",
     iconKind: "mac",
     group: "control",

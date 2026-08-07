@@ -1284,7 +1284,7 @@ pub async fn get_hooks_config() -> Result<ha_core::hooks::config::HooksSettings,
 /// Persist the user-scope hooks settings. Writes both the master switch and the
 /// `hooks` map through the config contract; `config:changed` then rebuilds the
 /// hook registry. The GUI is the only writer for user-scope hooks (the
-/// `ha-settings` skill is read-only — hooks run arbitrary commands).
+/// `tpa-settings` skill is read-only — hooks run arbitrary commands).
 #[tauri::command]
 pub async fn save_hooks_config(
     config: ha_core::hooks::config::HooksSettings,

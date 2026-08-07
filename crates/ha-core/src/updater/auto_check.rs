@@ -57,7 +57,7 @@ pub fn spawn_auto_update_loop() {
         let mut rx = bus.subscribe();
         let notify_for_sub = notify.clone();
         // Wake on any config:changed — `mutate_config` emits `{category:"app"}`
-        // while ha-settings emits `"auto_update"`, so an `auto_update`-only
+        // while tpa-settings emits `"auto_update"`, so an `auto_update`-only
         // filter would miss GUI saves.
         tokio::spawn(async move {
             while let Ok(evt) = rx.recv().await {

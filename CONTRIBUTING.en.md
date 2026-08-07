@@ -14,9 +14,9 @@ Participation implies agreement with the [Contributor Covenant](https://www.cont
 
 | Goal | Path |
 |---|---|
-| Report a bug | [New issue](https://github.com/shiwenwen/hope-agent/issues/new/choose) → Bug report template |
+| Report a bug | [New issue](https://github.com/zzq2022/Tpa-cowork/issues/new/choose) → Bug report template |
 | Report a **security vulnerability** | **Do not file a public issue**, see [SECURITY.md](SECURITY.md) for the private channel |
-| Propose a feature | Open a [discussion](https://github.com/shiwenwen/hope-agent/discussions) first, then an issue |
+| Propose a feature | Open a [discussion](https://github.com/zzq2022/Tpa-cowork/discussions) first, then an issue |
 | Fix a bug / add a feature | fork → branch → PR (details below) |
 | Help with translation | See "Translation contributions" below |
 | Add a skill / provider / channel | See "Plugin-style contributions" below |
@@ -27,9 +27,9 @@ Participation implies agreement with the [Contributor Covenant](https://www.cont
 ### 1. Fork & branch
 
 ```bash
-git clone git@github.com:<your-account>/hope-agent.git
-cd hope-agent
-git remote add upstream git@github.com:shiwenwen/hope-agent.git
+git clone git@github.com:<your-account>/tpa-cowork.git
+cd tpa-cowork
+git remote add upstream git@github.com:zzq2022/Tpa-cowork.git
 
 git checkout -b feat/xxx   # or fix/xxx, docs/xxx
 ```
@@ -70,7 +70,7 @@ Any failure blocks the push. **Do not use `--no-verify` to bypass**—CI runs th
 
 ### 5. Commit message convention
 
-Follow the existing repo style ([git log](https://github.com/shiwenwen/hope-agent/commits/main)):
+Follow the existing repo style ([git log](https://github.com/zzq2022/Tpa-cowork/commits/main)):
 
 ```
 <type>(<scope>): <one-line description>
@@ -110,7 +110,7 @@ We squash-merge to keep `main` linear—your multiple commits collapse into one.
 
 ## Translation contributions
 
-Hope Agent supports 12 languages (zh, en, ja, ko, de, fr, es, pt-BR, ru, it, tr, vi). `zh` and `en` are the source-of-truth; the other 10 are filled from these.
+TPA CoWork supports 12 languages (zh, en, ja, ko, de, fr, es, pt-BR, ru, it, tr, vi). `zh` and `en` are the source-of-truth; the other 10 are filled from these.
 
 ```bash
 node scripts/sync-i18n.mjs --check   # check missing translations
@@ -176,8 +176,8 @@ If you plan to touch cross-PR contracts (Provider / Permission / Plan Mode / Cha
 
 ## Feedback & discussion
 
-- Bugs / feature requests: [Issues](https://github.com/shiwenwen/hope-agent/issues)
-- Design discussion / usage questions: [Discussions](https://github.com/shiwenwen/hope-agent/discussions)
+- Bugs / feature requests: [Issues](https://github.com/zzq2022/Tpa-cowork/issues)
+- Design discussion / usage questions: [Discussions](https://github.com/zzq2022/Tpa-cowork/discussions)
 - Security: see [SECURITY.md](SECURITY.md) (**not in public issues**)
 
-Thanks for contributing to Hope Agent! 🎉
+Thanks for contributing to TPA CoWork! 🎉

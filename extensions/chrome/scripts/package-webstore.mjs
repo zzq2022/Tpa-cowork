@@ -36,7 +36,7 @@ const packageFiles = [
 
 const outDir = path.join(extensionDir, "dist")
 mkdirSync(outDir, { recursive: true })
-const outPath = path.join(outDir, `hope-agent-chrome-extension-${manifest.version}.zip`)
+const outPath = path.join(outDir, `tpa-cowork-chrome-extension-${manifest.version}.zip`)
 writeFileSync(outPath, buildZip(packageFiles))
 console.log(`[chrome-extension:package] wrote ${outPath}`)
 

@@ -38,7 +38,7 @@ def now_w3c() -> str:
 class Comment:
     id: int
     text: str
-    author: str = "Hope Agent"
+    author: str = "TPA CoWork"
     initials: str = "HA"
     date: str = field(default_factory=now_w3c)
 
@@ -65,7 +65,7 @@ class BuildContext:
     images: list[ImagePart] = field(default_factory=list)
     has_revisions: bool = False
 
-    def add_comment(self, text: object, author: str = "Hope Agent", initials: str = "HA") -> int:
+    def add_comment(self, text: object, author: str = "TPA CoWork", initials: str = "HA") -> int:
         comment_id = self.next_comment_id
         self.next_comment_id += 1
         self.comments.append(Comment(comment_id, str(text or ""), author, initials))
@@ -125,11 +125,11 @@ def revision_run(text: object, ctx: BuildContext, kind: str) -> str:
     preserve = ' xml:space="preserve"' if raw != raw.strip() else ""
     if kind == "delete":
         return (
-            f'<w:del w:id="{rev_id}" w:author="Hope Agent" w:date="{date}">'
+            f'<w:del w:id="{rev_id}" w:author="TPA CoWork" w:date="{date}">'
             f"<w:r><w:delText{preserve}>{x(raw)}</w:delText></w:r></w:del>"
         )
     return (
-        f'<w:ins w:id="{rev_id}" w:author="Hope Agent" w:date="{date}">'
+        f'<w:ins w:id="{rev_id}" w:author="TPA CoWork" w:date="{date}">'
         + text_run(raw)
         + "</w:ins>"
     )
@@ -164,7 +164,7 @@ def paragraph(
     if comment:
         comment_id = ctx.add_comment(
             comment.get("text", comment) if isinstance(comment, dict) else comment,
-            str(comment.get("author", "Hope Agent")) if isinstance(comment, dict) else "Hope Agent",
+            str(comment.get("author", "TPA CoWork")) if isinstance(comment, dict) else "TPA CoWork",
             str(comment.get("initials", "HA")) if isinstance(comment, dict) else "HA",
         )
         run_xml = (
@@ -302,7 +302,7 @@ def block_xml(block: dict, ctx: BuildContext | None = None) -> str:
             ctx=ctx,
             comment={
                 "text": block.get("comment", block.get("note", "")),
-                "author": block.get("author", "Hope Agent"),
+                "author": block.get("author", "TPA CoWork"),
                 "initials": block.get("initials", "HA"),
             },
         )
@@ -398,8 +398,8 @@ def core_xml(title: str) -> str:
     now = now_w3c()
     return f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <dc:title>{x(title)}</dc:title><dc:creator>Hope Agent</dc:creator>
-  <cp:lastModifiedBy>Hope Agent</cp:lastModifiedBy>
+  <dc:title>{x(title)}</dc:title><dc:creator>TPA CoWork</dc:creator>
+  <cp:lastModifiedBy>TPA CoWork</cp:lastModifiedBy>
   <dcterms:created xsi:type="dcterms:W3CDTF">{now}</dcterms:created>
   <dcterms:modified xsi:type="dcterms:W3CDTF">{now}</dcterms:modified>
 </cp:coreProperties>'''
@@ -469,7 +469,7 @@ def write_docx(spec: dict, out: Path, base_dir: Path | None = None) -> None:
     entries = {
         "[Content_Types].xml": content_types_xml(include_comments, ctx.images),
         "_rels/.rels": '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/></Relationships>''',
-        "docProps/app.xml": '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"><Application>Hope Agent</Application></Properties>''',
+        "docProps/app.xml": '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"><Application>TPA CoWork</Application></Properties>''',
         "docProps/core.xml": core_xml(title),
         "word/_rels/document.xml.rels": document_rels_xml(include_comments, ctx.images),
         "word/document.xml": doc_xml,

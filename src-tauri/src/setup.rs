@@ -15,9 +15,9 @@ pub(crate) fn app_setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::
     {
         use tauri::Manager;
         let host_name = if cfg!(windows) {
-            "ha-browser-host.exe"
+            "tpa-browser-host.exe"
         } else {
-            "ha-browser-host"
+            "tpa-browser-host"
         };
         if let Ok(host_path) = app.path().resolve(
             format!("browser-host/{host_name}"),

@@ -8,7 +8,7 @@
 //!   primary-gated background loop ([`super::auto_check`]).
 //!
 //! Risk class is HIGH (network exposure + service restart + binary swap), so
-//! the `ha-settings` skill must confirm before writing.
+//! the `tpa-settings` skill must confirm before writing.
 
 use serde::{Deserialize, Serialize};
 

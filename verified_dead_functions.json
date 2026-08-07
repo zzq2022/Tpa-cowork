@@ -1,0 +1,1916 @@
+[
+  {
+    "name": "text_item",
+    "file": "crates/ha-core/src/channel/wechat/inbound_media.rs",
+    "line": 510,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "supports_vectors",
+    "file": "crates/ha-core/src/memory/traits.rs",
+    "line": 395,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/memory/traits.rs:    fn supports_vectors(&self) -> bool {"
+    ]
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/feishu/mod.rs",
+    "line": 458,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/traits.rs",
+    "line": 191,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "get_channel",
+    "file": "crates/ha-core/src/channel/discord/api.rs",
+    "line": 307,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "DesignRepoBinding",
+    "file": "src/components/design/DesignRepoBinding.tsx",
+    "line": 49,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "get_denied_tools",
+    "file": "crates/ha-core/src/agent/mod.rs",
+    "line": 3176,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/agent/mod.rs:    pub fn get_denied_tools(&self) -> &[String] {"
+    ]
+  },
+  {
+    "name": "build_static_system_prompt",
+    "file": "crates/ha-core/src/agent/mod.rs",
+    "line": 4139,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/agent/mod.rs:    pub(crate) fn build_static_system_prompt(&self, model: &str, provider: &str) -> String {"
+    ]
+  },
+  {
+    "name": "execute_tool",
+    "file": "crates/ha-core/src/tools/execution.rs",
+    "line": 837,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/tools/execution.rs:pub async fn execute_tool(name: &str, args: &Value) -> anyhow::Result<String> {"
+    ]
+  },
+  {
+    "name": "modality_label",
+    "file": "crates/ha-core/src/memory/types.rs",
+    "line": 2322,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/memory/types.rs:pub fn modality_label(mime: &str) -> &'static str {"
+    ]
+  },
+  {
+    "name": "get_design_config",
+    "file": "crates/ha-server/src/routes/config.rs",
+    "line": 1454,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "save_design_config",
+    "file": "crates/ha-server/src/routes/config.rs",
+    "line": 1460,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "delete_system",
+    "file": "crates/ha-core/src/design/system.rs",
+    "line": 687,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "load_all_skills",
+    "file": "crates/ha-core/src/skills/discovery.rs",
+    "line": 361,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/skills/discovery.rs:pub fn load_all_skills() -> Vec<SkillEntry> {"
+    ]
+  },
+  {
+    "name": "set_pinned",
+    "file": "crates/ha-server/src/routes/evaluation.rs",
+    "line": 249,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-server/src/routes/evaluation.rs:pub async fn set_pinned("
+    ]
+  },
+  {
+    "name": "DeckSlideThumb",
+    "file": "src/components/design/DeckSlideThumb.tsx",
+    "line": 13,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "clear_persisted_account_state",
+    "file": "crates/ha-core/src/channel/wechat/mod.rs",
+    "line": 274,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/wechat/mod.rs",
+    "line": 611,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "list_plugins",
+    "file": "crates/ha-server/src/routes/channel.rs",
+    "line": 13,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "list_accounts",
+    "file": "crates/ha-server/src/routes/channel.rs",
+    "line": 24,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "set_auto_transcribe_voice",
+    "file": "crates/ha-server/src/routes/channel.rs",
+    "line": 106,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "health_all",
+    "file": "crates/ha-server/src/routes/channel.rs",
+    "line": 185,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "send_test_message",
+    "file": "crates/ha-server/src/routes/channel.rs",
+    "line": 218,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "wechat_start_login",
+    "file": "crates/ha-server/src/routes/channel.rs",
+    "line": 281,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "wechat_wait_login",
+    "file": "crates/ha-server/src/routes/channel.rs",
+    "line": 297,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "run_turn",
+    "file": "crates/ha-core/src/acp_control/types.rs",
+    "line": 40,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "cancel_turn",
+    "file": "crates/ha-core/src/acp_control/types.rs",
+    "line": 49,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "close_session",
+    "file": "crates/ha-core/src/acp_control/types.rs",
+    "line": 52,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "getDerivedStateFromError",
+    "file": "src/components/common/ErrorBoundary.tsx",
+    "line": 20,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/common/ErrorBoundary.tsx:  static getDerivedStateFromError(error: Error): ErrorBoundaryState {"
+    ]
+  },
+  {
+    "name": "collect_partial_meta_from_runtime",
+    "file": "crates/ha-core/src/chat_engine/engine.rs",
+    "line": 2216,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/chat_engine/engine.rs:fn collect_partial_meta_from_runtime("
+    ]
+  },
+  {
+    "name": "caller_operation",
+    "file": "crates/ha-core/src/model_usage.rs",
+    "line": 101,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/model_usage.rs:pub fn caller_operation(location: &'static std::panic::Location<'static>) -> String {"
+    ]
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/line/mod.rs",
+    "line": 435,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "fileTargetName",
+    "file": "src/components/chat/files/fileCapabilities.ts",
+    "line": 36,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/chat/files/fileCapabilities.ts:export function fileTargetName(target: FileTarget): string {"
+    ]
+  },
+  {
+    "name": "is_valid",
+    "file": "crates/ha-core/src/skills/types.rs",
+    "line": 616,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/skills/types.rs:    pub fn is_valid(&self, extra_dirs: &[String]) -> bool {"
+    ]
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/googlechat/mod.rs",
+    "line": 385,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "get_or_first_available",
+    "file": "crates/ha-core/src/acp_control/registry.rs",
+    "line": 48,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "health_check_all",
+    "file": "crates/ha-core/src/acp_control/registry.rs",
+    "line": 73,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "cached_health",
+    "file": "crates/ha-core/src/acp_control/registry.rs",
+    "line": 96,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "list_backend_info",
+    "file": "crates/ha-core/src/acp_control/registry.rs",
+    "line": 105,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "row_to_code_binding",
+    "file": "crates/ha-core/src/design/db.rs",
+    "line": 222,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "map_system_row",
+    "file": "crates/ha-core/src/design/db.rs",
+    "line": 307,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "map_comment_row",
+    "file": "crates/ha-core/src/design/db.rs",
+    "line": 326,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "create_folder",
+    "file": "crates/ha-core/src/design/db.rs",
+    "line": 785,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "rename_artifact",
+    "file": "crates/ha-core/src/design/db.rs",
+    "line": 897,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "reorder_artifacts",
+    "file": "crates/ha-core/src/design/db.rs",
+    "line": 907,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "list_deployments",
+    "file": "crates/ha-core/src/design/db.rs",
+    "line": 1197,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "delete_comment",
+    "file": "crates/ha-core/src/design/db.rs",
+    "line": 1405,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "map_receipt",
+    "file": "crates/ha-core/src/design/db.rs",
+    "line": 1552,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "next_at",
+    "file": "crates/ha-core/src/channel/worker/streaming.rs",
+    "line": 33,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "is_tool_denied",
+    "file": "crates/ha-core/src/context_compact/estimation.rs",
+    "line": 370,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/context_compact/estimation.rs:pub(super) fn is_tool_denied(tool_name: &str, deny_list: &[String]) -> bool {"
+    ]
+  },
+  {
+    "name": "TelegramGroupChannelConfig",
+    "file": "src/components/settings/channel-panel/TelegramGroupConfig.tsx",
+    "line": 23,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "create_acp_runs_table",
+    "file": "crates/ha-core/src/session/acp_db.rs",
+    "line": 13,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/session/acp_db.rs:    pub fn create_acp_runs_table(&self) -> Result<()> {"
+    ]
+  },
+  {
+    "name": "header_num",
+    "file": "crates/ha-core/src/channel/feishu/ws_event.rs",
+    "line": 387,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "channel_registry",
+    "file": "crates/ha-server/src/routes/helpers.rs",
+    "line": 235,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "getExecutionToolGroupLabel",
+    "file": "src/components/chat/message/executionStatus.ts",
+    "line": 276,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/chat/message/executionStatus.ts:export function getExecutionToolGroupLabel("
+    ]
+  },
+  {
+    "name": "helpHeadingIdsPlugin",
+    "file": "src/components/help/HelpMarkdown.tsx",
+    "line": 59,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/help/HelpMarkdown.tsx:  return function helpHeadingIdsPlugin() {"
+    ]
+  },
+  {
+    "name": "set_artifact_status",
+    "file": "crates/ha-core/src/design/service.rs",
+    "line": 2368,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "upsert_guild_channels",
+    "file": "crates/ha-core/src/channel/discord/gateway.rs",
+    "line": 662,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "upsert_channel_from_event",
+    "file": "crates/ha-core/src/channel/discord/gateway.rs",
+    "line": 679,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "remove_channel_from_event",
+    "file": "crates/ha-core/src/channel/discord/gateway.rs",
+    "line": 687,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "upsert_thread_list_sync",
+    "file": "crates/ha-core/src/channel/discord/gateway.rs",
+    "line": 696,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "convert_message_create",
+    "file": "crates/ha-core/src/channel/discord/gateway.rs",
+    "line": 783,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "handle_approval_component",
+    "file": "crates/ha-core/src/channel/discord/gateway.rs",
+    "line": 946,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "convert_interaction",
+    "file": "crates/ha-core/src/channel/discord/gateway.rs",
+    "line": 986,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "deliver_handover_catchup",
+    "file": "crates/ha-core/src/channel/attach_sync.rs",
+    "line": 73,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "mk_tool",
+    "file": "crates/ha-core/src/channel/attach_sync.rs",
+    "line": 542,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "onWheel",
+    "file": "src/components/design/DesignDrawOverlay.tsx",
+    "line": 293,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/common/ImageLightbox.tsx:        onWheel={handleWheel}"
+    ]
+  },
+  {
+    "name": "DesignInpaintModal",
+    "file": "src/components/design/DesignInpaintModal.tsx",
+    "line": 39,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "clearMask",
+    "file": "src/components/design/DesignInpaintModal.tsx",
+    "line": 132,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "unstable_now",
+    "file": "crates/ha-core/src/design/assets/react.production.min.js",
+    "line": 24,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "has_handlers",
+    "file": "crates/ha-core/src/channel/webhook_server.rs",
+    "line": 128,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "local_url",
+    "file": "crates/ha-core/src/channel/webhook_server.rs",
+    "line": 134,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "handle_webhook",
+    "file": "crates/ha-core/src/channel/webhook_server.rs",
+    "line": 148,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "remove_session_file",
+    "file": "crates/ha-core/src/channel/qqbot/gateway.rs",
+    "line": 104,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "handle_gateway_message",
+    "file": "crates/ha-core/src/channel/qqbot/gateway.rs",
+    "line": 492,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "handleBack",
+    "file": "src/components/settings/channel-panel/AddAccountDialog.tsx",
+    "line": 125,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "handle_envelope",
+    "file": "crates/ha-core/src/channel/slack/socket.rs",
+    "line": 206,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "upload_media_type",
+    "file": "crates/ha-core/src/channel/wechat/media.rs",
+    "line": 331,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "mime_from_filename",
+    "file": "crates/ha-core/src/channel/wechat/media.rs",
+    "line": 394,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "list_finished",
+    "file": "crates/ha-core/src/process_registry.rs",
+    "line": 102,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/process_registry.rs:    pub fn list_finished(&self) -> Vec<&ProcessSession> {"
+    ]
+  },
+  {
+    "name": "cleanup_old_sessions",
+    "file": "crates/ha-core/src/process_registry.rs",
+    "line": 182,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/process_registry.rs:    pub fn cleanup_old_sessions(&mut self, ttl_ms: u64) {"
+    ]
+  },
+  {
+    "name": "DesignSharePanel",
+    "file": "src/components/design/DesignSharePanel.tsx",
+    "line": 24,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "segmentInput",
+    "file": "src/components/chat/file-mention/mentionTokens.ts",
+    "line": 83,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/chat/file-mention/mentionTokens.ts:export function segmentInput("
+    ]
+  },
+  {
+    "name": "GroupConfigItem",
+    "file": "src/components/settings/channel-panel/GroupConfigItem.tsx",
+    "line": 22,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "msg_meta",
+    "file": "crates/ha-core/src/design/code_sync.rs",
+    "line": 774,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "addBackend",
+    "file": "src/components/settings/AcpControlPanel.tsx",
+    "line": 123,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "acceptNode",
+    "file": "src/lib/inlineHighlight.ts",
+    "line": 100,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/lib/inlineHighlight.ts:    acceptNode(node) {"
+    ]
+  },
+  {
+    "name": "DesignFigmaImport",
+    "file": "src/components/design/DesignFigmaImport.tsx",
+    "line": 34,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "last_reply_to",
+    "file": "crates/ha-core/src/channel/worker/dispatcher.rs",
+    "line": 1788,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/worker/dispatcher.rs",
+    "line": 1860,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "with_tool_metadata",
+    "file": "crates/ha-core/src/session/types.rs",
+    "line": 724,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/session/types.rs:    pub fn with_tool_metadata(mut self, metadata: Option<String>) -> Self {"
+    ]
+  },
+  {
+    "name": "get_bot_info",
+    "file": "crates/ha-core/src/channel/feishu/api.rs",
+    "line": 173,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "slack_action_id",
+    "file": "crates/ha-core/src/channel/slack/mod.rs",
+    "line": 93,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/slack/mod.rs",
+    "line": 458,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "assert_protocol_constants_are_distinct",
+    "file": "crates/ha-eval/src/model.rs",
+    "line": 4503,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-eval/src/model.rs:fn assert_protocol_constants_are_distinct() {"
+    ]
+  },
+  {
+    "name": "done_button_text",
+    "file": "crates/ha-core/src/channel/worker/ask_user.rs",
+    "line": 445,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "cancel_button_text",
+    "file": "crates/ha-core/src/channel/worker/ask_user.rs",
+    "line": 466,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "default_raw_arc",
+    "file": "crates/ha-core/src/channel/types.rs",
+    "line": 457,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "list_views_tool",
+    "file": "crates/ha-core/src/tools/feishu/bitable.rs",
+    "line": 173,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "get_view_tool",
+    "file": "crates/ha-core/src/tools/feishu/bitable.rs",
+    "line": 202,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "list_dashboards_tool",
+    "file": "crates/ha-core/src/tools/feishu/bitable.rs",
+    "line": 231,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/telegram/mod.rs",
+    "line": 551,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "is_oversized_for_summary",
+    "file": "crates/ha-core/src/context_compact/summarization.rs",
+    "line": 309,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/context_compact/summarization.rs:pub fn is_oversized_for_summary(msg: &Value, context_window: u32) -> bool {"
+    ]
+  },
+  {
+    "name": "compute_adaptive_chunk_ratio",
+    "file": "crates/ha-core/src/context_compact/summarization.rs",
+    "line": 316,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/context_compact/summarization.rs:pub fn compute_adaptive_chunk_ratio(messages: &[Value], context_window: u32) -> f64 {"
+    ]
+  },
+  {
+    "name": "split_messages_by_token_share",
+    "file": "crates/ha-core/src/context_compact/summarization.rs",
+    "line": 336,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/context_compact/summarization.rs:pub fn split_messages_by_token_share(messages: &[Value], parts: usize) -> Vec<Vec<Value>> {"
+    ]
+  },
+  {
+    "name": "clamp_export_scale",
+    "file": "crates/ha-core/src/design/mod.rs",
+    "line": 87,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "clamp_export_jpeg_quality",
+    "file": "crates/ha-core/src/design/mod.rs",
+    "line": 92,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "is_design_enabled",
+    "file": "crates/ha-core/src/design/mod.rs",
+    "line": 141,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "disposeDraftSkillsStore",
+    "file": "src/hooks/useDraftSkillsStore.ts",
+    "line": 90,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/hooks/useDraftSkillsStore.ts:export function disposeDraftSkillsStore() {"
+    ]
+  },
+  {
+    "name": "update_team_member_tokens",
+    "file": "crates/ha-core/src/team/db.rs",
+    "line": 254,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/team/db.rs:    pub fn update_team_member_tokens("
+    ]
+  },
+  {
+    "name": "delete_team_member",
+    "file": "crates/ha-core/src/team/db.rs",
+    "line": 283,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/team/db.rs:    pub fn delete_team_member(&self, member_id: &str) -> Result<()> {"
+    ]
+  },
+  {
+    "name": "find_team_member_by_run_id",
+    "file": "crates/ha-core/src/team/db.rs",
+    "line": 319,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/team/db.rs:    pub fn find_team_member_by_run_id(&self, run_id: &str) -> Result<Option<TeamMember>> {"
+    ]
+  },
+  {
+    "name": "delete_team_task",
+    "file": "crates/ha-core/src/team/db.rs",
+    "line": 620,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/team/db.rs:    pub fn delete_team_task(&self, task_id: i64) -> Result<()> {"
+    ]
+  },
+  {
+    "name": "download_text",
+    "file": "crates/ha-core/src/updater/download.rs",
+    "line": 43,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/updater/download.rs:pub async fn download_text(url: &str) -> Result<String> {"
+    ]
+  },
+  {
+    "name": "save_embedding_config_for_model",
+    "file": "crates/ha-core/src/local_embedding.rs",
+    "line": 183,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/local_embedding.rs:pub fn save_embedding_config_for_model(model: &OllamaEmbeddingModel) -> Result<EmbeddingConfig> {"
+    ]
+  },
+  {
+    "name": "firstUnifiedLine",
+    "file": "src/components/chat/diff-panel/diffLayout.ts",
+    "line": 269,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/chat/diff-panel/diffLayout.ts:export function firstUnifiedLine(row: UnifiedRow): number | null {"
+    ]
+  },
+  {
+    "name": "firstSplitLine",
+    "file": "src/components/chat/diff-panel/diffLayout.ts",
+    "line": 273,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/chat/diff-panel/diffLayout.ts:export function firstSplitLine(row: SplitRow): number | null {"
+    ]
+  },
+  {
+    "name": "refreshCronUnread",
+    "file": "src/hooks/useCronUnreadStore.ts",
+    "line": 74,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/hooks/useCronUnreadStore.ts:export function refreshCronUnread() {"
+    ]
+  },
+  {
+    "name": "list_all_sources",
+    "file": "crates/ha-core/src/knowledge/registry.rs",
+    "line": 1388,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/knowledge/registry.rs:    pub fn list_all_sources(&self, kb_id: &str) -> Result<Vec<KnowledgeSource>> {"
+    ]
+  },
+  {
+    "name": "source_asset_stored_paths",
+    "file": "crates/ha-core/src/knowledge/registry.rs",
+    "line": 1714,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/knowledge/registry.rs:    pub fn source_asset_stored_paths(&self, kb_id: &str, source_id: &str) -> Result<Vec<String>> {"
+    ]
+  },
+  {
+    "name": "deploy_artifact",
+    "file": "crates/ha-core/src/design/deploy.rs",
+    "line": 164,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "is_valid_command",
+    "file": "crates/ha-core/src/slash_commands/registry.rs",
+    "line": 505,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/slash_commands/registry.rs:pub fn is_valid_command(name: &str) -> bool {"
+    ]
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/whatsapp/mod.rs",
+    "line": 325,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "is_llm",
+    "file": "crates/ha-core/src/knowledge/maintenance/types.rs",
+    "line": 76,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/knowledge/maintenance/types.rs:    pub fn is_llm(&self) -> bool {"
+    ]
+  },
+  {
+    "name": "videoExportSupported",
+    "file": "src/lib/designVideo.ts",
+    "line": 26,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/lib/designVideo.ts:export function videoExportSupported(): boolean {"
+    ]
+  },
+  {
+    "name": "WeChatConnectSection",
+    "file": "src/components/settings/channel-panel/WeChatConnectSection.tsx",
+    "line": 11,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "useMessageUrlPreviews",
+    "file": "src/hooks/useUrlPreview.ts",
+    "line": 113,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/hooks/useUrlPreview.ts:export function useMessageUrlPreviews("
+    ]
+  },
+  {
+    "name": "BrowserStatusIndicator",
+    "file": "src/components/common/BrowserStatusIndicator.tsx",
+    "line": 20,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/common/BrowserStatusIndicator.tsx:export default function BrowserStatusIndicator({ onOpen, className }: BrowserStatusIndicatorProps) {"
+    ]
+  },
+  {
+    "name": "clear_project_from_sessions",
+    "file": "crates/ha-core/src/session/db.rs",
+    "line": 2241,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/session/db.rs:    pub fn clear_project_from_sessions(&self, project_id: &str) -> Result<usize> {"
+    ]
+  },
+  {
+    "name": "load_previous_turn_tail",
+    "file": "crates/ha-core/src/session/db.rs",
+    "line": 3300,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/session/db.rs:    pub fn load_previous_turn_tail(&self, session_id: &str) -> Result<Vec<SessionMessage>> {"
+    ]
+  },
+  {
+    "name": "duplicate_project",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 244,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "rename_artifact",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 266,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "duplicate_artifact",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 279,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "reorder_artifacts",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 289,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "list_folders",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 327,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "create_folder",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 337,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "delete_folder",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 361,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "move_artifact",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 373,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "inpaint_image",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 427,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "patch_page_style",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 444,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "set_artifact_dir",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 464,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "set_presenter_notes",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 476,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "generate_brand_pack",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 516,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "import_image",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 535,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "get_code_binding",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 642,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "code_drift_changes",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 706,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "code_drift_sync",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 718,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "bind_code",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 772,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "sync_code",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 790,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "list_code_bindings",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 799,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "unbind_code",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 811,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "restyle_artifact",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 826,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "critique_artifact",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 840,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "remove_element",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 859,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "insert_element",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 874,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "cancel_generation",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 896,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "get_version_html",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 919,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "create_share",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 933,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "get_share",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 942,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "revoke_share",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 951,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "serve_share",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 962,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "save_deploy_config",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1002,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "get_deploy_config",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1012,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "probe_deploy",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1029,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "bind_domain",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1041,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "list_domains",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1057,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "quality_review_artifact",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1069,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "list_deployments",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1078,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "preflight_deploy",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1088,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "get_vercel_config",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1118,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "deploy_artifact_vercel",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1126,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "ensure_artifact_fresh",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1136,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "export_pptx_outline",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1159,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "export_pptx",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1168,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "export_zip",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1179,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "export_selected_zip",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1197,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "delete_system",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1239,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "rename_system",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1248,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "import_figma_system",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1289,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "export_design_tokens",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1311,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "recipe_demo",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1345,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "export_native",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1358,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "ffmpeg_doctor",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1371,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "install_ffmpeg",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1377,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "install_browser",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1392,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "serve_artifact_file",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1402,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "relocate_comment",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1481,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "update_comment",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1501,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "resolve_comment",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1515,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "delete_comment",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1529,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "refine_comment",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1541,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "system_kit",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1554,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "review_artifact",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1568,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "chat_thread_latest",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1591,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "chat_threads_list",
+    "file": "crates/ha-server/src/routes/design.rs",
+    "line": 1603,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "new_journaled",
+    "file": "crates/ha-core/src/chat_engine/persister.rs",
+    "line": 75,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/chat_engine/persister.rs:    pub(crate) fn new_journaled("
+    ]
+  },
+  {
+    "name": "trailing_text_for_commit",
+    "file": "crates/ha-core/src/chat_engine/persister.rs",
+    "line": 478,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/chat_engine/persister.rs:    pub(crate) fn trailing_text_for_commit(&self) -> (String, Option<i64>) {"
+    ]
+  },
+  {
+    "name": "mark_final_commit_complete",
+    "file": "crates/ha-core/src/chat_engine/persister.rs",
+    "line": 484,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/chat_engine/persister.rs:    pub(crate) fn mark_final_commit_complete(&self) {"
+    ]
+  },
+  {
+    "name": "has_visible_partial_output",
+    "file": "crates/ha-core/src/chat_engine/persister.rs",
+    "line": 563,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/chat_engine/persister.rs:    pub(crate) fn has_visible_partial_output(&self) -> bool {"
+    ]
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/qqbot/mod.rs",
+    "line": 357,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "handlePickConversation",
+    "file": "src/components/chat/HandoverDialog.tsx",
+    "line": 199,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "confirmRemove",
+    "file": "src/components/settings/channel-panel/index.tsx",
+    "line": 161,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "channel_set_auto_transcribe_voice",
+    "file": "src-tauri/src/commands/channel.rs",
+    "line": 90,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/lib/transport-http.ts:  channel_set_auto_transcribe_voice: {"
+    ]
+  },
+  {
+    "name": "save_vercel_config",
+    "file": "crates/ha-core/src/design/deploy_vercel.rs",
+    "line": 45,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "public_vercel_config",
+    "file": "crates/ha-core/src/design/deploy_vercel.rs",
+    "line": 73,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "deploy_artifact",
+    "file": "crates/ha-core/src/design/deploy_vercel.rs",
+    "line": 127,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "goLive",
+    "file": "src/components/design/ArtifactThumb.tsx",
+    "line": 107,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "media_with_caption",
+    "file": "crates/ha-core/src/channel/slack/media.rs",
+    "line": 47,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "photo_to_inbound",
+    "file": "crates/ha-core/src/channel/telegram/media.rs",
+    "line": 7,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "SaveErrorBanner",
+    "file": "src/components/settings/channel-panel/SaveErrorBanner.tsx",
+    "line": 3,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "mark_stream_run_recovered",
+    "file": "crates/ha-core/src/session/stream_persistence.rs",
+    "line": 1179,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/session/stream_persistence.rs:    pub fn mark_stream_run_recovered("
+    ]
+  },
+  {
+    "name": "AttachmentButtons",
+    "file": "src/components/chat/input/AttachmentBar.tsx",
+    "line": 401,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/chat/input/AttachmentBar.tsx:export default function AttachmentButtons({ onAttachFiles }: AttachmentButtonsProps) {"
+    ]
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/signal/mod.rs",
+    "line": 406,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "extension_for_mime",
+    "file": "crates/ha-core/src/channel/media_helpers.rs",
+    "line": 197,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "default_schema",
+    "file": "crates/ha-core/src/channel/worker/startup_state.rs",
+    "line": 50,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "media_with_caption",
+    "file": "crates/ha-core/src/channel/discord/media.rs",
+    "line": 51,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "isBackgroundJobTerminal",
+    "file": "src/types/background-jobs.ts",
+    "line": 57,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/types/background-jobs.ts:export function isBackgroundJobTerminal(job: BackgroundJobSnapshot): boolean {"
+    ]
+  },
+  {
+    "name": "approval_button_allow_once",
+    "file": "crates/ha-core/src/channel/worker/approval.rs",
+    "line": 185,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "_root_of",
+    "file": "crates/ha-core/src/tools/note.rs",
+    "line": 1809,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/tools/note.rs:fn _root_of(scope: &WorkspaceScope) -> &Path {"
+    ]
+  },
+  {
+    "name": "copy_completed_upload",
+    "file": "crates/ha-core/src/file_upload.rs",
+    "line": 394,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/file_upload.rs:pub fn copy_completed_upload("
+    ]
+  },
+  {
+    "name": "handle_sse_data",
+    "file": "crates/ha-core/src/channel/signal/client.rs",
+    "line": 345,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "all_current_turn_ids",
+    "file": "crates/ha-core/src/chat_engine/active_turn.rs",
+    "line": 223,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/chat_engine/active_turn.rs:pub fn all_current_turn_ids() -> Vec<String> {"
+    ]
+  },
+  {
+    "name": "base_info",
+    "file": "crates/ha-core/src/channel/wechat/api.rs",
+    "line": 323,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "PlanStatsSection",
+    "file": "src/components/dashboard/PlanStatsSection.tsx",
+    "line": 26,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/dashboard/PlanStatsSection.tsx:export default function PlanStatsSection({"
+    ]
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/irc/mod.rs",
+    "line": 291,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "connect_with_headers",
+    "file": "crates/ha-core/src/channel/ws.rs",
+    "line": 36,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "recv_text",
+    "file": "crates/ha-core/src/channel/ws.rs",
+    "line": 80,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "recv_text_with_close",
+    "file": "crates/ha-core/src/channel/ws.rs",
+    "line": 104,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "recv_binary",
+    "file": "crates/ha-core/src/channel/ws.rs",
+    "line": 134,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "formatGitRef",
+    "file": "src/components/chat/workspace/workspaceEnvironment.ts",
+    "line": 140,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/chat/workspace/workspaceEnvironment.ts:export function formatGitRef(t: TFunction, git: WorkspaceGitSnapshot): string {"
+    ]
+  },
+  {
+    "name": "formatGitChanges",
+    "file": "src/components/chat/workspace/workspaceEnvironment.ts",
+    "line": 146,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/chat/workspace/workspaceEnvironment.ts:export function formatGitChanges(git: WorkspaceGitSnapshot): {"
+    ]
+  },
+  {
+    "name": "formatGitSync",
+    "file": "src/components/chat/workspace/workspaceEnvironment.ts",
+    "line": 159,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/chat/workspace/workspaceEnvironment.ts:export function formatGitSync(git: WorkspaceGitSnapshot): string | null {"
+    ]
+  },
+  {
+    "name": "onMsg",
+    "file": "src/components/design/DesignView.tsx",
+    "line": 3018,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "onProg",
+    "file": "src/components/design/DesignView.tsx",
+    "line": 3587,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "onWheel",
+    "file": "src/components/design/DesignView.tsx",
+    "line": 3898,
+    "occurrences_count": 1,
+    "occurrences": [
+      "src/components/common/ImageLightbox.tsx:        onWheel={handleWheel}"
+    ]
+  },
+  {
+    "name": "onFullscreenChange",
+    "file": "src/components/design/DesignView.tsx",
+    "line": 3917,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "default_gateway_shards",
+    "file": "crates/ha-core/src/channel/qqbot/api.rs",
+    "line": 110,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/discord/mod.rs",
+    "line": 540,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "validate_credentials",
+    "file": "crates/ha-core/src/channel/imessage/mod.rs",
+    "line": 407,
+    "occurrences_count": 1,
+    "occurrences": [
+      "docs/architecture/im-channel.md:    async fn validate_credentials(&self, credentials) -> Result<String>;"
+    ]
+  },
+  {
+    "name": "enabled_for",
+    "file": "crates/ha-core/src/knowledge/maintenance/config.rs",
+    "line": 120,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/knowledge/maintenance/config.rs:    pub fn enabled_for(&self, kind: super::types::ProposalKind) -> bool {"
+    ]
+  },
+  {
+    "name": "for_external_plan_agent",
+    "file": "crates/ha-core/src/agent/plan_context.rs",
+    "line": 67,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/agent/plan_context.rs:    pub fn for_external_plan_agent(extra_system_context: Option<String>) -> Self {"
+    ]
+  },
+  {
+    "name": "refresh_backends",
+    "file": "crates/ha-server/src/routes/acp.rs",
+    "line": 59,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "kill_run",
+    "file": "crates/ha-server/src/routes/acp.rs",
+    "line": 93,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "get_run_result",
+    "file": "crates/ha-server/src/routes/acp.rs",
+    "line": 104,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "register_child_session",
+    "file": "crates/ha-core/src/eval_context.rs",
+    "line": 846,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/eval_context.rs:pub fn register_child_session("
+    ]
+  },
+  {
+    "name": "record_signal",
+    "file": "crates/ha-core/src/eval_context.rs",
+    "line": 1450,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/eval_context.rs:pub fn record_signal(session_id: Option<&str>, signal: &str) {"
+    ]
+  },
+  {
+    "name": "get_note_by_id",
+    "file": "crates/ha-core/src/knowledge/db.rs",
+    "line": 247,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/knowledge/db.rs:    pub fn get_note_by_id(&self, note_id: i64) -> Result<Option<Note>> {"
+    ]
+  },
+  {
+    "name": "default_native_host_manifest_path",
+    "file": "crates/ha-core/src/browser/extension/diagnostics.rs",
+    "line": 491,
+    "occurrences_count": 0,
+    "occurrences": []
+  },
+  {
+    "name": "is_canvas_enabled",
+    "file": "crates/ha-core/src/tools/canvas/mod.rs",
+    "line": 66,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/tools/canvas/mod.rs:pub fn is_canvas_enabled() -> bool {"
+    ]
+  },
+  {
+    "name": "reset_all",
+    "file": "crates/ha-core/src/browser/launch_circuit.rs",
+    "line": 115,
+    "occurrences_count": 1,
+    "occurrences": [
+      "crates/ha-core/src/browser/launch_circuit.rs:pub fn reset_all() {"
+    ]
+  }
+]

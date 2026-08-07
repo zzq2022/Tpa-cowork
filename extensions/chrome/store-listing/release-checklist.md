@@ -4,7 +4,7 @@
 
 - Run `pnpm chrome:extension:package`.
 - Confirm verifier output is ok.
-- Confirm the generated zip is `extensions/chrome/dist/hope-agent-chrome-extension-<version>.zip`.
+- Confirm the generated zip is `extensions/chrome/dist/tpa-cowork-chrome-extension-<version>.zip`.
 - Upload only the generated zip. Do not upload the unpacked source directory.
 - Use the copy in `en-US.md`, `permissions.md`, `privacy.md`, and `review-notes.md`.
 

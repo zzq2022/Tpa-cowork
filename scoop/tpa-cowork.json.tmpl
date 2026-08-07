@@ -1,0 +1,41 @@
+{
+    "version": "__PKGVER__",
+    "description": "Local-first AI assistant desktop app — cross-device sessions, IM channel routing",
+    "homepage": "https://github.com/zzq2022/Tpa-cowork",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/zzq2022/Tpa-cowork/releases/download/v__PKGVER__/TPA.CoWork___PKGVER___x64-setup.exe",
+            "hash": "sha256:__SHA256__"
+        }
+    },
+    "pre_install": [
+        "Remove-Item -Path \"$dir\\`$PLUGINSDIR\" -Recurse -Force -ErrorAction SilentlyContinue"
+    ],
+    "bin": "tpa-cowork.exe",
+    "shortcuts": [
+        ["tpa-cowork.exe", "TPA CoWork"]
+    ],
+    "notes": [
+        "TPA CoWork is a single-binary three-mode app:",
+        "  - Click the 'TPA CoWork' shortcut in the Start menu to launch the desktop GUI",
+        "  - 'tpa-cowork server start' runs the HTTP/WS daemon (no GUI)",
+        "  - 'tpa-cowork acp' runs the ACP stdio mode for IDE integrations",
+        "",
+        "If the app fails to launch with a missing DLL error (MSVCP140.dll / VCRUNTIME140.dll),",
+        "install the Microsoft Visual C++ 2015-2022 Redistributable (x64):",
+        "  https://aka.ms/vs/17/release/vc_redist.x64.exe",
+        "or run the bundled installer in this app directory:",
+        "  $dir\\resources\\vc_redist.x64.exe"
+    ],
+    "checkver": {
+        "github": "https://github.com/zzq2022/Tpa-cowork"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/zzq2022/Tpa-cowork/releases/download/v$version/TPA.CoWork_$version_x64-setup.exe"
+            }
+        }
+    }
+}

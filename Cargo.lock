@@ -2949,17 +2949,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "ha-browser-host"
-version = "0.22.0"
-dependencies = [
- "anyhow",
- "dirs 6.0.0",
- "serde",
- "serde_json",
- "windows-sys 0.52.0",
-]
-
-[[package]]
 name = "ha-core"
 version = "0.22.0"
 dependencies = [
@@ -9214,6 +9203,17 @@ name = "tower-service"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8df9b6e13f2d32c91b9bd719c00d1958837bc7dec474d94952798cc8e69eeec3"
+
+[[package]]
+name = "tpa-browser-host"
+version = "0.22.0"
+dependencies = [
+ "anyhow",
+ "dirs 6.0.0",
+ "serde",
+ "serde_json",
+ "windows-sys 0.52.0",
+]
 
 [[package]]
 name = "tpa-cowork"

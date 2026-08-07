@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/alpha-logo.png" alt="Hope Agent" width="200">
+  <img src="assets/alpha-logo.png" alt="TPA CoWork" width="200">
 </p>
 
-<h1 align="center">Hope Agent</h1>
+<h1 align="center">TPA CoWork</h1>
 
 <p align="center">
   <strong>A desktop AI assistant that hands off across your devices and gets to know you better the more you use it — also runs headless, on a NAS or in the cloud.</strong><br/>
@@ -10,10 +10,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/shiwenwen/hope-agent/actions/workflows/rust.yml"><img src="https://img.shields.io/github/actions/workflow/status/shiwenwen/hope-agent/rust.yml?branch=main&style=flat-square&logo=githubactions&logoColor=white&label=CI" alt="CI status"></a>
-  <a href="https://github.com/shiwenwen/hope-agent/releases"><img src="https://img.shields.io/badge/macOS-000000?style=flat-square&logo=apple&logoColor=white" alt="macOS"></a>
-  <a href="https://github.com/shiwenwen/hope-agent/releases"><img src="https://img.shields.io/badge/Linux-experimental-FFA500?style=flat-square&logo=linux&logoColor=black" alt="Linux (experimental)"></a>
-  <a href="https://github.com/shiwenwen/hope-agent/releases"><img src="https://img.shields.io/badge/Windows-experimental-FFA500?style=flat-square&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0wIDMuNDQ5TDkuNzUgMi4xdjkuNDUxSDBtMTAuOTQ5LTkuNjAyTDI0IDB2MTEuNEgxMC45NDlNMCAxMi42aDkuNzV2OS40NTFMMCAyMC42OTlNMTAuOTQ5IDEyLjZIMjRWMjRsLTEyLjktMS44MDEiLz48L3N2Zz4=" alt="Windows (experimental)"></a>
+  <a href="https://github.com/zzq2022/Tpa-cowork/actions/workflows/rust.yml"><img src="https://img.shields.io/github/actions/workflow/status/zzq2022/Tpa-cowork/rust.yml?branch=main&style=flat-square&logo=githubactions&logoColor=white&label=CI" alt="CI status"></a>
+  <a href="https://github.com/zzq2022/Tpa-cowork/releases"><img src="https://img.shields.io/badge/macOS-000000?style=flat-square&logo=apple&logoColor=white" alt="macOS"></a>
+  <a href="https://github.com/zzq2022/Tpa-cowork/releases"><img src="https://img.shields.io/badge/Linux-experimental-FFA500?style=flat-square&logo=linux&logoColor=black" alt="Linux (experimental)"></a>
+  <a href="https://github.com/zzq2022/Tpa-cowork/releases"><img src="https://img.shields.io/badge/Windows-experimental-FFA500?style=flat-square&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0wIDMuNDQ5TDkuNzUgMi4xdjkuNDUxSDBtMTAuOTQ5LTkuNjAyTDI0IDB2MTEuNEgxMC45NDlNMCAxMi42aDkuNzV2OS40NTFMMCAyMC42OTlNMTAuOTQ5IDEyLjZIMjRWMjRsLTEyLjktMS44MDEiLz48L3N2Zz4=" alt="Windows (experimental)"></a>
   <a href="#run-modes"><img src="https://img.shields.io/badge/Web%20GUI-browser-4F46E5?style=flat-square&logo=googlechrome&logoColor=white" alt="Web GUI"></a>
   <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Rust-edition%202021-dea584?style=flat-square&logo=rust&logoColor=white" alt="Rust"></a>
   <a href="https://tauri.app/"><img src="https://img.shields.io/badge/Tauri-2-24C8DB?style=flat-square&logo=tauri&logoColor=white" alt="Tauri"></a>
@@ -27,9 +27,9 @@
 
 ---
 
-**Hope Agent** is a local-first, desktop-first personal AI agent that can also run continuously as a service. It opens like mature desktop software while offering real agentic capability: understanding long-term context, using tools to complete work, and reliably pursuing goals even after you step away.
+**TPA CoWork** is a local-first, desktop-first personal AI agent that can also run continuously as a service. It opens like mature desktop software while offering real agentic capability: understanding long-term context, using tools to complete work, and reliably pursuing goals even after you step away.
 
-**Hope Agent did not begin after “desktop AI agents” became a popular category.** We started building it when desktop agents were still uncommon and Codex itself was in an earlier form. We have always focused on the product itself, not on manufacturing attention. As more products have moved in the same direction, they have reinforced our original conviction: **AI assistants will move beyond the chat box and become personal software people can trust with long-running work.**
+**TPA CoWork did not begin after “desktop AI agents” became a popular category.** We started building it when desktop agents were still uncommon and Codex itself was in an earlier form. We have always focused on the product itself, not on manufacturing attention. As more products have moved in the same direction, they have reinforced our original conviction: **AI assistants will move beyond the chat box and become personal software people can trust with long-running work.**
 
 ## Contents
 
@@ -56,7 +56,7 @@
 <tr><td><b>🧭 Completes work, not just replies</b></td><td>Goal defines the outcome, Workflow dynamically organizes execution, and Loop decides when to continue. Complex work can progress in the background while remaining visible, pausable, resumable, and adjustable.</td></tr>
 <tr><td><b>🧠 Long-term memory and knowledge</b></td><td>Cross-session memory, on-demand recall, offline consolidation, user profiles, and reusable skills compound over time. Knowledge Space lets you and the AI read and write real Markdown together as a traceable second brain.</td></tr>
 <tr><td><b>🎨 From an idea to a deliverable design</b></td><td>Design Space turns a prompt or reference image into 10+ artifact types, including websites, mobile prototypes, and presentations, with visual editing, version history, multi-format export, and handoff into a real codebase.</td></tr>
-<tr><td><b>🛠️ Acts in the real environment</b></td><td>With permission and approval, Hope Agent can control the computer and browser, run commands, edit files, call MCP tools, connect to workspaces, and coordinate multiple agents.</td></tr>
+<tr><td><b>🛠️ Acts in the real environment</b></td><td>With permission and approval, TPA CoWork can control the computer and browser, run commands, edit files, call MCP tools, connect to workspaces, and coordinate multiple agents.</td></tr>
 <tr><td><b>🌐 Handoff across devices, always available</b></td><td>Desktop / Server / Web / ACP share the same core. The same session, memory, and task state can continue across desktop, browser, and popular IM channels.</td></tr>
 <tr><td><b>🛡️ Local-first, controlled, dependable</b></td><td>Data stays local by default and model requests go directly to providers. Tool approvals, Docker sandboxing, configuration rollback, crash recovery, and keepalive layers protect long-running operation.</td></tr>
 </table>
@@ -74,7 +74,7 @@
 ### 🧭 Long-running work & autonomy
 
 <table>
-<tr><td width="220"><b>🎯 Goal · keep pursuing the outcome</b></td><td>Give Hope Agent an outcome and completion criteria, and it keeps decomposing, executing, checking, and advancing. Goals support budgets, progress, pause, and resume; completion requires a conservative audit with result evidence.</td></tr>
+<tr><td width="220"><b>🎯 Goal · keep pursuing the outcome</b></td><td>Give TPA CoWork an outcome and completion criteria, and it keeps decomposing, executing, checking, and advancing. Goals support budgets, progress, pause, and resume; completion requires a conservative audit with result evidence.</td></tr>
 <tr><td><b>🧩 Workflow · dynamic orchestration</b></td><td>The model organizes phases, conditions, parallel work, multiple agents, tools, diffs, reviews, and verification when the task benefits from it. Every run has a durable trace with pause, resume, cancel, and conservative restart recovery.</td></tr>
 <tr><td><b>🔁 Loop · continue on time or events</b></td><td>Continue on fixed intervals, conditions, internal events, or model-selected wakeups. Each iteration can resume the current conversation or launch a Goal-bound Workflow, with budgets, backoff, and no-progress protection.</td></tr>
 <tr><td><b>📋 Plan, Task, and background work</b></td><td>Complex work can start with an editable plan while Tasks expose live progress. Long-running tools and sub-agents run in the background, and milestones return progressively to the main conversation without blocking the chat.</td></tr>
@@ -94,7 +94,7 @@
 ### 🛠 Tools & connections
 
 <table>
-<tr><td width="220"><b>🖱️ Computer and browser control</b></td><td>On macOS, granted permissions let Hope Agent observe and operate the desktop, windows, menus, keyboard, and pointer. The controllable browser includes a live mirror so you can see the pages the Agent is visiting and manipulating. Side effects share one approval flow.</td></tr>
+<tr><td width="220"><b>🖱️ Computer and browser control</b></td><td>On macOS, granted permissions let TPA CoWork observe and operate the desktop, windows, menus, keyboard, and pointer. The controllable browser includes a live mirror so you can see the pages the Agent is visiting and manipulating. Side effects share one approval flow.</td></tr>
 <tr><td><b>👥 Multiple agents and natural-language scheduling</b></td><td>Preset teams or dynamic sub-agents work in parallel and summarize results back to the main conversation. Natural-language schedules can run recurring work and deliver results to a chosen IM channel.</td></tr>
 <tr><td><b>📁 Project containers</b></td><td>Keep related sessions, project instructions, memory, and shared files together. Uploaded files are extracted automatically and exposed as a directory, inline context, or on-demand reads according to size.</td></tr>
 <tr><td><b>🔌 MCP and Hooks</b></td><td>The built-in MCP client covers major transports and OAuth 2.1. Hooks attach command / HTTP / MCP / prompt / agent handlers to 20+ lifecycle events, with layered configuration and hot reload.</td></tr>
@@ -106,16 +106,16 @@
 
 <table>
 <tr><td width="220"><b>🖥️ Native GUI and model setup</b></td><td>macOS provides the complete desktop experience, while Linux and Windows support is currently experimental. The interface is multilingual, with broad provider coverage, a large preset model catalog, and automatic rotation across multiple API keys per provider.</td></tr>
-<tr><td><b>🦙 One-click local models</b></td><td>No account, API key, or terminal required. Pick a model that fits your hardware and Hope Agent handles Ollama installation, model download, provider registration, and switching; local embedding models use the same flow.</td></tr>
+<tr><td><b>🦙 One-click local models</b></td><td>No account, API key, or terminal required. Pick a model that fits your hardware and TPA CoWork handles Ollama installation, model download, provider registration, and switching; local embedding models use the same flow.</td></tr>
 <tr><td><b>🤝 IM channels and session handoff</b></td><td>Connect Telegram, Discord, Slack, Feishu, and other popular IM channels. Images, voice, and files become multimodal context; sessions hand off between desktop, browser, and IM, and active responses can live-mirror into chat apps.</td></tr>
-<tr><td><b>🌐 Standalone service and multiple run modes</b></td><td><code>hope-agent server</code> stays online on a NAS, home server, or cloud VM with a full embedded Web GUI. <code>hope-agent acp</code> serves as an Agent backend for IDEs. Every entry point shares the same core, sessions, memory, and configuration.</td></tr>
+<tr><td><b>🌐 Standalone service and multiple run modes</b></td><td><code>tpa-cowork server</code> stays online on a NAS, home server, or cloud VM with a full embedded Web GUI. <code>tpa-cowork acp</code> serves as an Agent backend for IDEs. Every entry point shares the same core, sessions, memory, and configuration.</td></tr>
 </table>
 
 ### 🛡 Security & reliability
 
 <table>
 <tr><td width="220"><b>🔒 Tool approval + Docker sandbox</b></td><td>Sensitive tool calls enter a unified approval flow. High-risk commands and file writes can run inside a Docker sandbox to reduce the blast radius of privileged mistakes.</td></tr>
-<tr><td><b>🏠 Local-first · zero third-party hops</b></td><td>Configuration, sessions, memory, attachments, skills, and logs live under <code>~/.hope-agent/</code> by default, while API keys connect directly to model providers. Daemon mode adds Bearer token authentication and SSRF protection policies.</td></tr>
+<tr><td><b>🏠 Local-first · zero third-party hops</b></td><td>Configuration, sessions, memory, attachments, skills, and logs live under <code>~/.tpa-cowork/</code> by default, while API keys connect directly to model providers. Daemon mode adds Bearer token authentication and SSRF protection policies.</td></tr>
 <tr><td><b>🛟 Rollback, recovery, and keepalive</b></td><td>Configuration changes create local snapshots for one-click rollback. Guardian, system services, and subsystem watchdogs provide restart, diagnosis, and reconnection so long-running work recovers in an observable way.</td></tr>
 </table>
 
@@ -125,50 +125,50 @@
 
 ### Install Locally
 
-> 📦 Full installer list across platforms: [Releases](https://github.com/shiwenwen/hope-agent/releases)
+> 📦 Full installer list across platforms: [Releases](https://github.com/zzq2022/Tpa-cowork/releases)
 
 #### macOS
 
 ##### Homebrew (recommended)
 
 ```bash
-brew tap shiwenwen/hope-agent
-brew install --cask hope-agent
+brew tap zzq2022/Tpa-cowork
+brew install --cask tpa-cowork
 ```
 
-> Already have `Hope Agent.app` installed manually? Append `--adopt` to let the cask take over your existing same-version app without re-downloading, or `--force` to overwrite.
+> Already have `TPA CoWork.app` installed manually? Append `--adopt` to let the cask take over your existing same-version app without re-downloading, or `--force` to overwrite.
 
 ##### Manual install (DMG)
 
-Download `Hope.Agent_*.dmg` from [Releases](https://github.com/shiwenwen/hope-agent/releases) and drag into Applications.
+Download `TPA.CoWork_*.dmg` from [Releases](https://github.com/zzq2022/Tpa-cowork/releases) and drag into Applications.
 
 > If macOS reports "damaged" or "cannot verify the developer" on first launch, run in Terminal:
 >
 > ```bash
-> sudo xattr -cr /Applications/Hope\ Agent.app
-> sudo codesign --force --deep --sign - /Applications/Hope\ Agent.app
+> sudo xattr -cr /Applications/TPA\ CoWork.app
+> sudo codesign --force --deep --sign - /Applications/TPA\ CoWork.app
 > ```
 
 Native builds for both Apple Silicon (arm64) and Intel (x64); Homebrew and manual download both pick the correct DMG for your hardware automatically.
 
 ##### Launch modes
 
-- **Desktop GUI**: Launchpad / Applications folder (click the Hope Agent icon), or `open -a "Hope Agent"` / `hope-agent` from a terminal
-- **Browser Web GUI**: open <http://127.0.0.1:8420> after launching the desktop app, or run `hope-agent server start` to start only the service without a desktop window
-- **ACP (IDE integration)**: `hope-agent acp`
+- **Desktop GUI**: Launchpad / Applications folder (click the TPA CoWork icon), or `open -a "TPA CoWork"` / `tpa-cowork` from a terminal
+- **Browser Web GUI**: open <http://127.0.0.1:8420> after launching the desktop app, or run `tpa-cowork server start` to start only the service without a desktop window
+- **ACP (IDE integration)**: `tpa-cowork acp`
 
 #### Windows
 
 ##### Scoop (recommended)
 
 ```powershell
-scoop bucket add hope-agent https://github.com/shiwenwen/scoop-hope-agent
-scoop install hope-agent
+scoop bucket add tpa-cowork https://github.com/shiwenwen/scoop-tpa-cowork
+scoop install tpa-cowork
 ```
 
 ##### Manual install (installer)
 
-Download `Hope.Agent_*-setup.exe` from [Releases](https://github.com/shiwenwen/hope-agent/releases) and double-click. **Windows is not yet fully tested** — please file issues if anything breaks.
+Download `TPA.CoWork_*-setup.exe` from [Releases](https://github.com/zzq2022/Tpa-cowork/releases) and double-click. **Windows is not yet fully tested** — please file issues if anything breaks.
 
 > If Windows reports "MSVCP140_1.dll was not found" or a similar missing `VCRUNTIME140.dll` / `MSVCP140.dll` error on launch, install the [Microsoft Visual C++ 2015–2022 Redistributable (x64)](https://aka.ms/vs/17/release/vc_redist.x64.exe) and relaunch.
 
@@ -176,16 +176,16 @@ x64 only.
 
 ##### Launch modes
 
-- **Desktop GUI**: click "Hope Agent" in the Start menu, or `hope-agent` from PowerShell
-- **Browser Web GUI**: open <http://127.0.0.1:8420> after launching the desktop app, or run `hope-agent server start` in PowerShell / cmd to start only the service without a desktop window
-- **ACP (IDE integration)**: `hope-agent acp`
+- **Desktop GUI**: click "TPA CoWork" in the Start menu, or `tpa-cowork` from PowerShell
+- **Browser Web GUI**: open <http://127.0.0.1:8420> after launching the desktop app, or run `tpa-cowork server start` in PowerShell / cmd to start only the service without a desktop window
+- **ACP (IDE integration)**: `tpa-cowork acp`
 
 #### Linux
 
 ##### Arch Linux / Manjaro (AUR)
 
 ```bash
-yay -S hope-agent-bin   # or paru / any AUR helper
+yay -S tpa-cowork-bin   # or paru / any AUR helper
 ```
 
 Pre-built binary package (repackaged from the GitHub Release `.deb`) — no source compilation.
@@ -193,20 +193,20 @@ Pre-built binary package (repackaged from the GitHub Release `.deb`) — no sour
 ##### Debian / Ubuntu (apt)
 
 ```bash
-curl -fsSL https://repo.hopeagent.ai/pubkey.gpg | \
-  sudo gpg --dearmor -o /usr/share/keyrings/hope-agent.gpg
-echo "deb [signed-by=/usr/share/keyrings/hope-agent.gpg] https://repo.hopeagent.ai/apt stable main" | \
-  sudo tee /etc/apt/sources.list.d/hope-agent.list
+curl -fsSL https://repo.tpacowork.ai/pubkey.gpg | \
+  sudo gpg --dearmor -o /usr/share/keyrings/tpa-cowork.gpg
+echo "deb [signed-by=/usr/share/keyrings/tpa-cowork.gpg] https://repo.tpacowork.ai/apt stable main" | \
+  sudo tee /etc/apt/sources.list.d/tpa-cowork.list
 sudo apt update
-sudo apt install hope-agent
+sudo apt install tpa-cowork
 ```
 
 ##### Fedora / RHEL / CentOS (dnf / yum)
 
 ```bash
-sudo curl -fsSL https://repo.hopeagent.ai/rpm/hope-agent.repo \
-  -o /etc/yum.repos.d/hope-agent.repo
-sudo dnf install hope-agent     # or `sudo yum install hope-agent`
+sudo curl -fsSL https://repo.tpacowork.ai/rpm/tpa-cowork.repo \
+  -o /etc/yum.repos.d/tpa-cowork.repo
+sudo dnf install tpa-cowork     # or `sudo yum install tpa-cowork`
 ```
 
 > The older `sudo dnf config-manager --add-repo …` form has been removed in dnf5 (Fedora 41+); the `curl` variant above works on dnf4 / dnf5 / yum / zypper alike.
@@ -214,25 +214,25 @@ sudo dnf install hope-agent     # or `sudo yum install hope-agent`
 openSUSE users:
 
 ```bash
-sudo zypper addrepo https://repo.hopeagent.ai/rpm/hope-agent.repo
-sudo zypper install hope-agent
+sudo zypper addrepo https://repo.tpacowork.ai/rpm/tpa-cowork.repo
+sudo zypper install tpa-cowork
 ```
 
 ##### Manual install (AppImage / deb / rpm)
 
-From [Releases](https://github.com/shiwenwen/hope-agent/releases) (filenames include the arch suffix — pick `_amd64` / `_arm64` for deb/AppImage or `.x86_64` / `.aarch64` for rpm):
+From [Releases](https://github.com/zzq2022/Tpa-cowork/releases) (filenames include the arch suffix — pick `_amd64` / `_arm64` for deb/AppImage or `.x86_64` / `.aarch64` for rpm):
 
-- AppImage: `Hope.Agent_*.AppImage` — `chmod +x` and run
-- Debian / Ubuntu: `Hope.Agent_*.deb` — `sudo dpkg -i Hope.Agent_*.deb`
-- Fedora / RHEL: `Hope.Agent_*.rpm` — `sudo rpm -i Hope.Agent_*.rpm`
+- AppImage: `TPA.CoWork_*.AppImage` — `chmod +x` and run
+- Debian / Ubuntu: `TPA.CoWork_*.deb` — `sudo dpkg -i TPA.CoWork_*.deb`
+- Fedora / RHEL: `TPA.CoWork_*.rpm` — `sudo rpm -i TPA.CoWork_*.rpm`
 
 Both amd64 (x86_64) and arm64 (aarch64) native builds are published, covering desktops, Raspberry Pi 4/5, Apple Silicon Macs running Asahi Linux, and Graviton / Ampere cloud VMs. apt and dnf automatically pick the right arch via `dpkg --print-architecture` / `$basearch`.
 
 ##### Launch modes
 
-- **Desktop GUI**: click "Hope Agent" in your app menu, or `hope-agent` from a terminal
-- **Browser Web GUI**: open <http://127.0.0.1:8420> after launching the desktop app, or run `hope-agent server start` to start only the service without a desktop window
-- **ACP (IDE integration)**: `hope-agent acp`
+- **Desktop GUI**: click "TPA CoWork" in your app menu, or `tpa-cowork` from a terminal
+- **Browser Web GUI**: open <http://127.0.0.1:8420> after launching the desktop app, or run `tpa-cowork server start` to start only the service without a desktop window
+- **ACP (IDE integration)**: `tpa-cowork acp`
 
 #### First launch & auto-update
 
@@ -240,18 +240,18 @@ Both amd64 (x86_64) and arm64 (aarch64) native builds are published, covering de
 2. Desktop builds ship with the GitHub Releases auto-updater. Go to **Settings → About** in-app to check for and install updates, or just tell the model "upgrade" / "check for updates" in chat.
 3. Versions installed via Homebrew / AUR / Scoop also receive updates through the built-in updater; the package manager's recorded version stays pinned to the initial install version and does not affect functionality.
 
-> To connect from a phone or another computer, set an API key under **Settings → Server** and change the bind address to `0.0.0.0:8420`. After restarting, open `http://<IP of the device running Hope Agent>:8420`. Never expose the port to a LAN or the public internet without authentication; for public access, put it behind an HTTPS reverse proxy. See the [Docker deployment guide](docs/deployment/docker.en.md).
+> To connect from a phone or another computer, set an API key under **Settings → Server** and change the bind address to `0.0.0.0:8420`. After restarting, open `http://<IP of the device running TPA CoWork>:8420`. Never expose the port to a LAN or the public internet without authentication; for public access, put it behind an HTTPS reverse proxy. See the [Docker deployment guide](docs/deployment/docker.en.md).
 
 ### Self-hosting (Docker)
 
-For running Hope Agent on a home NAS / VPS / homelab and accessing the Web GUI from a browser:
+For running TPA CoWork on a home NAS / VPS / homelab and accessing the Web GUI from a browser:
 
 ```bash
 docker run -d \
-  --name hope-agent \
+  --name tpa-cowork \
   -p 127.0.0.1:8420:8420 \
-  -v hope-data:/data \
-  ghcr.io/shiwenwen/hope-agent:latest
+  -v tpa-cowork-data:/data \
+  ghcr.io/zzq2022/Tpa-cowork:latest
 ```
 
 Once the container is running, open <http://127.0.0.1:8420> in a browser and follow the onboarding wizard to configure provider API keys. The image covers `linux/amd64` + `linux/arm64` (including Apple Silicon and Raspberry Pi) and is auto-built on every release tag.
@@ -261,8 +261,8 @@ For docker-compose, the optional Ollama sidecar for local LLMs, LAN exposure, re
 ### For developers
 
 ```bash
-git clone https://github.com/shiwenwen/hope-agent.git
-cd hope-agent
+git clone https://github.com/zzq2022/Tpa-cowork.git
+cd tpa-cowork
 pnpm install
 pnpm tauri dev         # desktop dev (frontend + Rust hot reload)
 
@@ -280,9 +280,9 @@ For local Web GUI development with live reload, run `pnpm tauri dev` and open `h
 | ---------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | Desktop GUI      | Double-click the app / `pnpm tauri dev`                                        | The most complete entry point: full GUI plus an embedded HTTP/WS server, so the desktop can serve remote clients while you use it |
 | Server + Web GUI (HTTP/WS) | `server start` subcommand; `server install` registers a launchd / systemd service | Headless always-on daemon for IM channels and cron jobs; **the React frontend is `rust-embed`-baked into the server binary, so opening `http://<server>:port` in any browser gives you the full Web GUI** — phone, tablet, any computer can connect directly without installing a client |
-| ACP (stdio)      | `acp` subcommand                                                                  | IDE integration — any ACP-capable editor can call Hope Agent as its agent backend |
+| ACP (stdio)      | `acp` subcommand                                                                  | IDE integration — any ACP-capable editor can call TPA CoWork as its agent backend |
 
-All three modes share the same `ha-core` core. Config, sessions, and memories live under `~/.hope-agent/`.
+All three modes share the same `ha-core` core. Config, sessions, and memories live under `~/.tpa-cowork/`.
 
 ## Ecosystem
 
@@ -341,25 +341,25 @@ node scripts/sync-i18n.mjs --check   # i18n completeness check
 
 ## Community
 
-- 🐛 [Issues](https://github.com/shiwenwen/hope-agent/issues) — bug reports, feature requests
-- 💡 [Discussions](https://github.com/shiwenwen/hope-agent/discussions) — usage, ideas, Q&A
-- ⭐ If Hope Agent helps you, consider giving it a star on GitHub
+- 🐛 [Issues](https://github.com/zzq2022/Tpa-cowork/issues) — bug reports, feature requests
+- 💡 [Discussions](https://github.com/zzq2022/Tpa-cowork/discussions) — usage, ideas, Q&A
+- ⭐ If TPA CoWork helps you, consider giving it a star on GitHub
 - 📮 Roadmap, a dedicated docs site, and more community channels are on the way
 
 ## Acknowledgements
 
-- [Ollama](https://ollama.com/) — the one-click local LLM experience is built on top of Ollama's local runtime and its OpenAI-compatible endpoint; Hope Agent only wraps the GUI layer, while Qwen / Gemma and other models are distributed through the Ollama model library
-- [ClawHub](https://www.clawhub.com/) / [SkillHub](https://skillhub.cn/) — public skill discovery sources for Hope Agent
-- [Tauri](https://tauri.app/), [axum](https://github.com/tokio-rs/axum), [React](https://react.dev/), [shadcn/ui](https://ui.shadcn.com/), [Streamdown](https://github.com/streamdown/streamdown), [Radix UI](https://www.radix-ui.com/), and the rest of the open source stack Hope Agent stands on
+- [Ollama](https://ollama.com/) — the one-click local LLM experience is built on top of Ollama's local runtime and its OpenAI-compatible endpoint; TPA CoWork only wraps the GUI layer, while Qwen / Gemma and other models are distributed through the Ollama model library
+- [ClawHub](https://www.clawhub.com/) / [SkillHub](https://skillhub.cn/) — public skill discovery sources for TPA CoWork
+- [Tauri](https://tauri.app/), [axum](https://github.com/tokio-rs/axum), [React](https://react.dev/), [shadcn/ui](https://ui.shadcn.com/), [Streamdown](https://github.com/streamdown/streamdown), [Radix UI](https://www.radix-ui.com/), and the rest of the open source stack TPA CoWork stands on
 - Everyone who has filed issues, tested builds, and given feedback along the way
 
 ## Star History
 
-<a href="https://www.star-history.com/#shiwenwen/hope-agent&Date">
+<a href="https://www.star-history.com/#zzq2022/Tpa-cowork&Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=shiwenwen/hope-agent&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=shiwenwen/hope-agent&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=shiwenwen/hope-agent&type=Date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=zzq2022/Tpa-cowork&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=zzq2022/Tpa-cowork&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=zzq2022/Tpa-cowork&type=Date" />
   </picture>
 </a>
 

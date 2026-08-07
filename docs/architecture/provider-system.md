@@ -1002,7 +1002,7 @@ flowchart TD
 ### 12.1 配置与解析
 
 - `AppConfig.function_models.vision: Option<ActiveModel>`（`FunctionModelsConfig` 容器，camelCase `functionModels.vision`）。**opt-in**：`None` = 视觉桥关闭（维持占位符行为），不做自动挑选。
-- 设置三件套（MEDIUM）：GUI 全局模型区 `ModelSelector`（过滤 `inputTypes` 含 `image`）、`ha-settings` `function_models` category（纯模型引用无凭据、不 redact）、SKILL.md 登记。专用命令 `get_vision_model` / `set_vision_model`（Tauri + HTTP `GET`/`PUT /api/models/vision`）。
+- 设置三件套（MEDIUM）：GUI 全局模型区 `ModelSelector`（过滤 `inputTypes` 含 `image`）、`tpa-settings` `function_models` category（纯模型引用无凭据、不 redact）、SKILL.md 登记。专用命令 `get_vision_model` / `set_vision_model`（Tauri + HTTP `GET`/`PUT /api/models/vision`）。
 - `vision_bridge::prepare(session_id)` 解析：取 `function_models.vision` → `find_provider` → 校验 `model_supports_vision` → `AssistantAgent::try_new_from_provider` → **`set_session_id(sid)`**（令 `KIND_VISION` 用量按 incognito 跳过）。任一步失败返回 `None`（桥关闭，调用方回退占位符）。
 
 ### 12.2 流水线：memo-cache + 每轮临时 transform

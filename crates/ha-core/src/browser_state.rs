@@ -91,9 +91,9 @@ pub(crate) fn browser_runtime() -> &'static tokio::runtime::Handle {
         tokio::runtime::Builder::new_multi_thread()
             .worker_threads(2)
             .enable_all()
-            .thread_name("ha-browser-bg")
+            .thread_name("tpa-browser-bg")
             .build()
-            .expect("failed to build ha-browser background runtime")
+            .expect("failed to build tpa-browser background runtime")
     });
     rt.handle()
 }

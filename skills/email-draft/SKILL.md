@@ -179,7 +179,7 @@ When the user asks to translate an email:
 |---|---|
 | Generic subject ("Hi", "Followup") | Specific subject naming the topic + action |
 | Burying the ask in paragraph 4 | Move to paragraph 1 or 2 |
-| "Hope you're well" filler when familiar | Skip — go straight to topic |
+| "TPA CoWork you're well" filler when familiar | Skip — go straight to topic |
 | Vague deadline ("when you can") | Specific date or "no rush, just FYI" |
 | Mixing 3 unrelated asks | Split into 3 emails |
 | Auto-translation kept English greeting | Localize properly (`你好`, `안녕하세요`) |

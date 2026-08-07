@@ -55,7 +55,7 @@ type FileTarget =
 | `knowledgeSourceLimits.maxBinarySourceMb` | 24 | 1–100 | 知识空间文档、音视频、图片来源 |
 | `knowledgeSourceLimits.maxUrlResponseMb` | 2 | 1–20 | URL 网页响应 |
 
-`PATCH /api/config/filesystem` / `patch_filesystem_config` 只更新显式字段，避免 Server 页修改 `allowRemoteWrites` 覆盖文件限制。`ha-settings` 中 `filesystem` 仍只承载 HIGH 风险开关；`file_limits` 与 `knowledge_source_limits` 为 MEDIUM。
+`PATCH /api/config/filesystem` / `patch_filesystem_config` 只更新显式字段，避免 Server 页修改 `allowRemoteWrites` 覆盖文件限制。`tpa-settings` 中 `filesystem` 仍只承载 HIGH 风险开关；`file_limits` 与 `knowledge_source_limits` 为 MEDIUM。
 
 不可配置的安全/协议上限保持独立：头像 10 MiB；Office 富渲染 30 MiB（超限回退文本提取）；代码高亮约 400 KiB（超限无高亮）；Logo、STT、IM 平台、远程图片/PDF、Memory 备份继续使用各子系统硬上限。旧 Base64 知识导入固定 24 MiB，旧聊天 stage/Base64 与旧 Workspace whole-body 上传固定 20 MiB；只有新版分块租约可使用更高配置。
 

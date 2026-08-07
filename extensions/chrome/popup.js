@@ -73,7 +73,7 @@ function setMessage(message, isError = false) {
 
 async function refreshStatus() {
   try {
-    const status = await sendMessage("hope.popup.status")
+    const status = await sendMessage("tpa-cowork.popup.status")
     if (dotEl) dotEl.classList.toggle("connected", Boolean(status.nativeConnected))
     if (statusEl) {
       statusEl.textContent = status.nativeConnected
@@ -96,7 +96,7 @@ async function stopCurrentTab() {
   setMessage("")
   try {
     const tabId = await activeTabId()
-    await sendMessage("hope.popup.stopTab", { tabId })
+    await sendMessage("tpa-cowork.popup.stopTab", { tabId })
     setMessage(t("result_stopped_tab", [String(tabId)]))
     await refreshStatus()
   } catch (error) {
@@ -110,7 +110,7 @@ async function stopAllTabs() {
   setBusy(true)
   setMessage("")
   try {
-    const result = await sendMessage("hope.popup.stopAll")
+    const result = await sendMessage("tpa-cowork.popup.stopAll")
     setMessage(t("result_stopped_count", [String(result.stopped)]))
     await refreshStatus()
   } catch (error) {

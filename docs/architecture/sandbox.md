@@ -104,7 +104,7 @@ default_sandbox_mode.unwrap_or_else(|| {
 - `default_sandbox_mode = Some(...)` 是新字段，优先级最高。
 - `sandbox: bool` 是旧字段，不删除，只在新字段缺失时参与映射。
 - Agent 设置页保存默认沙箱模式时，同时写 `defaultSandboxMode` 和 `sandbox = mode != "off"`，保证旧代码读到尽量等价的行为。
-- Agent 配置不是 `AppConfig` category，不进入 `ha-settings` 三件套；它走既有 Agent 设置保存路径 `get_agent_config` / `save_agent_config_cmd`。
+- Agent 配置不是 `AppConfig` category，不进入 `tpa-settings` 三件套；它走既有 Agent 设置保存路径 `get_agent_config` / `save_agent_config_cmd`。
 
 ### Session DB
 
@@ -662,7 +662,7 @@ outgoing:
 8. 敏感 env 不得传入容器。
 9. server 模式 Docker 引导必须反映服务器宿主机，不是浏览器客户端。
 10. `SandboxConfig` 是执行沙箱配置；SearXNG Docker 配置和状态不得混用。
-11. `ha-settings` 不写 Agent 默认 sandbox mode；Agent 配置走 Agent 设置保存路径。
+11. `tpa-settings` 不写 Agent 默认 sandbox mode；Agent 配置走 Agent 设置保存路径。
 
 ## 测试矩阵
 

@@ -616,7 +616,7 @@ bundled resources；这样复杂 skill 可以把稳定逻辑放进包内脚本�
 输入框 `@` 菜单除了文件 / 知识笔记，还有一段**内置技能**：用户选中后插入一个 **markdown 链接 token `[@<标签>](#skill:<name>)`**（Codex 风格——链接文本是本地化友好标签、href 是稳定 id），留在消息文本里（与 `@path`、`[[note]]` 一致），由后端在 send-time 解析。这是「一次性 system-prompt 追加」方案的落地实例——技能内容进本回合 `extra_system_context`，不污染 conversation_history。
 
 - **token = markdown 链接（关键设计）**：用 `[@标签](#skill:name)` 而非裸 `@skill:name`，好处是**同一 token 在输入框（CM6 装饰）和消息历史（`MarkdownLink` 拦截 `#skill:` href）都渲染成同一玫瑰粉 chip**，不会在历史里露出 `@skill:xxx` 原文；标签本地化、id 稳定，后端只认 href 里的 id 与标签解耦。href 选 **fragment `#skill:`**（不是 `skill://`）——Streamdown 用固定 `defaultSchema` 的 rehype-sanitize，自定义 scheme 会被剥 href，fragment 则像现有本地路径链接一样存活（`allowedLinkPrefixes:["*"]`）。
-- **固定 allowlist（红线）**：`@skill` **只对内置、固定的技能开放**，不是通用技能注入入口。allowlist 在 [`skills/mention.rs::AT_MENTIONABLE_SKILLS`](../../crates/ha-core/src/skills/mention.rs)，共 6 项，按菜单展示顺序：`office-docx` / `office-pptx` / `office-xlsx` / `ha-data-analytics` / `ha-browser` / `ha-mac-control`（最后一个经 `is_mentionable_on_this_os` 的 `cfg!(target_os = "macos")` 硬门控，其余跨平台）。任意 / 已禁用（`disabled_skills`）/ 非本 OS 的名字一律静默跳过，原 token 文本留在消息里不注入。
+- **固定 allowlist（红线）**：`@skill` **只对内置、固定的技能开放**，不是通用技能注入入口。allowlist 在 [`skills/mention.rs::AT_MENTIONABLE_SKILLS`](../../crates/ha-core/src/skills/mention.rs)，共 6 项，按菜单展示顺序：`office-docx` / `office-pptx` / `office-xlsx` / `tpa-data-analytics` / `tpa-browser` / `tpa-mac-control`（最后一个经 `is_mentionable_on_this_os` 的 `cfg!(target_os = "macos")` 硬门控，其余跨平台）。任意 / 已禁用（`disabled_skills`）/ 非本 OS 的名字一律静默跳过，原 token 文本留在消息里不注入。
 - **解析 = `knowledge::inject` 平行**：`resolve_inline_skill_mentions(message)`（同步、纯文本扫描）正则 `\[@[^\]\n]+\]\(#skill:([a-z0-9-]+)\)`（label `+` 非空，与前端 `parseSkillMentions` 字节一致；绑定链接形态，挡掉散落在正文里的 `#skill:`）→ 去重 → 过 allowlist ∩ invocable ∩ OS → 读 SKILL.md（`$ARGUMENTS` 替换为空 + `build_skill_context_payload`）→ 拼一段 `# Activated Skills (@skill)` 块。在 [`chat_engine/engine.rs`](../../crates/ha-core/src/chat_engine/engine.rs) 紧跟 `[[note]]` 注入之后合并进 `extra_system_context`，**仅 `source.fires_user_lifecycle_hooks()`（Desktop / HTTP / IM 用户回合）生效**——`Subagent` / `ParentInjection` 不解析,挡掉子 Agent 未转义输出里夹带的 `[@…](#skill:…)` 自激活 skill。
 - **菜单数据**：`list_mentionable_skills()`（Tauri `list_mentionable_skills` / HTTP `GET /api/skills/mentionable`，owner 平面无 session 参数）返回 allowlist ∩ invocable ∩ OS 的 `{ name, description }`；友好标签 + 图标在前端 [`skill-mention/skillTokens.ts`](../../src/components/chat/skill-mention/skillTokens.ts) 按 `name` 映射（i18n `chat.skillMention.*`），后端不下发文案。插入时 `useFileMention` 用自己的 `useTranslation` 取当前语言标签写进链接文本（`skillTokens` 保持纯 / 无 i18n 副作用导入，避免被广引时把 i18n init 拖进测试图）。
 - **前端**：统一 `@` 菜单第三段（[`useFileMention`](../../src/components/chat/file-mention/useFileMention.ts) + [`FileMentionMenu`](../../src/components/chat/file-mention/FileMentionMenu.tsx)），扁平光标 `[...files, ...notes, ...skills]`；输入框 chip 在 [`MentionComposerInput`](../../src/components/chat/input/MentionComposerInput.tsx)（玫瑰粉，文件=蓝 / 笔记=紫之外的第三色），历史 chip 在 [`SkillMentionChip`](../../src/components/chat/skill-mention/SkillMentionChip.tsx)（`MarkdownLink` 按 `#skill:` href 派发）。链接形态的 `@` 在 `[` 之后，**天然不被裸 `@token` 文件 mention 语法命中**（无需像旧裸 token 那样在文件 chip / 发送展开处特判）。`enableSkillMention` prop 默认关，主对话 `ChatScreen` opt-in（QuickChat / 知识空间面板不开）。
@@ -626,7 +626,7 @@ bundled resources；这样复杂 skill 可以把稳定逻辑放进包内脚本�
 
 经多角度 review 评估后**有意接受**的取舍（非疏漏）；如后续要收紧按此清单逐条处理：
 
-1. **前端 chip 渲染只认静态 catalog 成员（`isSkillMentionName`），不感知 OS / `disabled_skills`**。菜单本身正确（`list_mentionable_skills` 后端已 OS + invocable 过滤），后端注入也正确（OS 门控）。残留：在非 macOS 上**手动粘贴** `[@Mac](#skill:ha-mac-control)` 会显示一个误导性玫瑰粉 Mac chip，但后端不注入——纯视觉、无权限泄漏；跨设备查看一条真实 macOS 回合的历史 chip 则是如实的。收紧需把 OS 感知穿到 3 个渲染路径（composer / `MarkdownLink` / `SkillMentionText`）。
+1. **前端 chip 渲染只认静态 catalog 成员（`isSkillMentionName`），不感知 OS / `disabled_skills`**。菜单本身正确（`list_mentionable_skills` 后端已 OS + invocable 过滤），后端注入也正确（OS 门控）。残留：在非 macOS 上**手动粘贴** `[@Mac](#skill:tpa-mac-control)` 会显示一个误导性玫瑰粉 Mac chip，但后端不注入——纯视觉、无权限泄漏；跨设备查看一条真实 macOS 回合的历史 chip 则是如实的。收紧需把 OS 感知穿到 3 个渲染路径（composer / `MarkdownLink` / `SkillMentionText`）。
 2. **`enableSkillMention` 只 gate 输入框（编辑/菜单），不 gate 历史 chip 渲染与后端注入**。与 `@path` / `[[note]]` 的「token 语义全局统一」一致——开关管的是「该面是否提供录入」，不是 token 本身。残留：在 QuickChat / 知识空间面板（`enableSkillMention=false`）**粘贴** skill token 仍会渲染 chip + 后端注入。要硬隔离需把该 flag 透传到后端。
 3. **`mentionable_entries()` 每个含 @skill token 的回合重走 skill 目录 + 解析 frontmatter**（`get_invocable_skills` → `load_all_skills_with_budget`）。仅在消息确含 token 时触发（无 token 提前返回），且与 slash 菜单 / @ 菜单既有开销同源。skill 数量增大后再考虑缓存解析结果。
 4. **非 allowlist 的 `#skill:` token 跨面降级不一致**：消息气泡走 `MarkdownLink` fallback 成普通 `<a>`，吸顶 pill 走 `SkillMentionText` 渲染成纯 `@label`。仅影响本不应出现的非白名单 token。
@@ -1694,25 +1694,25 @@ sequenceDiagram
 
 | 技能 | 类别 | 可见性 | 说明 |
 |------|------|--------|------|
-| `ha-settings` | meta | `always: true`（跳过依赖检查） | 通过自然语言查看 / 修改 TPA CoWork Agent 设置，指导模型使用 `get_settings` / `update_settings` / settings backup 工具，不直接编辑配置文件 |
-| `ha-skill-creator` | meta | `always: true`（跳过依赖检查） | 创建、编辑、改进、审核 TPA CoWork Agent skill；包含格式规范、评估思路和 frontmatter 指南 |
-| `ha-find-skills` | meta | `always: true`（跳过依赖检查） | 当当前 catalog 没有合适能力时，指导模型发现并安装第三方 skill；安装第三方代码必须先显式确认 |
-| `ha-browser` | meta | 全局可见 | `browser` 工具自动化方法论：`status → tabs → snapshot → act` 循环、stale-ref 恢复、登录 / 2FA / 验证码阻塞处理（`@skill` allowlist 成员） |
-| `ha-mac-control` | meta | 全局可见（macOS-only） | `mac_control` 原生 macOS 桌面控制方法论：apps / dock / spaces / 视觉定位 / 菜单 / 窗口 / 对话框循环（`@skill` allowlist 成员） |
-| `ha-knowledge` | meta | 全局可见 | 知识空间笔记工作方法：用 `note_*` 工具捕获 / 组织 / 关联 / 检索 / 维护 Markdown 笔记 |
-| `ha-logs` | meta | `requires.anyBins: [sqlite3, python3]` | 自助诊断：经 `exec` 直查本地 `logs / sessions / background_jobs` SQLite（只读 SELECT）排查问题、分析用量 |
-| `ha-data-stores` | meta | 全局可见 | TPA CoWork Agent 本地数据存储地图 + 安全只读查询流程（sessions.db / memory.db / logs.db / knowledge index 等） |
-| `ha-self-diagnosis` | meta | 全局可见 | TPA CoWork Agent 自我理解与问题上报：解释内部运作、诊断日志、创建 / 提交 GitHub issue |
-| `ha-self-update` | meta | `always: false` | 通过对话检查并安装 TPA CoWork Agent 更新；覆盖桌面 bundle / server 包管理 / headless 单 binary 三形态，始终经 `ask_user_question` 用户确认 |
+| `tpa-settings` | meta | `always: true`（跳过依赖检查） | 通过自然语言查看 / 修改 TPA CoWork Agent 设置，指导模型使用 `get_settings` / `update_settings` / settings backup 工具，不直接编辑配置文件 |
+| `tpa-skill-creator` | meta | `always: true`（跳过依赖检查） | 创建、编辑、改进、审核 TPA CoWork Agent skill；包含格式规范、评估思路和 frontmatter 指南 |
+| `tpa-find-skills` | meta | `always: true`（跳过依赖检查） | 当当前 catalog 没有合适能力时，指导模型发现并安装第三方 skill；安装第三方代码必须先显式确认 |
+| `tpa-browser` | meta | 全局可见 | `browser` 工具自动化方法论：`status → tabs → snapshot → act` 循环、stale-ref 恢复、登录 / 2FA / 验证码阻塞处理（`@skill` allowlist 成员） |
+| `tpa-mac-control` | meta | 全局可见（macOS-only） | `mac_control` 原生 macOS 桌面控制方法论：apps / dock / spaces / 视觉定位 / 菜单 / 窗口 / 对话框循环（`@skill` allowlist 成员） |
+| `tpa-knowledge` | meta | 全局可见 | 知识空间笔记工作方法：用 `note_*` 工具捕获 / 组织 / 关联 / 检索 / 维护 Markdown 笔记 |
+| `tpa-logs` | meta | `requires.anyBins: [sqlite3, python3]` | 自助诊断：经 `exec` 直查本地 `logs / sessions / background_jobs` SQLite（只读 SELECT）排查问题、分析用量 |
+| `tpa-data-stores` | meta | 全局可见 | TPA CoWork Agent 本地数据存储地图 + 安全只读查询流程（sessions.db / memory.db / logs.db / knowledge index 等） |
+| `tpa-self-diagnosis` | meta | 全局可见 | TPA CoWork Agent 自我理解与问题上报：解释内部运作、诊断日志、创建 / 提交 GitHub issue |
+| `tpa-self-update` | meta | `always: false` | 通过对话检查并安装 TPA CoWork Agent 更新；覆盖桌面 bundle / server 包管理 / headless 单 binary 三形态，始终经 `ask_user_question` 用户确认 |
 | `feishu` | 办公集成 | `paths:` 飞书 / feishu / lark 文件触发；`allowed-tools:` 白名单 `feishu_*` + `read` / `web_search` | 飞书 / Lark workspace 操作：云文档 / 多维表格 / 云盘 / 知识库 / 审批 / 日历 / 联系人 / 招聘 |
-| `ha-coding-common` | 原生编程方法论 | `paths:` 代码文件触发；Coding Profile 可按名推荐 | 仓库优先、保护用户改动、任务分级、范围控制和交付基线 |
-| `ha-coding-plan` | 原生编程方法论 | `paths:` 代码文件触发；复杂 Feature 推荐 | 基于现有代码设计依赖、关键文件、风险、验证和完成信号；普通执行模式计划后继续推进 |
-| `ha-debug` | 原生编程方法论 | `paths:` 代码文件触发；Debug 推荐 | 复现或刻画故障、可证伪假设、最小根因修复和回归证据 |
-| `ha-test-strategy` | 原生编程方法论 | `paths:` 代码文件触发；Debug / 小 Feature 推荐 | 按风险选择 test-first、regression-first、characterization、集成、E2E 或人工证据 |
-| `ha-code-review` | 原生编程方法论 | `paths:` 代码文件触发；Review 推荐 | findings-first；候选发现与独立验证分离，高风险时才启用独立 reviewer |
-| `ha-multi-agent-coding` | 原生编程方法论 | `paths:` 代码文件触发；Workflow 推荐 | 有界 fan-out、隔离、结构化阶段结果、主动查询、steer/cancel 和主 Agent 综合 |
-| `ha-verify` | 原生编程方法论 | `paths:` 代码文件触发；所有完成审计按需使用 | criteria-to-evidence、最小充分检查、证据时效和诚实完成审计 |
-| `ha-workflow-script` | 原生编程方法论 | `paths:` 代码文件触发；Workflow Script 推荐 | V4 durable Workflow：typed result、parallel/pipeline、预算、replay、阶段消费和 closure gate |
+| `tpa-coding-common` | 原生编程方法论 | `paths:` 代码文件触发；Coding Profile 可按名推荐 | 仓库优先、保护用户改动、任务分级、范围控制和交付基线 |
+| `tpa-coding-plan` | 原生编程方法论 | `paths:` 代码文件触发；复杂 Feature 推荐 | 基于现有代码设计依赖、关键文件、风险、验证和完成信号；普通执行模式计划后继续推进 |
+| `tpa-debug` | 原生编程方法论 | `paths:` 代码文件触发；Debug 推荐 | 复现或刻画故障、可证伪假设、最小根因修复和回归证据 |
+| `tpa-test-strategy` | 原生编程方法论 | `paths:` 代码文件触发；Debug / 小 Feature 推荐 | 按风险选择 test-first、regression-first、characterization、集成、E2E 或人工证据 |
+| `tpa-code-review` | 原生编程方法论 | `paths:` 代码文件触发；Review 推荐 | findings-first；候选发现与独立验证分离，高风险时才启用独立 reviewer |
+| `tpa-multi-agent-coding` | 原生编程方法论 | `paths:` 代码文件触发；Workflow 推荐 | 有界 fan-out、隔离、结构化阶段结果、主动查询、steer/cancel 和主 Agent 综合 |
+| `tpa-verify` | 原生编程方法论 | `paths:` 代码文件触发；所有完成审计按需使用 | criteria-to-evidence、最小充分检查、证据时效和诚实完成审计 |
+| `tpa-workflow-script` | 原生编程方法论 | `paths:` 代码文件触发；Workflow Script 推荐 | V4 durable Workflow：typed result、parallel/pipeline、预算、replay、阶段消费和 closure gate |
 | `meeting-notes` | 办公方法论 | 全局可见 | 会议记录 / standup / 1:1 纪要模板：议程、决策、行动项、开放问题 |
 | `email-draft` | 办公方法论 | 全局可见 | 邮件起草、润色、翻译和回复，输出 subject / greeting / body / sign-off |
 | `status-report` | 办公方法论 | 全局可见 | 周报 / 月报 / 项目进展，覆盖 shipped / in-flight / blocked / metrics |
@@ -1749,13 +1749,13 @@ deprecated stub、双轨 catalog 或 feature flag。历史 `CHANGELOG.md` 记录
 
 | 场景 | 推荐 skill | 计划策略 |
 |------|------------|----------|
-| Review | `ha-code-review`, `ha-verify` | review-only，不自动修复 |
-| Debug | `ha-debug`, `ha-test-strategy`, `ha-verify` | 证据和回归优先 |
-| 小 Feature | `ha-coding-common`, `ha-test-strategy`, `ha-verify` | 直接实施，不做 plan 仪式 |
-| 复杂 Feature | `ha-coding-common`, `ha-coding-plan`, `ha-verify` | 基于仓库证据计划，非 Plan Mode 时继续执行 |
-| Workflow Script | `ha-workflow-script`, `ha-multi-agent-coding`, `ha-verify` | durable script + 有界编排 |
-| Verify | `ha-verify` | 逐要求核对直接证据 |
-| General coding | `ha-coding-common`, `ha-verify` | 轻量执行 |
+| Review | `tpa-code-review`, `tpa-verify` | review-only，不自动修复 |
+| Debug | `tpa-debug`, `tpa-test-strategy`, `tpa-verify` | 证据和回归优先 |
+| 小 Feature | `tpa-coding-common`, `tpa-test-strategy`, `tpa-verify` | 直接实施，不做 plan 仪式 |
+| 复杂 Feature | `tpa-coding-common`, `tpa-coding-plan`, `tpa-verify` | 基于仓库证据计划，非 Plan Mode 时继续执行 |
+| Workflow Script | `tpa-workflow-script`, `tpa-multi-agent-coding`, `tpa-verify` | durable script + 有界编排 |
+| Verify | `tpa-verify` | 逐要求核对直接证据 |
+| General coding | `tpa-coding-common`, `tpa-verify` | 轻量执行 |
 
 “复杂 Feature”由跨模块、迁移、架构、Phase/V2+、端到端、完整实现或长输入
 等保守信号判定。泛化的“工作流、复核、验证、报错”只有同时存在 coding
@@ -1819,7 +1819,7 @@ primary-runtime Office skills。`office-skill-smoke-test.py` 是端到端 smoke�
 
 ### settings 技能工具
 
-`get_settings` / `update_settings` / settings backup 工具是 deferred 工具（通过 `tool_search` 发现），`ha-settings` 只提供何时、如何安全调用它们的工作流：
+`get_settings` / `update_settings` / settings backup 工具是 deferred 工具（通过 `tool_search` 发现），`tpa-settings` 只提供何时、如何安全调用它们的工作流：
 
 - **`get_settings(category)`**：读取指定分类的当前设置，返回 JSON。`category: "all"` 返回所有分类概览
 - **`update_settings(category, values)`**：更新指定分类的设置，采用 partial merge 语义（递归深合并），只传需要修改的字段
@@ -1859,7 +1859,7 @@ primary-runtime Office skills。`office-skill-smoke-test.py` 是端到端 smoke�
 | **插件集成** | 嵌套 `skills/` 检测 | 无 | Plugin manifest 声明 |
 | **Skill 进度 UI** | `SkillProgressBlock` 🧩 独立渲染 | `SkillTool/UI.tsx` 子 Agent 内嵌 | — |
 | **Draft 审核** | ✓（`status: draft` + auto_review 管线）| — | — |
-| **Skill Marketplace / Import** | Quick Import 探测本机 Claude Code / Anthropic marketplace / OpenClaw / Hermes 目录；`ha-find-skills` 可指导外部查找 | Skill Search（实验特性）| ClawHub 集成 |
+| **Skill Marketplace / Import** | Quick Import 探测本机 Claude Code / Anthropic marketplace / OpenClaw / Hermes 目录；`tpa-find-skills` 可指导外部查找 | Skill Search（实验特性）| ClawHub 集成 |
 
 **TPA CoWork Agent 独有或优于 Claude Code 的点：**
 
@@ -1886,7 +1886,7 @@ primary-runtime Office skills。`office-skill-smoke-test.py` 是端到端 smoke�
 推荐用脚手架脚本一键生成骨架——带全部 frontmatter 字段 stub + 按需的 `scripts/` / `references/` / `assets/` 子目录：
 
 ```bash
-python skills/ha-skill-creator/scripts/init_skill.py my-tool \
+python skills/tpa-skill-creator/scripts/init_skill.py my-tool \
   --resources scripts,references \
   --context fork \
   --examples

@@ -251,9 +251,9 @@ impl CodingSessionProfile {
 
     fn for_feature(requires_plan: bool) -> Self {
         let recommended_skills = if requires_plan {
-            vec!["ha-coding-common", "ha-coding-plan", "ha-verify"]
+            vec!["tpa-coding-common", "tpa-coding-plan", "tpa-verify"]
         } else {
-            vec!["ha-coding-common", "ha-test-strategy", "ha-verify"]
+            vec!["tpa-coding-common", "tpa-test-strategy", "tpa-verify"]
         };
         let task_flow = if requires_plan {
             TaskFlow::PlanImplement
@@ -291,7 +291,7 @@ impl CodingSessionProfile {
                 requires_plan: false,
                 requires_script: false,
                 requires_task_truth: false,
-                recommended_skills: vec!["ha-code-review", "ha-verify"],
+                recommended_skills: vec!["tpa-code-review", "tpa-verify"],
                 verification_policy: "inspect the review target; run only cheap targeted checks if they materially improve confidence",
                 risk_level: "medium",
                 discipline: vec![
@@ -306,7 +306,7 @@ impl CodingSessionProfile {
                 requires_plan: false,
                 requires_script: false,
                 requires_task_truth: true,
-                recommended_skills: vec!["ha-debug", "ha-test-strategy", "ha-verify"],
+                recommended_skills: vec!["tpa-debug", "tpa-test-strategy", "tpa-verify"],
                 verification_policy: "reproduce or characterize the failure first; verify with the narrowest regression check",
                 risk_level: "medium",
                 discipline: vec![
@@ -323,9 +323,9 @@ impl CodingSessionProfile {
                 requires_script: true,
                 requires_task_truth: true,
                 recommended_skills: vec![
-                    "ha-workflow-script",
-                    "ha-multi-agent-coding",
-                    "ha-verify",
+                    "tpa-workflow-script",
+                    "tpa-multi-agent-coding",
+                    "tpa-verify",
                 ],
                 verification_policy: "review script gates, replay safety, stop conditions, and targeted validation commands",
                 risk_level: "high",
@@ -341,7 +341,7 @@ impl CodingSessionProfile {
                 requires_plan: false,
                 requires_script: false,
                 requires_task_truth: false,
-                recommended_skills: vec!["ha-verify"],
+                recommended_skills: vec!["tpa-verify"],
                 verification_policy: "map each requirement to direct evidence; run the smallest allowed checks",
                 risk_level: "low",
                 discipline: vec![
@@ -356,7 +356,7 @@ impl CodingSessionProfile {
                 requires_plan: false,
                 requires_script: false,
                 requires_task_truth: true,
-                recommended_skills: vec!["ha-coding-common", "ha-verify"],
+                recommended_skills: vec!["tpa-coding-common", "tpa-verify"],
                 verification_policy: "use targeted verification that matches the touched surface",
                 risk_level: "low",
                 discipline: vec![
@@ -462,7 +462,7 @@ mod tests {
         let p = CodingSessionProfile::classify("实现 file search v2").unwrap();
         assert_eq!(p.task_kind, CodingTaskKind::Feature);
         assert!(p.requires_plan);
-        assert!(p.recommended_skills.contains(&"ha-coding-plan"));
+        assert!(p.recommended_skills.contains(&"tpa-coding-plan"));
         assert!(p
             .render_prompt_block()
             .contains("do not default to full suites"));
@@ -474,7 +474,7 @@ mod tests {
         assert_eq!(p.task_kind, CodingTaskKind::Feature);
         assert_eq!(p.task_flow, TaskFlow::LightCoding);
         assert!(!p.requires_plan);
-        assert!(p.recommended_skills.contains(&"ha-test-strategy"));
+        assert!(p.recommended_skills.contains(&"tpa-test-strategy"));
     }
 
     #[test]
@@ -482,7 +482,7 @@ mod tests {
         let p = CodingSessionProfile::classify("设计 workflow.js 的执行模式").unwrap();
         assert_eq!(p.task_kind, CodingTaskKind::WorkflowScript);
         assert!(p.requires_script);
-        assert!(p.recommended_skills.contains(&"ha-multi-agent-coding"));
+        assert!(p.recommended_skills.contains(&"tpa-multi-agent-coding"));
         assert!(p.render_prompt_block().contains("runtime-derived"));
     }
 

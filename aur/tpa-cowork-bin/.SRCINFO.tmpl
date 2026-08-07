@@ -1,0 +1,21 @@
+pkgbase = tpa-cowork-bin
+	pkgdesc = Local-first AI assistant desktop app — cross-device sessions, IM channel routing
+	pkgver = __PKGVER__
+	pkgrel = 1
+	url = https://github.com/zzq2022/Tpa-cowork
+	arch = x86_64
+	arch = aarch64
+	license = MIT
+	depends = webkit2gtk-4.1
+	depends = gtk3
+	depends = libayatana-appindicator
+	provides = tpa-cowork
+	conflicts = tpa-cowork
+	options = !strip
+	options = !debug
+	source_x86_64 = tpa-cowork-__PKGVER__-x86_64.deb::https://github.com/zzq2022/Tpa-cowork/releases/download/v__PKGVER__/TPA.CoWork___PKGVER___amd64.deb
+	sha256sums_x86_64 = __SHA256_X86_64__
+	source_aarch64 = tpa-cowork-__PKGVER__-aarch64.deb::https://github.com/zzq2022/Tpa-cowork/releases/download/v__PKGVER__/TPA.CoWork___PKGVER___arm64.deb
+	sha256sums_aarch64 = __SHA256_AARCH64__
+
+pkgname = tpa-cowork-bin

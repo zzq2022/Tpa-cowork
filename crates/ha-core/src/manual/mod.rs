@@ -8,7 +8,7 @@
 //! - **GUI**: Tauri / HTTP commands call [`get_bundle`] / [`search`] which
 //!   read the embedded bytes in-memory — no disk copy, works in every run
 //!   mode including the standalone Web GUI.
-//! - **Agent**: the `ha-manual` skill reads/greps the stable on-disk mirror
+//! - **Agent**: the `tpa-manual` skill reads/greps the stable on-disk mirror
 //!   at `<data-dir>/manual/{zh,en}/NN.md` maintained by
 //!   [`ensure_local_manual`] (fingerprint marker + byte-diff mirror, modeled
 //!   on the extension's stable-copy machinery).
@@ -150,12 +150,12 @@ mod tests {
         }
     }
 
-    /// The ha-manual skill's inline routing table must reference exactly the
+    /// The tpa-manual skill's inline routing table must reference exactly the
     /// chapters that exist — a re-numbered or renamed chapter with a stale
     /// table would silently route the agent to the wrong file.
     #[test]
     fn ha_manual_skill_routing_table_matches_chapters() {
-        let skill = include_str!("../../../../skills/ha-manual/SKILL.md");
+        let skill = include_str!("../../../../skills/tpa-manual/SKILL.md");
         let referenced: std::collections::BTreeSet<u8> = regex::Regex::new(r"`(\d{2})\.md`")
             .unwrap()
             .captures_iter(skill)
@@ -169,7 +169,7 @@ mod tests {
             .collect();
         assert_eq!(
             referenced, existing,
-            "skills/ha-manual/SKILL.md routing table drifted from docs/user-guide chapters"
+            "skills/tpa-manual/SKILL.md routing table drifted from docs/user-guide chapters"
         );
         assert!(
             skill.contains("`index.md`"),

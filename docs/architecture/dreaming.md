@@ -278,7 +278,7 @@ V2 动态候选受 `memory.recall.maxSelected/maxTokens` 约束，不占用或�
 | `deepResolver.autoMergeNearDuplicates` | `true` | 允许自动合并被二次佐证的近重复；关闭后冲突仍可进待审 |
 | `deepResolver.autoMergeSimilarity` | `0.84` | 无 alias 边时的词法佐证阈值，读时钳 `[0.70,0.98]` |
 
-GUI 在「设置 → 记忆 → Dreaming」（`DreamingPanel`，含 idle 倒计时与 cron 可视化编辑器）；`ha-settings` 技能可读写同一字段集（风险等级 MEDIUM，登记于 [`skills/ha-settings/SKILL.md`](../../skills/ha-settings/SKILL.md)），二者零偏差。Dreaming 负责 claim 的生成与整理，不等于允许在每轮对话中自动召回：V2 是否自动检索由全局 `memory.recall.enabled`（默认关闭）控制，是否纳入 claim 由 `memory.recall.includeClaims`（默认开启、但仅在自动召回有效时生效）控制。`ActiveMemoryConfig.include_claims`（per-agent，默认关）仅保留给旧兼容 / V1 rollback 链。
+GUI 在「设置 → 记忆 → Dreaming」（`DreamingPanel`，含 idle 倒计时与 cron 可视化编辑器）；`tpa-settings` 技能可读写同一字段集（风险等级 MEDIUM，登记于 [`skills/tpa-settings/SKILL.md`](../../skills/tpa-settings/SKILL.md)），二者零偏差。Dreaming 负责 claim 的生成与整理，不等于允许在每轮对话中自动召回：V2 是否自动检索由全局 `memory.recall.enabled`（默认关闭）控制，是否纳入 claim 由 `memory.recall.includeClaims`（默认开启、但仅在自动召回有效时生效）控制。`ActiveMemoryConfig.include_claims`（per-agent，默认关）仅保留给旧兼容 / V1 rollback 链。
 
 ## API / UI 表面
 

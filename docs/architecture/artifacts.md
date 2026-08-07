@@ -12,7 +12,7 @@ Artifacts 是 Canvas 之上的持久化控制面。Canvas 继续负责项目目�
 
 ```mermaid
 flowchart LR
-    Producer["Agent / ha-data-analytics / Owner import"]
+    Producer["Agent / tpa-data-analytics / Owner import"]
     File["workspace 中的 HTML / Markdown / artifact.json"]
     Service["ha-core::artifacts::ArtifactService"]
     Canvas["Canvas DB + managed project directory"]
@@ -157,7 +157,7 @@ Agent 工具中的 `file_path` 始终解析为 runtime workspace 路径。Owner 
 - canonical sources；
 - data-quality 与 claim-validation 结果。
 
-详细字段示例和 authoring 约束见 [`skills/ha-data-analytics/references/analysis-artifact-v1.md`](../../skills/ha-data-analytics/references/analysis-artifact-v1.md)。Core 导入器至少拒绝：
+详细字段示例和 authoring 约束见 [`skills/tpa-data-analytics/references/analysis-artifact-v1.md`](../../skills/tpa-data-analytics/references/analysis-artifact-v1.md)。Core 导入器至少拒绝：
 
 - schema 不匹配、问题为空或 status 不是 `ready|partial|blocked`；
 - 来源缺稳定 ID/64 位 SHA-256，或存在重复 source ID；
@@ -171,7 +171,7 @@ Agent 工具中的 `file_path` 始终解析为 runtime workspace 路径。Owner 
 
 ## Hope Data Analytics producer
 
-内置 `skills/ha-data-analytics/` 采用固定阶段：
+内置 `skills/tpa-data-analytics/` 采用固定阶段：
 
 1. context：问题、受众、决策、口径、范围；
 2. sources：附件、CSV/XLSX、项目文件、知识空间和当前已安装连接器；
@@ -404,4 +404,4 @@ Canvas renderer 本身也已经离线化：不再加载 marked、highlight、Mer
 | `src/lib/transport*.ts` | Tauri/HTTP 统一前端契约 |
 | `src/components/artifacts/ArtifactsView.tsx` | Gallery、详情、复核与导出 UI |
 | `src/components/artifacts/ArtifactViewer.tsx` | Gallery/Canvas 共享 iframe 阅读器 |
-| `skills/ha-data-analytics/` | Hope 原生 Data Analytics producer |
+| `skills/tpa-data-analytics/` | Hope 原生 Data Analytics producer |

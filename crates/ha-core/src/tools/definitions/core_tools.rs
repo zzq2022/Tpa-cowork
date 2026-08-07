@@ -626,7 +626,7 @@ pub fn get_available_tools() -> Vec<ToolDefinition> {
         // ── Browser Control ──────────────────────────────────────
         ToolDefinition {
             name: TOOL_BROWSER.into(),
-            description: "Drive Chrome with Hope Agent's browser backend. Product policy is Chrome Extension + Native Messaging first, with CDP fallback only for actions that do not require the user's real Chrome tabs or logged-in session state. Eight high-level actions cover the full surface; see the `ha-browser` skill for the standard `status → tabs → snapshot → act` loop and stale-ref recovery rules. For explicit CDP lifecycle, use `profile.op=launch` with `profile=managed` (default, ephemeral isolated profile) or `profile=user_attach` (persistent, port 9222). Users can configure additional profiles in settings → Browser → Profiles.".into(),
+            description: "Drive Chrome with Hope Agent's browser backend. Product policy is Chrome Extension + Native Messaging first, with CDP fallback only for actions that do not require the user's real Chrome tabs or logged-in session state. Eight high-level actions cover the full surface; see the `tpa-browser` skill for the standard `status → tabs → snapshot → act` loop and stale-ref recovery rules. For explicit CDP lifecycle, use `profile.op=launch` with `profile=managed` (default, ephemeral isolated profile) or `profile=user_attach` (persistent, port 9222). Users can configure additional profiles in settings → Browser → Profiles.".into(),
             tier: ToolTier::Standard { default_for_main: true, default_for_others: true, default_deferred: true },
             internal: false,
             concurrent_safe: false,

@@ -8,8 +8,8 @@ const extensionDir = path.resolve(scriptDir, "..")
 const pagesDir = path.join(extensionDir, "test-pages")
 
 const checkMode = process.argv.includes("--check")
-const mainPort = checkMode ? 0 : Number(process.env.HOPE_EXTENSION_SMOKE_MAIN_PORT || 17610)
-const framePort = checkMode ? 0 : Number(process.env.HOPE_EXTENSION_SMOKE_FRAME_PORT || 17611)
+const mainPort = checkMode ? 0 : Number(process.env.TPA_COWORK_EXTENSION_SMOKE_MAIN_PORT || 17610)
+const framePort = checkMode ? 0 : Number(process.env.TPA_COWORK_EXTENSION_SMOKE_FRAME_PORT || 17611)
 
 const mainServer = makeServer("main")
 const frameServer = makeServer("frame")
@@ -38,7 +38,7 @@ if (checkMode) {
   console.log("Manual browser smoke:")
   console.log("  1. Load the unpacked extension and install the native host.")
   console.log("  2. Open the root URL in Chrome.")
-  console.log("  3. In Hope Agent, claim the tab and run browser snapshot/action/screenshot checks.")
+  console.log("  3. In TPA CoWork, claim the tab and run browser snapshot/action/screenshot checks.")
   console.log("  4. Verify browser.status shows frame tree + matched flat sessions.")
   console.log("")
   console.log("Press Ctrl+C to stop.")
@@ -82,17 +82,17 @@ function makeServer(kind) {
 
 async function runCheck(rootUrl, frameUrl) {
   const root = await fetchText(rootUrl)
-  assertIncludes(root, 'data-hope-smoke-page="root"', "root marker")
+  assertIncludes(root, 'data-tpa-cowork-smoke-page="root"', "root marker")
   assertIncludes(root, frameUrl, "cross-origin frame URL")
   assertIncludes(root, 'id="same-origin-frame"', "same-origin frame")
   assertIncludes(root, 'id="cross-origin-frame"', "cross-origin frame")
 
   const sameFrame = await fetchText(`${mainOrigin}/same-origin-frame.html`)
-  assertIncludes(sameFrame, 'data-hope-smoke-page="same-origin-frame"', "same-origin marker")
+  assertIncludes(sameFrame, 'data-tpa-cowork-smoke-page="same-origin-frame"', "same-origin marker")
   assertIncludes(sameFrame, "Same Frame Drag Source", "same-origin drag source")
 
   const crossFrame = await fetchText(frameUrl)
-  assertIncludes(crossFrame, 'data-hope-smoke-page="cross-origin-frame"', "cross-origin marker")
+  assertIncludes(crossFrame, 'data-tpa-cowork-smoke-page="cross-origin-frame"', "cross-origin marker")
   assertIncludes(crossFrame, "Cross Frame Drag Source", "cross-origin drag source")
   assertIncludes(crossFrame, "Cross Frame Crop Target", "cross-origin crop target")
 }

@@ -26,15 +26,15 @@ use serde::Serialize;
 use super::{build_skill_context_payload, get_invocable_skills, SkillEntry};
 
 /// Curated, fixed allowlist of built-in skills offered by the `@skill` menu.
-/// Order here is the menu display order. `ha-mac-control` is macOS-only (gated
+/// Order here is the menu display order. `tpa-mac-control` is macOS-only (gated
 /// in [`is_mentionable_on_this_os`]); the rest are cross-platform.
 pub const AT_MENTIONABLE_SKILLS: &[&str] = &[
     "office-docx",
     "office-pptx",
     "office-xlsx",
-    "ha-data-analytics",
-    "ha-browser",
-    "ha-mac-control",
+    "tpa-data-analytics",
+    "tpa-browser",
+    "tpa-mac-control",
 ];
 
 /// One row of the `@skill` menu. `name` is the canonical skill id (also the
@@ -48,7 +48,7 @@ pub struct MentionableSkill {
     pub description: String,
 }
 
-/// macOS-only hard gate. `ha-mac-control` drives the native macOS desktop and
+/// macOS-only hard gate. `tpa-mac-control` drives the native macOS desktop and
 /// is meaningless elsewhere, so it's hidden from the menu and not resolvable
 /// off macOS.
 // `cfg!` folds to a literal per target, collapsing this into `true`/`!=` so
@@ -56,7 +56,7 @@ pub struct MentionableSkill {
 // readability across platforms.
 #[allow(clippy::needless_bool)]
 fn is_mentionable_on_this_os(name: &str) -> bool {
-    if name == "ha-mac-control" {
+    if name == "tpa-mac-control" {
         cfg!(target_os = "macos")
     } else {
         true
@@ -182,9 +182,9 @@ mod tests {
     #[test]
     fn scans_multiple_mentions_in_order() {
         let names = scan_skill_mention_names(
-            "make a deck [@PPT](#skill:office-pptx) then screenshot it [@Browser](#skill:ha-browser)",
+            "make a deck [@PPT](#skill:office-pptx) then screenshot it [@Browser](#skill:tpa-browser)",
         );
-        assert_eq!(names, vec!["office-pptx", "ha-browser"]);
+        assert_eq!(names, vec!["office-pptx", "tpa-browser"]);
     }
 
     #[test]
@@ -205,8 +205,8 @@ mod tests {
 
     #[test]
     fn scans_data_analytics_mention() {
-        let names = scan_skill_mention_names("分析这个 CSV [@数据分析](#skill:ha-data-analytics)");
-        assert_eq!(names, vec!["ha-data-analytics"]);
+        let names = scan_skill_mention_names("分析这个 CSV [@数据分析](#skill:tpa-data-analytics)");
+        assert_eq!(names, vec!["tpa-data-analytics"]);
     }
 
     #[test]
@@ -226,8 +226,8 @@ mod tests {
     #[test]
     fn stops_at_non_token_chars() {
         // The closing `)` delimits the id; trailing punctuation is excluded.
-        let names = scan_skill_mention_names("use [@Mac](#skill:ha-mac-control), please");
-        assert_eq!(names, vec!["ha-mac-control"]);
+        let names = scan_skill_mention_names("use [@Mac](#skill:tpa-mac-control), please");
+        assert_eq!(names, vec!["tpa-mac-control"]);
     }
 
     #[test]
@@ -241,18 +241,18 @@ mod tests {
         assert!(AT_MENTIONABLE_SKILLS.contains(&"office-docx"));
         assert!(AT_MENTIONABLE_SKILLS.contains(&"office-pptx"));
         assert!(AT_MENTIONABLE_SKILLS.contains(&"office-xlsx"));
-        assert!(AT_MENTIONABLE_SKILLS.contains(&"ha-data-analytics"));
-        assert!(AT_MENTIONABLE_SKILLS.contains(&"ha-browser"));
-        assert!(AT_MENTIONABLE_SKILLS.contains(&"ha-mac-control"));
+        assert!(AT_MENTIONABLE_SKILLS.contains(&"tpa-data-analytics"));
+        assert!(AT_MENTIONABLE_SKILLS.contains(&"tpa-browser"));
+        assert!(AT_MENTIONABLE_SKILLS.contains(&"tpa-mac-control"));
     }
 
     #[test]
     fn mac_control_gated_to_macos() {
         assert_eq!(
-            is_mentionable_on_this_os("ha-mac-control"),
+            is_mentionable_on_this_os("tpa-mac-control"),
             cfg!(target_os = "macos")
         );
         assert!(is_mentionable_on_this_os("office-docx"));
-        assert!(is_mentionable_on_this_os("ha-browser"));
+        assert!(is_mentionable_on_this_os("tpa-browser"));
     }
 }

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://hope-agent.local/evals/model-campaign-suite-v1.schema.json",
+  "$id": "https://tpa-cowork.local/evals/model-campaign-suite-v1.schema.json",
   "type": "object",
   "additionalProperties": false,
   "required": [

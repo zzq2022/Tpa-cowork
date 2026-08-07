@@ -1,0 +1,11 @@
+# Single source of truth for the TPA CoWork product identity.
+display_name = "TPA CoWork"
+slug = "tpa-cowork"
+compact_name = "TPACoWork"
+agent_name = "TPA-Agent"
+data_dir = ".tpa-cowork"
+env_prefix = "TPA_COWORK_"
+binary_name = "tpa-cowork"
+service_name = "tpa-cowork"
+user_agent = "TPA-CoWork"
+native_host_id = "com.tpacowork.chrome"

@@ -30,8 +30,8 @@ __pycache__/
 *.pyc
 *.pyo
 
-# Hope Agent runtime data
-.hope-agent/
+# TPA CoWork runtime data
+.tpa-cowork/
 
 # IDE
 .vscode/

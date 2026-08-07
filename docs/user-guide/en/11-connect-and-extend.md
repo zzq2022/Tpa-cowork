@@ -76,11 +76,11 @@ A skill equips the AI with **specialized methodology / an operating manual**—a
 
 TPA CoWork includes a set of skills, organized by category:
 
-- **Platform self-management**: `ha-settings` (change settings by conversation), `ha-skill-creator` (create / edit skills), `ha-find-skills` (discover and install third-party skills), `ha-browser` (browser automation methods), `ha-mac-control` (macOS control methods, macOS only), `ha-knowledge` (Knowledge Space workflow), `ha-logs` / `ha-data-stores` (read-only inspection of local data), `ha-self-diagnosis` (self-diagnosis + filing a GitHub issue), `ha-self-update` (check for and install updates).
+- **Platform self-management**: `tpa-settings` (change settings by conversation), `tpa-skill-creator` (create / edit skills), `tpa-find-skills` (discover and install third-party skills), `tpa-browser` (browser automation methods), `tpa-mac-control` (macOS control methods, macOS only), `tpa-knowledge` (Knowledge Space workflow), `tpa-logs` / `tpa-data-stores` (read-only inspection of local data), `tpa-self-diagnosis` (self-diagnosis + filing a GitHub issue), `tpa-self-update` (check for and install updates).
 - **Programming methodology**: eight of them—implementation, planning, debugging, test strategy, code review, multi-Agent collaboration, completion verification, workflow authoring, and more (recommended and combined automatically per task).
 - **Office trio** (requires python3): `office-docx` (Word), `office-xlsx` (Excel), `office-pptx` (PowerPoint)—create, edit, review, and deliver, with support for real tables, charts, formulas, comments and tracked changes, and more.
 - **Office methodology**: meeting minutes, email drafting, weekly/monthly reports, chart drawing.
-- **Integrations**: `feishu` (over 30 tools spanning Feishu cloud documents / Bitable / cloud drive / knowledge base / approvals / calendar / contacts / recruiting, and more), `ha-data-analytics` (local data analysis + generating shareable reports).
+- **Integrations**: `feishu` (over 30 tools spanning Feishu cloud documents / Bitable / cloud drive / knowledge base / approvals / calendar / contacts / recruiting, and more), `tpa-data-analytics` (local data analysis + generating shareable reports).
 
 ### Three activation methods
 
@@ -92,8 +92,8 @@ TPA CoWork includes a set of skills, organized by category:
 
 ### Authoring and installing
 
-- **Authoring**: use the `ha-skill-creator` skill, or create one under "Settings → Skills." Skills the AI creates on its own enter a **draft** state; they don't take effect immediately and wait for your review (passing through a security scan and other gates).
-- **Installing third-party skills**: `ha-find-skills` searches and discovers skills from ClawHub, Skillhub (better suited to users in mainland China), or GitHub. **Installing third-party skills is a high-risk operation** (third-party code enters the AI's toolchain), so the AI must first show you the candidates and get your **explicit confirmation** before installing.
+- **Authoring**: use the `tpa-skill-creator` skill, or create one under "Settings → Skills." Skills the AI creates on its own enter a **draft** state; they don't take effect immediately and wait for your review (passing through a security scan and other gates).
+- **Installing third-party skills**: `tpa-find-skills` searches and discovers skills from ClawHub, Skillhub (better suited to users in mainland China), or GitHub. **Installing third-party skills is a high-risk operation** (third-party code enters the AI's toolchain), so the AI must first show you the candidates and get your **explicit confirmation** before installing.
 - **Compatibility standard**: follows the [agentskills.io](https://agentskills.io) open standard, and is also compatible with skills from ecosystems like Claude Code and OpenAI Codex, which can be imported directly.
 
 ---

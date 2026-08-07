@@ -274,7 +274,7 @@ sequenceDiagram
 | `job_timeout_secs` | 0 | `0` = 不加 cron 层超时；正数钳 `[30, 7200]` | 全局 per-run wall-clock 预算（§5）；可被 per-job `CronJob.job_timeout_secs` 覆盖（C19） |
 | `at_grace_secs` | 300 | 仅上限钳 7 天；`0` = 严格不补跑（**不钳地板**） | At 一次性任务 late-fire 补跑窗口（§7） |
 
-- **三件套入口**：GUI = 设置页「定时任务」分区 [`CronSettingsPanel`](../../src/components/settings/CronSettingsPanel.tsx)（`SettingsView` 的 `activeSection === "cron"` 挂载）；cron 面板头部的齿轮按钮经 `onOpenSettings("cron")` 深链跳进来，**cron 面板自身不再内嵌配置输入框**。技能 = [`tools/settings.rs`](../../crates/ha-core/src/tools/settings.rs) `"cron"` category（[`ha-settings` SKILL.md](../../skills/ha-settings/SKILL.md) 风险表已登记）；命令 = `get_cron_config` / `save_cron_config`（Tauri + HTTP `GET` / `PUT /api/config/cron`）。
+- **三件套入口**：GUI = 设置页「定时任务」分区 [`CronSettingsPanel`](../../src/components/settings/CronSettingsPanel.tsx)（`SettingsView` 的 `activeSection === "cron"` 挂载）；cron 面板头部的齿轮按钮经 `onOpenSettings("cron")` 深链跳进来，**cron 面板自身不再内嵌配置输入框**。技能 = [`tools/settings.rs`](../../crates/ha-core/src/tools/settings.rs) `"cron"` category（[`tpa-settings` SKILL.md](../../skills/tpa-settings/SKILL.md) 风险表已登记）；命令 = `get_cron_config` / `save_cron_config`（Tauri + HTTP `GET` / `PUT /api/config/cron`）。
 - **gotcha（红线）**：`save_cron_config` **替换整个 `CronConfig`**——每次保存必须同时回传全三字段，只传其一会让其余两字段被 serde 默认重置。`CronSettingsPanel` 的三个 commit 回调（`commitMaxConcurrent` / `commitJobTimeout` / `commitAtGrace`）都汇入同一个 `persistCron`，固定带全三字段。
 - **加载门（C18）**：面板内部 `loaded` state 在 `get_cron_config` 成功返回前把三个 `NumberInput` 全部 `disabled`——否则加载失败时组件的硬编码初值（5 / 0 / 300）会在用户随手一改时被整体写回，静默覆盖已有配置。
 

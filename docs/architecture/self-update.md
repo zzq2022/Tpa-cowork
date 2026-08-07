@@ -1,6 +1,6 @@
 # 自升级（Self-Update）
 
-> 关联源码：[`crates/ha-core/src/updater/`](../../crates/ha-core/src/updater) · [`crates/ha-core/src/tools/app_update.rs`](../../crates/ha-core/src/tools/app_update.rs) · [`crates/ha-core/src/tools/definitions/update_tools.rs`](../../crates/ha-core/src/tools/definitions/update_tools.rs) · [`crates/ha-core/src/platform/`](../../crates/ha-core/src/platform) · [`src-tauri/src/commands/update_bridge.rs`](../../src-tauri/src/commands/update_bridge.rs) · [`skills/ha-self-update/SKILL.md`](../../skills/ha-self-update/SKILL.md)
+> 关联源码：[`crates/ha-core/src/updater/`](../../crates/ha-core/src/updater) · [`crates/ha-core/src/tools/app_update.rs`](../../crates/ha-core/src/tools/app_update.rs) · [`crates/ha-core/src/tools/definitions/update_tools.rs`](../../crates/ha-core/src/tools/definitions/update_tools.rs) · [`crates/ha-core/src/platform/`](../../crates/ha-core/src/platform) · [`src-tauri/src/commands/update_bridge.rs`](../../src-tauri/src/commands/update_bridge.rs) · [`skills/tpa-self-update/SKILL.md`](../../skills/tpa-self-update/SKILL.md)
 
 ## 目的
 
@@ -25,7 +25,7 @@ TPA CoWork Agent 是单 binary 多形态产品（桌面 GUI / `hope-agent server
 配置单一真相源 [`AutoUpdateConfig`](../../crates/ha-core/src/updater/config.rs)（`AppConfig.auto_update`，camelCase）：`checkEnabled` / `checkIntervalHours`（钳到 `[1,168]`）/ `autoDownload` / `notify`，全部默认开。桌面与 headless **共享同一份配置**：
 
 - **headless / server**（`hope-agent server`）：[`updater::auto_check::spawn_auto_update_loop`](../../crates/ha-core/src/updater/auto_check.rs) 在 [`app_init::start_background_tasks`](../../crates/ha-core/src/app_init.rs) 的 **primary-gated** 区块 spawn（仿 dreaming cron loop），`!is_desktop()` 才起（桌面用 JS 链路，避免双检查）。每 `checkIntervalHours` 调 `check_update_full()`；发现新版 emit `app_update:available` + 日志（按版本去重）；`autoDownload && recommended_path==SelfContained` 时调 `self_contained::stage_only` 静默下载 + Minisign 校验到 staging（**不 swap**），emit `app_update:staged`。loop 永不自行替换 binary——install 始终走用户确认的 `app_update install`。
-- **桌面**：[`desktopUpdater.ts`](../../src/lib/desktopUpdater.ts) 仍走 `@tauri-apps/plugin-updater`，但读 `auto_update` 配置驱动周期检查；命中后 `autoDownload` 时后台 `update.download()` 预下载（plugin-updater 2.10.1 的 `Update` 支持 download/install 分离）。GUI 入口在「设置 → 关于 → 自动更新」+ 命令 `get_auto_update_config` / `set_auto_update_config`（Tauri + HTTP `GET|PUT /api/config/auto-update`，写时钳 interval）。`ha-settings` 技能侧 `auto_update` 为 **HIGH** 风险（网络 + 重启），写前须二次确认。
+- **桌面**：[`desktopUpdater.ts`](../../src/lib/desktopUpdater.ts) 仍走 `@tauri-apps/plugin-updater`，但读 `auto_update` 配置驱动周期检查；命中后 `autoDownload` 时后台 `update.download()` 预下载（plugin-updater 2.10.1 的 `Update` 支持 download/install 分离）。GUI 入口在「设置 → 关于 → 自动更新」+ 命令 `get_auto_update_config` / `set_auto_update_config`（Tauri + HTTP `GET|PUT /api/config/auto-update`，写时钳 interval）。`tpa-settings` 技能侧 `auto_update` 为 **HIGH** 风险（网络 + 重启），写前须二次确认。
 
 **桌面重启选择前置**：发现新版后 UI 提供「更新并重启」（装完自动 `relaunch()`）与「仅更新（稍后重启）」（装完停在「已就绪」态，等用户显式点重启）两选项——**绝不无条件自动重启**，避免打断进行中的对话。`app_update install`（headless）的用户审批契约不变。
 
@@ -58,9 +58,9 @@ TPA CoWork Agent 是单 binary 多形态产品（桌面 GUI / `hope-agent server
 [`.github/workflows/release.yml`](../../.github/workflows/release.yml) 单次 release 产出两套产物，最终汇总到同一个 `latest.json`：
 
 - **桌面 installer**：`tauri-action` 输出 DMG / MSI / NSIS / AppImage + 各自 `.sig`，写入 `latest.json#platforms.<plat>.{url, signature}`（tauri 原生格式，不变）。
-- **裸 binary archive**：每个 platform build job 末尾跑 `Bundle + sign bare binary` step，把 `target/release/hope-agent[.exe]` 与浏览器 native messaging 桥 `ha-browser-host[.exe]`（由 `beforeBuildCommand` 的 `prepare:browser-host` 构建到同一 target 目录）一起打 `tar.gz` (Unix) / `zip` (Windows) → `pnpm tauri signer sign` 用同一私钥签 → 上传 `hope-agent-{ver}-{plat}.tar.gz` + `.sig` 到 release。附带 host 使 bare-binary 部署也能装扩展后端的 native host（`native_host_binary_candidates` 的 exe 同级探测直接命中）。
+- **裸 binary archive**：每个 platform build job 末尾跑 `Bundle + sign bare binary` step，把 `target/release/hope-agent[.exe]` 与浏览器 native messaging 桥 `tpa-browser-host[.exe]`（由 `beforeBuildCommand` 的 `prepare:browser-host` 构建到同一 target 目录）一起打 `tar.gz` (Unix) / `zip` (Windows) → `pnpm tauri signer sign` 用同一私钥签 → 上传 `hope-agent-{ver}-{plat}.tar.gz` + `.sig` 到 release。附带 host 使 bare-binary 部署也能装扩展后端的 native host（`native_host_binary_candidates` 的 exe 同级探测直接命中）。
 - **manifest 合并**：`patch-manifest` job（`needs: build`）下载所有 `bare-binary-*` artifact + release 上的 `latest.json`，跑 `scripts/patch-latest-json.mjs` 注入 `bare_binary.platforms.<plat>.{url, signature, archive, binary_path, extra_binaries}` 后重新上传。
-- **sibling swap 语义**：`self_contained::install` 主二进制 swap + 冷烟自检通过后，把归档内 `extra_binaries` 声明的附带可执行文件（当前即 `ha-browser-host`）逐个 `atomic_replace_binary` 到主二进制同目录——**best-effort**：单个 sibling 失败只 `app_warn` 不阻断也不回滚主升级——host 是薄帧转发桥，broker 连接期只硬校验手工维护的 `PROTOCOL_VERSION`（`hostVersion` 上报但不 enforce），版本偏斜降级可容忍；`app_update rollback` 只还原主二进制、sibling 保持新版并 `app_warn` 记录偏斜（sibling 从不进 backup，回归匹配只能靠下次升级）。`ha-browser-host` 版本随 `sync-version.mjs` 与整个产品同步 bump，令 `hostVersion` 能真实区分新旧。旧 manifest 无 `extra_binaries` 字段 → serde 默认空数组，行为与从前一致。
+- **sibling swap 语义**：`self_contained::install` 主二进制 swap + 冷烟自检通过后，把归档内 `extra_binaries` 声明的附带可执行文件（当前即 `tpa-browser-host`）逐个 `atomic_replace_binary` 到主二进制同目录——**best-effort**：单个 sibling 失败只 `app_warn` 不阻断也不回滚主升级——host 是薄帧转发桥，broker 连接期只硬校验手工维护的 `PROTOCOL_VERSION`（`hostVersion` 上报但不 enforce），版本偏斜降级可容忍；`app_update rollback` 只还原主二进制、sibling 保持新版并 `app_warn` 记录偏斜（sibling 从不进 backup，回归匹配只能靠下次升级）。`tpa-browser-host` 版本随 `sync-version.mjs` 与整个产品同步 bump，令 `hostVersion` 能真实区分新旧。旧 manifest 无 `extra_binaries` 字段 → serde 默认空数组，行为与从前一致。
 
 Manifest 结构（[`updater::manifest::Manifest`](../../crates/ha-core/src/updater/manifest.rs)）：
 
@@ -79,7 +79,7 @@ Manifest 结构（[`updater::manifest::Manifest`](../../crates/ha-core/src/updat
         "signature": "...",
         "archive": "tar_gz",
         "binary_path": "hope-agent",
-        "extra_binaries": ["ha-browser-host"]
+        "extra_binaries": ["tpa-browser-host"]
       }
     }
   }
@@ -159,7 +159,7 @@ binary 换好后 [`service_control::restart_service`](../../crates/ha-core/src/u
 
 ## 失败路径 → 兜底 `ask_user_question`
 
-工具内部失败处理参考 [`tools/app_update.rs::prompt_manual_install`](../../crates/ha-core/src/tools/app_update.rs) 模板。Skill [`ha-self-update`](../../skills/ha-self-update/SKILL.md) "When things fail" 章节列了每种错误关键字的兜底方案——模型按该决策树触发兜底 prompt 而不是自己 retry。
+工具内部失败处理参考 [`tools/app_update.rs::prompt_manual_install`](../../crates/ha-core/src/tools/app_update.rs) 模板。Skill [`tpa-self-update`](../../skills/tpa-self-update/SKILL.md) "When things fail" 章节列了每种错误关键字的兜底方案——模型按该决策树触发兜底 prompt 而不是自己 retry。
 
 ## 不在 MVP 范围
 

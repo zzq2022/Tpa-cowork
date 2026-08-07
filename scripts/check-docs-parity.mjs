@@ -2,7 +2,7 @@
 // Bilingual parity guard for the built-in user manual (docs/user-guide).
 //
 // The manual is compiled into the app (crates/ha-core/src/manual) and served
-// to users and the ha-manual skill; the zh tree and the en/ tree must stay
+// to users and the tpa-manual skill; the zh tree and the en/ tree must stay
 // chapter-for-chapter aligned or one language silently loses content:
 //   1. Chapter-number sets must match 1:1 (01..NN + README on both sides).
 //   2. H2/H3 heading counts must match per chapter — a section added to one

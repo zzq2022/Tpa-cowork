@@ -40,7 +40,7 @@ fn default_candidate_multiplier() -> usize {
 /// User-tunable ranking parameters for the hybrid `note_search` pipeline
 /// (`AppConfig.knowledge_search`). Pure query-time — no reindex side effect — so
 /// unlike `knowledge_chunk` / `knowledge_embedding` it is a normal MEDIUM setting
-/// (GUI + `ha-settings`). Only affects `search_notes`; `note_similar` is
+/// (GUI + `tpa-settings`). Only affects `search_notes`; `note_similar` is
 /// vector-only and `note_related` uses its own fusion.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]

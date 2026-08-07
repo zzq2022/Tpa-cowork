@@ -208,7 +208,7 @@ Keyboard，因此编辑期间会持续保留焦点提示。
 `AppConfig.enhanced_focus_indicators` 是手动增强开关，默认关闭。桌面通过 Tauri 命令、
 Web GUI 通过 `/api/config/enhanced-focus-indicators` 读写；两者都通过
 `config:changed { category: "focus_indicator" }` 热更新现有窗口。对话式设置通过
-`ha-settings` 的 `focus_indicator.enhancedFocusIndicators` 读取和修改，风险级别为 low。
+`tpa-settings` 的 `focus_indicator.enhancedFocusIndicators` 读取和修改，风险级别为 low。
 
 ## 登记的例外
 

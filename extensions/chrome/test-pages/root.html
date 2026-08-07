@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hope Agent Browser Control Smoke Root</title>
+    <title>TPA CoWork Browser Control Smoke Root</title>
     <style>
       body {
         color: #111827;
@@ -50,8 +50,8 @@
       }
     </style>
   </head>
-  <body data-hope-smoke-page="root">
-    <h1>Hope Agent Browser Control Smoke Root</h1>
+  <body data-tpa-cowork-smoke-page="root">
+    <h1>TPA CoWork Browser Control Smoke Root</h1>
     <main>
       <section class="panel" aria-label="Root controls">
         <button id="root-action" aria-label="Root Action Button">Root Action</button>
@@ -69,18 +69,18 @@
       <section class="frames" aria-label="Frame smoke area">
         <iframe
           id="same-origin-frame"
-          title="Hope Same Origin Frame"
+          title="TPA CoWork Same Origin Frame"
           src="/same-origin-frame.html"
         ></iframe>
         <iframe
           id="cross-origin-frame"
-          title="Hope Cross Origin Frame"
+          title="TPA CoWork Cross Origin Frame"
           src="__CROSS_ORIGIN__/frame.html"
         ></iframe>
       </section>
     </main>
     <script>
-      window.__hopeSmokeRoot = true
+      window.__tpaCoworkSmokeRoot = true
       for (const el of document.querySelectorAll("[draggable=true]")) {
         el.addEventListener("dragstart", (event) => {
           event.dataTransfer?.setData("text/plain", el.id)

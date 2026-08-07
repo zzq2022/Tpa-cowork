@@ -122,7 +122,7 @@ jobs:
         run: |
           set -euo pipefail
           version="${RELEASE_TAG#v}"
-          dmg="target/x86_64-apple-darwin/release/bundle/dmg/Hope.Agent_${version}_x64.dmg"
+          dmg="target/x86_64-apple-darwin/release/bundle/dmg/TPA.CoWork_${version}_x64.dmg"
           if [ ! -f "$dmg" ]; then
             echo "::error::Intel DMG not found at $dmg"
             ls "target/x86_64-apple-darwin/release/bundle/dmg/" || true
@@ -132,7 +132,7 @@ jobs:
           echo "Uploaded $dmg to ${RELEASE_TAG}"
 
       # Bundle + sign bare binary for headless self-update (Intel Mac
-      # users running `hope-agent server` or `hope-agent acp` on Intel
+      # users running `tpa-cowork server` or `tpa-cowork acp` on Intel
       # hardware need this to receive updates). Same Minisign keypair
       # as release.yml — `ha_core::updater` verifies against the
       # pubkey in `ha-core/updater/keys.rs`.
@@ -145,7 +145,7 @@ jobs:
           set -euo pipefail
           version="${RELEASE_TAG#v}"
           target_dir=target/x86_64-apple-darwin/release
-          bin_path="$target_dir/hope-agent"
+          bin_path="$target_dir/tpa-cowork"
           if [ ! -f "$bin_path" ]; then
             echo "::error::Bare binary not found at $bin_path"
             ls "$target_dir" || true
@@ -163,8 +163,8 @@ jobs:
           cp "$host_path" "$target_dir/ha-browser-host"
           out_dir="bare-binary-bundle"
           mkdir -p "$out_dir"
-          archive="$out_dir/hope-agent-${version}-darwin-x86_64.tar.gz"
-          tar -C "$target_dir" -czf "$archive" "hope-agent" "ha-browser-host"
+          archive="$out_dir/tpa-cowork-${version}-darwin-x86_64.tar.gz"
+          tar -C "$target_dir" -czf "$archive" "tpa-cowork" "ha-browser-host"
           pnpm tauri signer sign --private-key "$TAURI_SIGNING_PRIVATE_KEY" --password "$TAURI_SIGNING_PRIVATE_KEY_PASSWORD" "$archive"
           echo "archive=$archive" >> "$GITHUB_OUTPUT"
           echo "sig=$archive.sig" >> "$GITHUB_OUTPUT"
@@ -198,7 +198,7 @@ jobs:
           version="${RELEASE_TAG#v}"
           gh release download "${RELEASE_TAG}" --pattern latest.json --dir .
 
-          export ARCHIVE_URL="https://github.com/shiwenwen/hope-agent/releases/download/${RELEASE_TAG}/hope-agent-${version}-darwin-x86_64.tar.gz"
+          export ARCHIVE_URL="https://github.com/zzq2022/Tpa-cowork/releases/download/${RELEASE_TAG}/tpa-cowork-${version}-darwin-x86_64.tar.gz"
 
           node -e '
             const fs = require("fs");
@@ -209,7 +209,7 @@ jobs:
               url: process.env.ARCHIVE_URL,
               signature: fs.readFileSync(process.env.SIG_PATH, "utf8").trim(),
               archive: "tar_gz",
-              binary_path: "hope-agent",
+              binary_path: "tpa-cowork",
               extra_binaries: ["ha-browser-host"],
             };
             fs.writeFileSync("latest.json", JSON.stringify(m, null, 2) + "\n");
@@ -221,7 +221,7 @@ jobs:
       # Re-trigger the Homebrew tap update so the cask flips from the
       # arm-only template (rendered by the release.published-triggered
       # run that fired before this workflow finished) to the dual-arch
-      # template (now that Hope.Agent_<v>_x64.dmg exists in the
+      # template (now that TPA.CoWork_<v>_x64.dmg exists in the
       # release). update-homebrew-tap.yml already detects which DMGs
       # are present and picks the right template.
       #

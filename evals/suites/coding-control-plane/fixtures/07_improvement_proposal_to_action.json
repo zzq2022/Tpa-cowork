@@ -49,7 +49,7 @@
       "expectedAppliedStatus": "applied",
       "expectedAppliedKind": "eval_candidate",
       "minAppliedArtifacts": 1,
-      "expectedActionTargetContains": ".hope-agent/coding-improvement/eval-candidates"
+      "expectedActionTargetContains": ".tpa-cowork/coding-improvement/eval-candidates"
     }
   }
 }

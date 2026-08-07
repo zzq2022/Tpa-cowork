@@ -349,7 +349,7 @@ pub struct RecapConfig {
 - **章节生成**（`section_language_directive`）：正文 / 标题 / 列表标签用目标语言，代码标识符 / 模型名 / 路径 / 斜杠命令保持原样。
 - **章节标题 / 报告名**（`localized_section_title` / `report_title`）：后端 12 语言表，写入持久化报告作为**语言快照**（旧报告不回溯改写）。`SUPPORTED_LOCALES` 是列序单一真相源，`locale_index` 与标题列表对齐，单测锚定每列防错位。
 
-设置入口：「设置 → 复盘」语言选择器（GUI）+ `ha-settings` 的 `recap.language`（默认跟随界面）。
+设置入口：「设置 → 复盘」语言选择器（GUI）+ `tpa-settings` 的 `recap.language`（默认跟随界面）。
 
 ## HTML 导出（renderer）
 

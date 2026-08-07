@@ -1,0 +1,12 @@
+[package]
+name = "tpa-product"
+version = "0.22.0"
+description = "Generated TPA CoWork product identity constants"
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+edition.workspace = true
+build = "build.rs"
+
+[lints]
+workspace = true

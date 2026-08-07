@@ -152,7 +152,7 @@ autosave 文件名带毫秒（`%3f`），避免同一秒内多次写盘碰撞；
 | [可靠性 / 崩溃恢复](reliability.md) | `guardian::run_recovery` 崩溃阈值命中调 `create_backup`；`self_diagnosis::try_restore_config_from_backup` 用最新全量备份自愈损坏 config |
 | [工具系统](tool-system.md) | `list_settings_backups` / `restore_settings_backup` 作 `Standard` tier `internal` 工具，主 Agent 默认加载（`default_deferred: true`，延迟加载模式下为 `tool_search` 可发现的 deferred 候选） |
 | [自升级](self-update.md) | 独立的 `updater/backup.rs` 负责 binary 备份，与本子系统无关 |
-| `ha-settings` 技能 | SKILL.md 登记 autosave 自动快照说明 + 两个 settings-backup 工具用法 + "Rollback is built-in" 指引 |
+| `tpa-settings` 技能 | SKILL.md 登记 autosave 自动快照说明 + 两个 settings-backup 工具用法 + "Rollback is built-in" 指引 |
 
 ## 关键文件索引
 

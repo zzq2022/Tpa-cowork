@@ -1,12 +1,12 @@
 # Self-Diagnosis & Issue Reporting
 
 TPA CoWork Agent exposes a conversational self-understanding path through the bundled
-`ha-self-diagnosis` skill and a core `issue_report` tool. The v1 scope is
+`tpa-self-diagnosis` skill and a core `issue_report` tool. The v1 scope is
 user/conversation triggered: it does not run background health scans.
 
 ## Responsibilities
 
-- `skills/ha-self-diagnosis/` is the workflow entrypoint. It runs in
+- `skills/tpa-self-diagnosis/` is the workflow entrypoint. It runs in
   `context: fork` so source reads, log queries, and diagnostic snippets do not
   bloat the parent conversation.
 - Self-study mode answers questions about TPA CoWork Agent's implementation by
@@ -69,7 +69,7 @@ the shared sensitive-data redactor. Bodies are capped by
 - Outbound GitHub requests must pass `security::ssrf::check_url`.
 - The `gh` fallback is used only when no TPA CoWork Agent issue-reporting token is
   configured.
-- `ha-self-diagnosis` must query SQLite databases read-only.
+- `tpa-self-diagnosis` must query SQLite databases read-only.
 - Background monitoring or auto-filing is out of scope for v1.
 - The issue-reporting token should never be echoed in chat, logs, or issue
   bodies.

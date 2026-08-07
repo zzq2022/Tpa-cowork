@@ -85,7 +85,7 @@ graph TD
 | `src/lib/transport-http.ts` | HTTP command 映射，保持和 Tauri invoke 同名 |
 | `src/components/settings/PermissionsPanel.tsx` | Settings → Permissions 顶部 readiness 摘要 |
 | `src/components/chat/MacControlPanel.tsx` | 聊天右侧截图镜像面板 |
-| `skills/ha-mac-control/SKILL.md` | 模型使用 `mac_control` 的标准 loop 和恢复策略 |
+| `skills/tpa-mac-control/SKILL.md` | 模型使用 `mac_control` 的标准 loop 和恢复策略 |
 
 ## 运行模式
 
@@ -663,7 +663,7 @@ action 事件 → 帧关联：mutating 成功（及 `act` 失败）后 fire-and-
 
 ## 模型使用约束
 
-内置 skill：`skills/ha-mac-control/SKILL.md`。
+内置 skill：`skills/tpa-mac-control/SKILL.md`。
 
 模型应遵循：
 

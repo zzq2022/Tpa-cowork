@@ -98,7 +98,7 @@ fn main() -> Result<()> {
     let broker = match connect_broker() {
         Ok(stream) => stream,
         Err(e) => {
-            eprintln!("ha-browser-host: broker unavailable at startup: {e:#}");
+            eprintln!("tpa-browser-host: broker unavailable at startup: {e:#}");
             return Ok(());
         }
     };
@@ -114,7 +114,7 @@ fn main() -> Result<()> {
                 // log to stderr (stdout is the native-messaging channel) and
                 // exit this host instance cleanly instead of aborting with `?`.
                 // Chrome relaunches the host on the next message.
-                eprintln!("ha-browser-host: native read error: {e:#}");
+                eprintln!("tpa-browser-host: native read error: {e:#}");
                 break;
             }
         };
@@ -126,7 +126,7 @@ fn main() -> Result<()> {
             // Broker connection lost mid-session (app restart). Exit so the
             // extension reconnects against a fresh host instead of dropping
             // commands into a dead socket and faking connectivity.
-            eprintln!("ha-browser-host: broker write failed, exiting: {e:#}");
+            eprintln!("tpa-browser-host: broker write failed, exiting: {e:#}");
             break;
         }
     }
@@ -151,7 +151,7 @@ fn connect_broker() -> Result<BrokerStream> {
         "method": "host.hello",
         "token": discovery.token,
         "payload": {
-            "host": "ha-browser-host",
+            "host": "tpa-browser-host",
             "hostVersion": env!("CARGO_PKG_VERSION"),
             "pid": std::process::id(),
             "protocolVersion": PROTOCOL_VERSION

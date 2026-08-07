@@ -11,14 +11,14 @@ pub(super) async fn execute(entry: &SkillEntry, args: &str) -> Result<String> {
     let path = entry.file_path.clone();
     let args_owned = args.to_string();
 
-    // `ha-manual` routes the model to the on-disk manual mirror; make sure it
+    // `tpa-manual` routes the model to the on-disk manual mirror; make sure it
     // exists before the skill instructions run. This lives HERE (not in the
     // `skill` tool dispatch) because it is the chokepoint shared by BOTH
     // activation paths — the model's `skill({name})` call and the user's
     // `/manual` slash command via `render_inline` — so a startup-mirror
     // failure is retried on every activation, whichever door was used.
     // Idempotent: the fingerprint check short-circuits once mirrored.
-    if entry.name == "ha-manual" {
+    if entry.name == "tpa-manual" {
         let _ = tokio::task::spawn_blocking(crate::manual::ensure_local_manual).await;
     }
 

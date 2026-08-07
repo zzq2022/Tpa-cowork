@@ -1,0 +1,76 @@
+cask "tpa-cowork" do
+  version "__VERSION__"
+  sha256 "__SHA256_ARM__"
+
+  url "https://github.com/zzq2022/Tpa-cowork/releases/download/v#{version}/TPA.CoWork_#{version}_aarch64.dmg"
+  name "TPA CoWork"
+  desc "Local-first AI assistant with cross-device sessions and IM channel routing"
+  homepage "https://github.com/zzq2022/Tpa-cowork"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  auto_updates true
+  # Apple Silicon only — this release skipped the macOS Intel build lane
+  # (macos-13 runner capacity constraints in upstream release.yml).
+  # Intel Mac users have no installable arm64 path (Rosetta 2 translates
+  # Intel → Apple Silicon, not the reverse) and should stay on the prior
+  # dual-arch release until the next version that ships an x64 DMG.
+  depends_on macos: ">= :big_sur", arch: :arm64
+
+  app "TPA CoWork.app"
+
+  binary "#{appdir}/TPA CoWork.app/Contents/MacOS/tpa-cowork"
+
+  caveats <<~EOS
+    This release ships only the Apple Silicon (arm64) DMG. Intel Macs
+    cannot install it — Rosetta 2 translates Intel binaries to run on
+    Apple Silicon, not the reverse. Intel Mac users should remain on
+    the prior dual-arch release (download from
+    https://github.com/zzq2022/Tpa-cowork/releases) until a future
+    version ships an x64 DMG again.
+
+    The bundle is not yet code-signed or notarized. The installer clears
+    the macOS quarantine attribute so first launch should work without
+    extra steps, but you may still see a Gatekeeper warning. If macOS
+    refuses to open the app, run:
+
+      sudo xattr -cr "/Applications/TPA CoWork.app"
+
+    Launch the desktop app from Launchpad/Spotlight, or `open -a "TPA CoWork"`.
+
+    The `tpa-cowork` shell command is also installed for the headless modes:
+      tpa-cowork server start   # HTTP/WS daemon (no GUI)
+      tpa-cowork acp            # ACP stdio for IDE integrations
+
+    Updates are delivered by the app's built-in updater, not by Homebrew.
+    After install, `brew upgrade` will not touch this cask — the desktop
+    app prompts you when a new release is published, and the `tpa-cowork`
+    CLI shares the same binary so it stays in sync automatically. To force
+    a reinstall from this tap (for example to recover from a broken
+    install), run:
+
+      brew reinstall --cask tpa-cowork
+  EOS
+
+  postflight do
+    # Strip the quarantine xattr so first launch does not trip Gatekeeper
+    # for unsigned/un-notarized builds. Safe to ignore failures — if the
+    # xattr is already absent xattr returns non-zero.
+    system_command "/usr/bin/xattr",
+                   args: ["-rd", "com.apple.quarantine", "#{appdir}/TPA CoWork.app"],
+                   sudo: false,
+                   must_succeed: false
+  end
+
+  zap trash: [
+    "~/Library/Application Support/ai.tpacowork.desktop",
+    "~/Library/Caches/ai.tpacowork.desktop",
+    "~/Library/Preferences/ai.tpacowork.desktop.plist",
+    "~/Library/Saved Application State/ai.tpacowork.desktop.savedState",
+    "~/Library/WebKit/ai.tpacowork.desktop",
+    "~/.tpa-cowork",
+  ]
+end

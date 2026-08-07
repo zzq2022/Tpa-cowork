@@ -6,7 +6,7 @@ The extension's single purpose is to let the TPA CoWork desktop app control Chro
 
 ## Data Collection
 
-The extension can read page content, URLs, screenshots, console output, and network response metadata for Hope-controlled tabs. It can also observe Chrome download metadata when TPA CoWork invokes an approved download observation action. This data is sent to the local TPA CoWork native host through Chrome Native Messaging.
+The extension can read page content, URLs, screenshots, console output, and network response metadata for TPA CoWork-controlled tabs. It can also observe Chrome download metadata when TPA CoWork invokes an approved download observation action. This data is sent to the local TPA CoWork native host through Chrome Native Messaging.
 
 The extension does not sell data, does not use data for advertising, and does not send data directly to third-party services.
 

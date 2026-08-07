@@ -1,6 +1,6 @@
 {
   "schemaVersion": "eval-policy.v1",
-  "id": "hope-agent-release-deterministic",
+  "id": "tpa-cowork-release-deterministic",
   "version": "1.0.0",
   "tier": "release",
   "mode": "advisory",

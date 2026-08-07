@@ -14,7 +14,7 @@ const packageJson = readJson(packagePath)
 const zipPath = path.join(
   extensionDir,
   "dist",
-  `hope-agent-chrome-extension-${manifest.version}.zip`,
+  `tpa-cowork-chrome-extension-${manifest.version}.zip`,
 )
 
 const REQUIRED_PACKAGE_FILES = [

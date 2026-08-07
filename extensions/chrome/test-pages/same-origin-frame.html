@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hope Same Origin Frame</title>
+    <title>TPA CoWork Same Origin Frame</title>
     <style>
       body {
         color: #111827;
@@ -29,7 +29,7 @@
       }
     </style>
   </head>
-  <body data-hope-smoke-page="same-origin-frame">
+  <body data-tpa-cowork-smoke-page="same-origin-frame">
     <h2>Same-Origin Frame</h2>
     <button id="same-frame-action" aria-label="Same Frame Action Button">Same Frame Action</button>
     <label>
@@ -43,7 +43,7 @@
       Same frame drop target
     </div>
     <script>
-      window.__hopeSmokeSameFrame = true
+      window.__tpaCoworkSmokeSameFrame = true
       document.querySelector("#same-frame-drag").addEventListener("dragstart", (event) => {
         event.dataTransfer?.setData("text/plain", "same-frame-drag")
       })

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hope Cross Origin Frame</title>
+    <title>TPA CoWork Cross Origin Frame</title>
     <style>
       body {
         color: #111827;
@@ -41,7 +41,7 @@
       }
     </style>
   </head>
-  <body data-hope-smoke-page="cross-origin-frame">
+  <body data-tpa-cowork-smoke-page="cross-origin-frame">
     <h2>Cross-Origin Frame</h2>
     <div class="toolbar" role="toolbar" aria-label="Cross Frame Toolbar">
       <button id="cross-frame-action" aria-label="Cross Frame Action Button">Cross Frame Action</button>
@@ -61,7 +61,7 @@
       Cross frame crop target with stable bounds
     </div>
     <script>
-      window.__hopeSmokeCrossFrame = true
+      window.__tpaCoworkSmokeCrossFrame = true
       document.querySelector("#cross-frame-action").addEventListener("click", (event) => {
         event.currentTarget.textContent = "Cross Frame Clicked"
       })

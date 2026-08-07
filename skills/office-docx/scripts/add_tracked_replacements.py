@@ -28,8 +28,8 @@ def text_run_from_escaped(text: str, rpr: str = "") -> str:
 def revision_pair(old: str, new: str, rev_id: int, rpr: str = "") -> str:
     date = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     return (
-        f'<w:del w:id="{rev_id}" w:author="Hope Agent" w:date="{date}"><w:r>{rpr}<w:delText>{escape(old)}</w:delText></w:r></w:del>'
-        f'<w:ins w:id="{rev_id + 1}" w:author="Hope Agent" w:date="{date}"><w:r>{rpr}<w:t>{escape(new)}</w:t></w:r></w:ins>'
+        f'<w:del w:id="{rev_id}" w:author="TPA CoWork" w:date="{date}"><w:r>{rpr}<w:delText>{escape(old)}</w:delText></w:r></w:del>'
+        f'<w:ins w:id="{rev_id + 1}" w:author="TPA CoWork" w:date="{date}"><w:r>{rpr}<w:t>{escape(new)}</w:t></w:r></w:ins>'
     )
 
 

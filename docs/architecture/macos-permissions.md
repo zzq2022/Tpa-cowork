@@ -12,7 +12,7 @@
 - **Tauri-only**：能力仅经 **5 条 Tauri 命令**暴露给桌面 Shell，**无 HTTP 路由**、不进 `transport.ts` 的 `COMMAND_MAP`——HTTP/server 模式没有系统托盘进程，TCC 概念不适用。
 - **非 macOS 严禁伪造 granted**：Windows / Linux / 其它平台一律收敛到 `unsupported` / `NotApplicable`，绝不假装已授权（单测红线，见安全章节）。
 
-与上层桌面控制能力 [`ha-mac-control`](macos-control.md) 是两个子系统：本文是底层 TCC 探测/引导，`ha-mac-control` 是 macOS 桌面控制能力的 readiness 编排，复用本目录的 catalog 但走独立命令/路由（边界详见末章）。
+与上层桌面控制能力 [`tpa-mac-control`](macos-control.md) 是两个子系统：本文是底层 TCC 探测/引导，`tpa-mac-control` 是 macOS 桌面控制能力的 readiness 编排，复用本目录的 catalog 但走独立命令/路由（边界详见末章）。
 
 ## 模块结构
 
@@ -166,7 +166,7 @@ automation 两项的 request 路径：osascript 触发同意 → 打开设置 �
 | 子系统 | 关系 |
 |---|---|
 | [Platform 抽象层](platform.md) | facade 视角：`platform.md` 列了 `system_permissions_*` facade 与 `system_permissions.rs` 文件；本文是 TCC 领域视角，两文互链 |
-| [ha-mac-control（macOS 桌面控制）](macos-control.md) | **边界**：本文是底层 TCC 探测/引导，`ha-mac-control` 是上层桌面控制能力 readiness；`mac_control_permissions` 命令**复用本目录 catalog**（`systemPermissions` 字段）但走**独立命令/HTTP 路由**。`PermissionsPanel` 在两文都出现 |
+| [tpa-mac-control（macOS 桌面控制）](macos-control.md) | **边界**：本文是底层 TCC 探测/引导，`tpa-mac-control` 是上层桌面控制能力 readiness；`mac_control_permissions` 命令**复用本目录 catalog**（`systemPermissions` 字段）但走**独立命令/HTTP 路由**。`PermissionsPanel` 在两文都出现 |
 | [权限引擎 v2](permission-system.md) | **同名不同物**：本子系统 ≠ 工具审批权限引擎；`~/.hope-agent/permission/`（`protected_paths` / `dangerous_commands`）属权限引擎，与 TCC 无关 |
 | [API 参考](api-reference.md) | §7.3 Desktop-only 表登记全部 5 条命令；新增/改命令须与此对齐 |
 

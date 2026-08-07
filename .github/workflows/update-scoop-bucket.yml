@@ -1,7 +1,7 @@
 name: Update Scoop Bucket
 
-# Sync the manifest template in `scoop/hope-agent.json.tmpl` into the
-# bucket repo (shiwenwen/scoop-hope-agent → bucket/hope-agent.json)
+# Sync the manifest template in `scoop/tpa-cowork.json.tmpl` into the
+# bucket repo (shiwenwen/scoop-tpa-cowork → bucket/tpa-cowork.json)
 # whenever a release is published.
 #
 # Triggers:
@@ -13,7 +13,7 @@ name: Update Scoop Bucket
 #
 # Required repo secrets:
 #   SCOOP_BUCKET_TOKEN — fine-grained PAT with `Contents: Read and write`
-#                        on shiwenwen/scoop-hope-agent only.
+#                        on shiwenwen/scoop-tpa-cowork only.
 
 on:
   release:
@@ -36,7 +36,7 @@ jobs:
   update-bucket:
     runs-on: ubuntu-latest
     env:
-      BUCKET_REPO: shiwenwen/scoop-hope-agent
+      BUCKET_REPO: shiwenwen/scoop-tpa-cowork
       TAG: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.event.release.tag_name }}
 
     steps:
@@ -53,7 +53,7 @@ jobs:
             exit 1
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
-          echo "exe_name=Hope.Agent_${version}_x64-setup.exe" >> "$GITHUB_OUTPUT"
+          echo "exe_name=TPA.CoWork_${version}_x64-setup.exe" >> "$GITHUB_OUTPUT"
 
       - name: Download setup.exe from release
         env:
@@ -83,19 +83,19 @@ jobs:
           mkdir -p rendered/bucket
           sed -e "s/__PKGVER__/${{ steps.ver.outputs.version }}/g" \
               -e "s/__SHA256__/${{ steps.sha.outputs.sha256 }}/g" \
-              scoop/hope-agent.json.tmpl > rendered/bucket/hope-agent.json
+              scoop/tpa-cowork.json.tmpl > rendered/bucket/tpa-cowork.json
 
-          if grep -qE '__PKGVER__|__SHA256__' rendered/bucket/hope-agent.json; then
+          if grep -qE '__PKGVER__|__SHA256__' rendered/bucket/tpa-cowork.json; then
             echo "::error::rendered manifest still contains template placeholders"
-            cat rendered/bucket/hope-agent.json
+            cat rendered/bucket/tpa-cowork.json
             exit 1
           fi
 
           # Validate JSON syntax.
-          python3 -c "import json,sys; json.load(open('rendered/bucket/hope-agent.json'))"
+          python3 -c "import json,sys; json.load(open('rendered/bucket/tpa-cowork.json'))"
 
-          echo "--- rendered bucket/hope-agent.json ---"
-          cat rendered/bucket/hope-agent.json
+          echo "--- rendered bucket/tpa-cowork.json ---"
+          cat rendered/bucket/tpa-cowork.json
 
       - name: Checkout bucket repo
         uses: actions/checkout@v6
@@ -108,25 +108,25 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p bucket/bucket
-          cp rendered/bucket/hope-agent.json bucket/bucket/hope-agent.json
+          cp rendered/bucket/tpa-cowork.json bucket/bucket/tpa-cowork.json
 
       - name: Commit and push if changed
         working-directory: bucket
         run: |
           set -euo pipefail
-          git config user.name  "hope-agent-bot"
-          git config user.email "hope-agent-bot@users.noreply.github.com"
+          git config user.name  "tpa-cowork-bot"
+          git config user.email "tpa-cowork-bot@users.noreply.github.com"
 
           # Stage first so the diff check covers new and modified files
           # (git diff alone ignores untracked paths; same gotcha we hit
           # with the Homebrew tap on first sync).
-          git add bucket/hope-agent.json
+          git add bucket/tpa-cowork.json
           if git diff --cached --quiet; then
             echo "No manifest changes for $TAG; skipping push."
             exit 0
           fi
 
-          git commit -m "hope-agent ${{ steps.ver.outputs.version }}
+          git commit -m "tpa-cowork ${{ steps.ver.outputs.version }}
 
           setup.exe sha256: ${{ steps.sha.outputs.sha256 }}
           Source: ${{ github.repository }}@$TAG

@@ -2,7 +2,7 @@
 
 > [English](CONTRIBUTING.en.md) · 简体中文
 
-欢迎贡献 Hope Agent！本文档面向**首次贡献者和日常贡献者**——介绍如何报 Bug、提 PR、参与翻译 / 技能 / Provider / Channel 等常见方向。
+欢迎贡献 TPA CoWork！本文档面向**首次贡献者和日常贡献者**——介绍如何报 Bug、提 PR、参与翻译 / 技能 / Provider / Channel 等常见方向。
 
 如果你是**资深 maintainer 或 AI 编码助手**（Claude Code / Codex / Cursor），项目跨 PR 的契约面在 [AGENTS.md](AGENTS.md)，子系统设计在 [`docs/architecture/`](docs/architecture/)。本文档只覆盖流程，不重复那些。
 
@@ -14,9 +14,9 @@
 
 | 你想 | 路径 |
 |---|---|
-| 报告 Bug | [新建 issue](https://github.com/shiwenwen/hope-agent/issues/new/choose) → Bug report 模板 |
+| 报告 Bug | [新建 issue](https://github.com/zzq2022/Tpa-cowork/issues/new/choose) → Bug report 模板 |
 | 报告**安全漏洞** | **请勿公开 issue**，走 [SECURITY.md](SECURITY.md) 私密渠道 |
-| 提议新功能 | 先开 [discussion](https://github.com/shiwenwen/hope-agent/discussions) 聊清楚再开 issue |
+| 提议新功能 | 先开 [discussion](https://github.com/zzq2022/Tpa-cowork/discussions) 聊清楚再开 issue |
 | 改 Bug / 加功能 | fork → branch → PR（详见下方"提 PR 流程"） |
 | 帮做翻译 | 见下方"翻译贡献" |
 | 加新 Skill / Provider / Channel | 见下方"插件式贡献" |
@@ -28,9 +28,9 @@
 
 ```bash
 # fork 后 clone 你自己的 fork
-git clone git@github.com:<你的账号>/hope-agent.git
-cd hope-agent
-git remote add upstream git@github.com:shiwenwen/hope-agent.git
+git clone git@github.com:<你的账号>/tpa-cowork.git
+cd tpa-cowork
+git remote add upstream git@github.com:zzq2022/Tpa-cowork.git
 
 # 起短期分支（不要在你 fork 的 main 上直接改）
 git checkout -b feat/xxx   # 或 fix/xxx, docs/xxx
@@ -72,7 +72,7 @@ pnpm test
 
 ### 5. Commit message 规范
 
-跟着仓库现有风格（[`git log`](https://github.com/shiwenwen/hope-agent/commits/main) 看最近 20 条）：
+跟着仓库现有风格（[`git log`](https://github.com/zzq2022/Tpa-cowork/commits/main) 看最近 20 条）：
 
 ```
 <type>(<scope>): <一句话描述>
@@ -112,7 +112,7 @@ PR 模板会引导你填写。重点：
 
 ## 翻译贡献
 
-Hope Agent 支持 12 种语言（zh、en、ja、ko、de、fr、es、pt-BR、ru、it、tr、vi）。`zh` 和 `en` 是真相源，其他 10 种从这两个补齐。
+TPA CoWork 支持 12 种语言（zh、en、ja、ko、de、fr、es、pt-BR、ru、it、tr、vi）。`zh` 和 `en` 是真相源，其他 10 种从这两个补齐。
 
 ```bash
 node scripts/sync-i18n.mjs --check   # 检查缺失翻译
@@ -178,8 +178,8 @@ node scripts/sync-i18n.mjs --apply   # 从模板补齐
 
 ## 反馈与讨论
 
-- Bug / 功能请求：[Issues](https://github.com/shiwenwen/hope-agent/issues)
-- 设计讨论 / 用法提问：[Discussions](https://github.com/shiwenwen/hope-agent/discussions)
+- Bug / 功能请求：[Issues](https://github.com/zzq2022/Tpa-cowork/issues)
+- 设计讨论 / 用法提问：[Discussions](https://github.com/zzq2022/Tpa-cowork/discussions)
 - 安全漏洞：见 [SECURITY.md](SECURITY.md)（**勿在公开 issue 发**）
 
-感谢你对 Hope Agent 的贡献！🎉
+感谢你对 TPA CoWork 的贡献！🎉

@@ -1,5 +1,5 @@
 {
-  "name": "@hope-agent/chrome-extension",
+  "name": "@tpa-cowork/chrome-extension",
   "private": true,
   "version": "0.1.0",
   "type": "module",

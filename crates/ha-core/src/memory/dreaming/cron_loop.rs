@@ -41,7 +41,7 @@ pub fn spawn_dreaming_cron_loop() {
         let mut rx = bus.subscribe();
         let notify_for_sub = notify.clone();
         // Wake on any config:changed regardless of payload category — `mutate_config`
-        // always emits `{ category: "app" }` while ha-settings emits the specific
+        // always emits `{ category: "app" }` while tpa-settings emits the specific
         // category, so a "dreaming"-only filter misses every GUI save.
         tokio::spawn(async move {
             while let Ok(evt) = rx.recv().await {

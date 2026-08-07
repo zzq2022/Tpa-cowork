@@ -12,7 +12,7 @@ crates/ha-core/src/manual/          ← 解析 + 搜索 + 镜像
         ├─ GUI 路径：get_manual_bundle / search_manual（Tauri + HTTP）
         │            → HelpWindow（独立窗口 / Web 新标签页）
         └─ Agent 路径：镜像 <data-dir>/manual/{zh,en}/NN.md
-                     → ha-manual skill → read/grep
+                     → tpa-manual skill → read/grep
 ```
 
 与 `skills/embedded.rs`（bundled skills）、`browser/extension/embedded.rs`（Chrome 扩展）同属「rust-embed 单一来源 + 全部署形态统一携带」体系：**禁止再往构建产物单独拷贝手册**（Tauri `bundle.resources` / Dockerfile runtime COPY 均不需要）。
@@ -45,7 +45,7 @@ Rust 端 slug（`model.rs::github_slug`）、手册正文里的 intra-doc `#anch
 ### 镜像触发点（三处，全部幂等）
 
 1. 启动：`app_init.rs` 的 `start_background_tasks` / `start_minimal_background_tasks`（ACP）primary-only 块，`spawn_blocking` 不占 runtime worker；
-2. `ha-manual` skill 激活时——特判放在 [`tools/skill/inline.rs`](../../crates/ha-core/src/tools/skill/inline.rs) 的 `execute`（**两条激活路径的共同咽喉**：模型 `skill({name})` 工具调用与用户 `/manual` 斜杠命令都经它，启动镜像失败在任一入口重试都生效）；
+2. `tpa-manual` skill 激活时——特判放在 [`tools/skill/inline.rs`](../../crates/ha-core/src/tools/skill/inline.rs) 的 `execute`（**两条激活路径的共同咽喉**：模型 `skill({name})` 工具调用与用户 `/manual` 斜杠命令都经它，启动镜像失败在任一入口重试都生效）；
 3. `get_manual_bundle` 命令（HelpWindow 打开是 agent 路径的自然就绪点）。
 
 指纹命中即约 30 次 stat 的廉价校验短路。失败一律 `app_warn!`（category `manual`）不致命——GUI 读内嵌不依赖磁盘。
@@ -61,7 +61,7 @@ Rust 端 slug（`model.rs::github_slug`）、手册正文里的 intra-doc `#anch
 
 ## Agent 路径
 
-[`skills/ha-manual/SKILL.md`](../../skills/ha-manual/SKILL.md)：单文件 skill（无 fork、只读），内联章节路由表（按 `NN.md` 引导，通常一次 `read` 即中）。**路径动态解析** `${HA_DATA_DIR:-$HOME/.hope-agent}/manual/`（Docker 的 data-dir 是 `/data`，写死 `~` 会 ls 到空）。skill 本体随 #506 的 bundled-skills 内嵌机制在全部部署形态被目录发现。**单一来源纪律：SKILL.md 只放路由表，绝不复制手册正文**。守卫：`ha_manual_skill_routing_table_matches_chapters`（cargo test）断言路由表引用集合与真实章节一致。
+[`skills/tpa-manual/SKILL.md`](../../skills/tpa-manual/SKILL.md)：单文件 skill（无 fork、只读），内联章节路由表（按 `NN.md` 引导，通常一次 `read` 即中）。**路径动态解析** `${HA_DATA_DIR:-$HOME/.hope-agent}/manual/`（Docker 的 data-dir 是 `/data`，写死 `~` 会 ls 到空）。skill 本体随 #506 的 bundled-skills 内嵌机制在全部部署形态被目录发现。**单一来源纪律：SKILL.md 只放路由表，绝不复制手册正文**。守卫：`ha_manual_skill_routing_table_matches_chapters`（cargo test）断言路由表引用集合与真实章节一致。
 
 ## 双语对齐守卫
 
@@ -71,4 +71,4 @@ Rust 端 slug（`model.rs::github_slug`）、手册正文里的 intra-doc `#anch
 
 - **cargo（`manual::` 16 项）**：embed 非空硬门禁（`iter()` 计数，防 Docker 缺 COPY 静默空手册）、章节解析、slug 语料契约、CJK 搜索、镜像幂等/指纹短路/重镜像、链接重写形状、skill 路由表防漂移、语言映射。
 - **vitest**：`manualSlug.test.ts`（与 Rust 共享 ground-truth 对）、`helpLinks.test.ts`（五类链接形态穷举 + 越界不导航）。
-- **手测面**：开窗/聚焦/关闭、菜单与托盘入口、Web 新标签页、搜索高亮定位、Cmd+F、大纲跳转、设置页深链、问 AI、语言切换、Docker 内 agent 激活 ha-manual。
+- **手测面**：开窗/聚焦/关闭、菜单与托盘入口、Web 新标签页、搜索高亮定位、Cmd+F、大纲跳转、设置页深链、问 AI、语言切换、Docker 内 agent 激活 tpa-manual。

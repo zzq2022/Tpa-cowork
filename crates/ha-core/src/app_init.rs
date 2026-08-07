@@ -796,7 +796,7 @@ pub async fn start_background_tasks() {
         tokio::task::spawn_blocking(crate::plan::migrate_flat_plans_to_subdirs);
 
         // Mirror the embedded user manual to <data-dir>/manual/ for the
-        // `ha-manual` skill's read/grep path. Idempotent (fingerprint marker
+        // `tpa-manual` skill's read/grep path. Idempotent (fingerprint marker
         // short-circuits), primary-only (shared data dir), off-runtime, and
         // failure is non-fatal — the GUI reads the embedded bytes directly
         // and the skill re-triggers a lazy ensure on activation.
@@ -1124,7 +1124,7 @@ pub async fn start_minimal_background_tasks() {
     crate::async_jobs::approval_projection_watcher::spawn_subagent_approval_projection_watcher();
 
     if primary {
-        // Manual mirror for the `ha-manual` skill — same as the full-tier
+        // Manual mirror for the `tpa-manual` skill — same as the full-tier
         // startup (ACP agents activate skills too). Idempotent + non-fatal.
         tokio::task::spawn_blocking(|| {
             crate::manual::ensure_local_manual();

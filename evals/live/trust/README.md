@@ -62,6 +62,6 @@ cargo run -p ha-eval --locked -- model bundle-verify \
 - 禁止删除历史 key、改写已有 version-lock digest，或复用 Provider/updater 签名密钥。
 
 Headless Server 不从当前工作目录或可执行文件祖先目录发现注册表。只有确需在 HTTP 只读
-Evaluation 查询中刷新签名状态时，管理员才设置 `HA_EVAL_TRUST_REGISTRY_PATH`；它必须是
+Evaluation 查询中刷新签名状态时，管理员才设置 `TPA_COWORK_EVAL_TRUST_REGISTRY_PATH`；它必须是
 注册表文件的绝对 canonical path，且路径中不能包含 symlink。未配置或校验失败时查询会把
 受保护导入按 key missing 处理。

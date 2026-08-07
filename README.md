@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/alpha-logo.png" alt="Hope Agent" width="200">
+  <img src="assets/alpha-logo.png" alt="TPA CoWork" width="200">
 </p>
 
-<h1 align="center">Hope Agent</h1>
+<h1 align="center">TPA CoWork</h1>
 
 <p align="center">
   <strong>跨端交接、越用越懂你的桌面 AI 助手，也能服务化常驻、跑在云上</strong><br/>
@@ -10,10 +10,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/shiwenwen/hope-agent/actions/workflows/rust.yml"><img src="https://img.shields.io/github/actions/workflow/status/shiwenwen/hope-agent/rust.yml?branch=main&style=flat-square&logo=githubactions&logoColor=white&label=CI" alt="CI status"></a>
-  <a href="https://github.com/shiwenwen/hope-agent/releases"><img src="https://img.shields.io/badge/macOS-000000?style=flat-square&logo=apple&logoColor=white" alt="macOS"></a>
-  <a href="https://github.com/shiwenwen/hope-agent/releases"><img src="https://img.shields.io/badge/Linux-experimental-FFA500?style=flat-square&logo=linux&logoColor=black" alt="Linux (experimental)"></a>
-  <a href="https://github.com/shiwenwen/hope-agent/releases"><img src="https://img.shields.io/badge/Windows-experimental-FFA500?style=flat-square&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0wIDMuNDQ5TDkuNzUgMi4xdjkuNDUxSDBtMTAuOTQ5LTkuNjAyTDI0IDB2MTEuNEgxMC45NDlNMCAxMi42aDkuNzV2OS40NTFMMCAyMC42OTlNMTAuOTQ5IDEyLjZIMjRWMjRsLTEyLjktMS44MDEiLz48L3N2Zz4=" alt="Windows (experimental)"></a>
+  <a href="https://github.com/zzq2022/Tpa-cowork/actions/workflows/rust.yml"><img src="https://img.shields.io/github/actions/workflow/status/zzq2022/Tpa-cowork/rust.yml?branch=main&style=flat-square&logo=githubactions&logoColor=white&label=CI" alt="CI status"></a>
+  <a href="https://github.com/zzq2022/Tpa-cowork/releases"><img src="https://img.shields.io/badge/macOS-000000?style=flat-square&logo=apple&logoColor=white" alt="macOS"></a>
+  <a href="https://github.com/zzq2022/Tpa-cowork/releases"><img src="https://img.shields.io/badge/Linux-experimental-FFA500?style=flat-square&logo=linux&logoColor=black" alt="Linux (experimental)"></a>
+  <a href="https://github.com/zzq2022/Tpa-cowork/releases"><img src="https://img.shields.io/badge/Windows-experimental-FFA500?style=flat-square&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0wIDMuNDQ5TDkuNzUgMi4xdjkuNDUxSDBtMTAuOTQ5LTkuNjAyTDI0IDB2MTEuNEgxMC45NDlNMCAxMi42aDkuNzV2OS40NTFMMCAyMC42OTlNMTAuOTQ5IDEyLjZIMjRWMjRsLTEyLjktMS44MDEiLz48L3N2Zz4=" alt="Windows (experimental)"></a>
   <a href="#运行模式"><img src="https://img.shields.io/badge/Web%20GUI-browser-4F46E5?style=flat-square&logo=googlechrome&logoColor=white" alt="Web GUI"></a>
   <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Rust-edition%202021-dea584?style=flat-square&logo=rust&logoColor=white" alt="Rust"></a>
   <a href="https://tauri.app/"><img src="https://img.shields.io/badge/Tauri-2-24C8DB?style=flat-square&logo=tauri&logoColor=white" alt="Tauri"></a>
@@ -27,9 +27,9 @@
 
 ---
 
-**Hope Agent** 是一个本地优先、桌面优先，也能服务化常驻的个人 AI Agent。它像成熟的桌面软件一样打开即用，又真正具备 Agent 的行动力：理解长期上下文、调用工具完成工作，并在你离开后继续可靠地推进目标。
+**TPA CoWork** 是一个本地优先、桌面优先，也能服务化常驻的个人 AI Agent。它像成熟的桌面软件一样打开即用，又真正具备 Agent 的行动力：理解长期上下文、调用工具完成工作，并在你离开后继续可靠地推进目标。
 
-**Hope Agent 很早就开始探索桌面 AI Agent。** 在桌面 Agent 还很少见、Codex 尚处早期形态的阶段，我们就已经开始构建这个项目。我们一直专注于产品本身，而不是制造声量。随着桌面 AI Agent 逐渐成为热门方向，越来越多产品开始探索相似路径，也印证了我们最初的判断：**AI 助手终将走出聊天框，成为可以长期托付工作的个人软件。**
+**TPA CoWork 很早就开始探索桌面 AI Agent。** 在桌面 Agent 还很少见、Codex 尚处早期形态的阶段，我们就已经开始构建这个项目。我们一直专注于产品本身，而不是制造声量。随着桌面 AI Agent 逐渐成为热门方向，越来越多产品开始探索相似路径，也印证了我们最初的判断：**AI 助手终将走出聊天框，成为可以长期托付工作的个人软件。**
 
 ## 目录
 
@@ -108,14 +108,14 @@
 <tr><td width="220"><b>🖥️ 原生 GUI 与模型配置</b></td><td>macOS 提供完整桌面体验，Linux / Windows 当前为实验性支持；界面支持多语言。内置主流 Provider 模板与丰富的预设模型，同一 Provider 可配置多把 API Key 自动轮换。</td></tr>
 <tr><td><b>🦙 本地模型一键安装</b></td><td>不需要账号、API Key 或终端，在设置中选择适合硬件的模型，即可完成 Ollama 安装、模型下载、Provider 注册与切换；本地 Embedding 使用同一套流程。</td></tr>
 <tr><td><b>🤝 IM 渠道与会话交接</b></td><td>接入 Telegram、Discord、Slack、飞书等常用 IM 渠道，图片、语音和文件可直接进入多模态上下文。会话可在桌面、浏览器与 IM 之间接管或交接，运行中的回复也能流式镜像到聊天工具。</td></tr>
-<tr><td><b>🌐 独立服务与多种运行形态</b></td><td><code>hope-agent server</code> 可常驻 NAS、家用服务器或云主机，并内嵌完整 Web GUI；<code>hope-agent acp</code> 可作为 IDE 的 Agent 后端。不同入口共享同一套核心、会话、记忆与配置。</td></tr>
+<tr><td><b>🌐 独立服务与多种运行形态</b></td><td><code>tpa-cowork server</code> 可常驻 NAS、家用服务器或云主机，并内嵌完整 Web GUI；<code>tpa-cowork acp</code> 可作为 IDE 的 Agent 后端。不同入口共享同一套核心、会话、记忆与配置。</td></tr>
 </table>
 
 ### 🛡 安全与可靠性
 
 <table>
 <tr><td width="220"><b>🔒 工具审批 + Docker 沙箱</b></td><td>敏感工具调用进入统一审批，高风险命令和文件写入可选择在 Docker 沙箱中执行，降低高权限误操作的影响范围。</td></tr>
-<tr><td><b>🏠 本地优先 · 零第三方中转</b></td><td>配置、会话、记忆、附件、技能与日志默认保存在 <code>~/.hope-agent/</code>，API Key 直连模型 Provider。服务模式提供 Bearer Token 鉴权与 SSRF 防护策略。</td></tr>
+<tr><td><b>🏠 本地优先 · 零第三方中转</b></td><td>配置、会话、记忆、附件、技能与日志默认保存在 <code>~/.tpa-cowork/</code>，API Key 直连模型 Provider。服务模式提供 Bearer Token 鉴权与 SSRF 防护策略。</td></tr>
 <tr><td><b>🛟 回滚、自愈与保活</b></td><td>配置变更自动保存本地快照，可一键回滚；Guardian、系统服务与子系统 watchdog 负责异常重启、诊断和自动重连，让长期任务在故障后以可观察的方式恢复。</td></tr>
 </table>
 
@@ -125,50 +125,50 @@
 
 ### 下载安装
 
-> 📦 各平台完整安装包列表：[Releases](https://github.com/shiwenwen/hope-agent/releases)
+> 📦 各平台完整安装包列表：[Releases](https://github.com/zzq2022/Tpa-cowork/releases)
 
 #### macOS
 
 ##### Homebrew（推荐）
 
 ```bash
-brew tap shiwenwen/hope-agent
-brew install --cask hope-agent
+brew tap zzq2022/Tpa-cowork
+brew install --cask tpa-cowork
 ```
 
-> 已经手动装过 `Hope Agent.app`？在 `brew install` 后面加 `--adopt`（接管同版本现有应用，不重新下载）或 `--force`（强制重下覆盖）。
+> 已经手动装过 `TPA CoWork.app`？在 `brew install` 后面加 `--adopt`（接管同版本现有应用，不重新下载）或 `--force`（强制重下覆盖）。
 
 ##### 手动安装（DMG）
 
-到 [Releases](https://github.com/shiwenwen/hope-agent/releases) 下载 `Hope.Agent_*.dmg`，拖到「应用程序」即可。
+到 [Releases](https://github.com/zzq2022/Tpa-cowork/releases) 下载 `TPA.CoWork_*.dmg`，拖到「应用程序」即可。
 
 > 若启动时提示"已损坏"或"无法验证开发者"，请在终端执行：
 >
 > ```bash
-> sudo xattr -cr /Applications/Hope\ Agent.app
-> sudo codesign --force --deep --sign - /Applications/Hope\ Agent.app
+> sudo xattr -cr /Applications/TPA\ CoWork.app
+> sudo codesign --force --deep --sign - /Applications/TPA\ CoWork.app
 > ```
 
 Apple Silicon 与 Intel Mac 均提供原生构建（arm64 / x64 DMG），Homebrew 与手动下载都会按你的硬件自动选对版本。
 
 ##### 启动方式
 
-- **桌面 GUI**：Launchpad / 应用程序文件夹（点 Hope Agent 图标），或终端 `open -a "Hope Agent"` / `hope-agent`
-- **浏览器 Web GUI**：打开桌面应用后访问 <http://127.0.0.1:8420>；也可以运行 `hope-agent server start`，只启动服务、不打开桌面窗口
-- **ACP（IDE 集成）**：`hope-agent acp`
+- **桌面 GUI**：Launchpad / 应用程序文件夹（点 TPA CoWork 图标），或终端 `open -a "TPA CoWork"` / `tpa-cowork`
+- **浏览器 Web GUI**：打开桌面应用后访问 <http://127.0.0.1:8420>；也可以运行 `tpa-cowork server start`，只启动服务、不打开桌面窗口
+- **ACP（IDE 集成）**：`tpa-cowork acp`
 
 #### Windows
 
 ##### Scoop（推荐）
 
 ```powershell
-scoop bucket add hope-agent https://github.com/shiwenwen/scoop-hope-agent
-scoop install hope-agent
+scoop bucket add tpa-cowork https://github.com/shiwenwen/scoop-tpa-cowork
+scoop install tpa-cowork
 ```
 
 ##### 手动安装（installer）
 
-到 [Releases](https://github.com/shiwenwen/hope-agent/releases) 下载 `Hope.Agent_*-setup.exe` 双击安装。**Windows 端尚未完成充分测试**，欢迎反馈问题。
+到 [Releases](https://github.com/zzq2022/Tpa-cowork/releases) 下载 `TPA.CoWork_*-setup.exe` 双击安装。**Windows 端尚未完成充分测试**，欢迎反馈问题。
 
 > 若启动时提示"由于找不到 MSVCP140_1.dll，无法继续执行代码"或类似缺失 `VCRUNTIME140.dll` / `MSVCP140.dll`，请安装 [Microsoft Visual C++ 2015–2022 运行库（x64）](https://aka.ms/vs/17/release/vc_redist.x64.exe)后重启应用。
 
@@ -176,16 +176,16 @@ scoop install hope-agent
 
 ##### 启动方式
 
-- **桌面 GUI**：Start 菜单点「Hope Agent」启动，或 PowerShell `hope-agent`
-- **浏览器 Web GUI**：打开桌面应用后访问 <http://127.0.0.1:8420>；也可以在 PowerShell / cmd 运行 `hope-agent server start`，只启动服务、不打开桌面窗口
-- **ACP（IDE 集成）**：`hope-agent acp`
+- **桌面 GUI**：Start 菜单点「TPA CoWork」启动，或 PowerShell `tpa-cowork`
+- **浏览器 Web GUI**：打开桌面应用后访问 <http://127.0.0.1:8420>；也可以在 PowerShell / cmd 运行 `tpa-cowork server start`，只启动服务、不打开桌面窗口
+- **ACP（IDE 集成）**：`tpa-cowork acp`
 
 #### Linux
 
 ##### Arch Linux / Manjaro（AUR）
 
 ```bash
-yay -S hope-agent-bin   # 或 paru / 任意 AUR helper
+yay -S tpa-cowork-bin   # 或 paru / 任意 AUR helper
 ```
 
 预编译二进制版（沿用 GitHub Release 的 `.deb`），不从源码编译。
@@ -193,20 +193,20 @@ yay -S hope-agent-bin   # 或 paru / 任意 AUR helper
 ##### Debian / Ubuntu（apt）
 
 ```bash
-curl -fsSL https://repo.hopeagent.ai/pubkey.gpg | \
-  sudo gpg --dearmor -o /usr/share/keyrings/hope-agent.gpg
-echo "deb [signed-by=/usr/share/keyrings/hope-agent.gpg] https://repo.hopeagent.ai/apt stable main" | \
-  sudo tee /etc/apt/sources.list.d/hope-agent.list
+curl -fsSL https://repo.tpacowork.ai/pubkey.gpg | \
+  sudo gpg --dearmor -o /usr/share/keyrings/tpa-cowork.gpg
+echo "deb [signed-by=/usr/share/keyrings/tpa-cowork.gpg] https://repo.tpacowork.ai/apt stable main" | \
+  sudo tee /etc/apt/sources.list.d/tpa-cowork.list
 sudo apt update
-sudo apt install hope-agent
+sudo apt install tpa-cowork
 ```
 
 ##### Fedora / RHEL / CentOS（dnf / yum）
 
 ```bash
-sudo curl -fsSL https://repo.hopeagent.ai/rpm/hope-agent.repo \
-  -o /etc/yum.repos.d/hope-agent.repo
-sudo dnf install hope-agent     # 或 sudo yum install hope-agent
+sudo curl -fsSL https://repo.tpacowork.ai/rpm/tpa-cowork.repo \
+  -o /etc/yum.repos.d/tpa-cowork.repo
+sudo dnf install tpa-cowork     # 或 sudo yum install tpa-cowork
 ```
 
 > 历史命令 `sudo dnf config-manager --add-repo …` 在 dnf5（Fedora 41+）已经废弃，用上面的 `curl` 写法对 dnf4 / dnf5 / yum / zypper 都兼容。
@@ -214,25 +214,25 @@ sudo dnf install hope-agent     # 或 sudo yum install hope-agent
 openSUSE 用户：
 
 ```bash
-sudo zypper addrepo https://repo.hopeagent.ai/rpm/hope-agent.repo
-sudo zypper install hope-agent
+sudo zypper addrepo https://repo.tpacowork.ai/rpm/tpa-cowork.repo
+sudo zypper install tpa-cowork
 ```
 
 ##### 手动安装（AppImage / deb / rpm）
 
-到 [Releases](https://github.com/shiwenwen/hope-agent/releases) 下载（包名含架构后缀，按你的机器选 `_amd64` / `_arm64` 或 `.x86_64` / `.aarch64`）：
+到 [Releases](https://github.com/zzq2022/Tpa-cowork/releases) 下载（包名含架构后缀，按你的机器选 `_amd64` / `_arm64` 或 `.x86_64` / `.aarch64`）：
 
-- AppImage：`Hope.Agent_*.AppImage` —— `chmod +x` 后直接运行
-- Debian / Ubuntu：`Hope.Agent_*.deb` —— `sudo dpkg -i Hope.Agent_*.deb`
-- Fedora / RHEL：`Hope.Agent_*.rpm` —— `sudo rpm -i Hope.Agent_*.rpm`
+- AppImage：`TPA.CoWork_*.AppImage` —— `chmod +x` 后直接运行
+- Debian / Ubuntu：`TPA.CoWork_*.deb` —— `sudo dpkg -i TPA.CoWork_*.deb`
+- Fedora / RHEL：`TPA.CoWork_*.rpm` —— `sudo rpm -i TPA.CoWork_*.rpm`
 
 提供 amd64 (x86_64) 与 arm64 (aarch64) 两种原生构建，覆盖普通 PC、树莓派 4/5、Apple Silicon 跑 Asahi Linux、Graviton / Ampere 云主机。apt 与 dnf 都会按 `dpkg --print-architecture` / `$basearch` 自动选对版本。
 
 ##### 启动方式
 
-- **桌面 GUI**：应用菜单点「Hope Agent」启动，或终端 `hope-agent`
-- **浏览器 Web GUI**：打开桌面应用后访问 <http://127.0.0.1:8420>；也可以运行 `hope-agent server start`，只启动服务、不打开桌面窗口
-- **ACP（IDE 集成）**：`hope-agent acp`
+- **桌面 GUI**：应用菜单点「TPA CoWork」启动，或终端 `tpa-cowork`
+- **浏览器 Web GUI**：打开桌面应用后访问 <http://127.0.0.1:8420>；也可以运行 `tpa-cowork server start`，只启动服务、不打开桌面窗口
+- **ACP（IDE 集成）**：`tpa-cowork acp`
 
 #### 首次启动 & 自动更新
 
@@ -240,18 +240,18 @@ sudo zypper install hope-agent
 2. 桌面应用内置 GitHub Releases 自动更新，应用内 **设置 → 关于** 检查更新并一键安装；或者直接在对话里说「升级」或「检查更新」
 3. 通过 Homebrew / AUR / Scoop 装的版本同样走应用内置 updater；包管理器视角的版本号会保持初装时的，不影响功能
 
-> 要从手机或另一台电脑访问，在「设置 → 服务器」中设置 API Key，并把监听地址改为 `0.0.0.0:8420`；重启后访问 `http://<运行 Hope Agent 的设备 IP>:8420`。不要在没有鉴权的情况下把端口暴露到局域网或公网；公网使用请前置 HTTPS 反向代理，详见 [Docker 部署指南](docs/deployment/docker.md)。
+> 要从手机或另一台电脑访问，在「设置 → 服务器」中设置 API Key，并把监听地址改为 `0.0.0.0:8420`；重启后访问 `http://<运行 TPA CoWork 的设备 IP>:8420`。不要在没有鉴权的情况下把端口暴露到局域网或公网；公网使用请前置 HTTPS 反向代理，详见 [Docker 部署指南](docs/deployment/docker.md)。
 
 ### 自托管（Docker）
 
-把 Hope Agent 跑在家用 NAS / VPS / homelab 上、用浏览器访问 Web GUI 的场景：
+把 TPA CoWork 跑在家用 NAS / VPS / homelab 上、用浏览器访问 Web GUI 的场景：
 
 ```bash
 docker run -d \
-  --name hope-agent \
+  --name tpa-cowork \
   -p 127.0.0.1:8420:8420 \
-  -v hope-data:/data \
-  ghcr.io/shiwenwen/hope-agent:latest
+  -v tpa-cowork-data:/data \
+  ghcr.io/zzq2022/Tpa-cowork:latest
 ```
 
 容器跑起来后浏览器打开 <http://127.0.0.1:8420>，按 Onboarding 向导配 Provider API Key。镜像覆盖 `linux/amd64` + `linux/arm64`（含 Apple Silicon / 树莓派），随每次 Release Tag 自动构建。
@@ -261,8 +261,8 @@ docker run -d \
 ### 开发者
 
 ```bash
-git clone https://github.com/shiwenwen/hope-agent.git
-cd hope-agent
+git clone https://github.com/zzq2022/Tpa-cowork.git
+cd tpa-cowork
 pnpm install
 pnpm tauri dev         # 桌面开发模式（前端 + Rust 热重载）
 
@@ -280,9 +280,9 @@ pnpm tauri build       # 打生产包
 | --------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 桌面 GUI                    | 双击图标 / `pnpm tauri dev`                                                      | 功能最全的入口：完整 GUI 体验，并内嵌 HTTP/WS 服务，桌面在用的同时可对外提供接入                                                                                                                  |
 | Server + Web GUI（HTTP/WS） | 通过 `server start` 子命令；`server install` 可注册成 launchd / systemd 开机自启 | 无 GUI 守护进程，24 小时在线，IM 渠道 / Cron 不断线；**前端 React UI 通过 `rust-embed` 内嵌进 server 二进制，浏览器打开 `http://<server>:port` 即得完整 Web GUI**，手机 / 平板 / 任意电脑都能直连 |
-| ACP（stdio）                | 通过 `acp` 子命令                                                                | IDE 直连，兼容 ACP 协议的编辑器把 Hope Agent 当 agent 后端调                                                                                                                                      |
+| ACP（stdio）                | 通过 `acp` 子命令                                                                | IDE 直连，兼容 ACP 协议的编辑器把 TPA CoWork 当 agent 后端调                                                                                                                                      |
 
-三种模式共用同一套 `ha-core` 核心逻辑；配置、会话、记忆全部落在 `~/.hope-agent/` 下。
+三种模式共用同一套 `ha-core` 核心逻辑；配置、会话、记忆全部落在 `~/.tpa-cowork/` 下。
 
 ## 生态一览
 
@@ -341,25 +341,25 @@ node scripts/sync-i18n.mjs --check   # 检查翻译缺失
 
 ## 社区
 
-- 🐛 [Issues](https://github.com/shiwenwen/hope-agent/issues) — Bug 报告、功能请求
-- 💡 [Discussions](https://github.com/shiwenwen/hope-agent/discussions) — 用法分享、想法讨论、提问答疑
-- ⭐ 如果 Hope Agent 帮到了你，欢迎在 GitHub 上点个 Star
+- 🐛 [Issues](https://github.com/zzq2022/Tpa-cowork/issues) — Bug 报告、功能请求
+- 💡 [Discussions](https://github.com/zzq2022/Tpa-cowork/discussions) — 用法分享、想法讨论、提问答疑
+- ⭐ 如果 TPA CoWork 帮到了你，欢迎在 GitHub 上点个 Star
 - 📮 路线图、正式文档站和更多社区渠道正在筹备中
 
 ## 致谢
 
-- [Ollama](https://ollama.com/)：本地大模型一键安装能力建立在 Ollama 的本地运行时与 OpenAI 兼容端点之上；Hope Agent 仅作 GUI 层包装，Qwen / Gemma 等模型由 Ollama 模型库分发
-- [ClawHub](https://www.clawhub.com/) / [SkillHub](https://skillhub.cn/)：为 Hope Agent 提供公开的 skill 搜索与发现来源
+- [Ollama](https://ollama.com/)：本地大模型一键安装能力建立在 Ollama 的本地运行时与 OpenAI 兼容端点之上；TPA CoWork 仅作 GUI 层包装，Qwen / Gemma 等模型由 Ollama 模型库分发
+- [ClawHub](https://www.clawhub.com/) / [SkillHub](https://skillhub.cn/)：为 TPA CoWork 提供公开的 skill 搜索与发现来源
 - [Tauri](https://tauri.app/)、[axum](https://github.com/tokio-rs/axum)、[React](https://react.dev/)、[shadcn/ui](https://ui.shadcn.com/)、[Streamdown](https://github.com/streamdown/streamdown)、[Radix UI](https://www.radix-ui.com/) 等开源基础设施
 - 所有为这个项目做过反馈、测试、提交 issue 的朋友
 
 ## Star History
 
-<a href="https://www.star-history.com/#shiwenwen/hope-agent&Date">
+<a href="https://www.star-history.com/#zzq2022/Tpa-cowork&Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=shiwenwen/hope-agent&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=shiwenwen/hope-agent&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=shiwenwen/hope-agent&type=Date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=zzq2022/Tpa-cowork&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=zzq2022/Tpa-cowork&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=zzq2022/Tpa-cowork&type=Date" />
   </picture>
 </a>
 

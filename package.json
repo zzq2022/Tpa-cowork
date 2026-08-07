@@ -37,6 +37,7 @@
     "release:verify": "node scripts/verify-release-version.mjs",
     "check:release-paths": "node scripts/check-release-paths.mjs",
     "check:docs-parity": "node scripts/check-docs-parity.mjs",
+    "product:check": "node scripts/check-product-identity.mjs",
     "chrome:extension:package": "pnpm --dir extensions/chrome package:webstore",
     "chrome:extension:smoke-pages": "pnpm --dir extensions/chrome smoke-pages",
     "chrome:extension:smoke-pages:check": "pnpm --dir extensions/chrome smoke-pages:check",

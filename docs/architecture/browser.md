@@ -1,6 +1,6 @@
 # 浏览器自动化子系统
 
-> 返回 [文档索引](../README.md) | 关联源码：[`crates/ha-core/src/browser/`](../../crates/ha-core/src/browser/)、[`crates/ha-core/src/tools/browser/mod.rs`](../../crates/ha-core/src/tools/browser/mod.rs)、[`src/components/chat/BrowserPanel.tsx`](../../src/components/chat/BrowserPanel.tsx)、[`skills/ha-browser/SKILL.md`](../../skills/ha-browser/SKILL.md)
+> 返回 [文档索引](../README.md) | 关联源码：[`crates/ha-core/src/browser/`](../../crates/ha-core/src/browser/)、[`crates/ha-core/src/tools/browser/mod.rs`](../../crates/ha-core/src/tools/browser/mod.rs)、[`src/components/chat/BrowserPanel.tsx`](../../src/components/chat/BrowserPanel.tsx)、[`skills/tpa-browser/SKILL.md`](../../skills/tpa-browser/SKILL.md)
 
 LLM 看到一个 `browser` 工具，**8 个高层 action**。默认后端是 **Chrome Extension + Native Messaging Host**：扩展运行在用户真实 Chrome profile 内，通过 `chrome.debugger` 控制已打开 tab；当扩展未安装或不可用、且动作不依赖真实 Chrome 状态时，降级到现有 `CdpBackend`（`chromiumoxide` managed / user_attach profile）兜底。
 
@@ -17,7 +17,7 @@ observe { kind: console|network|page_errors|downloads, since? }
 control { op: resize|scroll|wait_for|handle_dialog|evaluate|raw_cdp|download_cancel }
 ```
 
-完整 schema 在 [`tools/definitions/core_tools.rs`](../../crates/ha-core/src/tools/definitions/core_tools.rs)（`TOOL_BROWSER` 段）。工具标记 `default_deferred: true`，常态不进 system prompt，通过 `tool_search` 按需暴露。配套 [`skills/ha-browser/SKILL.md`](../../skills/ha-browser/SKILL.md) 教 agent 标准 loop：`status → tabs → snapshot → act → 必要时 resnapshot`，含登录 / 2FA / captcha / camera prompt / 文件下载等阻塞情形清单（一律 `ask_user_question`）。
+完整 schema 在 [`tools/definitions/core_tools.rs`](../../crates/ha-core/src/tools/definitions/core_tools.rs)（`TOOL_BROWSER` 段）。工具标记 `default_deferred: true`，常态不进 system prompt，通过 `tool_search` 按需暴露。配套 [`skills/tpa-browser/SKILL.md`](../../skills/tpa-browser/SKILL.md) 教 agent 标准 loop：`status → tabs → snapshot → act → 必要时 resnapshot`，含登录 / 2FA / captcha / camera prompt / 文件下载等阻塞情形清单（一律 `ask_user_question`）。
 
 ## Backend 架构
 
@@ -54,7 +54,7 @@ flowchart TB
 
 ### `ExtensionBackend`（[`extension/backend.rs`](../../crates/ha-core/src/browser/extension/backend.rs)）
 
-ExtensionBackend 通过 Core broker 和 Chrome 扩展通信。扩展 `connectNative("com.hope_agent.chrome")` 到 `ha-browser-host`，host 再通过本机 broker 连接 `ha-core`。broker 负责握手、版本诊断、request/response 生命周期、大响应 blob、二进制 `dataBlob`、connection generation、late response 丢弃和权限校验。
+ExtensionBackend 通过 Core broker 和 Chrome 扩展通信。扩展 `connectNative("com.hope_agent.chrome")` 到 `tpa-browser-host`，host 再通过本机 broker 连接 `ha-core`。broker 负责握手、版本诊断、request/response 生命周期、大响应 blob、二进制 `dataBlob`、connection generation、late response 丢弃和权限校验。
 
 Native host 是很薄的本机桥：只做 Chrome Native Messaging stdio frame 和本机 broker socket/pipe 转发，不拥有业务策略。策略真相源全部在 `ha-core`：backend selection、tab lease、SSRF、protected path、tool approval、response/blob 校验、session cleanup 都在 Core 层裁决。
 
@@ -75,8 +75,8 @@ Native host 是很薄的本机桥：只做 Chrome Native Messaging stdio frame �
 
 - **Chrome Extension 安装**：主路径是 Chrome Web Store；alpha/dev/self-host/enterprise 继续支持本地 unpacked 扩展。Settings 向导会优先显示本地扩展目录（release resource 或 dev `extensions/chrome`），推荐在 `chrome://extensions` 开启 Developer mode 后直接拖入该目录；也可复制路径后用 `Load unpacked` 手动选择。App 不能静默安装扩展，只能在 Settings 打开 Web Store 或 `chrome://extensions` 向导，最终确认必须发生在 Chrome UI。
 - **扩展运行时文件编译嵌入二进制（本地安装前提）**：运行时文件白名单（同 Web Store zip 清单，**保留 `manifest.key`**——区别于 `package-webstore.mjs` strip key）经 `rust-embed` 编译进 ha-core（`browser/extension/embedded.rs`），随二进制到达所有发行形态（桌面 / bare binary / headless server），不再依赖 Tauri resource / prepare 脚本拷贝（均已退役）。`ensure_local_unpacked_extension` 把 dev repo checkout（存在时优先，扩展编辑即时生效）或嵌入文件集镜像到稳定目录 `~/.hope-agent/extension/browser/`（字节 diff 幂等 + prune 多余文件 + 完成 marker 防半拷贝），二进制升级后镜像自动刷新；`unpacked_extension_path()` 优先稳定副本，headless 无桌面启动钩子时经每进程一次的懒 ensure 自举。**保留 key 使 unpacked id 恒为固定 dev id**，native host `allowed_origins` 据此推导——这是「商店上架前用户先 Load unpacked 本地装扩展、且无需 Web Store id 即可连上 broker」可行的前提。注意 Chrome 不自动重载 unpacked 扩展：镜像更新后需用户在 `chrome://extensions` 手动 reload 生效（上架 Web Store 后由商店自动更新接管）。
-- **Native host 安装**：Settings 调 owner 平面命令写 user-level native host manifest。正式桌面包通过 Tauri resource 携带 `ha-browser-host`，启动时把资源路径写入 `HOPE_AGENT_BROWSER_HOST_PATH`；dev/self-host 可显式传 path 或设置同名 env。manifest 的 `allowed_origins` 只写入用户选择/检测到的 extension id，扩展 id 必须是 Chrome 的 32 位 `a-p` 字符串。Windows 额外写 HKCU `Software\Google\Chrome\NativeMessagingHosts\<host>` 指向 manifest。
-- **Broker 连接**：Core broker 启动时生成本机 token；`ha-browser-host` 首帧必须是带 token 的 `host.hello`。Unix/macOS socket 校验 peer uid，Windows named pipe 校验当前用户 SID。扩展不接触 TPA CoWork Agent HTTP API key。
+- **Native host 安装**：Settings 调 owner 平面命令写 user-level native host manifest。正式桌面包通过 Tauri resource 携带 `tpa-browser-host`，启动时把资源路径写入 `HOPE_AGENT_BROWSER_HOST_PATH`；dev/self-host 可显式传 path 或设置同名 env。manifest 的 `allowed_origins` 只写入用户选择/检测到的 extension id，扩展 id 必须是 Chrome 的 32 位 `a-p` 字符串。Windows 额外写 HKCU `Software\Google\Chrome\NativeMessagingHosts\<host>` 指向 manifest。
+- **Broker 连接**：Core broker 启动时生成本机 token；`tpa-browser-host` 首帧必须是带 token 的 `host.hello`。Unix/macOS socket 校验 peer uid，Windows named pipe 校验当前用户 SID。扩展不接触 TPA CoWork Agent HTTP API key。
 - **Extension id**：生产 id 由 Web Store 首次上传后产生，进入 `browser.extension.extensionIds`；unpacked dev id 由 `manifest.key` 推导并自动加入状态输出，方便 alpha fallback。
 - **Stop 控制**：用户可从页面 overlay、extension popup、Settings Stop 结束控制。Core 会 emit `browser:control_stopped`，并清理 session scoped lease/ref 状态。
 
@@ -95,7 +95,7 @@ Native host 是很薄的本机桥：只做 Chrome Native Messaging stdio frame �
 
 ## Native Messaging 协议
 
-> 关联源码：[`extensions/chrome/service_worker.js`](../../extensions/chrome/service_worker.js)（Chrome MV3 service worker）、[`ha-browser-host` crate `main.rs` / `protocol.rs`](../../crates/ha-browser-host/src/main.rs)（native host 二进制）、[`extension/broker.rs`](../../crates/ha-core/src/browser/extension/broker.rs) / [`extension/backend.rs`](../../crates/ha-core/src/browser/extension/backend.rs)（Core broker + 后端）。
+> 关联源码：[`extensions/chrome/service_worker.js`](../../extensions/chrome/service_worker.js)（Chrome MV3 service worker）、[`tpa-browser-host` crate `main.rs` / `protocol.rs`](../../crates/tpa-browser-host/src/main.rs)（native host 二进制）、[`extension/broker.rs`](../../crates/ha-core/src/browser/extension/broker.rs) / [`extension/backend.rs`](../../crates/ha-core/src/browser/extension/backend.rs)（Core broker + 后端）。
 
 LLM 看到的是高层 8-action；其底层是一条跨三进程的 native-messaging 链路。本节是这条链路的**线协议方法表与不变量**——8-action 表面的实现真相源。
 
@@ -104,19 +104,19 @@ LLM 看到的是高层 8-action；其底层是一条跨三进程的 native-messa
 ```mermaid
 flowchart LR
     SW["Chrome MV3 service worker<br/>service_worker.js（SW）<br/>独占 chrome.debugger / tabs / scripting / downloads"]
-    HOST["ha-browser-host<br/>Rust 透传中继<br/>decode → re-encode"]
+    HOST["tpa-browser-host<br/>Rust 透传中继<br/>decode → re-encode"]
     BROKER["Core broker<br/>broker.rs · backend.rs 驱动 8-action"]
     SW -->|"stdio native messaging<br/>4B LE len + JSON"| HOST
     HOST -->|"socket / pipe / tcp<br/>length-prefixed JSON"| BROKER
 ```
 
 - **SW 是唯一可拨号 / 重连的一方**：Chrome 与 host 走 stdio，host 与 Core 走 socket/pipe/tcp；**Core 纯粹是 listener/broker，无任何 reconnect / keepalive / heartbeat**，broker 不实现 `heartbeat`/`ping` 方法。（注：扩展层配置 `BrowserExtensionConfig.heartbeat_interval_secs`（默认 15s）目前**未被任何路径消费**——既不 plumb 给 host 也不影响本链路；真正起作用的 heartbeat 属于另一条 CDP/WebSocket backend（[`browser_state.rs`](../../crates/ha-core/src/browser_state.rs)，ping `browser.version()`，默认 120s），与本节的 native-messaging 链路无关。）
-- **统一帧格式**：两段链路复用同一 Chrome Native Messaging 线格式——`4 字节小端 u32 长度前缀 + 该长度的 UTF-8 JSON body`。host [`MAX_NATIVE_MESSAGE_LEN`](../../crates/ha-browser-host/src/protocol.rs) 与 Core [`MAX_BROKER_MESSAGE_LEN`](../../crates/ha-core/src/browser/extension/broker.rs) 均 = `1024×1024`（1 MiB，读写双向强制，`len==0` 拒绝，header 前干净 EOF = 优雅关闭）。**1 MiB 是 per-frame 线上限，更大 payload 走 chunk/blob 通道**。
+- **统一帧格式**：两段链路复用同一 Chrome Native Messaging 线格式——`4 字节小端 u32 长度前缀 + 该长度的 UTF-8 JSON body`。host [`MAX_NATIVE_MESSAGE_LEN`](../../crates/tpa-browser-host/src/protocol.rs) 与 Core [`MAX_BROKER_MESSAGE_LEN`](../../crates/ha-core/src/browser/extension/broker.rs) 均 = `1024×1024`（1 MiB，读写双向强制，`len==0` 拒绝，header 前干净 EOF = 优雅关闭）。**1 MiB 是 per-frame 线上限，更大 payload 走 chunk/blob 通道**。
 - **两段握手**：
   1. **`host.hello` token 握手（transport auth）** — host 连上 broker 后**同步**写出首帧 `host.hello`，携带 discovery 文件里的 token；broker 把该 token 校验为强制首帧，**token 不符直接拒连**（`native host token mismatch`），Core 不回复 `host.hello`。
   2. **`extension.hello` 应用握手** — SW 在 port open 后立刻 fire-and-forget 发 `extension.hello`（带 `protocolVersion:1` + 身份），Core 回 `hello_ack`。`PROTOCOL_VERSION = 1`；**版本只记录不拒绝**，不匹配仅由 [`diagnostics.rs`](../../crates/ha-core/src/browser/extension/diagnostics.rs) 抛 `VersionMismatch`（`next_action=reload_extension`）。
 - **Peer 身份校验（fail-closed）**：Unix 用 `SO_PEERCRED`（Linux）/ `getpeereid`（macOS+BSD）校验 peer euid 必须 == 当前 euid，**无法确定 uid 一律拒连**；Windows 用 `ImpersonateNamedPipeClient` → TokenUser SID 必须 `EqualSid` 当前进程用户 SID，pipe DACL 限定当前用户、`reject_remote_clients(true)`。
-- **Discovery / endpoint**：broker 把 `BrowserBrokerDiscovery { protocolVersion, endpoint, token, pid }` 以 0600 写入 `~/.hope-agent/browser-extension/broker.json`。endpoint 按 scheme 前缀解析：Unix `unix:<…broker.sock>`（dir 0700 / sock 0600）、Windows `pipe:\\.\pipe\hope-agent-browser-extension-<pid>`、其他 `tcp:127.0.0.1:<ephemeral>`。**两个同前缀环境变量用途不同、勿混淆**：host 侧 discovery 文件路径由 `HOPE_AGENT_BROWSER_BROKER_DISCOVERY` 覆盖（[`main.rs`](../../crates/ha-browser-host/src/main.rs)，host 据此找 broker）；ha-core 写 native-host manifest 时由 `HOPE_AGENT_BROWSER_HOST_PATH` 指定 host 二进制路径（[`diagnostics.rs`](../../crates/ha-core/src/browser/extension/diagnostics.rs)，Core 据此找 host 二进制）；数据根统一由 `HA_DATA_DIR` 覆盖。
+- **Discovery / endpoint**：broker 把 `BrowserBrokerDiscovery { protocolVersion, endpoint, token, pid }` 以 0600 写入 `~/.hope-agent/browser-extension/broker.json`。endpoint 按 scheme 前缀解析：Unix `unix:<…broker.sock>`（dir 0700 / sock 0600）、Windows `pipe:\\.\pipe\hope-agent-browser-extension-<pid>`、其他 `tcp:127.0.0.1:<ephemeral>`。**两个同前缀环境变量用途不同、勿混淆**：host 侧 discovery 文件路径由 `HOPE_AGENT_BROWSER_BROKER_DISCOVERY` 覆盖（[`main.rs`](../../crates/tpa-browser-host/src/main.rs)，host 据此找 broker）；ha-core 写 native-host manifest 时由 `HOPE_AGENT_BROWSER_HOST_PATH` 指定 host 二进制路径（[`diagnostics.rs`](../../crates/ha-core/src/browser/extension/diagnostics.rs)，Core 据此找 host 二进制）；数据根统一由 `HA_DATA_DIR` 覆盖。
 - **连接换代 / supersede**：每次 accept 铸 `connection_id`（`connection_seq` 起始 1）。新 `host.hello` 到来时若已有 active 连接，Core 记 `Superseding…` 并 `fail_all_pending()` 立即清空 pending oneshot + chunk 装配，旧在途 `call()` 立刻返回；disconnect 时仅当本连接仍是 active 才清状态（`was_active` 守卫，被 supersede 的旧连接不动新 sender）。`request_seq` 起始 1。超时后才完成装配的响应无 waiter → 丢弃。
 
 ### 协议方法表
@@ -155,7 +155,7 @@ flowchart LR
 
 | 方法 | 发起方 | 关键参数 | 响应（Core 回） | 源码 |
 | --- | --- | --- | --- | --- |
-| `host.hello` | native host | `{ id:"host-hello", method:"host.hello", token, payload:{host,hostVersion,pid,protocolVersion:1} }` | **Core 不回复**（成功即换 active sender 起读循环）；token≠broker token 拒连 | host [`main.rs:141-153`](../../crates/ha-browser-host/src/main.rs) / Core `broker.rs:587` |
+| `host.hello` | native host | `{ id:"host-hello", method:"host.hello", token, payload:{host,hostVersion,pid,protocolVersion:1} }` | **Core 不回复**（成功即换 active sender 起读循环）；token≠broker token 拒连 | host [`main.rs:141-153`](../../crates/tpa-browser-host/src/main.rs) / Core `broker.rs:587` |
 | `extension.hello`（别名 `hello`） | SW | port open 时 fire-and-forget：`{ id:"startup-…", method:"extension.hello", protocolVersion:1, payload:{extension,extensionVersion} }` | `{ ok:true, type:"hello_ack", protocolVersion:1, coreConnected:true }`，记录 reported 版本（不拒绝） | SW `:217-225` / Core `broker.rs:613` |
 | `extension.status`（别名 `status`） | SW | native RPC，由 `native.status` 触发 | `{ ok:true, type:"status", protocolVersion:1, coreConnected:true, broker:<BrokerStatus> }` | SW `:392-393` / Core `broker.rs:634` |
 | `extension.user_stop` | SW | detach debugger + 隐 overlay 后发 `{ tabId, source:"toolbar" \| "overlay" }`；best-effort | `{ ok:true, type:"user_stop_ack", tabId, removedLeases:N }`；副作用：`registry::remove_tab_from_all_scopes` + emit `browser:control_stopped` | SW `:840-856` / Core `broker.rs:653` |
@@ -432,7 +432,7 @@ raw CDP 不得被用来绕过高层 URL 策略，故在进入后端前按 method
 ## 已落地清单
 
 ✅ Backend trait + CdpBackend + ObserveBuffer
-✅ 27 → 8 action 收敛 + schema 重写 + ha-browser bundled skill
+✅ 27 → 8 action 收敛 + schema 重写 + tpa-browser bundled skill
 ✅ Stale-ref one-shot 自恢复
 ✅ 高层 URL 守卫覆盖 navigate / tabs.new / profile.connect / control.evaluate
 ✅ BROWSER_FRAME 事件 + capture_frame Tauri/HTTP + BrowserPanel 前端 + 12 语言 i18n
@@ -459,7 +459,7 @@ raw CDP 不得被用来绕过高层 URL 策略，故在进入后端前按 method
 | **P1** | AX-ref grounding 收口 + viewport 裁剪 | 跨域帧统一成稳定 ref（对齐 root session 真 AX）+ 只收视口内节点 → 降 token、提稳定 | `service_worker.js::collectHopeFrameSnapshot`（viewport 过滤）、`backend.rs`（子帧也走 `getPartialAXTree`）、snapshot ref 命名统一 | 中 | 低风险，纯 grounding 质量改进 |
 | **P2** | 网络拦截 / Mock / HAR（克制版） | `route.abort/observe` 级：离线回归、屏蔽遥测、注入测试桩；Google `chrome-devtools-mcp` 明确拒做，可差异化 | 解封 `Fetch.*` 黑名单 + 新增 observe/control 子动作；Core 侧规则白名单 + 每条过 SSRF + 审批 | 中-大 | **红线最高**：真实登录 tab 改流量 = strict 审批不可 AllowAlways；先只做「读 + abort」，`fulfill`/`continueWithHeaders` 暂缓 |
 | **P3** | 视觉 grounding（set-of-marks + 坐标点击）兜底 | canvas / 图表 / `<video>` 等 AX 不可见控件能操作；与现有 annotated screenshot + `clip` 组成 hybrid | `service_worker.js`：新增 `act{kind:click_at,x,y}`（走 `Input.dispatchMouseEvent`，drag 已有先例）+ set-of-marks 标注截图 | 中 | skill 明确「仅 AX 不可达时用」，坐标精度低于 ref |
-| **P4** | eval harness（WebVoyager / Online-Mind2Web 子集） | 改 grounding/重放有固定 judge 回归基线，防「Illusion of Progress」式自欺 | 不进 ha-core 主路径；`skills/ha-browser` 配套离线脚本 / 独立 crate，固定 judge，产 same-judge delta | 中 | 优先可复现沙盒（WebArena）做 gating，避免 live 站点漂移 |
+| **P4** | eval harness（WebVoyager / Online-Mind2Web 子集） | 改 grounding/重放有固定 judge 回归基线，防「Illusion of Progress」式自欺 | 不进 ha-core 主路径；`skills/tpa-browser` 配套离线脚本 / 独立 crate，固定 judge，产 same-judge delta | 中 | 优先可复现沙盒（WebArena）做 gating，避免 live 站点漂移 |
 | **P5** | 抗检测姿态收紧（防御性） | 消除取证级注入残留（overlay 已用 closed shadow-DOM，优于同类） | 审 `manifest.json` 的 `web_accessible_resources` + SW overlay 注入（随机化 id / idle 后清痕迹） | 小 | 只做「不主动暴露」，**不**滑向 JS-patch stealth 军备竞赛 |
 
 ### 明确非目标（Non-Goals）

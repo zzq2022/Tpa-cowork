@@ -84,7 +84,7 @@ per-agent 覆盖主对话模型选择，是「会话 > Agent > 全局」三层�
 
 per-agent 的 `memory.enabled` 是该 Agent 的记忆总开关；关闭后既不使用已有记忆，也不从新会话学习。提取相关字段多数为 `Option`，`None` = 继承全局，不是关闭；`budget` 覆盖是**整体替换**而非 field-by-field 合并。`effective_memory_budget(agent, global)` 是唯一预算入口：`agent.budget` 存在时整体覆盖全局 `MemoryBudgetConfig`。
 
-Memory UX v2 的自动动态召回由全局 `memory.recall.enabled` 控制，**默认关闭**；关闭时仍注入有界 Core Memory，模型也仍可按需调用 `recall_memory` / `memory_get`。用户显式开启后先运行不调用额外 LLM 的确定性 Fast Recall；`memory.recall.deepRecall.enabled` 另行控制有额外延迟和 token 成本的 Deep Recall，默认也关闭。旧 `ActiveMemoryConfig.enabled=true` 只在一个 minor 的兼容窗口内视为所属 Agent 的既有明确同意，为该 Agent 启用 Fast + Deep Recall，不得扩散成全局或其它 Agent 的同意；`include_claims` 只继续控制旧兼容 / V1 rollback 链是否加入 effective-active claims。两项旧字段仍 per-agent 存在 `agent.json`、不进 `ha-settings`；V2 是否纳入 claim 由全局 `memory.recall.includeClaims` 控制。普通用户通过 Agent 记忆总开关和全局“自动召回相关记忆 / 深度召回”界面配置。记忆侧契约详见 [memory.md](memory.md) / [dreaming.md](dreaming.md)。
+Memory UX v2 的自动动态召回由全局 `memory.recall.enabled` 控制，**默认关闭**；关闭时仍注入有界 Core Memory，模型也仍可按需调用 `recall_memory` / `memory_get`。用户显式开启后先运行不调用额外 LLM 的确定性 Fast Recall；`memory.recall.deepRecall.enabled` 另行控制有额外延迟和 token 成本的 Deep Recall，默认也关闭。旧 `ActiveMemoryConfig.enabled=true` 只在一个 minor 的兼容窗口内视为所属 Agent 的既有明确同意，为该 Agent 启用 Fast + Deep Recall，不得扩散成全局或其它 Agent 的同意；`include_claims` 只继续控制旧兼容 / V1 rollback 链是否加入 effective-active claims。两项旧字段仍 per-agent 存在 `agent.json`、不进 `tpa-settings`；V2 是否纳入 claim 由全局 `memory.recall.includeClaims` 控制。普通用户通过 Agent 记忆总开关和全局“自动召回相关记忆 / 深度召回”界面配置。记忆侧契约详见 [memory.md](memory.md) / [dreaming.md](dreaming.md)。
 
 ### 委派（`SubagentConfig` / `TeamAgentConfig`）
 
@@ -252,7 +252,7 @@ markdown 各文件如何进 system prompt（行为说明 / 人格 / soul / 记�
 - **`tools.allow/deny` 仅是非 Core 工具显式覆盖**，Core 工具不受影响（执行层走 `dispatch::resolve_tool_fate`）；`skills` 用严格白 / 黑名单语义
 - **mode 字段只影响新会话**：`default_session_permission_mode` / `default_sandbox_mode` 仅决定新会话初始 mode，**已有会话不受改动影响**；`default_sandbox_mode=None` 时按 legacy sandbox bool 经 `effective_default_sandbox_mode` 映射
 - **记忆继承语义**：`MemoryConfig` 提取相关字段 `None` = 继承全局**不是关闭**；`agent.budget` 覆盖是整体替换不是 field-by-field 合并
-- **Legacy Active Memory 配置不进 `ha-settings`**：`ActiveMemoryConfig.enabled` / `include_claims` 仅作为 per-agent 兼容与 V1 rollback 字段保留在 `agent.json`；V2 自动召回及 claim 纳入策略走全局 `memory.recall`
+- **Legacy Active Memory 配置不进 `tpa-settings`**：`ActiveMemoryConfig.enabled` / `include_claims` 仅作为 per-agent 兼容与 V1 rollback 字段保留在 `agent.json`；V2 自动召回及 claim 纳入策略走全局 `memory.recall`
 - **`normalize_default_agent_id` 是写归一统一入口**（Tauri / HTTP / `update_settings` 三处），空串 = 清除全局默认、resolver 回退硬编码
 
 ## 与相邻子系统的关系

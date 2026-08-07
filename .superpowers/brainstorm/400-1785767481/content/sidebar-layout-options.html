@@ -1,0 +1,131 @@
+<style>
+  .intro { max-width: 900px; margin-bottom: 22px; }
+  .layout-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+  .design-card { border:1px solid var(--border); border-radius:16px; overflow:hidden; background:var(--surface); cursor:pointer; transition:160ms ease; }
+  .design-card:hover { transform:translateY(-2px); box-shadow:0 12px 34px rgba(30,41,59,.12); }
+  .design-card.selected { outline:2px solid #6366f1; outline-offset:2px; }
+  .window { height:510px; background:#fff; display:flex; color:#172033; border-bottom:1px solid var(--border); }
+  .rail { background:#f5f7fb; border-right:1px solid #e3e8f0; padding:20px 8px 12px; display:flex; flex-direction:column; }
+  .rail.compact { width:58px; align-items:center; }
+  .rail.medium { width:112px; }
+  .rail.wide { width:142px; }
+  .logo { font-size:11px; font-weight:800; color:#6366f1; margin-bottom:18px; }
+  .group { display:flex; flex-direction:column; gap:4px; }
+  .group.bottom { margin-top:auto; }
+  .divider { height:1px; background:#dfe4ec; margin:8px 5px; }
+  .nav { height:34px; border-radius:9px; display:flex; align-items:center; gap:9px; padding:0 9px; color:#657084; font-size:11px; white-space:nowrap; }
+  .nav.active { background:#e7e8ff; color:#4f46e5; font-weight:650; }
+  .ico { width:18px; text-align:center; font-size:14px; flex:none; }
+  .compact .nav { width:34px; padding:0; justify-content:center; }
+  .tip { position:absolute; left:52px; top:64px; background:#202838; color:white; padding:7px 10px; border-radius:7px; font-size:10px; box-shadow:0 6px 18px rgba(0,0,0,.18); }
+  .tip:before { content:""; position:absolute; left:-4px; top:11px; border-width:4px 4px 4px 0; border-style:solid; border-color:transparent #202838 transparent transparent; }
+  .panel { width:112px; background:#fbfcfe; border-right:1px solid #e4e8ef; padding:17px 13px; }
+  .panel-title { font-size:13px; font-weight:700; margin-bottom:14px; }
+  .search { height:28px; border-radius:8px; background:#f1f3f7; margin-bottom:14px; }
+  .line { height:7px; border-radius:6px; background:#e4e8ef; margin:9px 0; }
+  .content { flex:1; padding:19px; }
+  .content-title { width:90px; height:10px; border-radius:5px; background:#273248; }
+  .content-empty { margin:150px auto 0; width:55%; height:7px; border-radius:5px; background:#f0f2f6; }
+  .card-copy { padding:15px 16px 17px; }
+  .card-copy h3 { margin:0 0 6px; font-size:15px; }
+  .card-copy p { margin:0; color:var(--muted); font-size:12px; line-height:1.55; }
+  .badge { display:inline-flex; margin-top:10px; padding:4px 8px; border-radius:999px; background:#eeefff; color:#4f46e5; font-size:10px; font-weight:700; }
+  @media (max-width: 1000px) { .layout-grid { grid-template-columns:1fr; } }
+</style>
+
+<div class="intro">
+  <h2>左侧功能导航：哪种说明方式更适合 TPA CoWork？</h2>
+  <p class="subtitle">三种方案都保留现有分组、彩色选中态与轻量灰色表面。点击你偏好的方案；重点感受可发现性、空间占用与长期使用效率。</p>
+</div>
+
+<div class="layout-grid">
+  <div class="design-card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="window">
+      <aside class="rail wide">
+        <div class="logo">TPA</div>
+        <div class="group">
+          <div class="nav active"><span class="ico">▢</span>会话</div>
+          <div class="nav"><span class="ico">◫</span>知识空间</div>
+          <div class="nav"><span class="ico">◇</span>成果</div>
+          <div class="nav"><span class="ico">□</span>定时任务</div>
+          <div class="nav"><span class="ico">▥</span>数据看板</div>
+        </div>
+        <div class="divider"></div>
+        <div class="group">
+          <div class="nav"><span class="ico">◎</span>技能广场</div>
+          <div class="nav"><span class="ico">⇩</span>我的技能</div>
+          <div class="nav"><span class="ico">☷</span>计划</div>
+          <div class="nav"><span class="ico">≡</span>日志</div>
+        </div>
+        <div class="group bottom">
+          <div class="nav"><span class="ico">◯</span>个人资料</div>
+          <div class="nav"><span class="ico">◐</span>外观</div>
+          <div class="nav"><span class="ico">文</span>语言</div>
+          <div class="nav"><span class="ico">⚙</span>设置</div>
+        </div>
+      </aside>
+      <div class="panel"><div class="panel-title">会话</div><div class="search"></div><div class="line"></div><div class="line" style="width:70%"></div></div>
+      <main class="content"><div class="content-title"></div><div class="content-empty"></div></main>
+    </div>
+    <div class="card-copy"><h3>A · 固定文字侧栏</h3><p>所有入口始终显示图标与名称，零学习成本；但导航增宽约 65px，内容区长期被压缩。</p></div>
+  </div>
+
+  <div class="design-card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="window">
+      <aside class="rail medium">
+        <div class="logo">TPA</div>
+        <div class="group">
+          <div class="nav active"><span class="ico">▢</span>会话</div>
+          <div class="nav"><span class="ico">◫</span>知识</div>
+          <div class="nav"><span class="ico">◇</span>成果</div>
+          <div class="nav"><span class="ico">□</span>任务</div>
+          <div class="nav"><span class="ico">▥</span>看板</div>
+        </div>
+        <div class="divider"></div>
+        <div class="group">
+          <div class="nav"><span class="ico">◎</span>技能</div>
+          <div class="nav"><span class="ico">☷</span>计划</div>
+          <div class="nav"><span class="ico">≡</span>日志</div>
+        </div>
+        <div class="group bottom">
+          <div class="nav"><span class="ico">◯</span>我的</div>
+          <div class="nav"><span class="ico">◐</span>外观</div>
+          <div class="nav"><span class="ico">⚙</span>设置</div>
+        </div>
+      </aside>
+      <div class="panel"><div class="panel-title">会话</div><div class="search"></div><div class="line"></div><div class="line" style="width:70%"></div></div>
+      <main class="content"><div class="content-title"></div><div class="content-empty"></div></main>
+    </div>
+    <div class="card-copy"><h3>B · 紧凑标签栏</h3><p>用 2–4 字短标签常驻，宽度控制在约 112px；兼顾清晰与空间，是最稳妥的桌面端方案。</p><span class="badge">推荐</span></div>
+  </div>
+
+  <div class="design-card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="window" style="position:relative">
+      <aside class="rail compact">
+        <div class="logo">TPA</div>
+        <div class="group">
+          <div class="nav active"><span class="ico">▢</span></div>
+          <div class="nav"><span class="ico">◫</span></div>
+          <div class="nav"><span class="ico">◇</span></div>
+          <div class="nav"><span class="ico">□</span></div>
+          <div class="nav"><span class="ico">▥</span></div>
+        </div>
+        <div class="divider" style="width:24px"></div>
+        <div class="group">
+          <div class="nav"><span class="ico">◎</span></div>
+          <div class="nav"><span class="ico">☷</span></div>
+          <div class="nav"><span class="ico">≡</span></div>
+        </div>
+        <div class="group bottom">
+          <div class="nav"><span class="ico">◯</span></div>
+          <div class="nav"><span class="ico">◐</span></div>
+          <div class="nav"><span class="ico">⚙</span></div>
+        </div>
+      </aside>
+      <div class="tip">会话<br><span style="opacity:.68">管理日常对话</span></div>
+      <div class="panel"><div class="panel-title">会话</div><div class="search"></div><div class="line"></div><div class="line" style="width:70%"></div></div>
+      <main class="content"><div class="content-title"></div><div class="content-empty"></div></main>
+    </div>
+    <div class="card-copy"><h3>C · 图标栏 + 说明浮层</h3><p>维持当前宽度，悬停时显示“名称 + 一句话用途”；最省空间，但说明不是一直可见。</p></div>
+  </div>
+</div>

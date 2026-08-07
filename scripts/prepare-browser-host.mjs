@@ -19,11 +19,11 @@ const targetTriple = DEV
     ""
 const hostName =
   process.platform === "win32" || targetTriple.includes("windows")
-    ? "ha-browser-host.exe"
-    : "ha-browser-host"
+    ? "tpa-browser-host.exe"
+    : "tpa-browser-host"
 
 const profileDir = DEV ? "debug" : "release"
-const cargoArgs = ["build", "-p", "ha-browser-host"]
+const cargoArgs = ["build", "-p", "tpa-browser-host"]
 if (!DEV) {
   cargoArgs.push("--release", "--locked")
 }

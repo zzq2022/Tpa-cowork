@@ -1,7 +1,7 @@
 name: Update Linux Repo
 
 # Build & sign the apt + dnf/yum indexes, then publish them to the
-# Cloudflare R2 bucket served at https://repo.hopeagent.ai/ whenever a
+# Cloudflare R2 bucket served at https://repo.tpacowork.ai/ whenever a
 # Release is published.
 #
 # WHY R2 (not GitHub Pages): apt/dnf indexes reference the package files by
@@ -23,14 +23,14 @@ name: Update Linux Repo
 #                           metadata signing. Its public half is exported
 #                           to pubkey.gpg by this workflow (no longer a
 #                           manual step). Fingerprint must match the key
-#                           advertised at https://repo.hopeagent.ai/pubkey.gpg
+#                           advertised at https://repo.tpacowork.ai/pubkey.gpg
 #   R2_ACCOUNT_ID         — Cloudflare account id (the R2 S3 endpoint host).
 #   R2_ACCESS_KEY_ID      — R2 API token access key id (S3-compatible).
 #   R2_SECRET_ACCESS_KEY  — R2 API token secret access key.
-#   R2_BUCKET             — R2 bucket name (e.g. hope-agent-linux-repo).
+#   R2_BUCKET             — R2 bucket name (e.g. tpa-cowork-linux-repo).
 #
 # First-time / rotation setup on the Cloudflare side (bucket, custom domain
-# repo.hopeagent.ai, API token) is documented in linux-repo/README.md.
+# repo.tpacowork.ai, API token) is documented in linux-repo/README.md.
 
 on:
   release:
@@ -58,8 +58,8 @@ permissions:
 env:
   # Public base URL served by the R2 bucket's custom domain. Baked into the
   # apt sources.list line and the dnf .repo file; keep in lockstep with
-  # README.md / README.en.md / linux-repo/rpm/hope-agent.repo.
-  PUBLIC_BASE: https://repo.hopeagent.ai
+  # README.md / README.en.md / linux-repo/rpm/tpa-cowork.repo.
+  PUBLIC_BASE: https://repo.tpacowork.ai
   # rclone remote "r2" configured entirely from env (no rclone.conf file).
   RCLONE_CONFIG_R2_TYPE: s3
   RCLONE_CONFIG_R2_PROVIDER: Cloudflare
@@ -160,10 +160,10 @@ jobs:
           # All four artefact filenames, by arch. Missing arches are
           # tolerated downstream (e.g. v0.1.0 ~ v0.1.2 had no arm64/aarch64
           # builds — those versions just get amd64-only indexes).
-          echo "DEB_AMD64=Hope.Agent_${version}_amd64.deb"        >> "$GITHUB_ENV"
-          echo "DEB_ARM64=Hope.Agent_${version}_arm64.deb"        >> "$GITHUB_ENV"
-          echo "RPM_X86_64=Hope.Agent-${version}-1.x86_64.rpm"    >> "$GITHUB_ENV"
-          echo "RPM_AARCH64=Hope.Agent-${version}-1.aarch64.rpm"  >> "$GITHUB_ENV"
+          echo "DEB_AMD64=TPA.CoWork_${version}_amd64.deb"        >> "$GITHUB_ENV"
+          echo "DEB_ARM64=TPA.CoWork_${version}_arm64.deb"        >> "$GITHUB_ENV"
+          echo "RPM_X86_64=TPA.CoWork-${version}-1.x86_64.rpm"    >> "$GITHUB_ENV"
+          echo "RPM_AARCH64=TPA.CoWork-${version}-1.aarch64.rpm"  >> "$GITHUB_ENV"
 
       - name: Install build dependencies (reprepro + createrepo_c + rclone)
         run: |
@@ -183,8 +183,8 @@ jobs:
           # produce two files instead of four.
           gh release download "$TAG" \
             --repo "${{ github.repository }}" \
-            --pattern "Hope.Agent_${VERSION}_*.deb" \
-            --pattern "Hope.Agent-${VERSION}-1.*.rpm" \
+            --pattern "TPA.CoWork_${VERSION}_*.deb" \
+            --pattern "TPA.CoWork-${VERSION}-1.*.rpm" \
             --dir artifacts || true
           ls -la artifacts/
           # At minimum the amd64 deb + x86_64 rpm must exist; bail otherwise
@@ -253,14 +253,14 @@ jobs:
           Components: main
           Architectures: amd64 arm64
           SignWith: ${GPG_KEY_ID}
-          Description: Hope Agent apt repository (auto-published, see https://github.com/shiwenwen/hope-agent)
+          Description: TPA CoWork apt repository (auto-published, see https://github.com/zzq2022/Tpa-cowork)
           EOF
 
           # Idempotent re-add: reprepro refuses to replace an existing
           # version, so for workflow_dispatch re-runs against the same
           # tag we remove the package first. A single `remove` clears
           # all architectures because reprepro tracks by source name.
-          reprepro -b apt remove stable hope-agent || true
+          reprepro -b apt remove stable tpa-cowork || true
 
           for deb in "$DEB_AMD64" "$DEB_ARM64"; do
             if [[ -f "$GITHUB_WORKSPACE/artifacts/$deb" ]]; then
@@ -274,14 +274,14 @@ jobs:
 
           echo "--- apt index ---"
           ls -la apt/dists/stable/
-          ls -la apt/pool/main/h/hope-agent/ || true
+          ls -la apt/pool/main/h/tpa-cowork/ || true
 
       - name: Build yum/dnf index (createrepo_c + GPG sign metadata)
         run: |
           set -euo pipefail
           cd bucket
 
-          # Per-arch index. dnf uses $basearch in hope-agent.repo to pick
+          # Per-arch index. dnf uses $basearch in tpa-cowork.repo to pick
           # x86_64 vs aarch64 automatically. Missing arches are skipped.
           for pair in "x86_64:$RPM_X86_64" "aarch64:$RPM_AARCH64"; do
             arch="${pair%%:*}"
@@ -309,8 +309,8 @@ jobs:
           done
 
           # Sync the .repo template from the main repo (single source of
-          # truth: linux-repo/rpm/hope-agent.repo) to the bucket root.
-          cp -f "$GITHUB_WORKSPACE/linux-repo/rpm/hope-agent.repo" rpm/hope-agent.repo
+          # truth: linux-repo/rpm/tpa-cowork.repo) to the bucket root.
+          cp -f "$GITHUB_WORKSPACE/linux-repo/rpm/tpa-cowork.repo" rpm/tpa-cowork.repo
 
           # Publish the signing key's PUBLIC half at the bucket root so the
           # apt `signed-by` keyring and dnf `gpgkey=` can fetch it. Exporting
@@ -367,7 +367,7 @@ jobs:
           # absorb custom-domain / cache propagation latency.
           #
           # NOTE: on the very first seed run this step fails until the R2
-          # bucket's custom domain (repo.hopeagent.ai) is connected. Wire the
+          # bucket's custom domain (repo.tpacowork.ai) is connected. Wire the
           # domain first (linux-repo/README.md), then re-run — the upload is
           # idempotent so a re-run just re-verifies.
           check() {

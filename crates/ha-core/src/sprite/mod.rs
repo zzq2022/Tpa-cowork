@@ -22,7 +22,7 @@ use std::time::Duration;
 
 use crate::ttl_cache::TtlCache;
 
-// ── Config service (owner plane: GUI + ha-settings) ─────────────────────
+// ── Config service (owner plane: GUI + tpa-settings) ─────────────────────
 
 /// Current sprite config (clamped).
 pub fn get_config() -> SpriteConfig {

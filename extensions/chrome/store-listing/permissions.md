@@ -16,7 +16,7 @@ Required to keep the connection to the local TPA CoWork native host healthy. Chr
 
 Required for Chrome DevTools Protocol control of user-approved tabs: navigation, screenshots, accessibility snapshots, input events, PDF generation, console/network/page-error observation, and dialog handling.
 
-TPA CoWork exposes high-level browser actions and an advanced raw CDP path. Advanced calls go through TPA CoWork's normal tool approval system. Page content, console, network, and page-error inspection are scoped to Hope-controlled or claimed tabs.
+TPA CoWork exposes high-level browser actions and an advanced raw CDP path. Advanced calls go through TPA CoWork's normal tool approval system. Page content, console, network, and page-error inspection are scoped to TPA CoWork-controlled or claimed tabs.
 
 ## `scripting`
 
@@ -32,7 +32,7 @@ Required to observe Chrome download activity and cancel downloads by id after TP
 
 ## `webNavigation`
 
-Required to read Chrome's frame tree metadata (`frameId`, `parentFrameId`, URL, and document id) for Hope-controlled tabs. This lets TPA CoWork map cross-origin iframe debugger sessions back to the correct frame without guessing from page content. It is used for diagnostics and safer iframe control only; TPA CoWork does not monitor browsing history outside controlled tabs.
+Required to read Chrome's frame tree metadata (`frameId`, `parentFrameId`, URL, and document id) for TPA CoWork-controlled tabs. This lets TPA CoWork map cross-origin iframe debugger sessions back to the correct frame without guessing from page content. It is used for diagnostics and safer iframe control only; TPA CoWork does not monitor browsing history outside controlled tabs.
 
 ## `host_permissions`
 

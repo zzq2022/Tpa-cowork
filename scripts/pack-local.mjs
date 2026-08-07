@@ -56,8 +56,8 @@ const targetExplicit =
 
 const hostBinaryName =
   (targetExplicit ? targetExplicit.includes("windows") : isWindows)
-    ? "ha-browser-host.exe"
-    : "ha-browser-host"
+    ? "tpa-browser-host.exe"
+    : "tpa-browser-host"
 const hostResourcePath = join(
   repoRoot,
   "src-tauri",
@@ -171,7 +171,7 @@ function prepareHost(env, profile) {
     pnpm(["prepare:browser-host"], env)
     return
   }
-  const cargoHostArgs = ["build", "-p", "ha-browser-host", "--profile", profile, "--locked"]
+  const cargoHostArgs = ["build", "-p", "tpa-browser-host", "--profile", profile, "--locked"]
   if (targetExplicit) {
     cargoHostArgs.push("--target", targetExplicit)
   }
@@ -180,7 +180,7 @@ function prepareHost(env, profile) {
     ? join(repoRoot, "target", targetExplicit, profile)
     : join(repoRoot, "target", profile)
   const source = join(sourceDir, hostBinaryName)
-  requireExisting("browser-host build output", source, "cargo build -p ha-browser-host failed to produce binary.")
+  requireExisting("browser-host build output", source, "cargo build -p tpa-browser-host failed to produce binary.")
   const destinationDir = join(repoRoot, "src-tauri", "resources", "browser-host")
   mkdirSync(destinationDir, { recursive: true })
   copyFileSync(source, join(destinationDir, hostBinaryName))

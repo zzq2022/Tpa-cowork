@@ -399,7 +399,7 @@ flowchart LR
 | `enabled` | `true` | 旧字段；无 `mode` 时用于迁移判断 |
 | `toolNames` | 推荐集 | `custom` 模式的显式列表；旧列表若等于已知推荐集会迁移为 `recommended` |
 
-UI 入口：设置 → 工具 → Deferred Tools。`ha-settings` 技能：`update_settings(category="deferred_tools", values={enabled: true, toolNames: ["pdf"]})`。
+UI 入口：设置 → 工具 → Deferred Tools。`tpa-settings` 技能：`update_settings(category="deferred_tools", values={enabled: true, toolNames: ["pdf"]})`。
 
 ---
 

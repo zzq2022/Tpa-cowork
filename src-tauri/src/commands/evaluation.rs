@@ -860,10 +860,7 @@ fn local_build_identity(product: &Path) -> (String, bool) {
         return fallback;
     };
     let mut head_cmd = std::process::Command::new("git");
-    head_cmd
-        .arg("-C")
-        .arg(&root)
-        .args(["rev-parse", "HEAD"]);
+    head_cmd.arg("-C").arg(&root).args(["rev-parse", "HEAD"]);
     ha_core::platform::hide_console(&mut head_cmd);
     let head = head_cmd
         .output()
@@ -875,17 +872,14 @@ fn local_build_identity(product: &Path) -> (String, bool) {
             matches!(value.len(), 40 | 64) && value.bytes().all(|byte| byte.is_ascii_hexdigit())
         });
     let mut dirty_cmd = std::process::Command::new("git");
-    dirty_cmd
-        .arg("-C")
-        .arg(&root)
-        .args([
-            "status",
-            "--porcelain",
-            "--untracked-files=all",
-            "--",
-            ".",
-            ":(exclude)src-tauri/binaries/hope-agent-eval-*",
-        ]);
+    dirty_cmd.arg("-C").arg(&root).args([
+        "status",
+        "--porcelain",
+        "--untracked-files=all",
+        "--",
+        ".",
+        ":(exclude)src-tauri/binaries/hope-agent-eval-*",
+    ]);
     ha_core::platform::hide_console(&mut dirty_cmd);
     let dirty = dirty_cmd
         .output()

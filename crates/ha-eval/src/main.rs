@@ -878,8 +878,7 @@ fn aggregate_status(cases: &[CaseResult]) -> EvalStatus {
 
 fn git_dirty(root: &Path) -> bool {
     let mut cmd = Command::new("git");
-    cmd.args(["status", "--porcelain"])
-        .current_dir(root);
+    cmd.args(["status", "--porcelain"]).current_dir(root);
     #[cfg(windows)]
     {
         use std::os::windows::process::CommandExt;
